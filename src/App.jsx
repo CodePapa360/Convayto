@@ -1,21 +1,12 @@
-import {
-  getCurrentUser,
-  listenMessages,
-  logout,
-  sendMessage,
-} from "./services/apiAuth";
-import Signup from "./signup";
+import { getCurrentUser, logout, sendMessage } from "./services/apiAuth";
 import Login from "./Login";
 import { useEffect, useState } from "react";
-import { v4 as uuid } from "uuid";
 
 function App() {
   const [status, setStatus] = useState(false);
   const [message, setMessage] = useState("");
 
   const [allMessages, setAllMessages] = useState([]);
-
-  // console.log(message);
 
   async function handleGetcurrentuser() {
     const data = await getCurrentUser();
