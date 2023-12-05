@@ -1,10 +1,14 @@
 import { getCurrentUser, logout, sendMessage } from "./services/apiAuth";
 import Login from "./Login";
 import { useEffect, useState } from "react";
+import Signup from "./Signup";
+import CreateConversation from "./CreateConversation";
 
 function App() {
+  const [userEmail, setUserEmail] = useState("");
   const [status, setStatus] = useState(false);
   const [message, setMessage] = useState("");
+  const [convId, setConvId] = useState(null);
 
   const [allMessages, setAllMessages] = useState([]);
 
@@ -22,16 +26,7 @@ function App() {
     e.preventDefault();
 
     if (!message) return;
-
-    // setAllMessages((msgs) => [
-    //   ...msgs,
-    //   {
-    //     id: uuid(),
-    //     message,
-    //   },
-    // ]);
-
-    sendMessage(message);
+    sendMessage(convId, message);
 
     setMessage("");
   }
@@ -39,8 +34,12 @@ function App() {
   useEffect(function () {
     async function check() {
       const currentUser = await getCurrentUser();
-      if (currentUser.session === null) setStatus(false);
-      else setStatus(true);
+      if (currentUser.session === null) {
+        setStatus(false);
+      } else {
+        setStatus(true);
+        setUserEmail(currentUser.session.user.email);
+      }
     }
 
     check();
@@ -48,13 +47,14 @@ function App() {
 
   return (
     <main>
-      <div className={`login-status ${status ? "logged-in" : ""}`}></div>
-      {/* <Signup /> */}
+      <div className={`login-status ${status ? "logged-in" : ""}`}></div>{" "}
+      <span>{userEmail}</span>
+      <Signup />
       <Login onSetStatus={setStatus} />
       <button onClick={handleLogout}>Logout</button>
-
       <button onClick={handleGetcurrentuser}>Get Current user</button>
       <br />
+      <CreateConversation onSetConvId={setConvId} />
       <br />
       <form onSubmit={handleSubmit}>
         <label htmlFor="message">Message</label>
@@ -68,7 +68,6 @@ function App() {
         <button type="submit">Send</button>
       </form>
       <br />
-
       <div>
         {allMessages.map((msg) => (
           <p key={msg.id}>{msg.message}</p>

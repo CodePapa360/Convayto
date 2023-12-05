@@ -35,10 +35,10 @@ export async function getCurrentUser() {
   return data;
 }
 
-export async function sendMessage(newMessage) {
+export async function sendMessage(convId, newMessage) {
   const { data, error } = await supabase
-    .from("publicMessages")
-    .insert([{ message: newMessage }])
+    .from("messages")
+    .insert([{ conversation_id: convId, content: newMessage }])
     .select();
 
   if (error) throw new Error(error.message);
@@ -46,19 +46,42 @@ export async function sendMessage(newMessage) {
   return data;
 }
 
-export function getMessages(newMessages) {}
-let data = null;
+export async function createConversation(id) {
+  const { data: conversations, error: convError } = await supabase
+    .from("conversations")
+    .select("*")
+    .eq("user_2_id", `${id}`);
 
-export function listenMessages() {
-  supabase
-    .channel("my_messages")
-    .on(
-      "postgres_changes",
-      { event: "INSERT", schema: "public", table: "publicMessages" },
-      (payload) => {
-        console.log(payload);
-      }
-    )
-    .subscribe();
+  if (!conversations.length) {
+    const { data, error } = await supabase
+      .from("conversations")
+      .insert([{ user_2_id: id }])
+      .select();
+
+    if (error) throw new Error(error.message);
+    return data[0];
+  }
+
+  console.log("Conversations already exist");
+
+  if (convError) throw new Error(convError.message);
+
+  return conversations[0];
 }
-listenMessages();
+
+// export function getMessages(newMessages) {}
+// let data = null;
+
+// export function listenMessages() {
+//   supabase
+//     .channel("my_messages")
+//     .on(
+//       "postgres_changes",
+//       { event: "INSERT", schema: "public", table: "publicMessages" },
+//       (payload) => {
+//         console.log(payload);
+//       }
+//     )
+//     .subscribe();
+// }
+// listenMessages();
