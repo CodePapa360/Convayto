@@ -110,15 +110,3 @@ button:has(svg) {
 }
 /* ////////////// */
 /* ///////////// */
-
-.login-status {
-  height: 1rem;
-  width: 1rem;
-  background-color: gray;
-  margin: 0.5rem;
-  border-radius: 50%;
-}
-
-.login-status.logged-in {
-  background-color: green;
-}
