@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import HeaderBar from "./HeaderBar";
 import MessageView from "./MessageView";
+import Chats from "./Chats";
 
 function AppLayout() {
   return (
     <StyledAppLayout>
       <LeftSide>
         <HeaderBar></HeaderBar>
-        <chats-section></chats-section>
+        <Chats></Chats>
       </LeftSide>
 
       <RightSide>
@@ -25,15 +26,15 @@ const StyledAppLayout = styled.main`
   grid-template-columns: 22rem 1fr;
   height: 100vh;
   height: 100dvh;
-  /* overflow: hidden; */
 `;
 
 const LeftSide = styled.div`
-  background-color: yellow;
+  height: 100vh;
+  height: 100dvh;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 5rem 1fr;
 `;
 
-const RightSide = styled.div`
-  background-color: aqua;
-  display: flex;
-  flex-direction: column;
-`;
+const RightSide = styled.div``;

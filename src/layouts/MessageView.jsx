@@ -1,6 +1,30 @@
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 function MessageView() {
+  const [messages, setMessages] = useState([]);
+  const bottomMsgRef = useRef();
+
+  function scrollToBottom() {
+    bottomMsgRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "nearest",
+    });
+  }
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setMessages((msg) => [...msg, "Test message: "]);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <StyledMessageView>
       <TopBar>
@@ -10,66 +34,14 @@ function MessageView() {
 
       <MessageContainer>
         <MessagesWrapper>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
-          <p>test message</p>
+          {messages.map((msg, i) => (
+            <p key={i}>
+              {msg}
+              {i + 1}
+            </p>
+          ))}
+
+          <span ref={bottomMsgRef} className="bottomMsg"></span>
         </MessagesWrapper>
       </MessageContainer>
 
@@ -81,51 +53,40 @@ function MessageView() {
 export default MessageView;
 
 const StyledMessageView = styled.div`
-  /* display: flex;
-  flex-direction: column; */
-  /* height: 100%; */
-
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 5rem 1fr 4rem;
-  grid-template-areas:
-    "top-bar"
-    "middle"
-    "bottom-bar";
-
   height: 100vh;
+  height: 100dvh;
 `;
 
 const TopBar = styled.div`
-  background-color: azure;
-  height: 5rem;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 
-  grid-area: top-bar;
+  height: 5rem;
 `;
 
 const MessageContainer = styled.div`
-  border: 2px solid purple;
-  padding: 0 0.5rem;
-  grid-area: middle;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+
   overflow-y: scroll;
 
-  /* display: flex;
-  flex-direction: column;
-  justify-content: flex-end; */
+  // puts the messages to the bottom
+  display: grid;
+  align-items: end;
 `;
 
 const MessagesWrapper = styled.div`
-  border: 2px solid green;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+
   max-width: 90%;
   margin-inline: auto;
-  background-color: bisque;
   width: 100%;
 `;
 
 const InputBar = styled.div`
-  height: 4rem;
-  background-color: #86fa99;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 
-  grid-area: bottom-bar;
+  height: 4rem;
   margin-top: auto;
 `;

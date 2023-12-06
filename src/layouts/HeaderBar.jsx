@@ -12,8 +12,5 @@ function HeaderBar() {
 export default HeaderBar;
 
 const StyledHeaderBar = styled.div`
-  background-color: antiquewhite;
-
-  //temp
-  height: 5rem;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 `;
