@@ -1,7 +1,13 @@
-import AppLayout from "./components/AppLayout";
+import AppLayout from "./layouts/AppLayout";
+import GlobalStyles from "./styles/GlobalStyles";
 
 function App() {
-  return <AppLayout />;
+  return (
+    <>
+      <GlobalStyles />
+      <AppLayout />
+    </>
+  );
 }
 
 export default App;

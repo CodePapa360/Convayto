@@ -1,3 +1,6 @@
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyles = createGlobalStyle`
 /* ///////////////// */
 /* //Reset// */
 *,
@@ -110,3 +113,28 @@ button:has(svg) {
 }
 /* ////////////// */
 /* ///////////// */
+
+/* Works on Firefox */
+* {
+  --bg-color: transparent;
+  --the-thumb: rgba(120, 120, 120, 0.7);
+  scrollbar-width: thin;
+  scrollbar-color: var(--the-thumb) var(--bg-color);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--the-thumb);
+}
+`;
+
+export default GlobalStyles;
