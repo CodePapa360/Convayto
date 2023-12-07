@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import Logout from "../features/authentication/Logout";
+import { useUser } from "../features/authentication/useUser";
 
 function HeaderBar() {
+  const { user } = useUser();
+  const { fullname, username } = user.user_metadata;
+
   return (
     <StyledHeaderBar>
       <Profile>
@@ -9,8 +13,8 @@ function HeaderBar() {
           <img src="/images/default-avatar.png" alt="Avatar" />
         </span>
         <span>
-          <span>Alamin Hossain</span>
-          <span>@alamin</span>
+          <span>{fullname}</span>
+          <span>@{username}</span>
         </span>
       </Profile>
 

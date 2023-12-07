@@ -1,9 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useLogin } from "../features/authentication/useLogin";
+import { Link } from "react-router-dom";
 
 function Login() {
-  const [email, setEmail] = useState("virame7800@gyxmz.com");
+  const [email, setEmail] = useState("tanzil@test.com");
   const [password, setPassword] = useState("123456789");
   const { login, isLoading } = useLogin();
 
@@ -48,8 +49,12 @@ function Login() {
           placeholder="Password"
         />
 
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isLoading}>
+          Login
+        </button>
       </form>
+
+      <Link to="/signup">Sign up</Link>
     </StyledLogin>
   );
 }

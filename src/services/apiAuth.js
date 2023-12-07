@@ -1,24 +1,30 @@
 import supabase from "./supabase";
 
-async function storeUser(newUser) {
-  const { data, error } = await supabase
-    .from("pub_users")
-    .insert([{ user_id: newUser.session.user.id }])
-    .select();
+// async function storeUser(newUser) {
+//   const { data, error } = await supabase
+//     .from("pub_users")
+//     .insert([{ user_id: newUser.session.user.id }])
+//     .select();
 
-  if (error) throw new Error(error.message);
-  return data;
-}
+//   if (error) throw new Error(error.message);
+//   return data;
+// }
 
-export async function signup(email, password) {
+export async function signup({ email, password, fullname, username }) {
   const { data, error } = await supabase.auth.signUp({
-    email: email,
-    password: password,
+    email,
+    password,
+    options: {
+      data: {
+        fullname,
+        username,
+      },
+    },
   });
 
   if (error) throw new Error(error.message);
 
-  storeUser(data);
+  // storeUser(data);
   return data;
 }
 

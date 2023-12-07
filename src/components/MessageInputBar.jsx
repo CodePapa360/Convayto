@@ -1,6 +1,12 @@
 import styled from "styled-components";
+import { getCurrentUser } from "../services/apiAuth";
 
 function MessageInputBar() {
+  async function getUser() {
+    const data = await getCurrentUser();
+    console.log(data);
+  }
+
   return (
     <StyledInputBar>
       <form action="">
@@ -8,6 +14,8 @@ function MessageInputBar() {
 
         <button type="submit">Send</button>
       </form>
+
+      <button onClick={getUser}>User</button>
     </StyledInputBar>
   );
 }
