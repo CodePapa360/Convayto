@@ -114,6 +114,12 @@ button:has(svg) {
 /* ////////////// */
 /* ///////////// */
 
+body{
+  font-family: 'Inter', sans-serif;
+  background-color: hsla(239, 100%, 91%, 1);
+  cursor: default;
+}
+
 /* Works on Firefox */
 * {
   --bg-color: transparent;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import HeaderBar from "./HeaderBar";
+import HeaderBar from "../components/HeaderBar";
 import MessageView from "./MessageView";
-import Chats from "./Chats";
+import Chats from "../components/Chats";
 
 function AppLayout() {
   return (

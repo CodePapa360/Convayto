@@ -1,51 +1,20 @@
-import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import Messages from "../components/Messages";
+import MessageTopBar from "../components/MessageTopBar";
+import MessageInputBar from "../components/MessageInputBar";
 
 function MessageView() {
-  const [messages, setMessages] = useState([]);
-  const bottomMsgRef = useRef();
-
-  function scrollToBottom() {
-    bottomMsgRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "nearest",
-    });
-  }
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setMessages((msg) => [...msg, "Test message: "]);
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
   return (
     <StyledMessageView>
-      <TopBar>
-        <back-button></back-button>
-        <user-inof></user-inof>
-      </TopBar>
+      <MessageTopBar />
 
       <MessageContainer>
         <MessagesWrapper>
-          {messages.map((msg, i) => (
-            <p key={i}>
-              {msg}
-              {i + 1}
-            </p>
-          ))}
-
-          <span ref={bottomMsgRef} className="bottomMsg"></span>
+          <Messages />
         </MessagesWrapper>
       </MessageContainer>
 
-      <InputBar></InputBar>
+      <MessageInputBar />
     </StyledMessageView>
   );
 }
@@ -60,14 +29,8 @@ const StyledMessageView = styled.div`
   height: 100dvh;
 `;
 
-const TopBar = styled.div`
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-
-  height: 5rem;
-`;
-
 const MessageContainer = styled.div`
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
 
   overflow-y: scroll;
 
@@ -77,16 +40,9 @@ const MessageContainer = styled.div`
 `;
 
 const MessagesWrapper = styled.div`
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  /* box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3); */
 
-  max-width: 90%;
   margin-inline: auto;
   width: 100%;
-`;
-
-const InputBar = styled.div`
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-
-  height: 4rem;
-  margin-top: auto;
+  max-width: 50rem;
 `;
