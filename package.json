@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
+    "@tanstack/react-query": "^4.36.1",
+    "@tanstack/react-query-devtools": "^5.13.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.1",
     "styled-components": "^6.1.1",
     "uuid": "^9.0.1"
   },

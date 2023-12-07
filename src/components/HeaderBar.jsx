@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Logout from "../features/authentication/Logout";
 
 function HeaderBar() {
   return (
@@ -12,6 +13,8 @@ function HeaderBar() {
           <span>@alamin</span>
         </span>
       </Profile>
+
+      <Logout />
 
       <SearchBar>
         <input type="text" placeholder="Search people" />
