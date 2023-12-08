@@ -51,18 +51,25 @@ export async function getCurrentUser() {
   return data;
 }
 
-export async function sendMessage(convId, newMessage) {
+export async function sendMessage({ conversation_id, content }) {
   const { data, error } = await supabase
     .from("messages")
-    .insert([{ conversation_id: convId, content: newMessage }])
+    .insert([{ conversation_id, content }])
     .select();
 
   if (error) throw new Error(error.message);
 
+  // const { data, error } = await supabase
+  // .from("messages")
+  // .insert([{ conversation_id, content }])
+  // .select();
+
+  console.log(data[0]);
+
   return data;
 }
 
-export async function createConversation(recepentId) {
+export async function openConversation(recepentId) {
   const { data: conversations, error: convError } = await supabase
     .from("conversations")
     .select("*")

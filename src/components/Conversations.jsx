@@ -1,14 +1,21 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function Chats() {
+function Conversations() {
+  const navigate = useNavigate();
+
+  function handlClick() {
+    navigate("/userId?1234");
+  }
+
   return (
-    <StyledChats>
-      <h2>Chats</h2>
+    <StyledConversations>
+      <h2>Conversations</h2>
 
       <hr />
 
-      <ChatsContainer>
-        <Chat>
+      <ConversationsContainer>
+        <Conversation onClick={handlClick}>
           <span>
             <img src="/images/default-avatar.png" alt="User" />
           </span>
@@ -17,9 +24,9 @@ function Chats() {
             <span>Name</span>
             <span>Last message</span>
           </span>
-        </Chat>
+        </Conversation>
 
-        <Chat>
+        <Conversation>
           <span>
             <img src="/images/default-avatar.png" alt="User" />
           </span>
@@ -28,9 +35,9 @@ function Chats() {
             <span>Name</span>
             <span>Last message</span>
           </span>
-        </Chat>
+        </Conversation>
 
-        <Chat>
+        <Conversation>
           <span>
             <img src="/images/default-avatar.png" alt="User" />
           </span>
@@ -39,9 +46,9 @@ function Chats() {
             <span>Name</span>
             <span>Last message</span>
           </span>
-        </Chat>
+        </Conversation>
 
-        <Chat>
+        <Conversation>
           <span>
             <img src="/images/default-avatar.png" alt="User" />
           </span>
@@ -50,9 +57,9 @@ function Chats() {
             <span>Name</span>
             <span>Last message</span>
           </span>
-        </Chat>
+        </Conversation>
 
-        <Chat>
+        <Conversation>
           <span>
             <img src="/images/default-avatar.png" alt="User" />
           </span>
@@ -61,24 +68,24 @@ function Chats() {
             <span>Name</span>
             <span>Last message</span>
           </span>
-        </Chat>
-      </ChatsContainer>
-    </StyledChats>
+        </Conversation>
+      </ConversationsContainer>
+    </StyledConversations>
   );
 }
 
-export default Chats;
+export default Conversations;
 
-const StyledChats = styled.div`
+const StyledConversations = styled.div`
   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
 `;
 
-const ChatsContainer = styled.div`
+const ConversationsContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const Chat = styled.div`
+const Conversation = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;

@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import MessageView from "./layouts/MessageView";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,7 +31,7 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route path="/" element={<AppLayout />} />
+            <Route path="/:userId" element={<MessageView />} />
           </Route>
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />

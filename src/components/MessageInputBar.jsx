@@ -1,10 +1,25 @@
 import styled from "styled-components";
-import { getCurrentUser } from "../services/apiAuth";
+import {
+  openConversation,
+  getCurrentUser,
+  sendMessage,
+} from "../services/apiAuth";
 
 function MessageInputBar() {
-  async function getUser() {
-    const data = await getCurrentUser();
-    console.log(data);
+  // async function getUser() {
+  //   const data = await getCurrentUser();
+  //   console.log(data);
+  // }
+
+  // function testFn() {
+  //   openConversation("5a3ec70c-0c72-4198-a820-595734eb861a");
+  // }
+
+  function testFn() {
+    sendMessage({
+      conversation_id: "9aec9eae-54f8-48e7-93b4-b10cc1f78f0d",
+      content: "testing",
+    });
   }
 
   return (
@@ -15,7 +30,7 @@ function MessageInputBar() {
         <button type="submit">Send</button>
       </form>
 
-      <button onClick={getUser}>User</button>
+      <button onClick={testFn}>Test button</button>
     </StyledInputBar>
   );
 }

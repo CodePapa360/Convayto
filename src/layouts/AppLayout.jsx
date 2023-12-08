@@ -1,19 +1,20 @@
 import styled from "styled-components";
 import HeaderBar from "../components/HeaderBar";
 import MessageView from "./MessageView";
-import Chats from "../components/Chats";
+import Conversations from "../components/Conversations";
+import { Outlet } from "react-router-dom";
 
 function AppLayout() {
   return (
     <StyledAppLayout>
       <LeftSide>
         <HeaderBar></HeaderBar>
-        <Chats></Chats>
+        <Conversations></Conversations>
       </LeftSide>
 
       <RightSide>
-        {/* <outlet></outlet> */}
-        <MessageView />
+        <Outlet />
+        {/* <MessageView /> */}
       </RightSide>
     </StyledAppLayout>
   );
@@ -26,6 +27,7 @@ const StyledAppLayout = styled.main`
   grid-template-columns: 22rem 1fr;
   height: 100vh;
   height: 100dvh;
+  overflow: hidden;
 `;
 
 const LeftSide = styled.div`
