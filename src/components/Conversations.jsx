@@ -1,8 +1,16 @@
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { getConversations } from "../services/apiAuth";
+import { useUser } from "../features/authentication/useUser";
+import { useConversatoins } from "../features/converse/useConversations";
 
 function Conversations() {
   const navigate = useNavigate();
+
+  const { data: users, isPending } = useConversatoins();
+
+  // console.log(conversations);
 
   function handlClick() {
     navigate("/userId?1234");
@@ -15,7 +23,22 @@ function Conversations() {
       <hr />
 
       <ConversationsContainer>
-        <Conversation onClick={handlClick}>
+        {isPending && <p>Loading...</p>}
+
+        {users?.map((user) => (
+          <Conversation key={user.id}>
+            <span>
+              <img src="/images/default-avatar.png" alt="User" />
+            </span>
+
+            <span>
+              <span>{user.user_meta_data.fullname}</span>
+              <span>Last message</span>
+            </span>
+          </Conversation>
+        ))}
+
+        {/* <Conversation>
           <span>
             <img src="/images/default-avatar.png" alt="User" />
           </span>
@@ -57,18 +80,7 @@ function Conversations() {
             <span>Name</span>
             <span>Last message</span>
           </span>
-        </Conversation>
-
-        <Conversation>
-          <span>
-            <img src="/images/default-avatar.png" alt="User" />
-          </span>
-
-          <span>
-            <span>Name</span>
-            <span>Last message</span>
-          </span>
-        </Conversation>
+        </Conversation> */}
       </ConversationsContainer>
     </StyledConversations>
   );
@@ -83,6 +95,9 @@ const StyledConversations = styled.div`
 const ConversationsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  height: 100vh;
+  height: 100dvh;
 `;
 
 const Conversation = styled.div`

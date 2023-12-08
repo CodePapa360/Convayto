@@ -92,6 +92,38 @@ export async function openConversation(recepentId) {
   return conversations[0];
 }
 
+export async function getConversationEntries({ myUserId }) {
+  const { data, error } = await supabase
+    .from("conversations")
+    .select("*")
+    .or(`user_1_id.eq.${myUserId},user_2_id.eq.${myUserId}`);
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
+export async function getConversations({ myUserId }) {
+  const data = await getConversationEntries({
+    myUserId,
+  });
+
+  const friendsIds = data
+    .map((frnd) =>
+      frnd.user_1_id === myUserId ? frnd.user_2_id : frnd.user_1_id
+    )
+    .filter((friendId) => friendId !== myUserId);
+
+  const { data: users, error } = await supabase
+    .from("users")
+    .select("*")
+    .in("id", friendsIds);
+
+  if (error) throw new Error(error.message);
+
+  return users;
+}
+
 // export function getMessages(newMessages) {}
 // let data = null;
 
