@@ -3,17 +3,18 @@ import {
   openConversation,
   getCurrentUser,
   sendMessage,
+  testApi,
 } from "../services/apiAuth";
 
 function MessageInputBar() {
-  async function testFn() {
-    const data = await getCurrentUser();
-    console.log(data);
-  }
+  //   async function testFn() {
+  //     const data = await getCurrentUser();
+  //     console.log(data);
+  //   }
 
-  // function testFn() {
-  //   openConversation("5a3ec70c-0c72-4198-a820-595734eb861a");
-  // }
+  function testFn() {
+    testApi();
+  }
 
   // function testFn() {
   //   sendMessage({

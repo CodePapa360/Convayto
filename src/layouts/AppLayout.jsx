@@ -14,7 +14,7 @@ function AppLayout() {
 
       <RightSide>
         <Outlet />
-        <MessageView />
+        {/* <MessageView /> */}
       </RightSide>
     </StyledAppLayout>
   );

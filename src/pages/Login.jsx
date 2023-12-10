@@ -4,7 +4,7 @@ import { useLogin } from "../features/authentication/useLogin";
 import { Link } from "react-router-dom";
 
 function Login() {
-  const [email, setEmail] = useState("tanzil@test.com");
+  const [email, setEmail] = useState("tanzil@gmail.com");
   const [password, setPassword] = useState("123456789");
   const { login, isLoading } = useLogin();
 
