@@ -4,12 +4,12 @@ import { useUser } from "../authentication/useUser";
 import { useParams } from "react-router-dom";
 
 export function useMessages() {
-  const { userId } = useParams();
+  const { userId: friendUserId } = useParams();
   const { user } = useUser();
 
   const { data, isPending, error } = useQuery({
-    queryKey: ["messages", userId],
-    queryFn: () => getMessages({ myUserId: user.id, friendUserId: userId }),
+    queryKey: ["friend", friendUserId],
+    queryFn: () => getMessages({ myUserId: user.id, friendUserId }),
   });
 
   if (error) {

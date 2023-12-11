@@ -1,37 +1,84 @@
 import styled from "styled-components";
-import {
-  openConversation,
-  getCurrentUser,
-  sendMessage,
-  testApi,
-} from "../services/apiAuth";
+import { useMessages } from "../features/converse/useMessages";
+import { useUser } from "../features/authentication/useUser";
+import { useState } from "react";
+import { useSendNewMessage } from "../features/converse/useSendNewMessage";
+import { useQueryClient } from "@tanstack/react-query";
 
 function MessageInputBar() {
-  //   async function testFn() {
-  //     const data = await getCurrentUser();
-  //     console.log(data);
-  //   }
+  const quryClient = useQueryClient();
 
-  function testFn() {
-    testApi();
+  const [newMessage, setNewMessage] = useState("");
+  const { isSending, sendNewMessage } = useSendNewMessage();
+  const { user } = useUser();
+  const { data, isPending } = useMessages();
+  const conversationId = data?.conversationId;
+  const friendUserId = data?.frindDetails[0].id;
+  const myUserId = user.id;
+
+  const isFirstMessage = conversationId === null;
+
+  // console.log(conversationId, friendUserId, conversationId);
+
+  function handleSendNewMessage(e) {
+    e.preventDefault();
+    if (!newMessage) return;
+
+    if (isFirstMessage) {
+      sendNewMessage(
+        {
+          conversationId,
+          friendUserId,
+          myUserId,
+          content: newMessage,
+        },
+        {
+          onSuccess: () => {
+            quryClient.invalidateQueries({
+              queryKey: ["friend"],
+            });
+
+            setNewMessage("");
+          },
+        }
+      );
+    } else {
+      sendNewMessage(
+        {
+          conversationId,
+          friendUserId,
+          myUserId,
+          content: newMessage,
+        },
+        {
+          onSuccess: () => {
+            setNewMessage("");
+          },
+        }
+      );
+    }
   }
-
-  // function testFn() {
-  //   sendMessage({
-  //     conversation_id: "9aec9eae-54f8-48e7-93b4-b10cc1f78f0d",
-  //     content: "testing",
-  //   });
-  // }
 
   return (
     <StyledInputBar>
       <form action="">
-        <input type="text" placeholder="Message" />
+        <input
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          type="text"
+          placeholder="Message"
+        />
 
-        <button type="submit">Send</button>
+        <button
+          disabled={isPending || isSending}
+          onClick={handleSendNewMessage}
+          type="submit"
+        >
+          Send
+        </button>
       </form>
 
-      <button onClick={testFn}>Test button</button>
+      {/* <button>Test button</button> */}
     </StyledInputBar>
   );
 }

@@ -3,12 +3,14 @@ import { useMessages } from "../features/converse/useMessages";
 import Message from "./Message";
 
 function Messages() {
-  const { data: messages, isPending } = useMessages();
+  const { data, isPending } = useMessages();
+  const messages = data?.messages;
 
   return (
     <StyledMessages>
       {isPending && <p>Loading messages...</p>}
 
+      {messages?.length === 0 && <p>No messages</p>}
       {messages?.map((message) => (
         <Message message={message} key={message.id} />
       ))}

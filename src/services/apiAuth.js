@@ -40,47 +40,6 @@ export async function getCurrentUser() {
   return data;
 }
 
-export async function sendMessage({ conversation_id, content }) {
-  const { data, error } = await supabase
-    .from("messages")
-    .insert([{ conversation_id, content }])
-    .select();
-
-  if (error) throw new Error(error.message);
-
-  // const { data, error } = await supabase
-  // .from("messages")
-  // .insert([{ conversation_id, content }])
-  // .select();
-
-  console.log(data[0]);
-
-  return data;
-}
-
-export async function openConversation(recepentId) {
-  const { data: conversations, error: convError } = await supabase
-    .from("conversations")
-    .select("*")
-    .eq("user_2_id", `${recepentId}`);
-
-  if (!conversations.length) {
-    const { data, error } = await supabase
-      .from("conversations")
-      .insert([{ user_2_id: recepentId }])
-      .select();
-
-    if (error) throw new Error(error.message);
-    return data[0];
-  }
-
-  console.log("Conversations already exist");
-
-  if (convError) throw new Error(convError.message);
-
-  return conversations[0];
-}
-
 export async function getConversationEntries({ myUserId }) {
   const { data, error } = await supabase
     .from("conversations")
@@ -154,13 +113,31 @@ async function hasPreviousConversation({ myUserId, friendUserId }) {
   }
 }
 
+///////////////////
+export async function getSingleFriendDetail({ friendUserId }) {
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("id", friendUserId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+}
+////////////////
+
 export async function getMessages({ myUserId, friendUserId }) {
   const conversationId = await hasPreviousConversation({
     myUserId,
     friendUserId,
   });
 
-  if (!conversationId) return;
+  const frindDetails = await getSingleFriendDetail({ friendUserId });
+
+  if (!conversationId)
+    return { frindDetails, messages: null, conversationId: null };
 
   const { data: messages, error } = await supabase
     .from("messages")
@@ -171,22 +148,79 @@ export async function getMessages({ myUserId, friendUserId }) {
     throw new Error(error.message);
   }
 
-  return messages;
+  return { frindDetails, messages, conversationId };
 }
 
-// const myUserId = "06bd2050-5bbe-4069-95a5-b92e8ce5db71";
-// const friendUserId = "a4552a8e-c0d7-4bb6-ac4b-60b16057f46e";
+////////////////
+export async function openConversation(friendUserId) {
+  // const { data: conversations, error: convError } = await supabase
+  //   .from("conversations")
+  //   .select("*")
+  //   .eq("user_2_id", `${friendUserId}`);
+
+  const { data, error } = await supabase
+    .from("conversations")
+    .insert([{ user_2_id: friendUserId }])
+    .select();
+
+  if (error) throw new Error(error.message);
+  const conversationId = data[0].id;
+  return conversationId;
+}
+/////////////
+export async function sendMessage({ conversationId, content, friendUserId }) {
+  let conversation_id = conversationId;
+
+  if (conversationId === null) {
+    conversation_id = await openConversation({ friendUserId });
+  }
+
+  const { data, error } = await supabase
+    .from("messages")
+    .insert([{ conversation_id, content }])
+    .select();
+
+  if (error) throw new Error(error.message);
+
+  const { data: updatedRow, error: updatedError } = await supabase
+    .from("conversations")
+    .update({ last_message_id: data[0].id })
+    .eq("id", conversation_id) // Use the correct variable here
+    .select();
+
+  if (updatedError) throw new Error(updatedError.message);
+
+  return data;
+}
+
+// console.log("message", data);
+// console.log("conversation", updatedRow);
+///////////
 
 // getMessages({ myUserId, friendUserId });
+
+////////////////////////
 
 /////////////////
 export async function testApi() {
   const myUserId = "06bd2050-5bbe-4069-95a5-b92e8ce5db71";
   const friendUserId = "1435f575-0346-47bf-87d4-0d82a972a5ff";
 
-  const data = await hasPreviousConversation({ myUserId, friendUserId });
+  // const data = await hasPreviousConversation({ myUserId, friendUserId });
+
+  const { data, error } = await supabase
+    .from("conversations")
+    .update({ last_message_id: "35d62c8d-4c5d-47b1-bf58-6f500ce1cea8" })
+    .eq("id", "70956ae0-0bc6-475b-a98a-9ea4a7b8b88d")
+    .select();
+
+  if (error) throw new Error(error.message);
+
   console.log(data);
+  return data;
 }
+
+// testApi();
 
 // const myUserId = { myUserId: "06bd2050-5bbe-4069-95a5-b92e8ce5db71" };
 
