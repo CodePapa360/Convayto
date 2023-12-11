@@ -3,60 +3,61 @@ import { useMessages } from "../features/converse/useMessages";
 import { useUser } from "../features/authentication/useUser";
 import { useState } from "react";
 import { useSendNewMessage } from "../features/converse/useSendNewMessage";
-import { useQueryClient } from "@tanstack/react-query";
 
 function MessageInputBar() {
-  const quryClient = useQueryClient();
-
   const [newMessage, setNewMessage] = useState("");
   const { isSending, sendNewMessage } = useSendNewMessage();
   const { user } = useUser();
-  const { data, isPending } = useMessages();
+  const { data, isPending, setData } = useMessages();
   const conversationId = data?.conversationId;
   const friendUserId = data?.frindDetails[0].id;
   const myUserId = user.id;
-
-  const isFirstMessage = conversationId === null;
-
-  // console.log(conversationId, friendUserId, conversationId);
 
   function handleSendNewMessage(e) {
     e.preventDefault();
     if (!newMessage) return;
 
-    if (isFirstMessage) {
-      sendNewMessage(
-        {
-          conversationId,
-          friendUserId,
-          myUserId,
-          content: newMessage,
-        },
-        {
-          onSuccess: () => {
-            quryClient.invalidateQueries({
-              queryKey: ["friend"],
-            });
+    // Optimistically update the UI
+    const optimisticMessage = {
+      id: Math.random().toString(),
+      conversationId,
+      friendUserId,
+      content: newMessage,
+      sender_id: myUserId,
+      created_at: false,
+    };
 
-            setNewMessage("");
-          },
-        }
-      );
-    } else {
-      sendNewMessage(
-        {
-          conversationId,
-          friendUserId,
-          myUserId,
-          content: newMessage,
+    setData((prev) => ({
+      ...prev,
+      messages: [...(prev.messages || []), optimisticMessage],
+    }));
+
+    // Make the actual request to the server
+    sendNewMessage(
+      {
+        conversationId,
+        friendUserId,
+        myUserId,
+        content: newMessage,
+      },
+      {
+        onSuccess: (dataFromServer) => {
+          const data = dataFromServer[0];
+          // Update the UI with the response from the server
+          setData((prev) => ({
+            ...prev,
+            messages: prev.messages.map((message) =>
+              message.id === optimisticMessage.id
+                ? { ...data, created_at: data.created_at }
+                : message
+            ),
+          }));
+
+          // Reset the input field
+          setNewMessage("");
         },
-        {
-          onSuccess: () => {
-            setNewMessage("");
-          },
-        }
-      );
-    }
+      }
+    );
   }
 
   return (

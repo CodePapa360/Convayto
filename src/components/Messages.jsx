@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import { useMessages } from "../features/converse/useMessages";
 import Message from "./Message";
+import { useRef } from "react";
 
 function Messages() {
   const { data, isPending } = useMessages();
   const messages = data?.messages;
+
+  const bottomRef = useRef();
 
   return (
     <StyledMessages>
@@ -14,6 +17,13 @@ function Messages() {
       {messages?.map((message) => (
         <Message message={message} key={message.id} />
       ))}
+
+      {bottomRef?.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      })}
+      <span ref={bottomRef}></span>
     </StyledMessages>
   );
 }

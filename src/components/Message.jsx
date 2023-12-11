@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useUser } from "../features/authentication/useUser";
+import { formatTime } from "../utils/common";
 
 function Message({ message }) {
   const { user } = useUser();
@@ -10,7 +11,7 @@ function Message({ message }) {
     >
       <p>
         {message.content}
-        <span>09:01 PM</span>
+        <span>{formatTime(message.created_at)}</span>
       </p>
     </StyledMessage>
   );

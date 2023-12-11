@@ -11,7 +11,7 @@ import MessageView from "./layouts/MessageView";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 0,
+      staleTime: 1,
     },
   },
 });
