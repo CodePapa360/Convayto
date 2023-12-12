@@ -27,10 +27,10 @@ function MessageInputBar() {
       created_at: false,
     };
 
-    setData((prev) => ({
-      ...prev,
-      messages: [...(prev.messages || []), optimisticMessage],
-    }));
+    // setData((prev) => ({
+    //   ...prev,
+    //   messages: [...(prev.messages || []), optimisticMessage],
+    // }));
 
     // Make the actual request to the server
     sendNewMessage(

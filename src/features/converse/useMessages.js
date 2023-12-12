@@ -6,7 +6,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getMessages } from "../../services/apiAuth";
 import { useUser } from "../authentication/useUser";
 import { useParams } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { subscribeRealtime } from "../../services/apiRealtime";
 
 export function useMessages() {
@@ -21,30 +21,24 @@ export function useMessages() {
     select: (data) => ({ ...data, messages: [...(data?.messages || [])] }),
   });
 
-  const previousConversationIdRef = useRef(null);
   const conversationId = data?.conversationId;
 
-  useEffect(() => {
-    // Unsubscribe from the previous room when conversationId changes
-    if (
-      previousConversationIdRef.current &&
-      previousConversationIdRef.current !== conversationId
-    ) {
-      previousConversationIdRef.current = null;
-      console.log("Unsubscribed from the previous room");
-    }
-
-    // Subscribe to the new room if conversationId is available
-    if (conversationId) {
-      const subscription = subscribeRealtime({ conversationId });
-      previousConversationIdRef.current = conversationId;
+  useEffect(
+    function () {
+      const subscription = subscribeRealtime({
+        conversationId,
+        myUserId: user.id,
+        friendUserId,
+        queryClient,
+      });
 
       return () => {
         subscription.unsubscribe();
-        console.log("Unsubscribed from the current room");
+        console.log("unsubscribed");
       };
-    }
-  }, [conversationId]);
+    },
+    [conversationId, user.id, friendUserId, queryClient]
+  );
 
   if (error) {
     console.error(
