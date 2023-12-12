@@ -1,19 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getConversations } from "../services/apiAuth";
-import { useUser } from "../features/authentication/useUser";
 import { useConversatoins } from "../features/converse/useConversations";
 import Conversation from "./Conversation";
+import { sortByTime } from "../utils/common";
 
 function Conversations() {
-  const navigate = useNavigate();
-
   const { data: conversations, isPending } = useConversatoins();
 
-  function handlClick() {
-    navigate("/userId?1234");
-  }
+  const sortedConversations =
+    conversations?.length > 1 ? conversations?.sort(sortByTime) : conversations;
 
   return (
     <StyledConversations>
@@ -24,7 +18,7 @@ function Conversations() {
       <ConversationsContainer>
         {isPending && <p>Loading...</p>}
 
-        {conversations?.map((conv, i) => (
+        {sortedConversations?.map((conv) => (
           <Conversation key={conv.user.id} conversation={conv} />
         ))}
       </ConversationsContainer>

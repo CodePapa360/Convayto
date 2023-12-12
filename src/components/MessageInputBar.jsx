@@ -42,13 +42,12 @@ function MessageInputBar() {
       },
       {
         onSuccess: (dataFromServer) => {
-          const data = dataFromServer[0];
           // Update the UI with the response from the server
           setData((prev) => ({
             ...prev,
             messages: prev.messages.map((message) =>
               message.id === optimisticMessage.id
-                ? { ...data, created_at: data.created_at }
+                ? { ...dataFromServer, created_at: dataFromServer.created_at }
                 : message
             ),
           }));

@@ -1,4 +1,42 @@
+import { useEffect } from "react";
 import supabase from "./supabase";
+import { useQueryClient } from "@tanstack/react-query";
+
+// export function useRealtimeMessages(friendUserId) {
+//   const queryClient = useQueryClient();
+
+//   useEffect(() => {
+//     const channel = supabase
+//       .channel("custom-all-channel")
+//       .on(
+//         "postgres_changes",
+//         { event: "*", schema: "public", table: "messages" },
+//         (payload) => {
+//           // Handle real-time INSERT events (new messages)
+//           // console.log(payload);
+//           const previousData = queryClient.getQueryData([
+//             "friend",
+//             friendUserId,
+//           ]);
+//           const newData = {
+//             ...previousData,
+//             messages: [...(previousData?.messages || []), payload.new],
+//           };
+
+//           // Update the React Query cache
+//           queryClient.setQueryData(["friend", friendUserId], newData);
+//         }
+//       )
+//       .subscribe();
+
+//     return () => {
+//       // Unsubscribe when the component is unmounted
+//       channel.unsubscribe();
+//     };
+//   }, [friendUserId, queryClient]);
+// }
+
+/////////////////
 
 export async function signup({ email, password, fullname, username }) {
   const { data, error } = await supabase.auth.signUp({
@@ -151,6 +189,58 @@ export async function getMessages({ myUserId, friendUserId }) {
   return { frindDetails, messages, conversationId };
 }
 
+///////////////
+// function useRealtimeMessages(friendUserId, callback) {
+//   useEffect(() => {
+//     const channel = supabase.channel("realtime-messages-channel");
+//     const table = "messages";
+
+//     const subscription = channel
+//       .on("INSERT", { table, schema: "public" }, (payload) => {
+//         callback(payload);
+//       })
+//       .subscribe();
+
+//     return () => {
+//       // Unsubscribe when the component is unmounted
+//       channel.removeSubscription(subscription);
+//     };
+//   }, [friendUserId]); // Re-subscribe when friendUserId changes
+// }
+
+// export function subscribeToMessages(conversationId, friendUserId, user) {
+//   return supabase
+//     .from("messages")
+//     .on(
+//       "postgres_changes",
+//       { event: "*", schema: "public", table: "messages" },
+//       (payload) => {
+//         const { data: message } = payload;
+
+//         switch (payload.eventType) {
+//           case "INSERT":
+//             if (message.conversation_id === conversationId) {
+//               // Provide a callback function to update the data (without importing setQueryData)
+//               return (data) => {
+//                 return {
+//                   ...data,
+//                   messages: [...(data?.messages || []), message],
+//                 };
+//               };
+//             }
+//             break;
+//           case "UPDATE":
+//             // Implement logic to update specific message
+//             break;
+//           case "DELETE":
+//             // Implement logic to remove deleted message
+//             break;
+//         }
+//       }
+//     )
+//     .subscribe();
+// }
+
 ////////////////
 export async function openConversation(friendUserId) {
   // const { data: conversations, error: convError } = await supabase
@@ -190,7 +280,7 @@ export async function sendMessage({ conversationId, content, friendUserId }) {
 
   if (updatedError) throw new Error(updatedError.message);
 
-  return data;
+  return data[0];
 }
 
 // console.log("message", data);

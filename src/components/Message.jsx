@@ -7,11 +7,11 @@ function Message({ message }) {
 
   return (
     <StyledMessage
-      className={message.sender_id === user.id ? "own-message" : ""}
+      className={message?.sender_id === user.id ? "own-message" : ""}
     >
       <p>
-        {message.content}
-        <span>{formatTime(message.created_at)}</span>
+        {message?.content}
+        <span>{formatTime(message?.created_at)}</span>
       </p>
     </StyledMessage>
   );

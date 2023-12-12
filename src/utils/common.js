@@ -7,7 +7,7 @@ export function scrollToBottom(ref) {
 }
 
 export function formatTime(rawTime) {
-  if (!rawTime) return "-- : -- : --";
+  if (!rawTime) return "-- : -- --";
 
   const options = {
     hour: "numeric",
@@ -19,4 +19,13 @@ export function formatTime(rawTime) {
     new Date(rawTime)
   );
   return formattedTime.toLowerCase();
+}
+
+export function sortByTime(conv1, conv2) {
+  if (!conv1?.lastMessage) return conv2;
+  if (!conv2?.lastMessage) return conv1;
+
+  const time1 = Date.parse(conv1?.lastMessage.created_at);
+  const time2 = Date.parse(conv2?.lastMessage.created_at);
+  return time2 - time1;
 }
