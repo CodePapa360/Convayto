@@ -49,7 +49,7 @@ export function useMessages() {
       });
 
       return () => {
-        subscription.unsubscribe();
+        subscription?.unsubscribe();
         console.log("unsubscribed");
       };
     },
