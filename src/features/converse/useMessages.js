@@ -9,6 +9,8 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { subscribeRealtime } from "../../services/apiRealtime";
 
+let subscription;
+
 export function useMessages() {
   const { userId: friendUserId } = useParams();
   const { user } = useUser();
@@ -25,11 +27,25 @@ export function useMessages() {
 
   useEffect(
     function () {
-      const subscription = subscribeRealtime({
+      // if()
+      if (subscription && subscription?.topic === conversationId) return;
+
+      if (subscription) {
+        // console.log(subscription);
+        subscription.unsubscribe();
+      }
+
+      subscription = subscribeRealtime({
         conversationId,
-        myUserId: user.id,
-        friendUserId,
-        queryClient,
+        callback: (newData) => {
+          // Update the React Query cache with the new message
+          queryClient.setQueryData(["friend", friendUserId], (prevData) => {
+            return {
+              ...prevData,
+              messages: [...(prevData.messages || []), newData.new],
+            };
+          });
+        },
       });
 
       return () => {
@@ -37,7 +53,7 @@ export function useMessages() {
         console.log("unsubscribed");
       };
     },
-    [conversationId, user.id, friendUserId, queryClient]
+    [conversationId]
   );
 
   if (error) {

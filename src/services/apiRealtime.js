@@ -1,15 +1,11 @@
 import supabase from "./supabase";
 
-export function subscribeRealtime({
-  conversationId,
-  myUserId,
-  friendUserId,
-  queryClient,
-}) {
-  const room = `${myUserId}-${conversationId}`;
+export function subscribeRealtime({ conversationId, callback }) {
+  if (!conversationId) return;
+  const roomName = conversationId;
 
   const subscription = supabase
-    .channel(room)
+    .channel(roomName)
     .on(
       "postgres_changes",
       {
@@ -19,19 +15,12 @@ export function subscribeRealtime({
         filter: `conversation_id=eq.${conversationId}`,
       },
       (payload) => {
-        // Extract the message data from the payload
-        const message = payload.new;
-
-        // Update the React Query cache with the new message
-        queryClient.setQueryData(["friend", friendUserId], (prevData) => {
-          return {
-            ...prevData,
-            messages: [...(prevData.messages || []), message],
-          };
-        });
+        callback(payload);
       }
     )
     .subscribe();
+
+  console.log("subscribed", conversationId);
 
   return subscription;
 }
