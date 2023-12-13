@@ -2,9 +2,12 @@ import styled from "styled-components";
 import { useConversatoins } from "../features/converse/useConversations";
 import Conversation from "./Conversation";
 import { sortByTime } from "../utils/common";
+import { useEffect, useState } from "react";
 
 function Conversations() {
-  const { data: conversations, isPending } = useConversatoins();
+  const { data, isPending } = useConversatoins();
+
+  const conversations = data?.combinedArray;
 
   const sortedConversations =
     conversations?.length > 1 ? conversations?.sort(sortByTime) : conversations;

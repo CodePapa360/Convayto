@@ -92,6 +92,9 @@ export async function getConversationEntries({ myUserId }) {
 export async function getConversations({ myUserId }) {
   const data = await getConversationEntries({ myUserId });
 
+  // Extract all conversation IDs
+  const conversationIds = data.map((conv) => conv.id);
+
   // Extract friend IDs
   const friendsIds = data.map((frnd) =>
     frnd.user1_id === myUserId ? frnd.user2_id : frnd.user1_id
@@ -125,7 +128,7 @@ export async function getConversations({ myUserId }) {
     };
   });
 
-  return combinedArray;
+  return { combinedArray, conversationIds };
 }
 
 ///////////////////
