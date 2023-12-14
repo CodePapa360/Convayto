@@ -10,7 +10,7 @@ let subscription;
 export function useMessages() {
   const { userId: friendUserId } = useParams();
   const { user } = useUser();
-  const queryClient = useQueryClient(); // Get the query client
+  const queryClient = useQueryClient();
   const myUserId = user.id;
 
   const { data, isPending, error } = useQuery({
@@ -34,12 +34,33 @@ export function useMessages() {
       subscription = subscribeRealtimeMessage({
         conversationId,
         callback: (newData) => {
-          // Update the React Query cache with the new message
           queryClient.setQueryData(["friend", friendUserId], (prevData) => {
-            return {
-              ...prevData,
-              messages: [...(prevData.messages || []), newData.new],
-            };
+            const existingOptimisticMessage = prevData?.messages?.find(
+              (message) => message?.id === newData?.id
+            );
+
+            if (!existingOptimisticMessage) {
+              // Only update if no optimistic message exists
+              return {
+                ...prevData,
+                messages: [...prevData.messages, newData],
+              };
+            }
+
+            if (existingOptimisticMessage) {
+              // Update existing optimistic message with server data
+              return {
+                ...prevData,
+                messages: prevData.messages.map((message) =>
+                  message.id === newData.id ? newData : message
+                ),
+              };
+            }
+
+            // return {
+            //   ...prevData,
+            //   messages: [...(prevData.messages || []), newData],
+            // };
           });
         },
       });
@@ -63,7 +84,5 @@ export function useMessages() {
   return {
     data,
     isPending,
-    setData: (newData) =>
-      queryClient.setQueryData(["friend", friendUserId], newData),
   };
 }

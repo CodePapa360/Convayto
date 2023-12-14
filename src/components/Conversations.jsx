@@ -1,16 +1,15 @@
 import styled from "styled-components";
 import { useConversatoins } from "../features/converse/useConversations";
 import Conversation from "./Conversation";
-import { sortByTime } from "../utils/common";
-import { useEffect, useState } from "react";
+import { sortConverseByTime } from "../utils/common";
 
 function Conversations() {
-  const { data, isPending } = useConversatoins();
-
-  const conversations = data?.combinedArray;
+  const { data: conversations, isPending } = useConversatoins();
 
   const sortedConversations =
-    conversations?.length > 1 ? conversations?.sort(sortByTime) : conversations;
+    conversations?.length > 1
+      ? conversations?.sort(sortConverseByTime)
+      : conversations;
 
   return (
     <StyledConversations>
@@ -22,7 +21,7 @@ function Conversations() {
         {isPending && <p>Loading...</p>}
 
         {sortedConversations?.map((conv) => (
-          <Conversation key={conv.user.id} conversation={conv} />
+          <Conversation key={conv.friend.id} conversation={conv} />
         ))}
       </ConversationsContainer>
     </StyledConversations>

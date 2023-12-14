@@ -3,60 +3,64 @@ import { useMessages } from "../features/converse/useMessages";
 import { useUser } from "../features/authentication/useUser";
 import { useState } from "react";
 import { useSendNewMessage } from "../features/converse/useSendNewMessage";
+import { v4 as uuid } from "uuid";
+import { useQueryClient } from "@tanstack/react-query";
 
 function MessageInputBar() {
   const [newMessage, setNewMessage] = useState("");
   const { isSending, sendNewMessage } = useSendNewMessage();
   const { user } = useUser();
-  const { data, isPending, setData } = useMessages();
+  const { data, isPending } = useMessages();
   const conversationId = data?.conversationId;
   const friendUserId = data?.frindDetails[0].id;
   const myUserId = user.id;
+
+  const queryClient = useQueryClient();
 
   function handleSendNewMessage(e) {
     e.preventDefault();
     if (!newMessage) return;
 
-    // Optimistically update the UI
-    const optimisticMessage = {
-      id: Math.random().toString(),
-      conversationId,
+    const messageObj = {
+      id: uuid(),
+      conversation_id: conversationId,
       friendUserId,
+      myUserId,
       content: newMessage,
-      sender_id: myUserId,
-      created_at: false,
     };
 
-    // setData((prev) => ({
-    //   ...prev,
-    //   messages: [...(prev.messages || []), optimisticMessage],
-    // }));
-
     // Make the actual request to the server
-    sendNewMessage(
-      {
-        conversationId,
-        friendUserId,
-        myUserId,
-        content: newMessage,
-      },
-      {
-        onSuccess: (dataFromServer) => {
-          // Update the UI with the response from the server
-          setData((prev) => ({
-            ...prev,
-            messages: prev.messages.map((message) =>
-              message.id === optimisticMessage.id
-                ? { ...dataFromServer, created_at: dataFromServer.created_at }
-                : message
-            ),
-          }));
+    sendNewMessage(messageObj);
 
-          // Reset the input field
-          setNewMessage("");
-        },
-      }
+    // Optimistic update
+    // setData({
+    //   id: messageObj.id,
+    //   friendUserId,
+    //   sender_id: messageObj.myUserId,
+    //   content: messageObj.content,
+    //   created_at: false,
+    // });
+
+    // const setData = function (data) {
+    const optimisticMessage = {
+      id: messageObj.id,
+      content: messageObj.content,
+      created_at: new Date(),
+      sender_id: messageObj.myUserId,
+    };
+
+    // Update the cache with the optimistic message
+    queryClient.setQueryData(
+      ["friend", messageObj.friendUserId],
+      (prevData) => ({
+        ...prevData,
+        messages: [...prevData.messages, optimisticMessage],
+      })
     );
+    // };
+
+    // Reset the input field
+    setNewMessage("");
   }
 
   return (
@@ -77,8 +81,6 @@ function MessageInputBar() {
           Send
         </button>
       </form>
-
-      {/* <button>Test button</button> */}
     </StyledInputBar>
   );
 }

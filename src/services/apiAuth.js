@@ -1,42 +1,4 @@
-import { useEffect } from "react";
 import supabase from "./supabase";
-import { useQueryClient } from "@tanstack/react-query";
-
-// export function useRealtimeMessages(friendUserId) {
-//   const queryClient = useQueryClient();
-
-//   useEffect(() => {
-//     const channel = supabase
-//       .channel("custom-all-channel")
-//       .on(
-//         "postgres_changes",
-//         { event: "*", schema: "public", table: "messages" },
-//         (payload) => {
-//           // Handle real-time INSERT events (new messages)
-//           // console.log(payload);
-//           const previousData = queryClient.getQueryData([
-//             "friend",
-//             friendUserId,
-//           ]);
-//           const newData = {
-//             ...previousData,
-//             messages: [...(previousData?.messages || []), payload.new],
-//           };
-
-//           // Update the React Query cache
-//           queryClient.setQueryData(["friend", friendUserId], newData);
-//         }
-//       )
-//       .subscribe();
-
-//     return () => {
-//       // Unsubscribe when the component is unmounted
-//       channel.unsubscribe();
-//     };
-//   }, [friendUserId, queryClient]);
-// }
-
-/////////////////
 
 export async function signup({ email, password, fullname, username }) {
   const { data, error } = await supabase.auth.signUp({
@@ -78,6 +40,8 @@ export async function getCurrentUser() {
   return data;
 }
 
+////////////////
+
 export async function getConversationEntries({ myUserId }) {
   const { data, error } = await supabase
     .from("conversations")
@@ -85,15 +49,11 @@ export async function getConversationEntries({ myUserId }) {
     .or(`user1_id.eq.${myUserId},user2_id.eq.${myUserId}`);
 
   if (error) throw new Error(error.message);
-  // console.log(data);
   return data;
 }
 
 export async function getConversations({ myUserId }) {
   const data = await getConversationEntries({ myUserId });
-
-  // Extract all conversation IDs
-  const conversationIds = data.map((conv) => conv.id);
 
   // Extract friend IDs
   const friendsIds = data.map((frnd) =>
@@ -116,19 +76,17 @@ export async function getConversations({ myUserId }) {
     usersMapping[user.id] = user;
   });
 
-  // Combine user data and last messages
   const combinedArray = data.map((msg) => {
     const friendId = msg.user1_id === myUserId ? msg.user2_id : msg.user1_id;
     const user = usersMapping[friendId];
-    const lastMessage = msg.messages;
 
     return {
-      user,
-      lastMessage,
+      friend: user,
+      ...msg,
     };
   });
 
-  return { combinedArray, conversationIds };
+  return combinedArray;
 }
 
 ///////////////////
@@ -192,57 +150,19 @@ export async function getMessages({ myUserId, friendUserId }) {
   return { frindDetails, messages, conversationId };
 }
 
-///////////////
-// function useRealtimeMessages(friendUserId, callback) {
-//   useEffect(() => {
-//     const channel = supabase.channel("realtime-messages-channel");
-//     const table = "messages";
+////////////////
+export async function getMessageById(messageId) {
+  const { data, error } = await supabase
+    .from("messages")
+    .select("*")
+    .eq("id", messageId);
 
-//     const subscription = channel
-//       .on("INSERT", { table, schema: "public" }, (payload) => {
-//         callback(payload);
-//       })
-//       .subscribe();
+  if (error) {
+    throw new Error(error.message);
+  }
 
-//     return () => {
-//       // Unsubscribe when the component is unmounted
-//       channel.removeSubscription(subscription);
-//     };
-//   }, [friendUserId]); // Re-subscribe when friendUserId changes
-// }
-
-// export function subscribeToMessages(conversationId, friendUserId, user) {
-//   return supabase
-//     .from("messages")
-//     .on(
-//       "postgres_changes",
-//       { event: "*", schema: "public", table: "messages" },
-//       (payload) => {
-//         const { data: message } = payload;
-
-//         switch (payload.eventType) {
-//           case "INSERT":
-//             if (message.conversation_id === conversationId) {
-//               // Provide a callback function to update the data (without importing setQueryData)
-//               return (data) => {
-//                 return {
-//                   ...data,
-//                   messages: [...(data?.messages || []), message],
-//                 };
-//               };
-//             }
-//             break;
-//           case "UPDATE":
-//             // Implement logic to update specific message
-//             break;
-//           case "DELETE":
-//             // Implement logic to remove deleted message
-//             break;
-//         }
-//       }
-//     )
-//     .subscribe();
-// }
+  return data[0];
+}
 
 ////////////////
 export async function openConversation(friendUserId) {
@@ -261,20 +181,26 @@ export async function openConversation(friendUserId) {
   return conversationId;
 }
 /////////////
-export async function sendMessage({ conversationId, content, friendUserId }) {
-  let conversation_id = conversationId;
+export async function sendMessage({
+  id,
+  conversation_id,
+  content,
+  friendUserId,
+}) {
+  let convId = conversation_id;
 
-  if (conversationId === null) {
-    conversation_id = await openConversation({ friendUserId });
-  }
+  // if (convId === null) {
+  //   convId = await openConversation({ friendUserId });
+  // }
 
   const { data, error } = await supabase
     .from("messages")
-    .insert([{ conversation_id, content }])
+    .insert([{ id, conversation_id: convId, content }])
     .select();
 
   if (error) throw new Error(error.message);
 
+  // update conversation table with the last message id
   const { data: updatedRow, error: updatedError } = await supabase
     .from("conversations")
     .update({ last_message_id: data[0].id })

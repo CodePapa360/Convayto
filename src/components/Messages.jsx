@@ -2,10 +2,11 @@ import styled from "styled-components";
 import { useMessages } from "../features/converse/useMessages";
 import Message from "./Message";
 import { useRef } from "react";
+import { sortMessageByTime } from "../utils/common";
 
 function Messages() {
   const { data, isPending } = useMessages();
-  const messages = data?.messages;
+  const messages = data?.messages.sort(sortMessageByTime);
 
   const bottomRef = useRef();
 

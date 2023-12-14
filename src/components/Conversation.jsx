@@ -2,13 +2,12 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function Conversation({ conversation }) {
-  const { user, lastMessage } = conversation;
-
-  const { fullname, id } = user;
-  const messageContent = lastMessage?.content
-    ? lastMessage.content.length > 30
-      ? `${lastMessage.content.slice(0, 30)}...`
-      : lastMessage.content
+  const { friend, messages } = conversation;
+  const { fullname, id } = friend;
+  const messageContent = messages?.content
+    ? messages.content.length > 30
+      ? `${messages.content.slice(0, 30)}...`
+      : messages.content
     : "";
 
   const navigate = useNavigate();

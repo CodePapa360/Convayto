@@ -3,7 +3,6 @@ import { getConversations } from "../../services/apiAuth";
 import { useUser } from "../authentication/useUser";
 import { useEffect } from "react";
 import { subscribeRealtimeConversation } from "../../services/apiRealtime";
-import { sortByTime } from "../../utils/common";
 
 let subscriptionConversation;
 
@@ -18,34 +17,28 @@ export function useConversatoins() {
     queryFn: () => getConversations({ myUserId }),
   });
 
-  const conversationIds = data?.conversationIds;
+  // Extract all conversation IDs
+  const conversationIds = data?.map((conv) => conv.id);
 
   useEffect(
     function () {
-      if (!myUserId) return;
-      if (myUserId === subscriptionConversation?.subTopic) return;
+      if (!myUserId || !conversationIds) return;
 
       if (subscriptionConversation) {
         subscriptionConversation.unsubscribe();
       }
 
       const updateConversation = (payload) => {
-        // Update the React Query cache with the new message
         queryClient.setQueryData(["conversations", myUserId], (prevData) => {
-          const conversationArray = prevData.combinedArray;
-
-          const updatedArray = conversationArray.map((conversation) => {
-            if (conversation.lastMessage.conversation_id === payload.id) {
-              return { ...conversation, lastMessage: payload };
+          const updatedArray = prevData.map((conversation) => {
+            if (conversation.id === payload.id) {
+              return { ...conversation, ...payload };
             } else {
               return conversation;
             }
           });
 
-          return {
-            ...prevData,
-            combinedArray: updatedArray.sort(sortByTime),
-          };
+          return updatedArray;
         });
       };
 
