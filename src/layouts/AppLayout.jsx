@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import HeaderBar from "../components/HeaderBar";
-import MessageView from "./MessageView";
 import Conversations from "../components/Conversations";
 import { Outlet } from "react-router-dom";
 
@@ -14,7 +13,6 @@ function AppLayout() {
 
       <RightSide>
         <Outlet />
-        {/* <MessageView /> */}
       </RightSide>
     </StyledAppLayout>
   );
@@ -27,12 +25,12 @@ const StyledAppLayout = styled.main`
   grid-template-columns: 22rem 1fr;
   height: 100vh;
   height: 100dvh;
-  overflow: hidden;
+  overflow-y: hidden;
 `;
 
 const LeftSide = styled.div`
-  height: 100vh;
-  height: 100dvh;
+  /* height: 100vh;
+  height: 100dvh; */
 
   display: grid;
   grid-template-columns: 1fr;

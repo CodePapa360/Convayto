@@ -33,13 +33,6 @@ function Conversations() {
     test();
   });
 
-  // const { data, error } = useQuery({
-  //   queryKey: ["friend", friendUserId],
-  //   queryFn: () => getMessages({ myUserId, friendUserId }),
-  //   // Use previousData to update the messages array
-  //   select: (data) => ({ ...data, messages: [...(data?.messages || [])] }),
-  // });
-
   return (
     <StyledConversations>
       <h2>Conversations</h2>
