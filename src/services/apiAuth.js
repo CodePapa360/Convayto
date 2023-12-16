@@ -221,23 +221,23 @@ export async function sendMessage({
 ////////////////////////
 
 /////////////////
-export async function testApi() {
-  const myUserId = "06bd2050-5bbe-4069-95a5-b92e8ce5db71";
-  const friendUserId = "1435f575-0346-47bf-87d4-0d82a972a5ff";
+// export async function testApi() {
+//   const myUserId = "06bd2050-5bbe-4069-95a5-b92e8ce5db71";
+//   const friendUserId = "1435f575-0346-47bf-87d4-0d82a972a5ff";
 
-  // const data = await hasPreviousConversation({ myUserId, friendUserId });
+//   // const data = await hasPreviousConversation({ myUserId, friendUserId });
 
-  const { data, error } = await supabase
-    .from("conversations")
-    .update({ last_message_id: "35d62c8d-4c5d-47b1-bf58-6f500ce1cea8" })
-    .eq("id", "70956ae0-0bc6-475b-a98a-9ea4a7b8b88d")
-    .select();
+//   const { data, error } = await supabase
+//     .from("conversations")
+//     .update({ last_message_id: "35d62c8d-4c5d-47b1-bf58-6f500ce1cea8" })
+//     .eq("id", "70956ae0-0bc6-475b-a98a-9ea4a7b8b88d")
+//     .select();
 
-  if (error) throw new Error(error.message);
+//   if (error) throw new Error(error.message);
 
-  console.log(data);
-  return data;
-}
+//   console.log(data);
+//   return data;
+// }
 
 // testApi();
 
@@ -261,13 +261,21 @@ export async function testApi() {
 // }
 // listenMessages();
 
-// export async function test(searchTerm) {
-//   let { data: users, error } = await supabase.from("users").select("email");
+export async function searchPeople({ query }) {
+  console.log(query);
+  let { data: results, error } = await supabase
+    .from("users")
+    .select("*")
+    .or((query) =>
+      query
+        .or("fullname", "ilike", `%${query}%`)
+        .or("username", "ilike", `%${query}%`)
+        .or("email", "ilike", `%${query}%`)
+    );
 
-//   if (error) throw new Error(error.message);
+  if (error) throw new Error(error.message);
 
-//   console.log(users);
-//   return users;
-// }
+  return results;
+}
 
 // // test();

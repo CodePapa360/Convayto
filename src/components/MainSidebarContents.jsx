@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Logout from "../features/authentication/Logout";
 import Conversation from "./Conversation";
 import { useState } from "react";
+import { searchPeople } from "../services/apiAuth";
 
 function MainSidebarContents({ onSetMyAccountView }) {
   const [searchView, setSearchView] = useState(false);
@@ -19,6 +20,9 @@ function MainSidebarContents({ onSetMyAccountView }) {
     conversations?.length > 1
       ? conversations?.sort(sortConverseByTime)
       : conversations;
+
+  const [isSsearching, setIsSearching] = useState(false);
+  const [query, setQuery] = useState("");
 
   // prefetching messages of other conversations
   // sortedConversations?.slice(0, 5).forEach((conv) => {
@@ -37,39 +41,63 @@ function MainSidebarContents({ onSetMyAccountView }) {
   //   test();
   // });
 
+  async function handleSearch(e) {
+    e.preventDefault();
+
+    const results = await searchPeople({ query });
+    console.log(results);
+  }
+
   return (
     <>
       <StyledHeaderBar>
-        <Profile onClick={() => onSetMyAccountView(true)}>
-          <span>
-            <img src="/images/default-avatar.png" alt="Avatar" />
-          </span>
-          <span>
-            <span>{fullname}</span>
-            <span>@{username}</span>
-          </span>
-        </Profile>
+        <ProfileDetails>
+          <Profile onClick={() => onSetMyAccountView(true)}>
+            <span>
+              <img src="/images/default-avatar.png" alt="Avatar" />
+            </span>
+            <span>
+              <span>{fullname}</span>
+              <span>@{username}</span>
+            </span>
+          </Profile>
 
-        <Logout />
+          <Logout />
+        </ProfileDetails>
 
         <SearchBar>
-          <input type="text" placeholder="Search people" />
+          <button onClick={() => setIsSearching(false)}>⬅</button>
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            type="text"
+            onClick={() => setIsSearching(true)}
+            placeholder="Search people"
+          />
+
+          <button onClick={handleSearch}>🔍</button>
         </SearchBar>
       </StyledHeaderBar>
 
-      <StyledConversations>
-        <h2>Conversations</h2>
+      <UsersContainer>
+        {isSsearching && <p>Searchin users</p>}
 
-        <hr />
+        {!isSsearching && (
+          <ChatsContainer>
+            <h2>Conversations</h2>
 
-        <ConversationsContainer>
-          {isPending && <p>Loading...</p>}
+            <hr />
 
-          {sortedConversations?.map((conv) => (
-            <Conversation key={conv.friend.id} conversation={conv} />
-          ))}
-        </ConversationsContainer>
-      </StyledConversations>
+            <ConversationsContainer>
+              {isPending && <p>Loading...</p>}
+
+              {sortedConversations?.map((conv) => (
+                <Conversation key={conv.friend.id} conversation={conv} />
+              ))}
+            </ConversationsContainer>
+          </ChatsContainer>
+        )}
+      </UsersContainer>
     </>
   );
 }
@@ -79,10 +107,17 @@ export default MainSidebarContents;
 const StyledHeaderBar = styled.div`
   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
 
-  display: flex;
+  /* display: flex; */
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+`;
+
+const ProfileDetails = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Profile = styled.div`
@@ -91,6 +126,7 @@ const Profile = styled.div`
   gap: 0.5rem;
 
   > :first-child {
+    max-width: 3rem;
   }
 
   > :last-child {
@@ -100,20 +136,22 @@ const Profile = styled.div`
 `;
 
 const SearchBar = styled.div`
+  display: flex;
+  gap: 0.5rem;
+
   input {
-    width: 8rem;
+    width: 100%;
   }
 `;
 
 ///////
-const StyledConversations = styled.div`
+const UsersContainer = styled.div`
   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
 `;
 
+const ChatsContainer = styled.div``;
+
 const ConversationsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
   overflow-y: auto;
-  height: 100vh;
-  height: 100dvh;
+  height: 100%;
 `;

@@ -20,8 +20,8 @@ function LeftSideBar() {
 export default LeftSideBar;
 
 const StyledLeftSideBar = styled.div`
-  /* height: 100vh;
-  height: 100dvh; */
+  height: 100vh;
+  height: 100dvh;
 
   display: grid;
   grid-template-columns: 1fr;
