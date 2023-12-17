@@ -6,10 +6,13 @@ import styled from "styled-components";
 import Logout from "../features/authentication/Logout";
 import Conversation from "./Conversation";
 import { useState } from "react";
-import { searchPeople } from "../services/apiAuth";
+import { getMessages, searchPeople } from "../services/apiAuth";
+import SearchView from "./SearchView";
 
 function MainSidebarContents({ onSetMyAccountView }) {
-  const [searchView, setSearchView] = useState(false);
+  const [isSsearching, setIsSearching] = useState(false);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
   const { user } = useUser();
   const { fullname, username } = user.user_metadata;
 
@@ -20,9 +23,6 @@ function MainSidebarContents({ onSetMyAccountView }) {
     conversations?.length > 1
       ? conversations?.sort(sortConverseByTime)
       : conversations;
-
-  const [isSsearching, setIsSearching] = useState(false);
-  const [query, setQuery] = useState("");
 
   // prefetching messages of other conversations
   // sortedConversations?.slice(0, 5).forEach((conv) => {
@@ -43,9 +43,11 @@ function MainSidebarContents({ onSetMyAccountView }) {
 
   async function handleSearch(e) {
     e.preventDefault();
+    if (!query) return;
 
-    const results = await searchPeople({ query });
-    console.log(results);
+    const res = await searchPeople(query);
+    setResults(res);
+    setQuery("");
   }
 
   return (
@@ -80,7 +82,9 @@ function MainSidebarContents({ onSetMyAccountView }) {
       </StyledHeaderBar>
 
       <UsersContainer>
-        {isSsearching && <p>Searchin users</p>}
+        {isSsearching && (
+          <SearchView onUserClick={setIsSearching} users={results} />
+        )}
 
         {!isSsearching && (
           <ChatsContainer>

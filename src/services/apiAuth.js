@@ -166,14 +166,9 @@ export async function getMessageById(messageId) {
 
 ////////////////
 export async function openConversation(friendUserId) {
-  // const { data: conversations, error: convError } = await supabase
-  //   .from("conversations")
-  //   .select("*")
-  //   .eq("user_2_id", `${friendUserId}`);
-
   const { data, error } = await supabase
     .from("conversations")
-    .insert([{ user_2_id: friendUserId }])
+    .insert([{ user2_id: friendUserId }])
     .select();
 
   if (error) throw new Error(error.message);
@@ -189,9 +184,10 @@ export async function sendMessage({
 }) {
   let convId = conversation_id;
 
-  // if (convId === null) {
-  //   convId = await openConversation({ friendUserId });
-  // }
+  if (convId === null) {
+    const newConvId = await openConversation(friendUserId);
+    convId = newConvId;
+  }
 
   const { data, error } = await supabase
     .from("messages")
@@ -201,81 +197,25 @@ export async function sendMessage({
   if (error) throw new Error(error.message);
 
   // update conversation table with the last message id
-  const { data: updatedRow, error: updatedError } = await supabase
+  const { error: conversationError } = await supabase
     .from("conversations")
     .update({ last_message_id: data[0].id })
-    .eq("id", conversation_id) // Use the correct variable here
-    .select();
+    .eq("id", convId);
 
-  if (updatedError) throw new Error(updatedError.message);
+  if (conversationError) throw new Error(conversationError.message);
 
   return data[0];
 }
 
-// console.log("message", data);
-// console.log("conversation", updatedRow);
-///////////
-
-// getMessages({ myUserId, friendUserId });
-
-////////////////////////
-
-/////////////////
-// export async function testApi() {
-//   const myUserId = "06bd2050-5bbe-4069-95a5-b92e8ce5db71";
-//   const friendUserId = "1435f575-0346-47bf-87d4-0d82a972a5ff";
-
-//   // const data = await hasPreviousConversation({ myUserId, friendUserId });
-
-//   const { data, error } = await supabase
-//     .from("conversations")
-//     .update({ last_message_id: "35d62c8d-4c5d-47b1-bf58-6f500ce1cea8" })
-//     .eq("id", "70956ae0-0bc6-475b-a98a-9ea4a7b8b88d")
-//     .select();
-
-//   if (error) throw new Error(error.message);
-
-//   console.log(data);
-//   return data;
-// }
-
-// testApi();
-
-// const myUserId = { myUserId: "06bd2050-5bbe-4069-95a5-b92e8ce5db71" };
-
-// testApi();
-// export function getMessages(newMessages) {}
-// let data = null;
-
-// export function listenMessages() {
-//   supabase
-//     .channel("my_messages")
-//     .on(
-//       "postgres_changes",
-//       { event: "INSERT", schema: "public", table: "publicMessages" },
-//       (payload) => {
-//         console.log(payload);
-//       }
-//     )
-//     .subscribe();
-// }
-// listenMessages();
-
-export async function searchPeople({ query }) {
-  console.log(query);
+export async function searchPeople(query) {
   let { data: results, error } = await supabase
     .from("users")
     .select("*")
-    .or((query) =>
-      query
-        .or("fullname", "ilike", `%${query}%`)
-        .or("username", "ilike", `%${query}%`)
-        .or("email", "ilike", `%${query}%`)
+    .or(
+      `fullname.ilike.%${query}%,username.ilike.%${query}%,email.ilike.%${query}%`
     );
 
   if (error) throw new Error(error.message);
 
   return results;
 }
-
-// // test();

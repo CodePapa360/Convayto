@@ -54,7 +54,7 @@ function MessageInputBar() {
       ["friend", messageObj.friendUserId],
       (prevData) => ({
         ...prevData,
-        messages: [...prevData.messages, optimisticMessage],
+        messages: [...(prevData.messages || []), optimisticMessage],
       })
     );
     // };

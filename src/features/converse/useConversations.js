@@ -23,22 +23,20 @@ export function useConversatoins() {
   useEffect(
     function () {
       if (!myUserId || !conversationIds) return;
+      // if (myUserId === subscriptionConversation?.subTopic) return;
 
-      if (subscriptionConversation) {
-        subscriptionConversation.unsubscribe();
-      }
+      if (subscriptionConversation) return;
+
+      // if (subscriptionConversation) {
+      //   // subscriptionConversation.unsubscribe();
+      // }
 
       const updateConversation = (payload) => {
         queryClient.setQueryData(["conversations", myUserId], (prevData) => {
-          const updatedArray = prevData.map((conversation) => {
-            if (conversation.id === payload.id) {
-              return { ...conversation, ...payload };
-            } else {
-              return conversation;
-            }
-          });
-
-          return updatedArray;
+          const updatedArray = prevData.filter(
+            (conversation) => conversation.id !== payload.id
+          );
+          return updatedArray.concat([payload]);
         });
       };
 
@@ -49,8 +47,8 @@ export function useConversatoins() {
       });
 
       return () => {
-        subscriptionConversation?.unsubscribe();
-        console.log("unsubscribed conversations");
+        // subscriptionConversation?.unsubscribe();
+        // console.log("unsubscribed conversations");
       };
     },
     [myUserId, queryClient, conversationIds]
