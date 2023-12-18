@@ -48,6 +48,7 @@ export function subscribeRealtimeConversation({
         filter: `id=in.(${conversationIds.join(",")})`,
       },
       async (payload) => {
+        console.log("payload", payload);
         const conversation = payload?.new;
         const conveId = conversation?.last_message_id;
         const messages = await getMessageById(conveId);

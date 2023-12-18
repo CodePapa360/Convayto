@@ -33,10 +33,28 @@ export function useConversatoins() {
 
       const updateConversation = (payload) => {
         queryClient.setQueryData(["conversations", myUserId], (prevData) => {
-          const updatedArray = prevData.filter(
-            (conversation) => conversation.id !== payload.id
+          // const updatedArray = prevData.filter(
+          //   (conversation) => conversation.id !== payload.id
+          // );
+          // return updatedArray.concat([payload]);
+
+          const existingConversation = prevData.find(
+            (conversation) => conversation.id === payload.id
           );
-          return updatedArray.concat([payload]);
+
+          if (existingConversation) {
+            console.log("existing conversation");
+            // Update existing conversation
+            return prevData.map((conversation) =>
+              conversation.id === payload.id
+                ? { ...existingConversation, ...payload }
+                : conversation
+            );
+          } else {
+            console.log("new conversation");
+            // Add new conversation
+            return [...prevData, payload];
+          }
         });
       };
 
