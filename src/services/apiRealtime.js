@@ -1,4 +1,4 @@
-import { getMessageById } from "./apiAuth";
+import { getMessageById, getUserById } from "./apiAuth";
 import supabase from "./supabase";
 
 export function subscribeRealtimeMessage({ conversationId, callback }) {
@@ -31,7 +31,7 @@ export function subscribeRealtimeMessage({ conversationId, callback }) {
 
 export function subscribeRealtimeConversation({
   myUserId,
-  conversationIds,
+  // conversationIds,
   onUpdate,
 }) {
   // if (!myUserId || !conversationIds) return;
@@ -45,18 +45,61 @@ export function subscribeRealtimeConversation({
         event: "*",
         schema: "public",
         table: "conversations",
-        filter: `id=in.(${conversationIds.join(",")})`,
+        filter: `user1_id=eq.${myUserId}`,
       },
       async (payload) => {
-        console.log("payload", payload);
-        const conversation = payload?.new;
-        const conveId = conversation?.last_message_id;
-        const messages = await getMessageById(conveId);
-        conversation.messages = messages;
+        if (payload.eventType === "INSERT") {
+          const messageId = payload.new.last_message_id;
+          const friendId =
+            payload.new.user1_id === myUserId
+              ? payload.new.user2_id
+              : payload.new.user1_id;
 
-        onUpdate(conversation);
+          const messages = await getMessageById(messageId);
+          const friend = await getUserById(friendId);
+
+          const updatedPaylod = {
+            ...payload,
+            new: { friend, messages, ...payload.new },
+          };
+
+          console.log("inserted updatedPaylod", updatedPaylod);
+
+          onUpdate(updatedPaylod);
+        } else if (payload.eventType === "UPDATE") {
+          const messageId = payload.new.last_message_id;
+          const messages = await getMessageById(messageId);
+
+          const updatedPaylod = {
+            ...payload,
+            new: { ...payload.new, messages },
+          };
+
+          console.log("updated updatedPaylod", updatedPaylod);
+
+          onUpdate(updatedPaylod);
+        }
       }
     )
+    // .on(
+    //   "postgres_changes",
+    //   {
+    //     event: "*",
+    //     schema: "public",
+    //     table: "conversations",
+    //     filter: `user2_id=eq.${myUserId}`,
+    //   },
+    //   async (payload) => {
+    //     console.log("payload", payload);
+
+    //     // const conversation = payload?.new;
+    //     // const conveId = conversation?.last_message_id;
+    //     // const messages = await getMessageById(conveId);
+    //     // conversation.messages = messages;
+
+    //     // onUpdate(conversation);
+    //   }
+    // )
     .subscribe();
 
   console.log("subscribed conversations", myUserId);

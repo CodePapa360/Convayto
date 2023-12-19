@@ -24,6 +24,7 @@ function MainSidebarContents({ onSetMyAccountView }) {
       ? conversations?.sort(sortConverseByTime)
       : conversations;
 
+  // console.log("sorted Conversations", sortedConversations)
   // prefetching messages of other conversations
   // sortedConversations?.slice(0, 5).forEach((conv) => {
   //   const { friend } = conv;
@@ -95,9 +96,10 @@ function MainSidebarContents({ onSetMyAccountView }) {
             <ConversationsContainer>
               {isPending && <p>Loading...</p>}
 
-              {sortedConversations?.map((conv) => (
-                <Conversation key={conv.friend.id} conversation={conv} />
-              ))}
+              {!isPending &&
+                sortedConversations?.map((conv) => (
+                  <Conversation key={conv.friend.id} conversation={conv} />
+                ))}
             </ConversationsContainer>
           </ChatsContainer>
         )}

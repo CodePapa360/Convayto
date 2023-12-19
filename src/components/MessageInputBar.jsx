@@ -12,7 +12,7 @@ function MessageInputBar() {
   const { user } = useUser();
   const { data, isPending } = useMessages();
   const conversationId = data?.conversationId;
-  const friendUserId = data?.frindDetails[0].id;
+  const friendUserId = data?.frindDetails.id;
   const myUserId = user.id;
 
   const queryClient = useQueryClient();

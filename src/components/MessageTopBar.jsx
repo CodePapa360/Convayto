@@ -6,7 +6,7 @@ function MessageTopBar() {
   const friendDetails = data?.frindDetails;
 
   if (isPending) return <p>Loading</p>;
-  const { avatar_url, fullname, username } = friendDetails[0];
+  const { avatar_url, fullname, username } = friendDetails;
 
   return (
     <StyledMessageTopBar>

@@ -113,7 +113,7 @@ async function hasPreviousConversation({ myUserId, friendUserId }) {
 }
 
 ///////////////////
-export async function getSingleFriendDetail({ friendUserId }) {
+export async function getUserById(friendUserId) {
   const { data, error } = await supabase
     .from("users")
     .select("*")
@@ -123,7 +123,7 @@ export async function getSingleFriendDetail({ friendUserId }) {
     throw new Error(error.message);
   }
 
-  return data;
+  return data[0];
 }
 ////////////////
 
@@ -133,7 +133,7 @@ export async function getMessages({ myUserId, friendUserId }) {
     friendUserId,
   });
 
-  const frindDetails = await getSingleFriendDetail({ friendUserId });
+  const frindDetails = await getUserById(friendUserId);
 
   if (!conversationId)
     return { frindDetails, messages: null, conversationId: null };
@@ -152,6 +152,9 @@ export async function getMessages({ myUserId, friendUserId }) {
 
 ////////////////
 export async function getMessageById(messageId) {
+  if (!messageId) return null;
+
+  console.log("getMessageById", messageId);
   const { data, error } = await supabase
     .from("messages")
     .select("*")
