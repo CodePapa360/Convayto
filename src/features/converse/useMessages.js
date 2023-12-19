@@ -65,7 +65,7 @@ export function useMessages() {
 
       return () => {
         subscription?.unsubscribe();
-        console.log("unsubscribed message");
+        // console.log("unsubscribed message");
       };
     },
     [conversationId, friendUserId, queryClient]
