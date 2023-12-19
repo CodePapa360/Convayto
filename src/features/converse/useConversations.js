@@ -40,26 +40,6 @@ export function useConversatoins() {
             });
             return newData;
           }
-          // const updatedArray = prevData.filter(
-          //   (conversation) => conversation.id !== payload.id
-          // );
-          // return updatedArray.concat([payload]);
-          // const existingConversation = prevData.find(
-          //   (conversation) => conversation.id === payload.id
-          // );
-          // if (existingConversation) {
-          //   console.log("existing conversation");
-          //   // Update existing conversation
-          //   return prevData.map((conversation) =>
-          //     conversation.id === payload.id
-          //       ? { ...existingConversation, ...payload }
-          //       : conversation
-          //   );
-          // } else {
-          //   console.log("new conversation");
-          //   // Add new conversation
-          //   return [...prevData, payload];
-          // }
         });
       };
 

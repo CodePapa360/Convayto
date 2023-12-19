@@ -154,7 +154,6 @@ export async function getMessages({ myUserId, friendUserId }) {
 export async function getMessageById(messageId) {
   if (!messageId) return null;
 
-  console.log("getMessageById", messageId);
   const { data, error } = await supabase
     .from("messages")
     .select("*")

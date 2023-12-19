@@ -43,7 +43,11 @@ export function useMessages() {
               // Only update if no optimistic message exists
               return {
                 ...prevData,
-                messages: [...prevData.messages, newData],
+                messages:
+                  prevData.messages === null
+                    ? [newData]
+                    : [...prevData.messages, newData],
+                // conversationId: newData?.conversation_id,
               };
             }
 
@@ -54,13 +58,9 @@ export function useMessages() {
                 messages: prevData.messages.map((message) =>
                   message.id === newData.id ? newData : message
                 ),
+                // conversationId: newData.conversation_id,
               };
             }
-
-            // return {
-            //   ...prevData,
-            //   messages: [...(prevData.messages || []), newData],
-            // };
           });
         },
       });

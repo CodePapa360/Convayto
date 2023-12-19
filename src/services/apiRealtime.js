@@ -63,8 +63,6 @@ export function subscribeRealtimeConversation({
             new: { friend, messages, ...payload.new },
           };
 
-          console.log("inserted updatedPaylod", updatedPaylod);
-
           onUpdate(updatedPaylod);
         } else if (payload.eventType === "UPDATE") {
           const messageId = payload.new.last_message_id;
@@ -75,31 +73,10 @@ export function subscribeRealtimeConversation({
             new: { ...payload.new, messages },
           };
 
-          console.log("updated updatedPaylod", updatedPaylod);
-
           onUpdate(updatedPaylod);
         }
       }
     )
-    // .on(
-    //   "postgres_changes",
-    //   {
-    //     event: "*",
-    //     schema: "public",
-    //     table: "conversations",
-    //     filter: `user2_id=eq.${myUserId}`,
-    //   },
-    //   async (payload) => {
-    //     console.log("payload", payload);
-
-    //     // const conversation = payload?.new;
-    //     // const conveId = conversation?.last_message_id;
-    //     // const messages = await getMessageById(conveId);
-    //     // conversation.messages = messages;
-
-    //     // onUpdate(conversation);
-    //   }
-    // )
     .subscribe();
 
   console.log("subscribed conversations", myUserId);

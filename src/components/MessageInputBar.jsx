@@ -30,18 +30,26 @@ function MessageInputBar() {
     };
 
     // Make the actual request to the server
-    sendNewMessage(messageObj);
+    sendNewMessage(messageObj, {
+      onSuccess: (data) => {
+        if (conversationId === null) {
+          queryClient.setQueryData(
+            ["friend", messageObj.friendUserId],
+            (prevData) => ({
+              ...prevData,
+              messages:
+                prevData?.messages === null
+                  ? [data]
+                  : prevData.messages.map((message) =>
+                      message.id === data.id ? data : message
+                    ),
+              conversationId: data.conversation_id,
+            })
+          );
+        }
+      },
+    });
 
-    // Optimistic update
-    // setData({
-    //   id: messageObj.id,
-    //   friendUserId,
-    //   sender_id: messageObj.myUserId,
-    //   content: messageObj.content,
-    //   created_at: false,
-    // });
-
-    // const setData = function (data) {
     const optimisticMessage = {
       id: messageObj.id,
       content: messageObj.content,
@@ -57,7 +65,6 @@ function MessageInputBar() {
         messages: [...(prevData.messages || []), optimisticMessage],
       })
     );
-    // };
 
     // Reset the input field
     setNewMessage("");
