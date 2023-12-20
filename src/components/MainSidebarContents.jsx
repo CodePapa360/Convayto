@@ -69,7 +69,9 @@ function MainSidebarContents({ onSetMyAccountView }) {
         </ProfileDetails>
 
         <SearchBar>
-          <button onClick={() => setIsSearching(false)}>⬅</button>
+          <button onClick={() => setIsSearching(false)}>
+            {isSsearching ? "⬅" : "💢"}
+          </button>
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
