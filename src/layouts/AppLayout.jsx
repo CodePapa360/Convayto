@@ -4,13 +4,13 @@ import LeftSideBar from "../components/LeftSideBar";
 
 function AppLayout() {
   return (
-    <StyledAppLayout>
+    <main className="grid grid-cols-[23rem_1fr] bg-gray-800 text-gray-50">
       <LeftSideBar />
 
       <RightSide>
         <Outlet />
       </RightSide>
-    </StyledAppLayout>
+    </main>
   );
 }
 

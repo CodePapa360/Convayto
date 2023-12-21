@@ -8,11 +8,11 @@ function MessageView() {
     <StyledMessageView>
       <MessageTopBar />
 
-      <MessageContainer>
+      <div className="bg-gray-900">
         <MessagesWrapper>
           <Messages />
         </MessagesWrapper>
-      </MessageContainer>
+      </div>
 
       <MessageInputBar />
     </StyledMessageView>

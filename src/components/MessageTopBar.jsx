@@ -9,7 +9,7 @@ function MessageTopBar() {
   const { avatar_url, fullname, username } = friendDetails;
 
   return (
-    <StyledMessageTopBar>
+    <div className="flex">
       <BackButton>◀</BackButton>
 
       <Profile>
@@ -24,7 +24,7 @@ function MessageTopBar() {
           <span>@{username}</span>
         </span>
       </Profile>
-    </StyledMessageTopBar>
+    </div>
   );
 }
 

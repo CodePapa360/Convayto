@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./styles/index.css";
 import AppLayout from "./layouts/AppLayout";
 import GlobalStyles from "./styles/GlobalStyles";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -20,7 +21,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <GlobalStyles />
+      {/* <GlobalStyles /> */}
       <BrowserRouter>
         <Routes>
           <Route

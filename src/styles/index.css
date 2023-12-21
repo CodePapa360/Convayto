@@ -1,6 +1,7 @@
-import { createGlobalStyle } from "styled-components";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-const GlobalStyles = createGlobalStyle`
 /* ///////////////// */
 /* //Reset// */
 *,
@@ -44,8 +45,9 @@ html {
 body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  transition: color 0.3s, background-color 0.3s;
-
+  transition:
+    color 0.3s,
+    background-color 0.3s;
 }
 
 /* A elements that don't have a class get default styles */
@@ -115,11 +117,22 @@ button:has(svg) {
 /* ////////////// */
 /* ///////////// */
 
-body{
+body {
   background-color: hsla(239, 100%, 91%, 1);
   cursor: default;
 
-  font-family: "Roboto", -apple-system, apple color emoji, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family:
+    "Roboto",
+    -apple-system,
+    apple color emoji,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    "Helvetica Neue",
+    sans-serif;
 }
 
 /* Works on Firefox */
@@ -143,6 +156,3 @@ body{
 *::-webkit-scrollbar-thumb {
   background-color: var(--the-thumb);
 }
-`;
-
-export default GlobalStyles;
