@@ -4,7 +4,7 @@ import LeftSideBar from "../components/LeftSideBar";
 
 function AppLayout() {
   return (
-    <main className="grid grid-cols-[23rem_1fr] bg-gray-800 text-gray-50">
+    <main className="grid grid-cols-[23rem_1fr] bg-gray-900 text-gray-50">
       <LeftSideBar />
 
       <RightSide>
