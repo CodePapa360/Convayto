@@ -1,4 +1,6 @@
-import styled from "styled-components";
+// import styled from "styled-components";
+import { RiSendPlaneFill } from "react-icons/ri";
+
 import { useMessages } from "../features/converse/useMessages";
 import { useUser } from "../features/authentication/useUser";
 import { useState } from "react";
@@ -41,10 +43,10 @@ function MessageInputBar() {
                 prevData?.messages === null
                   ? [data]
                   : prevData.messages.map((message) =>
-                      message.id === data.id ? data : message
+                      message.id === data.id ? data : message,
                     ),
               conversationId: data.conversation_id,
-            })
+            }),
           );
         }
       },
@@ -63,7 +65,7 @@ function MessageInputBar() {
       (prevData) => ({
         ...prevData,
         messages: [...(prevData.messages || []), optimisticMessage],
-      })
+      }),
     );
 
     // Reset the input field
@@ -71,9 +73,10 @@ function MessageInputBar() {
   }
 
   return (
-    <StyledInputBar>
-      <form action="">
+    <div className="px-4 pb-4 pt-2">
+      <form className="flex items-center overflow-hidden rounded-full bg-slate-700">
         <input
+          className="h-12 grow bg-transparent pl-4 pr-2 outline-none"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           type="text"
@@ -81,22 +84,23 @@ function MessageInputBar() {
         />
 
         <button
+          className={` m-1 flex h-12 w-12 items-center justify-center rounded-full  bg-violet-500 text-2xl text-white hover:bg-violet-600`}
           disabled={isPending || isSending}
           onClick={handleSendNewMessage}
           type="submit"
         >
-          Send
+          <RiSendPlaneFill />
         </button>
       </form>
-    </StyledInputBar>
+    </div>
   );
 }
 
 export default MessageInputBar;
 
-const StyledInputBar = styled.div`
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+// const StyledInputBar = styled.div`
+//   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
 
-  height: 4rem;
-  margin-top: auto;
-`;
+//   height: 4rem;
+//   margin-top: auto;
+// `;

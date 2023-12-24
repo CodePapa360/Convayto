@@ -1,4 +1,4 @@
-import styled from "styled-components";
+// import styled from "styled-components";
 import { useMessages } from "../features/converse/useMessages";
 import Message from "./Message";
 import { useRef } from "react";
@@ -11,7 +11,7 @@ function Messages() {
   const bottomRef = useRef();
 
   return (
-    <StyledMessages>
+    <div className="flex flex-col gap-2">
       {isPending && <p>Loading messages...</p>}
 
       {messages?.length === 0 && <p>No messages</p>}
@@ -25,16 +25,16 @@ function Messages() {
         inline: "nearest",
       })}
       <span ref={bottomRef}></span>
-    </StyledMessages>
+    </div>
   );
 }
 
 export default Messages;
 
-const StyledMessages = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+// const StyledMessages = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 0.5rem;
 
-  padding: 1rem;
-`;
+//   padding: 1rem;
+// `;

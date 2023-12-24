@@ -1,4 +1,4 @@
-import styled from "styled-components";
+// import styled from "styled-components";
 import { useMessages } from "../features/converse/useMessages";
 
 function MessageTopBar() {
@@ -9,51 +9,51 @@ function MessageTopBar() {
   const { avatar_url, fullname, username } = friendDetails;
 
   return (
-    <div className="flex">
-      <BackButton>◀</BackButton>
+    <div className="flex rounded-b-3xl border-l-2 border-gray-900 bg-gray-800">
+      <button className="px-3 py-2">◀</button>
 
-      <Profile>
-        <span>
+      <div className="flex items-center gap-2">
+        <span className="w-12">
           <img
             src={avatar_url ? avatar_url : "/images/default-avatar.png"}
             alt={fullname}
           />
         </span>
-        <span>
+        <span className="flex flex-col">
           <span>{fullname}</span>
           <span>@{username}</span>
         </span>
-      </Profile>
+      </div>
     </div>
   );
 }
 
 export default MessageTopBar;
 
-const StyledMessageTopBar = styled.div`
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
-  height: 5rem;
+// const StyledMessageTopBar = styled.div`
+//   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+//   height: 5rem;
 
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-`;
+//   display: flex;
+//   align-items: center;
+//   gap: 1rem;
+//   padding: 1rem;
+// `;
 
-const BackButton = styled.button`
-  padding: 0.5rem 0.7rem;
-`;
+// const BackButton = styled.button`
+//   padding: 0.5rem 0.7rem;
+// `;
 
-const Profile = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+// const Profile = styled.div`
+//   display: flex;
+//   align-items: center;
+//   gap: 0.5rem;
 
-  > :first-child {
-  }
+//   > :first-child {
+//   }
 
-  > :last-child {
-    display: flex;
-    flex-direction: column;
-  }
-`;
+//   > :last-child {
+//     display: flex;
+//     flex-direction: column;
+//   }
+// `;
