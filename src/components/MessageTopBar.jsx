@@ -1,4 +1,5 @@
 // import styled from "styled-components";
+import { RiMenuUnfoldLine } from "react-icons/ri";
 import { useMessages } from "../features/converse/useMessages";
 
 function MessageTopBar() {
@@ -9,8 +10,10 @@ function MessageTopBar() {
   const { avatar_url, fullname, username } = friendDetails;
 
   return (
-    <div className="flex rounded-b-3xl border-l-2 border-gray-900 bg-gray-800">
-      <button className="px-3 py-2">◀</button>
+    <div className="flex items-center gap-2 rounded-b-3xl border-b border-l border-gray-700 bg-gray-800 p-2">
+      <button className="rounded-full p-3 text-xl hover:bg-gray-700 active:scale-95 md:hidden ">
+        <RiMenuUnfoldLine />
+      </button>
 
       <div className="flex items-center gap-2">
         <span className="w-12">

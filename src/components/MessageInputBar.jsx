@@ -74,7 +74,7 @@ function MessageInputBar() {
 
   return (
     <div className="px-4 pb-4 pt-2">
-      <form className="flex items-center overflow-hidden rounded-full bg-slate-700">
+      <form className="mx-auto flex max-w-3xl items-center overflow-hidden rounded-full border border-slate-600 bg-slate-700">
         <input
           className="h-12 grow bg-transparent pl-4 pr-2 outline-none"
           value={newMessage}
@@ -84,7 +84,7 @@ function MessageInputBar() {
         />
 
         <button
-          className={` m-1 flex h-12 w-12 items-center justify-center rounded-full  bg-violet-500 text-2xl text-white hover:bg-violet-600`}
+          className={` m-1 flex h-12 w-12 items-center justify-center rounded-full  bg-violet-500 text-2xl text-white hover:bg-violet-600 active:scale-95`}
           disabled={isPending || isSending}
           onClick={handleSendNewMessage}
           type="submit"

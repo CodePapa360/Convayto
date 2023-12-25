@@ -7,7 +7,7 @@ function LeftSideBar() {
   const [accountView, setAccountView] = useState(false);
 
   return (
-    <aside className="grid h-screen grid-cols-1 grid-rows-[5rem_1fr] bg-gray-800">
+    <aside className="-leflt-full absolute top-0 grid h-screen w-[23rem] grid-cols-1 grid-rows-[5rem_1fr] bg-gray-800 md:relative">
       {accountView && <MyAccount onSetMyAccountView={setAccountView} />}
 
       {!accountView && (

@@ -4,10 +4,10 @@ import LeftSideBar from "../components/LeftSideBar";
 
 function AppLayout() {
   return (
-    <main className="grid grid-cols-[23rem_1fr] bg-gray-900 text-gray-50">
+    <main className="relative grid grid-cols-[23rem_1fr] bg-gray-900 text-gray-50">
       <LeftSideBar />
 
-      <div>
+      <div className="col-span-2 md:col-span-1">
         <Outlet />
       </div>
     </main>
