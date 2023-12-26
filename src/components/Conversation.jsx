@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useUi } from "../contexts/UiContext";
 
 function Conversation({ conversation }) {
   const { friend, messages } = conversation;
@@ -11,9 +12,11 @@ function Conversation({ conversation }) {
     : "";
 
   const navigate = useNavigate();
+  const { toggleSidebar } = useUi();
 
   function handleClick() {
     navigate(`/${id}`);
+    toggleSidebar();
   }
 
   return (
