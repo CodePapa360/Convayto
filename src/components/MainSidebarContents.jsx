@@ -8,6 +8,7 @@ import Conversation from "./Conversation";
 import { useState } from "react";
 import { getMessages, searchPeople } from "../services/apiAuth";
 import SearchView from "./SearchView";
+import { useUi } from "../contexts/UiContext";
 
 function MainSidebarContents({ onSetMyAccountView }) {
   const [isSsearching, setIsSearching] = useState(false);
@@ -24,23 +25,22 @@ function MainSidebarContents({ onSetMyAccountView }) {
       ? conversations?.sort(sortConverseByTime)
       : conversations;
 
-  // console.log("sorted Conversations", sortedConversations)
   // prefetching messages of other conversations
-  sortedConversations?.slice(0, 5).forEach((conv) => {
-    const { friend } = conv;
-    const { id: friendUserId } = friend;
-    const myUserId = user?.id;
+  // sortedConversations?.slice(0, 5).forEach((conv) => {
+  //   const { friend } = conv;
+  //   const { id: friendUserId } = friend;
+  //   const myUserId = user?.id;
 
-    const test = async () => {
-      // The results of this query will be cached like a normal query
-      await queryClient.prefetchQuery({
-        queryKey: ["friend", friendUserId],
-        queryFn: () => getMessages({ myUserId, friendUserId }),
-      });
-    };
+  //   const test = async () => {
+  //     // The results of this query will be cached like a normal query
+  //     await queryClient.prefetchQuery({
+  //       queryKey: ["friend", friendUserId],
+  //       queryFn: () => getMessages({ myUserId, friendUserId }),
+  //     });
+  //   };
 
-    test();
-  });
+  //   test();
+  // });
 
   async function handleSearch(e) {
     e.preventDefault();
@@ -52,7 +52,7 @@ function MainSidebarContents({ onSetMyAccountView }) {
   }
 
   return (
-    <>
+    <div className="relative z-30 grid grid-cols-1 grid-rows-[5rem_1fr]">
       <StyledHeaderBar>
         <ProfileDetails>
           <Profile onClick={() => onSetMyAccountView(true)}>
@@ -106,7 +106,7 @@ function MainSidebarContents({ onSetMyAccountView }) {
           </ChatsContainer>
         )}
       </UsersContainer>
-    </>
+    </div>
   );
 }
 

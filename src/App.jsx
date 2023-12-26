@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MessageView from "./layouts/MessageView";
+import { UiProvider } from "./contexts/UiContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,26 +20,28 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-      {/* <GlobalStyles /> */}
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="/:userId" element={<MessageView />} />
-          </Route>
-          <Route path="signup" element={<Signup />} />
-          <Route path="login" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <UiProvider>
+      <QueryClientProvider client={queryClient}>
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        {/* <GlobalStyles /> */}
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="/:userId" element={<MessageView />} />
+            </Route>
+            <Route path="signup" element={<Signup />} />
+            <Route path="login" element={<Login />} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </UiProvider>
   );
 }
 

@@ -1,17 +1,23 @@
 // import styled from "styled-components";
 import { RiMenuUnfoldLine } from "react-icons/ri";
 import { useMessages } from "../features/converse/useMessages";
+import { useUi } from "../contexts/UiContext";
 
 function MessageTopBar() {
   const { data, isPending } = useMessages();
   const friendDetails = data?.frindDetails;
+
+  const { toggleSidebar } = useUi();
 
   if (isPending) return <p>Loading</p>;
   const { avatar_url, fullname, username } = friendDetails;
 
   return (
     <div className="flex items-center gap-2 rounded-b-3xl border-b border-l border-gray-700 bg-gray-800 p-2">
-      <button className="rounded-full p-3 text-xl hover:bg-gray-700 active:scale-95 md:hidden ">
+      <button
+        onClick={() => toggleSidebar()}
+        className="rounded-full p-3 text-xl hover:bg-gray-700 active:scale-95 md:hidden "
+      >
         <RiMenuUnfoldLine />
       </button>
 

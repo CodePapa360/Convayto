@@ -21,11 +21,13 @@ function reducer(state, action) {
 function UiProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, InitialState);
 
-  return (
-    <UiContext.Provider value={{ state, dispatch }}>
-      {children}
-    </UiContext.Provider>
-  );
+  function toggleSidebar() {
+    dispatch({ type: "TOGGLE_SIDEBAR" });
+  }
+
+  const value = { state, dispatch, toggleSidebar };
+
+  return <UiContext.Provider value={value}>{children}</UiContext.Provider>;
 }
 
 function useUi() {
@@ -34,3 +36,5 @@ function useUi() {
     throw new Error("UiContext was used outside the UiProvider");
   return context;
 }
+
+export { UiProvider, useUi };
