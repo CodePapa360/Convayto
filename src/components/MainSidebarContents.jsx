@@ -26,21 +26,21 @@ function MainSidebarContents({ onSetMyAccountView }) {
       : conversations;
 
   // prefetching messages of other conversations
-  // sortedConversations?.slice(0, 5).forEach((conv) => {
-  //   const { friend } = conv;
-  //   const { id: friendUserId } = friend;
-  //   const myUserId = user?.id;
+  sortedConversations?.slice(0, 5).forEach((conv) => {
+    const { friend } = conv;
+    const { id: friendUserId } = friend;
+    const myUserId = user?.id;
 
-  //   const test = async () => {
-  //     // The results of this query will be cached like a normal query
-  //     await queryClient.prefetchQuery({
-  //       queryKey: ["friend", friendUserId],
-  //       queryFn: () => getMessages({ myUserId, friendUserId }),
-  //     });
-  //   };
+    const test = async () => {
+      // The results of this query will be cached like a normal query
+      await queryClient.prefetchQuery({
+        queryKey: ["friend", friendUserId],
+        queryFn: () => getMessages({ myUserId, friendUserId }),
+      });
+    };
 
-  //   test();
-  // });
+    test();
+  });
 
   async function handleSearch(e) {
     e.preventDefault();
