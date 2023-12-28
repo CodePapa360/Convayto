@@ -12,11 +12,11 @@ function Conversation({ conversation }) {
     : "";
 
   const navigate = useNavigate();
-  const { openSidebar } = useUi();
+  const { closeSidebar } = useUi();
 
   function handleClick() {
     navigate(`/${id}`);
-    openSidebar();
+    closeSidebar();
   }
 
   return (
