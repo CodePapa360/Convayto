@@ -3,15 +3,20 @@ import { createContext, useContext, useReducer } from "react";
 const UiContext = createContext();
 
 const InitialState = {
-  isSidebarOpen: true,
+  isSidebarOpen: false,
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "TOGGLE_SIDEBAR":
+    case "OPEN_SIDEBAR":
       return {
         ...state,
-        isSidebarOpen: !state.isSidebarOpen,
+        isSidebarOpen: true,
+      };
+    case "CLOSE_SIDEBAR":
+      return {
+        ...state,
+        isSidebarOpen: false,
       };
     default:
       return state;
@@ -21,11 +26,15 @@ function reducer(state, action) {
 function UiProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, InitialState);
 
-  function toggleSidebar() {
-    dispatch({ type: "TOGGLE_SIDEBAR" });
+  function openSidebar() {
+    dispatch({ type: "OPEN_SIDEBAR" });
   }
 
-  const value = { state, dispatch, toggleSidebar };
+  function closeSidebar() {
+    dispatch({ type: "CLOSE_SIDEBAR" });
+  }
+
+  const value = { state, dispatch, openSidebar, closeSidebar };
 
   return <UiContext.Provider value={value}>{children}</UiContext.Provider>;
 }

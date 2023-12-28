@@ -7,7 +7,7 @@ function MessageTopBar() {
   const { data, isPending } = useMessages();
   const friendDetails = data?.frindDetails;
 
-  const { toggleSidebar } = useUi();
+  const { openSidebar } = useUi();
 
   if (isPending) return <p>Loading</p>;
   const { avatar_url, fullname, username } = friendDetails;
@@ -15,7 +15,7 @@ function MessageTopBar() {
   return (
     <div className="flex items-center gap-2 rounded-b-3xl border-b border-l border-gray-700 bg-gray-800 p-2">
       <button
-        onClick={() => toggleSidebar()}
+        onClick={() => openSidebar()}
         className="rounded-full p-3 text-xl hover:bg-gray-700 active:scale-95 md:hidden "
       >
         <RiMenuUnfoldLine />

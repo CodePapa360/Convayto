@@ -1,20 +1,25 @@
 // import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MyAccount from "./MyAccount";
 import MainSidebarContents from "./MainSidebarContents";
 import { useUi } from "../contexts/UiContext";
 import { useParams } from "react-router-dom";
 
 function LeftSideBar() {
-  const { state, toggleSidebar } = useUi();
+  const { state, closeSidebar, openSidebar } = useUi();
   const { isSidebarOpen } = state;
   const { userId } = useParams();
 
   const [accountView, setAccountView] = useState(false);
 
+  useEffect(() => {
+    if (userId) closeSidebar();
+    else openSidebar();
+  }, [userId]);
+
   function handleToggleSidebar() {
     if (!userId) return;
-    toggleSidebar();
+    closeSidebar();
   }
 
   return (
