@@ -13,13 +13,3 @@ function AppLayout() {
 }
 
 export default AppLayout;
-
-// const StyledAppLayout = styled.main`
-//   display: grid;
-//   grid-template-columns: 22rem 1fr;
-//   height: 100vh;
-//   height: 100dvh;
-//   overflow-y: hidden;
-// `;
-
-// const RightSide = styled.div``;

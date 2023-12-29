@@ -20,14 +20,14 @@ function Conversation({ conversation }) {
     <div
       className={`${
         isActiveUser ? "bg-violet-600 hover:bg-violet-800" : ""
-      } flex cursor-pointer items-center gap-2 rounded-lg p-2 hover:bg-slate-700/50`}
+      } flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 hover:bg-slate-700/50 `}
       onClick={handleClick}
     >
       <span className="max-w-12 overflow-hidden rounded-full">
-        <img src="/images/default-avatar.png" alt="User" />
+        <img draggable="false" src="/images/default-avatar.png" alt="User" />
       </span>
 
-      <span className="flex flex-col overflow-hidden">
+      <span className="flex flex-col overflow-hidden ">
         <span className="overflow-hidden text-ellipsis whitespace-nowrap font-bold">
           {fullname}
         </span>

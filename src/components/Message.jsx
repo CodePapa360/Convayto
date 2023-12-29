@@ -15,7 +15,7 @@ function Message({ message }) {
     >
       <p>
         {message?.content}
-        <span className="float-right ml-2 mt-2 select-none text-xs italic opacity-70">
+        <span className="float-right ml-2 mt-2 select-none text-xs opacity-70">
           {formatTime(message?.created_at)}
         </span>
       </p>
@@ -24,28 +24,3 @@ function Message({ message }) {
 }
 
 export default Message;
-
-// const StyledMessage = styled.div`
-//   /* padding: 0.5rem; */
-//   background-color: rgba(0, 0, 0, 0.1);
-//   border-radius: 10px;
-//   padding: 0.5rem 1rem;
-
-//   width: fit-content;
-//   max-width: 80%;
-
-//   span {
-//     float: right;
-//     font-size: 0.8rem;
-//     font-style: italic;
-//     line-height: 2;
-//     margin-left: 0.5rem;
-//     color: rgba(0, 0, 0, 0.7);
-//     user-select: none;
-//   }
-
-//   &.own-message {
-//     align-self: flex-end;
-//     background-color: bisque;
-//   }
-// `;

@@ -8,7 +8,7 @@ function MessageView() {
     <div className="col-span-2 grid h-dvh w-full grid-cols-1 grid-rows-[auto_1fr_auto] md:col-span-1">
       <MessageTopBar />
 
-      <div className="mx-auto grid w-full max-w-3xl items-end overflow-y-auto pt-4">
+      <div className="grid grid-cols-1 items-end overflow-y-auto">
         <Messages />
       </div>
 

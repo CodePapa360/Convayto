@@ -11,7 +11,7 @@ function Messages() {
   const bottomRef = useRef();
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-2 px-4 pt-2">
       {isPending && <p>Loading messages...</p>}
 
       {messages?.length === 0 && <p>No messages</p>}
