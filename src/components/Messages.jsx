@@ -1,4 +1,3 @@
-// import styled from "styled-components";
 import { useMessages } from "../features/converse/useMessages";
 import Message from "./Message";
 import { useRef } from "react";

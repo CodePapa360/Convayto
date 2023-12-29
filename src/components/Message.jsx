@@ -1,4 +1,3 @@
-// import styled from "styled-components";
 import { useUser } from "../features/authentication/useUser";
 import { formatTime } from "../utils/common";
 

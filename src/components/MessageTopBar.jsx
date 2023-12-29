@@ -1,4 +1,3 @@
-// import styled from "styled-components";
 import { RiMenuUnfoldLine } from "react-icons/ri";
 import { useMessages } from "../features/converse/useMessages";
 import { useUi } from "../contexts/UiContext";
@@ -38,31 +37,3 @@ function MessageTopBar() {
 }
 
 export default MessageTopBar;
-
-// const StyledMessageTopBar = styled.div`
-//   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
-//   height: 5rem;
-
-//   display: flex;
-//   align-items: center;
-//   gap: 1rem;
-//   padding: 1rem;
-// `;
-
-// const BackButton = styled.button`
-//   padding: 0.5rem 0.7rem;
-// `;
-
-// const Profile = styled.div`
-//   display: flex;
-//   align-items: center;
-//   gap: 0.5rem;
-
-//   > :first-child {
-//   }
-
-//   > :last-child {
-//     display: flex;
-//     flex-direction: column;
-//   }
-// `;

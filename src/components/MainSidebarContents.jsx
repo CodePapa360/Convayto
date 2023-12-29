@@ -3,13 +3,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "../features/authentication/useUser";
 import { useConversatoins } from "../features/converse/useConversations";
 import { sortConverseByTime } from "../utils/common";
-import styled from "styled-components";
 import Logout from "../features/authentication/Logout";
 import Conversation from "./Conversation";
 import { useState } from "react";
 import { getMessages, searchPeople } from "../services/apiAuth";
 import SearchView from "./SearchView";
-import { useUi } from "../contexts/UiContext";
 
 function MainSidebarContents({ onSetMyAccountView }) {
   const [isSsearching, setIsSearching] = useState(false);
@@ -27,21 +25,21 @@ function MainSidebarContents({ onSetMyAccountView }) {
       : conversations;
 
   // prefetching messages of other conversations
-  // sortedConversations?.slice(0, 5).forEach((conv) => {
-  //   const { friend } = conv;
-  //   const { id: friendUserId } = friend;
-  //   const myUserId = user?.id;
+  sortedConversations?.slice(0, 5).forEach((conv) => {
+    const { friend } = conv;
+    const { id: friendUserId } = friend;
+    const myUserId = user?.id;
 
-  //   const test = async () => {
-  //     // The results of this query will be cached like a normal query
-  //     await queryClient.prefetchQuery({
-  //       queryKey: ["friend", friendUserId],
-  //       queryFn: () => getMessages({ myUserId, friendUserId }),
-  //     });
-  //   };
+    const test = async () => {
+      // The results of this query will be cached like a normal query
+      await queryClient.prefetchQuery({
+        queryKey: ["friend", friendUserId],
+        queryFn: () => getMessages({ myUserId, friendUserId }),
+      });
+    };
 
-  //   test();
-  // });
+    test();
+  });
 
   async function handleSearch(e) {
     e.preventDefault();
@@ -100,7 +98,11 @@ function MainSidebarContents({ onSetMyAccountView }) {
 
       <div className="p-2">
         {isSsearching && (
-          <SearchView onUserClick={setIsSearching} users={results} />
+          <SearchView
+            query={query}
+            onUserClick={setIsSearching}
+            users={results}
+          />
         )}
 
         {!isSsearching && (

@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./styles/index.css";
 import AppLayout from "./layouts/AppLayout";
-import GlobalStyles from "./styles/GlobalStyles";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Signup from "./pages/Signup";
@@ -23,7 +22,6 @@ function App() {
     <UiProvider>
       <QueryClientProvider client={queryClient}>
         {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-        {/* <GlobalStyles /> */}
         <BrowserRouter>
           <Routes>
             <Route

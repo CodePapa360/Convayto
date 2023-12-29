@@ -1,4 +1,3 @@
-// import styled from "styled-components";
 import Messages from "../components/Messages";
 import MessageTopBar from "../components/MessageTopBar";
 import MessageInputBar from "../components/MessageInputBar";

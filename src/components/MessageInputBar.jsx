@@ -1,4 +1,3 @@
-// import styled from "styled-components";
 import { RiSendPlaneFill } from "react-icons/ri";
 
 import { useMessages } from "../features/converse/useMessages";
@@ -97,10 +96,3 @@ function MessageInputBar() {
 }
 
 export default MessageInputBar;
-
-// const StyledInputBar = styled.div`
-//   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
-
-//   height: 4rem;
-//   margin-top: auto;
-// `;

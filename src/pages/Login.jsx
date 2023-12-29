@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styled from "styled-components";
 import { useLogin } from "../features/authentication/useLogin";
 import { Link } from "react-router-dom";
 
@@ -25,7 +24,7 @@ function Login() {
   }
 
   return (
-    <StyledLogin>
+    <div>
       <h1>Login</h1>
 
       <form onSubmit={handleSubmit}>
@@ -55,10 +54,9 @@ function Login() {
       </form>
 
       <Link to="/signup">Sign up</Link>
-    </StyledLogin>
+    </div>
   );
 }
 
 export default Login;
 
-const StyledLogin = styled.div``;

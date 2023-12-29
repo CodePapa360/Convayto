@@ -1,4 +1,3 @@
-// import styled from "styled-components";
 import { useEffect, useState } from "react";
 import MyAccount from "./MyAccount";
 import MainSidebarContents from "./MainSidebarContents";
@@ -47,12 +46,3 @@ function LeftSideBar() {
 }
 
 export default LeftSideBar;
-
-// const StyledLeftSideBar = styled.div`
-//   height: 100vh;
-//   height: 100dvh;
-
-//   display: grid;
-//   grid-template-columns: 1fr;
-//   grid-template-rows: 5rem 1fr;
-// `;

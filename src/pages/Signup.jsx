@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styled from "styled-components";
 import { useSignup } from "../features/authentication/useSignup";
 import { Link } from "react-router-dom";
 
@@ -23,12 +22,12 @@ function Signup() {
           setEmail("");
           setPassword("");
         },
-      }
+      },
     );
   }
 
   return (
-    <StyledSignup>
+    <div>
       <h1>Signup</h1>
 
       <form onSubmit={handleSubmit}>
@@ -77,10 +76,8 @@ function Signup() {
       </form>
 
       <Link to="/login">Login</Link>
-    </StyledSignup>
+    </div>
   );
 }
 
 export default Signup;
-
-const StyledSignup = styled.div``;
