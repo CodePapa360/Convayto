@@ -1,11 +1,20 @@
 import { useLogout } from "./useLogout";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 function Logout() {
   const { logout, isLoading } = useLogout();
 
+  function handleLogout() {
+    logout();
+  }
+
   return (
-    <button disabled={isLoading} onClick={logout}>
-      Logout
+    <button
+      className="flex h-10 w-10 items-center justify-center rounded-full text-lg hover:bg-gray-500/30"
+      disabled={isLoading}
+      onClick={handleLogout}
+    >
+      <RiLogoutCircleLine />
     </button>
   );
 }

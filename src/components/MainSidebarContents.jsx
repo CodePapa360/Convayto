@@ -1,3 +1,4 @@
+import { RiSearchLine, RiMenuLine, RiArrowLeftLine } from "react-icons/ri";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "../features/authentication/useUser";
 import { useConversatoins } from "../features/converse/useConversations";
@@ -52,27 +53,38 @@ function MainSidebarContents({ onSetMyAccountView }) {
   }
 
   return (
-    <div className="relative z-30 grid grid-cols-1 grid-rows-[5rem_1fr]">
-      <StyledHeaderBar>
-        <ProfileDetails>
-          <Profile onClick={() => onSetMyAccountView(true)}>
-            <span>
+    <div className="relative z-30 grid grid-cols-1 grid-rows-[auto_1fr]">
+      <div className="border-b border-gray-700 p-2">
+        <div className="mb-2 flex items-center justify-between gap-2">
+          <button
+            className="flex h-10 w-10 items-center justify-center rounded-full text-lg hover:bg-gray-500/30"
+            onClick={() => setIsSearching(false)}
+          >
+            {isSsearching ? <RiArrowLeftLine /> : <RiMenuLine />}
+          </button>
+
+          <div
+            className="mr-auto flex items-center gap-2"
+            onClick={() => onSetMyAccountView(true)}
+          >
+            <span className="max-w-10">
               <img src="/images/default-avatar.png" alt="Avatar" />
             </span>
-            <span>
+            <span className="flex flex-col">
               <span>{fullname}</span>
-              <span>@{username}</span>
+              <span className="text-sm opacity-70">@{username}</span>
             </span>
-          </Profile>
+          </div>
 
           <Logout />
-        </ProfileDetails>
+        </div>
 
-        <SearchBar>
-          <button onClick={() => setIsSearching(false)}>
-            {isSsearching ? "⬅" : "💢"}
-          </button>
+        <form
+          onSubmit={handleSearch}
+          className="flex items-center justify-between overflow-hidden rounded-full border border-slate-600 bg-slate-700"
+        >
           <input
+            className="grow self-stretch bg-transparent pl-4 pr-2 outline-none"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"
@@ -80,86 +92,36 @@ function MainSidebarContents({ onSetMyAccountView }) {
             placeholder="Search people"
           />
 
-          <button onClick={handleSearch}>🔍</button>
-        </SearchBar>
-      </StyledHeaderBar>
+          <button className="m-[2px] items-center justify-center rounded-full bg-violet-500 p-2 text-xl text-white hover:bg-violet-600 active:scale-95">
+            <RiSearchLine />
+          </button>
+        </form>
+      </div>
 
-      <UsersContainer>
+      <div className="p-2">
         {isSsearching && (
           <SearchView onUserClick={setIsSearching} users={results} />
         )}
 
         {!isSsearching && (
-          <ChatsContainer>
-            <h2>Conversations</h2>
+          <div>
+            <h2 className="mb-2 border-b border-slate-600 pb-2 text-lg">
+              Chats
+            </h2>
 
-            <hr />
-
-            <ConversationsContainer>
+            <div className="overflow-y-auto">
               {isPending && <p>Loading...</p>}
 
               {!isPending &&
                 sortedConversations?.map((conv) => (
                   <Conversation key={conv.friend.id} conversation={conv} />
                 ))}
-            </ConversationsContainer>
-          </ChatsContainer>
+            </div>
+          </div>
         )}
-      </UsersContainer>
+      </div>
     </div>
   );
 }
 
 export default MainSidebarContents;
-
-const StyledHeaderBar = styled.div`
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
-
-  /* display: flex; */
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-`;
-
-const ProfileDetails = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Profile = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  > :first-child {
-    max-width: 3rem;
-  }
-
-  > :last-child {
-    display: flex;
-    flex-direction: column;
-  }
-`;
-
-const SearchBar = styled.div`
-  display: flex;
-  gap: 0.5rem;
-
-  input {
-    width: 100%;
-  }
-`;
-
-///////
-const UsersContainer = styled.div`
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
-`;
-
-const ChatsContainer = styled.div``;
-
-const ConversationsContainer = styled.div`
-  overflow-y: auto;
-  height: 100%;
-`;

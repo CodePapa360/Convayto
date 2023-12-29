@@ -22,7 +22,7 @@ function MessageTopBar() {
       </button>
 
       <div className="flex items-center gap-2">
-        <span className="w-12">
+        <span className="w-10">
           <img
             src={avatar_url ? avatar_url : "/images/default-avatar.png"}
             alt={fullname}
@@ -30,7 +30,7 @@ function MessageTopBar() {
         </span>
         <span className="flex flex-col">
           <span>{fullname}</span>
-          <span>@{username}</span>
+          <span className="text-sm  opacity-70">@{username}</span>
         </span>
       </div>
     </div>

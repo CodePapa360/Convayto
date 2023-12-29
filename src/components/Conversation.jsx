@@ -1,15 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { useNavigate, useParams } from "react-router-dom";
 import { useUi } from "../contexts/UiContext";
 
 function Conversation({ conversation }) {
   const { friend, messages } = conversation;
   const { fullname, id } = friend;
-  const messageContent = messages?.content
-    ? messages.content.length > 30
-      ? `${messages.content.slice(0, 30)}...`
-      : messages.content
-    : "";
+  const messageContent = messages?.content;
+  const { userId: currentFriendConvId } = useParams();
+  const isActiveUser = currentFriendConvId === id;
 
   const navigate = useNavigate();
   const { closeSidebar } = useUi();
@@ -20,38 +17,27 @@ function Conversation({ conversation }) {
   }
 
   return (
-    <StyledConversation onClick={handleClick}>
-      <span>
+    <div
+      className={`${
+        isActiveUser ? "bg-violet-600 hover:bg-violet-800" : ""
+      } flex cursor-pointer items-center gap-2 rounded-lg p-2 hover:bg-slate-700/50`}
+      onClick={handleClick}
+    >
+      <span className="max-w-12 overflow-hidden rounded-full">
         <img src="/images/default-avatar.png" alt="User" />
       </span>
 
-      <span>
-        <span>{fullname}</span>
-        <span>{messageContent}</span>
+      <span className="flex flex-col overflow-hidden">
+        <span className="overflow-hidden text-ellipsis whitespace-nowrap font-bold">
+          {fullname}
+        </span>
+
+        <span className="overflow-hidden text-ellipsis whitespace-nowrap text-sm opacity-70">
+          {messageContent}
+        </span>
       </span>
-    </StyledConversation>
+    </div>
   );
 }
 
 export default Conversation;
-
-const StyledConversation = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  cursor: pointer;
-
-  border-bottom: 1px solid gray;
-
-  > :first-child {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-  }
-
-  > :last-child {
-    display: flex;
-    flex-direction: column;
-  }
-`;
