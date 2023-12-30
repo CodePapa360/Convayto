@@ -25,7 +25,7 @@ function Signin() {
 
   return (
     <div className="flex min-h-dvh items-center justify-center bg-slate-900 transition-all duration-200 ease-in-out">
-      <div className="w-80 rounded-xl bg-slate-800 p-6">
+      <div className="w-full max-w-80 rounded-xl bg-slate-800 p-6">
         <h1 className="mb-8 text-center text-3xl  uppercase">Sign in</h1>
         <form onSubmit={handleSubmit} className="mb-4 flex flex-col">
           <div className="input-container mb-4 w-full">
