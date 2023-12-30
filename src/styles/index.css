@@ -161,3 +161,14 @@ body {
     background-color: var(--the-thumb);
   }
 }
+
+/* //////////////////// */
+.form-input:focus ~ .form-label,
+.form-input:not(:placeholder-shown).form-input:not(:focus) ~ .form-label {
+  top: -12px;
+  background-color: #1e293b;
+  opacity: 1;
+  padding: 0.2rem;
+  font-size: calc(1rem - 3px);
+  color: white;
+}
