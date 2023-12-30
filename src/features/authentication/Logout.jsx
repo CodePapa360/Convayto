@@ -10,7 +10,7 @@ function Logout() {
 
   return (
     <button
-      className="flex h-10 w-10 items-center justify-center rounded-full text-lg hover:bg-gray-500/30"
+      className="flex h-10 w-10 items-center justify-center rounded-full text-lg hover:bg-slate-500/30"
       disabled={isLoading}
       onClick={handleLogout}
     >

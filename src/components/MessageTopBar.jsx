@@ -12,10 +12,10 @@ function MessageTopBar() {
   const { avatar_url, fullname, username } = friendDetails;
 
   return (
-    <div className="flex items-center gap-2 rounded-b-3xl border-b border-l border-gray-700 bg-gray-800 p-2">
+    <div className="flex items-center gap-2 rounded-b-3xl border-b border-l border-slate-700 bg-slate-800 p-2">
       <button
         onClick={() => openSidebar()}
-        className="rounded-full p-3 text-xl hover:bg-gray-700 active:scale-95 md:hidden "
+        className="rounded-full p-3 text-xl hover:bg-slate-700 active:scale-95 md:hidden "
       >
         <RiMenuUnfoldLine />
       </button>

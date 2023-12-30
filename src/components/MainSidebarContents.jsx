@@ -55,7 +55,7 @@ function MainSidebarContents({ onSetMyAccountView }) {
       <div className="border-b border-gray-700 p-2">
         <div className="mb-2 flex items-center justify-between gap-2">
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-full text-lg hover:bg-gray-500/30"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-lg hover:bg-slate-500/30"
             onClick={() => setIsSearching(false)}
           >
             {isSsearching ? <RiArrowLeftLine /> : <RiMenuLine />}

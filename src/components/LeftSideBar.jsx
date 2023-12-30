@@ -33,7 +33,7 @@ function LeftSideBar() {
       <aside
         className={`${
           isSidebarOpen ? "left-0" : "-left-full"
-        } absolute top-0 z-20 h-dvh w-full bg-gray-800 transition-all duration-300  ease-in-out md:relative md:left-0`}
+        } absolute top-0 z-20 h-dvh w-full bg-slate-800 transition-all duration-300  ease-in-out md:relative md:left-0`}
       >
         {accountView && <MyAccount onSetMyAccountView={setAccountView} />}
 

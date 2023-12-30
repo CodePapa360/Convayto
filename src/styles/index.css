@@ -120,7 +120,8 @@ button:has(svg) {
 /* ///////////// */
 
 body {
-  background-color: hsla(239, 100%, 91%, 1);
+  background-color: black;
+  color: white;
   cursor: default;
 
   font-family:
