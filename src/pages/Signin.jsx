@@ -1,31 +1,31 @@
 import { useState } from "react";
-import { useLogin } from "../features/authentication/useLogin";
+import { useSignin } from "../features/authentication/useSignin";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Signin() {
   const [email, setEmail] = useState("tanzil@gmail.com");
   const [password, setPassword] = useState("123456789");
-  const { login, isLoading } = useLogin();
+  const { signin, isLoading } = useSignin();
 
   function handleSubmit(e) {
     e.preventDefault();
 
     if (!email || !password) return;
 
-    login(
+    signin(
       { email, password },
       {
         onSettled: () => {
           setEmail("");
           setPassword("");
         },
-      }
+      },
     );
   }
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Sign in</h1>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
@@ -49,7 +49,7 @@ function Login() {
         />
 
         <button type="submit" disabled={isLoading}>
-          Login
+          Sign in
         </button>
       </form>
 
@@ -58,5 +58,4 @@ function Login() {
   );
 }
 
-export default Login;
-
+export default Signin;

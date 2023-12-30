@@ -17,7 +17,7 @@ export async function signup({ email, password, fullname, username }) {
   return data;
 }
 
-export async function login({ email, password }) {
+export async function signin({ email, password }) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -57,7 +57,7 @@ export async function getConversations({ myUserId }) {
 
   // Extract friend IDs
   const friendsIds = data.map((frnd) =>
-    frnd.user1_id === myUserId ? frnd.user2_id : frnd.user1_id
+    frnd.user1_id === myUserId ? frnd.user2_id : frnd.user1_id,
   );
 
   // Fetch user data from Supabase
@@ -214,7 +214,7 @@ export async function searchPeople(query) {
     .from("users")
     .select("*")
     .or(
-      `fullname.ilike.%${query}%,username.ilike.%${query}%,email.ilike.%${query}%`
+      `fullname.ilike.%${query}%,username.ilike.%${query}%,email.ilike.%${query}%`,
     );
 
   if (error) throw new Error(error.message);

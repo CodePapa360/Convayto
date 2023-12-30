@@ -4,7 +4,7 @@ import AppLayout from "./layouts/AppLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Signup from "./pages/Signup";
-import Login from "./pages/Login";
+import Signin from "./pages/Signin";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MessageView from "./layouts/MessageView";
 import { UiProvider } from "./contexts/UiContext";
@@ -35,7 +35,7 @@ function App() {
               <Route path="/:userId" element={<MessageView />} />
             </Route>
             <Route path="signup" element={<Signup />} />
-            <Route path="login" element={<Login />} />
+            <Route path="signin" element={<Signin />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

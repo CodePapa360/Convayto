@@ -75,7 +75,7 @@ function Signup() {
         </button>
       </form>
 
-      <Link to="/login">Login</Link>
+      <Link to="/signin">Sign in</Link>
     </div>
   );
 }

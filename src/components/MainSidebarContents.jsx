@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "../features/authentication/useUser";
 import { useConversatoins } from "../features/converse/useConversations";
 import { sortConverseByTime } from "../utils/common";
-import Logout from "../features/authentication/Logout";
+import Logout from "../features/authentication/Signin";
 import Conversation from "./Conversation";
 import { useState } from "react";
 import { getMessages, searchPeople } from "../services/apiAuth";

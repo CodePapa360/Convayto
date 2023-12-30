@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { login as loginApi } from "../../services/apiAuth";
+import { signin as signinApi } from "../../services/apiAuth";
 import { useNavigate } from "react-router-dom";
 
-export function useLogin() {
+export function useSignin() {
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
 
-  const { mutate: login, isLoading } = useMutation({
-    mutationFn: ({ email, password }) => loginApi({ email, password }),
+  const { mutate: signin, isLoading } = useMutation({
+    mutationFn: ({ email, password }) => signinApi({ email, password }),
     onSuccess: (data) => {
       queryClient.setQueriesData(["user"], data);
 
@@ -21,5 +21,5 @@ export function useLogin() {
     },
   });
 
-  return { login, isLoading };
+  return { signin, isLoading };
 }
