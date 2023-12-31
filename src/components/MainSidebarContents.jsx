@@ -111,7 +111,7 @@ function MainSidebarContents({ onSetMyAccountView }) {
               Chats
             </h2>
 
-            <div className="overflow-y-auto">
+            <div>
               {isPending && <p>Loading...</p>}
 
               {!isPending &&
