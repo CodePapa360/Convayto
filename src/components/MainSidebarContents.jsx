@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "../features/authentication/useUser";
 import { useConversatoins } from "../features/converse/useConversations";
 import { sortConverseByTime } from "../utils/common";
-import Logout from "../features/authentication/Signout";
+import Signout from "../features/authentication/Signout";
 import Conversation from "./Conversation";
 import { useEffect, useState } from "react";
 import { getMessages } from "../services/apiAuth";
@@ -50,26 +50,26 @@ function MainSidebarContents({ onSetMyAccountView }) {
       <div className="border-b border-gray-700 p-2">
         <div className="mb-2 flex items-center justify-between gap-2">
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-full text-lg hover:bg-slate-500/30"
+            className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-slate-500/30"
             onClick={() => setIsSearching(false)}
           >
             {isSsearching ? <RiArrowLeftLine /> : <RiMenuLine />}
           </button>
 
           <div
-            className="mr-auto flex items-center gap-2"
+            className="mr-auto flex cursor-pointer items-center gap-2 truncate"
             onClick={() => onSetMyAccountView(true)}
           >
-            <span className="max-w-10">
+            <span className="max-w-10 flex-shrink-0">
               <img src="/images/default-avatar.png" alt="Avatar" />
             </span>
-            <span className="flex flex-col">
-              <span>{fullname}</span>
-              <span className="text-sm opacity-70">@{username}</span>
+            <span className="flex flex-col truncate">
+              <span className="truncate">{fullname}</span>
+              <span className="truncate text-sm opacity-70">@{username}</span>
             </span>
           </div>
 
-          <Logout />
+          <Signout />
         </div>
 
         <div className="relative">

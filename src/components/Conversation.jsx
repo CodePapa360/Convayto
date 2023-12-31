@@ -23,18 +23,17 @@ function Conversation({ conversation }) {
       } flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 hover:bg-slate-700/50 `}
       onClick={handleClick}
     >
-      <span className="max-w-12 overflow-hidden rounded-full">
+      <span className="w-full max-w-12 overflow-hidden rounded-full">
         <img draggable="false" src="/images/default-avatar.png" alt="User" />
       </span>
 
       <span className="flex flex-col overflow-hidden ">
-        <span className="overflow-hidden text-ellipsis whitespace-nowrap font-bold">
-          {fullname}
+        <span className="truncate font-bold">
+          {fullname} Lorem ipsum bla bla bla bla bla bla bla bla bla bla bla
+          blabla bla bla bla bla bla bla bla
         </span>
 
-        <span className="overflow-hidden text-ellipsis whitespace-nowrap text-sm opacity-70">
-          {messageContent}
-        </span>
+        <span className="truncate text-sm opacity-70">{messageContent}</span>
       </span>
     </div>
   );

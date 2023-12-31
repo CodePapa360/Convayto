@@ -10,7 +10,7 @@ function Logout() {
 
   return (
     <button
-      className="flex items-center justify-center gap-2 rounded-full p-3  hover:bg-slate-500/30"
+      className="flex flex-shrink-0 items-center justify-center gap-2 rounded-full  p-3 hover:bg-slate-500/30"
       disabled={isLoading}
       onClick={handleLogout}
     >
