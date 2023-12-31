@@ -33,9 +33,9 @@ function LeftSideBar() {
       <div
         className={`${
           isSidebarOpen ? "left-0" : "-left-full"
-        } absolute top-0 z-20 h-dvh h-svh w-full overflow-y-auto bg-slate-800 transition-all duration-200 ease-in-out sm:w-[23rem]  md:relative md:left-0`}
+        } absolute top-0 z-20 h-dvh h-svh w-full overflow-y-scroll bg-slate-800 transition-all duration-300 ease-[cubic-bezier(0.47,0,0.745,0.715)] sm:w-[23rem] md:relative md:left-0`}
       >
-        <aside className={``}>
+        <aside>
           {accountView && <MyAccount onSetMyAccountView={setAccountView} />}
 
           {!accountView && (

@@ -10,11 +10,11 @@ function Logout() {
 
   return (
     <button
-      className="flex h-10 w-10 items-center justify-center rounded-full text-lg hover:bg-slate-500/30"
+      className="flex items-center justify-center gap-2 rounded-full p-3  hover:bg-slate-500/30"
       disabled={isLoading}
       onClick={handleLogout}
     >
-      <RiLogoutCircleLine />
+      <RiLogoutCircleLine /> <span>Sign out</span>
     </button>
   );
 }

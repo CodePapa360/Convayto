@@ -3,16 +3,20 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "../features/authentication/useUser";
 import { useConversatoins } from "../features/converse/useConversations";
 import { sortConverseByTime } from "../utils/common";
-import Logout from "../features/authentication/Signin";
+import Logout from "../features/authentication/Signout";
 import Conversation from "./Conversation";
-import { useState } from "react";
-import { getMessages, searchPeople } from "../services/apiAuth";
+import { useEffect, useState } from "react";
+import { getMessages } from "../services/apiAuth";
 import SearchView from "./SearchView";
 
 function MainSidebarContents({ onSetMyAccountView }) {
   const [isSsearching, setIsSearching] = useState(false);
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    setQuery("");
+  }, [isSsearching]);
+
   const { user } = useUser();
   const { fullname, username } = user.user_metadata;
 
@@ -30,7 +34,7 @@ function MainSidebarContents({ onSetMyAccountView }) {
     const { id: friendUserId } = friend;
     const myUserId = user?.id;
 
-    const test = async () => {
+    const prefetch = async () => {
       // The results of this query will be cached like a normal query
       await queryClient.prefetchQuery({
         queryKey: ["friend", friendUserId],
@@ -38,17 +42,8 @@ function MainSidebarContents({ onSetMyAccountView }) {
       });
     };
 
-    test();
+    prefetch();
   });
-
-  async function handleSearch(e) {
-    e.preventDefault();
-    if (!query) return;
-
-    const res = await searchPeople(query);
-    setResults(res);
-    setQuery("");
-  }
 
   return (
     <div className="relative z-30 grid grid-cols-1 grid-rows-[auto_1fr]">
@@ -77,12 +72,9 @@ function MainSidebarContents({ onSetMyAccountView }) {
           <Logout />
         </div>
 
-        <form
-          onSubmit={handleSearch}
-          className="flex items-center justify-between overflow-hidden rounded-full border border-slate-600 bg-slate-700"
-        >
+        <div className="relative">
           <input
-            className="grow self-stretch bg-transparent pl-4 pr-2 outline-none"
+            className="bg-transparentf flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-slate-600 bg-slate-700 p-2 pl-9 outline-none"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"
@@ -90,19 +82,15 @@ function MainSidebarContents({ onSetMyAccountView }) {
             placeholder="Search people"
           />
 
-          <button className="m-[2px] items-center justify-center rounded-full bg-violet-500 p-2 text-xl text-white hover:bg-violet-600 active:scale-95">
+          <span className="pointer-events-none absolute left-3 top-3 text-xl text-white opacity-40">
             <RiSearchLine />
-          </button>
-        </form>
+          </span>
+        </div>
       </div>
 
       <div className="p-2">
         {isSsearching && (
-          <SearchView
-            query={query}
-            onUserClick={setIsSearching}
-            users={results}
-          />
+          <SearchView query={query} onUserClick={setIsSearching} />
         )}
 
         {!isSsearching && (

@@ -35,7 +35,7 @@ function Signup() {
           <div className="input-container mb-4 w-full">
             <div className="input-wrapper relative h-12">
               <input
-                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-slate-400 bg-transparent px-4 text-sm outline-none focus:border-violet-500"
+                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-slate-400 bg-transparent px-4 outline-none focus:border-violet-500"
                 value={fullname}
                 onChange={(e) => setFullname(e.target.value)}
                 id="fullname"
@@ -45,7 +45,7 @@ function Signup() {
                 autoComplete="off"
               />
               <label
-                className="form-label pointer-events-none absolute left-4 top-[calc(3rem_/_2_-_0.9rem_/_1.5)] z-20 text-sm opacity-80 transition-all duration-200 ease-in-out"
+                className="form-label pointer-events-none absolute left-4 top-[calc(3rem_/_2_-_0.9rem_/_1.5)] z-20 opacity-80 transition-all duration-200 ease-in-out"
                 htmlFor="fullname"
               >
                 Fullname
@@ -59,7 +59,7 @@ function Signup() {
           <div className="input-container mb-4 w-full">
             <div className="input-wrapper relative h-12">
               <input
-                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-slate-400 bg-transparent px-4 text-sm outline-none focus:border-violet-500"
+                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-slate-400 bg-transparent px-4 outline-none focus:border-violet-500"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 id="username"
@@ -69,7 +69,7 @@ function Signup() {
                 autoComplete="off"
               />
               <label
-                className="form-label pointer-events-none absolute left-4 top-[calc(3rem_/_2_-_0.9rem_/_1.5)] z-20 text-sm opacity-80 transition-all duration-200 ease-in-out"
+                className="form-label pointer-events-none absolute left-4 top-[calc(3rem_/_2_-_0.9rem_/_1.5)] z-20 opacity-80 transition-all duration-200 ease-in-out"
                 htmlFor="username"
               >
                 Username
@@ -83,7 +83,7 @@ function Signup() {
           <div className="input-container mb-4 w-full">
             <div className="input-wrapper relative h-12">
               <input
-                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-slate-400 bg-transparent px-4 text-sm outline-none focus:border-violet-500"
+                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-slate-400 bg-transparent px-4 outline-none focus:border-violet-500"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 id="email"
@@ -93,7 +93,7 @@ function Signup() {
                 autoComplete="off"
               />
               <label
-                className="form-label pointer-events-none absolute left-4 top-[calc(3rem_/_2_-_0.9rem_/_1.5)] z-20 text-sm opacity-80 transition-all duration-200 ease-in-out"
+                className="form-label pointer-events-none absolute left-4 top-[calc(3rem_/_2_-_0.9rem_/_1.5)] z-20 opacity-80 transition-all duration-200 ease-in-out"
                 htmlFor="email"
               >
                 Email
@@ -107,7 +107,7 @@ function Signup() {
           <div className="input-container mb-4 w-full">
             <div className="input-wrapper relative h-12">
               <input
-                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-slate-400 bg-transparent px-4 text-sm outline-none focus:border-violet-500"
+                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-slate-400 bg-transparent px-4 outline-none focus:border-violet-500"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 id="password"
@@ -117,7 +117,7 @@ function Signup() {
                 autoComplete="off"
               />
               <label
-                className="form-label pointer-events-none absolute left-4 top-[calc(3rem_/_2_-_0.9rem_/_1.5)] z-20 text-sm opacity-80 transition-all duration-200 ease-in-out"
+                className="form-label pointer-events-none absolute left-4 top-[calc(3rem_/_2_-_0.9rem_/_1.5)] z-20 opacity-80 transition-all duration-200 ease-in-out"
                 htmlFor="password"
               >
                 Password
