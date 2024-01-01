@@ -172,3 +172,11 @@ body {
   font-size: calc(1rem - 3px);
   color: white;
 }
+
+@layer components {
+  /* ///////// Applies /////////// */
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+}

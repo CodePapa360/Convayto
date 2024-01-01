@@ -36,7 +36,7 @@ export function useMessages() {
         callback: (newData) => {
           queryClient.setQueryData(["friend", friendUserId], (prevData) => {
             const existingOptimisticMessage = prevData?.messages?.find(
-              (message) => message?.id === newData?.id
+              (message) => message?.id === newData?.id,
             );
 
             if (!existingOptimisticMessage) {
@@ -55,7 +55,7 @@ export function useMessages() {
               return {
                 ...prevData,
                 messages: prevData.messages.map((message) =>
-                  message.id === newData.id ? newData : message
+                  message.id === newData.id ? newData : message,
                 ),
               };
             }
@@ -68,13 +68,13 @@ export function useMessages() {
         // console.log("unsubscribed message");
       };
     },
-    [conversationId, friendUserId, queryClient]
+    [conversationId, friendUserId, queryClient],
   );
 
   if (error) {
     console.error(
       "Error fetching conversations (from custom hook):",
-      error.message
+      error.message,
     );
   }
 
@@ -82,5 +82,6 @@ export function useMessages() {
   return {
     data,
     isPending,
+    error,
   };
 }

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useSendNewMessage } from "../features/converse/useSendNewMessage";
 import { v4 as uuid } from "uuid";
 import { useQueryClient } from "@tanstack/react-query";
+import Loader from "./Loader";
 
 function MessageInputBar() {
   const [newMessage, setNewMessage] = useState("");
@@ -13,7 +14,7 @@ function MessageInputBar() {
   const { user } = useUser();
   const { data, isPending } = useMessages();
   const conversationId = data?.conversationId;
-  const friendUserId = data?.frindDetails.id;
+  const friendUserId = data?.friendDetails.id;
   const myUserId = user.id;
 
   const queryClient = useQueryClient();
@@ -88,7 +89,7 @@ function MessageInputBar() {
           onClick={handleSendNewMessage}
           type="submit"
         >
-          <RiSendPlaneFill />
+          {isSending ? <Loader size="small" /> : <RiSendPlaneFill />}
         </button>
       </form>
     </div>

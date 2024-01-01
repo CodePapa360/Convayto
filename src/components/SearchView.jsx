@@ -1,17 +1,40 @@
 import { useUser } from "../features/authentication/useUser";
 import SearchedUser from "./SearchedUser";
 import { useSearchedUsers } from "../features/converse/useSearchedUsers";
+import Loader from "./Loader";
 
 function SearchView({ query, onUserClick }) {
   const { users, isLoading, error } = useSearchedUsers(query);
-
   const { user: myUserDetails } = useUser();
   const filteredUsers = users?.filter((user) => user.id !== myUserDetails.id);
 
-  if (query.length < 3) return <p>Search for people</p>;
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Something went wrong</p>;
-  if (filteredUsers.length === 0) return <p>No users found</p>;
+  if (query.length < 3)
+    return (
+      <span className="flex-center mt-4 opacity-70">
+        <p>Search for people</p>
+      </span>
+    );
+
+  if (isLoading)
+    return (
+      <span className="flex-center mt-4">
+        <Loader text="Loading" size="medium" />
+      </span>
+    );
+
+  if (error)
+    return (
+      <span className="flex-center mt-4 opacity-70">
+        <p>Som ething went wrong</p>
+      </span>
+    );
+
+  if (filteredUsers.length === 0)
+    return (
+      <span className="flex-center mt-4 opacity-70">
+        <p>No users found</p>
+      </span>
+    );
 
   return (
     <div>

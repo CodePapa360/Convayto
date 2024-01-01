@@ -28,10 +28,7 @@ function Conversation({ conversation }) {
       </span>
 
       <span className="flex flex-col overflow-hidden ">
-        <span className="truncate font-bold">
-          {fullname} Lorem ipsum bla bla bla bla bla bla bla bla bla bla bla
-          blabla bla bla bla bla bla bla bla
-        </span>
+        <span className="truncate font-bold">{fullname}</span>
 
         <span className="truncate text-sm opacity-70">{messageContent}</span>
       </span>

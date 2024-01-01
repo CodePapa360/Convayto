@@ -133,10 +133,10 @@ export async function getMessages({ myUserId, friendUserId }) {
     friendUserId,
   });
 
-  const frindDetails = await getUserById(friendUserId);
+  const friendDetails = await getUserById(friendUserId);
 
   if (!conversationId)
-    return { frindDetails, messages: null, conversationId: null };
+    return { friendDetails, messages: null, conversationId: null };
 
   const { data: messages, error } = await supabase
     .from("messages")
@@ -147,7 +147,7 @@ export async function getMessages({ myUserId, friendUserId }) {
     throw new Error(error.message);
   }
 
-  return { frindDetails, messages, conversationId };
+  return { friendDetails, messages, conversationId };
 }
 
 ////////////////

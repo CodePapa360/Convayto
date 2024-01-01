@@ -8,6 +8,7 @@ import Conversation from "./Conversation";
 import { useEffect, useState } from "react";
 import { getMessages } from "../services/apiAuth";
 import SearchView from "./SearchView";
+import Loader from "./Loader";
 
 function MainSidebarContents({ onSetMyAccountView }) {
   const [isSsearching, setIsSearching] = useState(false);
@@ -42,7 +43,7 @@ function MainSidebarContents({ onSetMyAccountView }) {
       });
     };
 
-    prefetch();
+    // prefetch();
   });
 
   return (
@@ -100,7 +101,11 @@ function MainSidebarContents({ onSetMyAccountView }) {
             </h2>
 
             <div>
-              {isPending && <p>Loading...</p>}
+              {isPending && (
+                <span className="mt-8 flex flex-col items-center justify-center">
+                  <Loader size="medium" text="Loading chats" />
+                </span>
+              )}
 
               {!isPending &&
                 sortedConversations?.map((conv) => (

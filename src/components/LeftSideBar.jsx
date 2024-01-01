@@ -3,6 +3,7 @@ import MyAccount from "./MyAccount";
 import MainSidebarContents from "./MainSidebarContents";
 import { useUi } from "../contexts/UiContext";
 import { useParams } from "react-router-dom";
+import Loader from "./Loader";
 
 function LeftSideBar() {
   const { state, closeSidebar, openSidebar } = useUi();
@@ -27,13 +28,13 @@ function LeftSideBar() {
         onClick={handleToggleSidebar}
         className={`${
           isSidebarOpen ? "visible opacity-100" : "invisible opacity-0"
-        } absolute left-0 top-0 z-0 h-dvh h-svh w-dvw bg-black/50 md:hidden`}
+        } absolute left-0 top-0 z-0 h-dvh h-svh w-dvw bg-black/50 transition-all duration-200 ease-in-out md:hidden`}
       ></div>
 
       <div
         className={`${
-          isSidebarOpen ? "left-0" : "-left-full"
-        } absolute top-0 z-20 h-dvh h-svh w-full overflow-y-scroll bg-slate-800 transition-all duration-300 ease-[cubic-bezier(0.47,0,0.745,0.715)] sm:w-[23rem] md:relative md:left-0`}
+          isSidebarOpen ? "left-0 opacity-100" : "-left-full opacity-0"
+        } absolute top-0 z-20 h-dvh h-svh w-full overflow-y-scroll bg-slate-800 transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] sm:w-[23rem] md:relative md:left-0 md:opacity-100`}
       >
         <aside>
           {accountView && <MyAccount onSetMyAccountView={setAccountView} />}
