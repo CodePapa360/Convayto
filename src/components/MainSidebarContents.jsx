@@ -58,12 +58,13 @@ function MainSidebarContents({ onSetMyAccountView }) {
           </button>
 
           <div
-            className="mr-auto flex cursor-pointer items-center gap-2 truncate"
+            className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] items-center gap-2 truncate  rounded-lg p-2 hover:bg-slate-500/30"
             onClick={() => onSetMyAccountView(true)}
           >
-            <span className="max-w-10 flex-shrink-0">
-              <img src="/images/default-avatar.png" alt="Avatar" />
+            <span>
+              <img src="./images/default-avatar.svg" alt="Avatar" />
             </span>
+
             <span className="flex flex-col truncate">
               <span className="truncate">{fullname}</span>
               <span className="truncate text-sm opacity-70">@{username}</span>

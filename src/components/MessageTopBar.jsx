@@ -23,7 +23,7 @@ function MessageTopBar() {
         <div className="flex items-center gap-2">
           <span className="w-10">
             <img
-              src={avatar_url ? avatar_url : "/images/default-avatar.png"}
+              src={avatar_url ? avatar_url : "/images/default-avatar.svg"}
               alt={fullname}
             />
           </span>

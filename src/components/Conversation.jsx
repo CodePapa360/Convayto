@@ -24,7 +24,7 @@ function Conversation({ conversation }) {
       onClick={handleClick}
     >
       <span className="w-full max-w-12 overflow-hidden rounded-full">
-        <img draggable="false" src="/images/default-avatar.png" alt="User" />
+        <img draggable="false" src="/images/default-avatar.svg" alt="User" />
       </span>
 
       <span className="flex flex-col overflow-hidden ">
