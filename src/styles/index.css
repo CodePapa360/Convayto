@@ -173,9 +173,8 @@ body {
   color: white;
 }
 
+/* ///////// Applies /////////// */
 @layer components {
-  /* ///////// Applies /////////// */
-
   .flex-center {
     @apply flex items-center justify-center;
   }

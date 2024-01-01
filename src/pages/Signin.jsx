@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useSignin } from "../features/authentication/useSignin";
 import { Link } from "react-router-dom";
+import Loader from "../components/Loader";
 
 function Signin() {
   const [email, setEmail] = useState("tanzil@gmail.com");
   const [password, setPassword] = useState("123456789");
-  const { signin, isLoading } = useSignin();
+  const { signin, isPending } = useSignin();
+
+  // const isPending = true;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -74,10 +77,11 @@ function Signin() {
 
           <button
             type="submit"
-            disabled={isLoading}
-            className="rounded-md bg-violet-800 p-3 font-bold uppercase tracking-wider transition-all duration-200 hover:bg-violet-900 active:scale-95"
+            disabled={isPending}
+            className="flex items-center justify-center rounded-md bg-violet-800 p-3 font-bold uppercase tracking-wider transition-all duration-200 hover:bg-violet-900 active:scale-95 disabled:pointer-events-none disabled:bg-violet-900"
           >
-            Sign in
+            {isPending && <Loader size="small" customClasses="mr-2" />}
+            <span>Sign in</span>
           </button>
         </form>
 

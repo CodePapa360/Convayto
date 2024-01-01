@@ -47,7 +47,7 @@ function MainSidebarContents({ onSetMyAccountView }) {
   });
 
   return (
-    <div className="relative z-30 grid grid-cols-1 grid-rows-[auto_1fr]">
+    <div className="relative z-30 grid select-none grid-cols-1 grid-rows-[auto_1fr]">
       <div className="border-b border-gray-700 p-2">
         <div className="mb-2 flex items-center justify-between gap-2">
           <button
@@ -62,7 +62,11 @@ function MainSidebarContents({ onSetMyAccountView }) {
             onClick={() => onSetMyAccountView(true)}
           >
             <span>
-              <img src="./images/default-avatar.svg" alt="Avatar" />
+              <img
+                draggable="false"
+                src="./images/default-avatar.svg"
+                alt="Avatar"
+              />
             </span>
 
             <span className="flex flex-col truncate">

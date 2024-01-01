@@ -7,7 +7,7 @@ export function useSignin() {
 
   const navigate = useNavigate();
 
-  const { mutate: signin, isLoading } = useMutation({
+  const { mutate: signin, isPending } = useMutation({
     mutationFn: ({ email, password }) => signinApi({ email, password }),
     onSuccess: (data) => {
       queryClient.setQueriesData(["user"], data);
@@ -21,5 +21,5 @@ export function useSignin() {
     },
   });
 
-  return { signin, isLoading };
+  return { signin, isPending };
 }

@@ -15,7 +15,7 @@ function Settings({ onSetMyAccountView }) {
         >
           <RiArrowLeftLine />
         </button>
-        <p className="font-bold tracking-wider">Profile</p>
+        <p className="select-none font-bold tracking-wider">Profile</p>
       </div>
 
       <div className="overflow-scroll p-4">

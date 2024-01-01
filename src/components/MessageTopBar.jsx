@@ -9,7 +9,7 @@ function MessageTopBar() {
   const { openSidebar } = useUi();
 
   return (
-    <div className="flex h-16 items-center gap-2 rounded-b-3xl border-b border-l border-slate-700 bg-slate-800 p-2">
+    <div className="flex h-16 items-center gap-2 rounded-b-3xl border-b border-l border-r  border-slate-700 bg-slate-800 p-2">
       <button
         onClick={() => openSidebar()}
         className="rounded-full p-3 text-xl hover:bg-slate-700 active:scale-95 md:hidden "
