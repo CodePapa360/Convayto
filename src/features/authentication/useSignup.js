@@ -6,7 +6,11 @@ export function useSignup() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const { mutate: signup, isPending } = useMutation({
+  const {
+    mutate: signup,
+    isPending,
+    error,
+  } = useMutation({
     mutationFn: ({ email, password, fullname, username }) =>
       apiSignup({ email, password, fullname, username }),
     onSuccess: (data) => {
@@ -22,5 +26,5 @@ export function useSignup() {
     },
   });
 
-  return { signup, isPending };
+  return { signup, isPending, error };
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSignup } from "../features/authentication/useSignup";
 import { Link } from "react-router-dom";
+import Loader from "../components/Loader";
 
 function Signup() {
   const [fullname, setFullname] = useState("");
@@ -8,7 +9,7 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("123456789");
 
-  const { signup, isLoading } = useSignup();
+  const { signup, isPending } = useSignup();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -128,10 +129,11 @@ function Signup() {
 
           <button
             type="submit"
-            disabled={isLoading}
-            className="rounded-md bg-violet-800 p-3 font-bold uppercase tracking-wider transition-all duration-200 hover:bg-violet-900 active:scale-95"
+            disabled={isPending}
+            className="flex items-center justify-center rounded-md bg-violet-800 p-3 font-bold uppercase leading-6 tracking-wider transition-all duration-200 hover:bg-violet-900 active:scale-95 disabled:pointer-events-none disabled:bg-violet-900"
           >
-            Sign up
+            {isPending && <Loader size="small" />}
+            <span className="ml-2">Sign up</span>
           </button>
         </form>
 
