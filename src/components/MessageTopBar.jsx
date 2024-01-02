@@ -1,4 +1,4 @@
-import { RiMenuUnfoldLine } from "react-icons/ri";
+import { RiArrowLeftLine } from "react-icons/ri";
 import { useMessages } from "../features/converse/useMessages";
 import { useUi } from "../contexts/UiContext";
 import Loader from "./Loader";
@@ -24,7 +24,7 @@ function MessageTopBar() {
         onClick={handleGoBack}
         className="rounded-full p-3 text-xl hover:bg-slate-700 active:scale-95 md:hidden "
       >
-        <RiMenuUnfoldLine />
+        <RiArrowLeftLine />
       </button>
 
       {isPending ? (

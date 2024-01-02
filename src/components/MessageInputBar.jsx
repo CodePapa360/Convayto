@@ -2,7 +2,7 @@ import { RiSendPlaneFill } from "react-icons/ri";
 
 import { useMessages } from "../features/converse/useMessages";
 import { useUser } from "../features/authentication/useUser";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSendNewMessage } from "../features/converse/useSendNewMessage";
 import { v4 as uuid } from "uuid";
 import { useQueryClient } from "@tanstack/react-query";
@@ -16,11 +16,13 @@ function MessageInputBar() {
   const conversationId = data?.conversationId;
   const friendUserId = data?.friendDetails.id;
   const myUserId = user.id;
-
+  const inputRef = useRef(null);
   const queryClient = useQueryClient();
 
   function handleSendNewMessage(e) {
     e.preventDefault();
+    inputRef.current.focus();
+
     if (!newMessage) return;
 
     const messageObj = {
@@ -77,6 +79,7 @@ function MessageInputBar() {
       <form className="mx-auto grid max-w-3xl grid-cols-[1fr_auto]  overflow-hidden rounded-full border border-slate-600 bg-slate-700">
         <input
           className="h-12 w-full bg-transparent pl-4 pr-2 outline-none"
+          ref={inputRef}
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           type="text"
