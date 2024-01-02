@@ -2,16 +2,26 @@ import { RiMenuUnfoldLine } from "react-icons/ri";
 import { useMessages } from "../features/converse/useMessages";
 import { useUi } from "../contexts/UiContext";
 import Loader from "./Loader";
+import { useNavigate } from "react-router-dom";
 
 function MessageTopBar() {
   const { data, isPending } = useMessages();
   const { avatar_url, fullname, username } = data?.friendDetails ?? {};
   const { openSidebar } = useUi();
+  const navigate = useNavigate();
+
+  function handleGoBack() {
+    if (window.matchMedia("(max-width: 640px)").matches) {
+      navigate("/");
+    } else {
+      openSidebar();
+    }
+  }
 
   return (
     <div className="flex h-16 items-center gap-2 rounded-b-3xl border-b border-l border-r  border-slate-700 bg-slate-800 p-2">
       <button
-        onClick={() => openSidebar()}
+        onClick={handleGoBack}
         className="rounded-full p-3 text-xl hover:bg-slate-700 active:scale-95 md:hidden "
       >
         <RiMenuUnfoldLine />
