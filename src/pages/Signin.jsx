@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSignin } from "../features/authentication/useSignin";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
+import { RiLoginCircleLine } from "react-icons/ri";
 
 function Signin() {
   const [email, setEmail] = useState("tanzil@gmail.com");
@@ -78,10 +79,10 @@ function Signin() {
           <button
             type="submit"
             disabled={isPending}
-            className="flex items-center justify-center rounded-md bg-violet-800 p-3 font-bold uppercase tracking-wider transition-all duration-200 hover:bg-violet-900 active:scale-95 disabled:pointer-events-none disabled:bg-violet-900"
+            className="flex items-center justify-center rounded-md bg-violet-800 p-3 font-bold uppercase leading-6 tracking-wider transition-all duration-200 hover:bg-violet-900 active:scale-95 disabled:pointer-events-none disabled:bg-violet-900"
           >
-            {isPending && <Loader size="small" customClasses="mr-2" />}
-            <span>Sign in</span>
+            {isPending ? <Loader size="small" /> : <RiLoginCircleLine />}
+            <span className="ml-2">Sign in</span>
           </button>
         </form>
 
