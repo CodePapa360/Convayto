@@ -8,6 +8,7 @@ export async function signup({ email, password, fullname, username }) {
       data: {
         fullname,
         username,
+        bio: "Hay there, I'm using ConverseMe!",
       },
     },
   });
