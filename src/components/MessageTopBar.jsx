@@ -12,7 +12,7 @@ function MessageTopBar() {
 
   function handleGoBack() {
     if (window.matchMedia("(max-width: 640px)").matches) {
-      navigate("/");
+      navigate("/", { replace: true });
     } else {
       openSidebar();
     }

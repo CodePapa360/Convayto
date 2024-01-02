@@ -1,5 +1,9 @@
 import { RiArrowLeftLine } from "react-icons/ri";
-import { useUser } from "../features/authentication/useUser";
+import { useUser } from "../../features/authentication/useUser";
+import { useState } from "react";
+import Name from "./Name";
+import Username from "./Username";
+import Bio from "./Bio";
 
 function Settings({ onSetMyAccountView }) {
   const { user } = useUser();
@@ -7,6 +11,13 @@ function Settings({ onSetMyAccountView }) {
     email,
     user_metadata: { fullname, username, bio },
   } = user;
+
+  const [isEditingName, setIsEditingName] = useState(false);
+
+  // const [newName, setNewName, updateName] = useProfileField(
+  //   "fullname",
+  //   fullname,
+  // );
 
   return (
     <div className="overflow-hidden">
@@ -29,30 +40,13 @@ function Settings({ onSetMyAccountView }) {
           />
         </div>
 
+        <Name />
+
+        <Username />
+
+        <Bio />
+
         <div className="mt-4">
-          <p className="select-none text-sm font-bold tracking-wider text-violet-400 opacity-80">
-            Name
-          </p>
-          <p className="mt-3">{fullname}</p>
-        </div>
-
-        <div className="mt-8">
-          <p className="select-none text-sm font-bold tracking-wider text-violet-400 opacity-80">
-            Username
-          </p>
-          <p className="mt-3">@{username}</p>
-        </div>
-
-        <div className="mt-8">
-          <p className="text-sm font-bold tracking-wider text-violet-400 opacity-80">
-            Bio
-          </p>
-          <p className="mt-3">
-            {bio === undefined ? "No bio available!" : bio}
-          </p>
-        </div>
-
-        <div className="mt-8">
           <p className="select-none text-sm font-bold tracking-wider text-violet-400 opacity-80">
             Email
           </p>
