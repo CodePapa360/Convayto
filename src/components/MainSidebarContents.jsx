@@ -1,4 +1,9 @@
-import { RiSearchLine, RiMenuLine, RiArrowLeftLine } from "react-icons/ri";
+import {
+  RiSearchLine,
+  RiMenuLine,
+  RiCloseFill,
+  RiArrowLeftLine,
+} from "react-icons/ri";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "../features/authentication/useUser";
 import { useConversatoins } from "../features/converse/useConversations";
@@ -62,9 +67,9 @@ function MainSidebarContents({ onSetMyAccountView }) {
       }
     }
 
-    document.addEventListener("mouseout", handleClickOutside);
+    document.addEventListener("mouseover", handleClickOutside);
     return () => {
-      document.removeEventListener("mouseout", handleClickOutside);
+      document.removeEventListener("mouseover", handleClickOutside);
     };
   }, [menuRef, menuBtnRef]);
 
@@ -87,7 +92,13 @@ function MainSidebarContents({ onSetMyAccountView }) {
               className=" hs-dropdown-open flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-slate-500/30"
               onClick={handleMenuBtnClick}
             >
-              {isSsearching ? <RiArrowLeftLine /> : <RiMenuLine />}
+              {isSsearching ? (
+                <RiArrowLeftLine />
+              ) : isMenuOpen ? (
+                <RiCloseFill />
+              ) : (
+                <RiMenuLine />
+              )}
             </button>
 
             {isMenuOpen && (
