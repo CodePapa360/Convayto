@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUser } from "../../features/authentication/useUser";
 import { RiCheckFill, RiEdit2Line } from "react-icons/ri";
 import { updateProfile } from "../../services/apiProfileUpdate";
@@ -13,9 +13,16 @@ function Username() {
   const [isEditing, setIsEditing] = useState(false);
   const usernameRegex = /^[a-zA-Z0-9_]{3,30}$/;
   const isValidUsername = usernameRegex.test(newUsername);
+  const inputRef = useRef(null);
 
   // Highest length of a username is 25 characters
   const MAX_USERNAME_LENGTH = 30;
+
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
 
   function handleUpdate() {
     if (!isEditing) return setIsEditing(true);
@@ -44,6 +51,7 @@ function Username() {
           <>
             <input
               type="text"
+              ref={inputRef}
               value={newUsername}
               onChange={(e) => {
                 e.target.value.length <= MAX_USERNAME_LENGTH &&
@@ -54,7 +62,7 @@ function Username() {
                 isValidUsername ? "border-violet-500" : "border-red-500"
               } h-full w-full rounded-md border-b-2  bg-slate-700 px-2 text-base text-slate-100 outline-none`}
             />
-            <span className="w-8 select-none opacity-60">
+            <span className="w-8 select-none text-sm opacity-60 ">
               {MAX_USERNAME_LENGTH - newUsername.length}
             </span>
           </>
