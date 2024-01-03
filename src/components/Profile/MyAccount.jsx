@@ -1,24 +1,9 @@
 import { RiArrowLeftLine } from "react-icons/ri";
-import { useUser } from "../../features/authentication/useUser";
-import { useState } from "react";
 import Name from "./Name";
 import Username from "./Username";
 import Bio from "./Bio";
 
 function Settings({ onSetMyAccountView }) {
-  const { user } = useUser();
-  const {
-    email,
-    user_metadata: { fullname, username, bio },
-  } = user;
-
-  const [isEditingName, setIsEditingName] = useState(false);
-
-  // const [newName, setNewName, updateName] = useProfileField(
-  //   "fullname",
-  //   fullname,
-  // );
-
   return (
     <div className="overflow-hidden">
       <div className="flex h-16 items-center justify-start gap-4 bg-slate-700 p-2">
@@ -50,7 +35,7 @@ function Settings({ onSetMyAccountView }) {
           <p className="select-none text-sm font-bold tracking-wider text-violet-400 opacity-80">
             Email
           </p>
-          <p className="mt-3">{email}</p>
+          <p className="mt-3">test email</p>
         </div>
       </div>
     </div>
