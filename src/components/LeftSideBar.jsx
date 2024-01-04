@@ -28,7 +28,7 @@ function LeftSideBar() {
         onClick={handleToggleSidebar}
         className={`${
           isSidebarOpen ? "visible opacity-100" : "invisible opacity-0"
-        } absolute left-0 top-0 z-0 hidden h-dvh w-dvw bg-black/50 transition-all duration-200 ease-in-out sm:block md:hidden`}
+        } absolute left-0 top-0 z-20 hidden h-dvh w-dvw bg-black/50 transition-all duration-200 ease-in-out sm:block md:hidden`}
       ></div>
 
       <div

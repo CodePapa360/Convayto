@@ -3,7 +3,12 @@ import SearchedUser from "./SearchedUser";
 import { useSearchedUsers } from "../features/converse/useSearchedUsers";
 import Loader from "./Loader";
 
-function SearchView({ query, onUserClick }) {
+function SearchView({ query, onSetIsSearching }) {
+  window.history.pushState(null, null, window.location.href);
+  window.onpopstate = () => {
+    onSetIsSearching(false);
+  };
+
   const { users, isLoading, error } = useSearchedUsers(query);
   const { user: myUserDetails } = useUser();
   const filteredUsers = users?.filter((user) => user.id !== myUserDetails.id);
@@ -39,7 +44,11 @@ function SearchView({ query, onUserClick }) {
   return (
     <div>
       {filteredUsers?.map((user) => (
-        <SearchedUser onUserClick={onUserClick} key={user.id} user={user} />
+        <SearchedUser
+          onSetIsSearching={onSetIsSearching}
+          key={user.id}
+          user={user}
+        />
       ))}
     </div>
   );

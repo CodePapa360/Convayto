@@ -52,26 +52,26 @@ function MainSidebarContents({ onSetMyAccountView }) {
     // prefetch();
   });
 
-  const menuRef = useRef(null);
-  const menuBtnRef = useRef(null);
+  // const menuRef = useRef(null);
+  // const menuBtnRef = useRef(null);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target) &&
-        menuBtnRef.current &&
-        !menuBtnRef.current.contains(event.target)
-      ) {
-        setIsMenuOpen(false);
-      }
-    }
+  // useEffect(() => {
+  //   function handleClickOutside(event) {
+  //     if (
+  //       menuRef.current &&
+  //       !menuRef.current.contains(event.target) &&
+  //       menuBtnRef.current &&
+  //       !menuBtnRef.current.contains(event.target)
+  //     ) {
+  //       setIsMenuOpen(false);
+  //     }
+  //   }
 
-    document.addEventListener("mouseover", handleClickOutside);
-    return () => {
-      document.removeEventListener("mouseover", handleClickOutside);
-    };
-  }, [menuRef, menuBtnRef]);
+  //   document.addEventListener("mouseover", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mouseover", handleClickOutside);
+  //   };
+  // }, [menuRef, menuBtnRef]);
 
   function handleMenuBtnClick() {
     // if is searching then close search view else open menu
@@ -86,10 +86,9 @@ function MainSidebarContents({ onSetMyAccountView }) {
     <div className="relative z-30 grid select-none grid-cols-1 grid-rows-[auto_1fr]">
       <div className="border-b border-gray-700 p-2">
         <div className="mb-2 flex items-center justify-between gap-2">
-          <div className="hs-dropdown-open relative">
+          <div className="relative">
             <button
-              ref={menuBtnRef}
-              className=" hs-dropdown-open flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-slate-500/30"
+              className="relative z-50 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-slate-500/30"
               onClick={handleMenuBtnClick}
             >
               {isSsearching ? (
@@ -102,14 +101,21 @@ function MainSidebarContents({ onSetMyAccountView }) {
             </button>
 
             {isMenuOpen && (
-              <div
-                ref={menuRef}
-                onClick={() => setIsMenuOpen(false)}
-                className="absolute left-0
-              top-0 z-50 -mt-4 pb-10 pl-4 pr-10 pt-14 "
-              >
+              <>
+                {/* Overlay */}
                 <div
-                  className={`mt-2 min-w-[15rem] select-none divide-y divide-gray-200 rounded-lg bg-white p-2 opacity-100 shadow-2xl transition-[opacity,margin] duration-200 ease-in-out dark:divide-gray-700 dark:border dark:border-gray-700 dark:bg-gray-800`}
+                  onClick={handleMenuBtnClick}
+                  className={`${
+                    isMenuOpen
+                      ? "pointer-events-auto visible"
+                      : "pointer-events-none invisible"
+                  } fixed left-0 top-0 z-40  h-dvh w-dvw opacity-0 transition-all duration-200 ease-in-out`}
+                ></div>
+
+                {/* Menu */}
+
+                <div
+                  className={`absolute left-4 top-10 z-50 mt-2 min-w-[15rem] select-none divide-y divide-gray-200 rounded-lg bg-white p-2 opacity-100 shadow-2xl transition-[opacity,margin] duration-200 ease-in-out dark:divide-gray-700 dark:border dark:border-gray-700 dark:bg-gray-800`}
                 >
                   <div className="py-2 first:pt-0 last:pb-0">
                     <a
@@ -149,7 +155,7 @@ function MainSidebarContents({ onSetMyAccountView }) {
                     </a>
                   </div>
                 </div>
-              </div>
+              </>
             )}
           </div>
 
@@ -193,7 +199,7 @@ function MainSidebarContents({ onSetMyAccountView }) {
 
       <div className="p-2">
         {isSsearching && (
-          <SearchView query={query} onUserClick={setIsSearching} />
+          <SearchView query={query} onSetIsSearching={setIsSearching} />
         )}
 
         {!isSsearching && (

@@ -11,7 +11,7 @@ function Username() {
 
   const [newUsername, setNewUsername] = useState(username);
   const [isEditing, setIsEditing] = useState(false);
-  const usernameRegex = /^[a-zA-Z0-9_]{3,30}$/;
+  const usernameRegex = /^[a-z0-9_]{3,30}$/;
   const isValidUsername = usernameRegex.test(newUsername);
   const inputRef = useRef(null);
 
@@ -72,7 +72,7 @@ function Username() {
 
         <button
           onClick={handleUpdate}
-          disabled={newUsername === "" || !isValidUsername}
+          disabled={newUsername === ""}
           className="rounded-full p-3 text-xl text-violet-500 hover:bg-slate-500/30 disabled:pointer-events-none disabled:text-slate-500"
         >
           {isEditing ? <RiCheckFill /> : <RiEdit2Line />}
