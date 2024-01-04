@@ -2,21 +2,23 @@ import { RiArrowLeftLine } from "react-icons/ri";
 import Name from "./Name";
 import Username from "./Username";
 import Bio from "./Bio";
+import { useUi } from "../../contexts/UiContext";
 
-function MyAccount({ onSetMyAccountView }) {
-  // set history so that when user clicks on back button, the view is changed
-  // to the previous view
+function MyAccount() {
+  const { closeAccountView } = useUi();
+
+  // set history to go back from account view
   window.history.pushState(null, null, window.location.href);
   window.onpopstate = () => {
-    onSetMyAccountView(false);
+    closeAccountView();
   };
 
   function handleGoBack() {
-    onSetMyAccountView(false);
+    closeAccountView();
   }
 
   return (
-    <div className="overflow-hidden">
+    <div className="fadeIn overflow-hidden">
       <div className="flex h-16 items-center justify-start gap-4 bg-slate-700 p-2">
         <button
           className="rounded-full p-3 text-xl hover:bg-slate-600"

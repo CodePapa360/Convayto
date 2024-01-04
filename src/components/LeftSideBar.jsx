@@ -6,11 +6,12 @@ import { useParams } from "react-router-dom";
 import Loader from "./Loader";
 
 function LeftSideBar() {
-  const { state, closeSidebar, openSidebar } = useUi();
-  const { isSidebarOpen } = state;
+  const { isSidebarOpen, isAccountView, closeSidebar, openSidebar } = useUi();
   const { userId } = useParams();
 
-  const [accountView, setAccountView] = useState(false);
+  // get the account view states from the context
+
+  // const [accountView, setAccountView] = useState(false);
 
   useEffect(() => {
     if (userId) closeSidebar();
@@ -36,13 +37,7 @@ function LeftSideBar() {
           isSidebarOpen ? "left-0 opacity-100" : "-left-full opacity-0"
         } absolute top-0 z-20  h-dvh w-full overflow-y-auto bg-slate-800 transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] sm:w-[23rem] md:relative md:left-0 md:opacity-100`}
       >
-        <aside>
-          {accountView && <MyAccount onSetMyAccountView={setAccountView} />}
-
-          {!accountView && (
-            <MainSidebarContents onSetMyAccountView={setAccountView} />
-          )}
-        </aside>
+        <aside>{isAccountView ? <MyAccount /> : <MainSidebarContents />}</aside>
       </div>
     </>
   );

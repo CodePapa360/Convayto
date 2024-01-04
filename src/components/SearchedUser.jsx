@@ -1,12 +1,15 @@
 import { useNavigate } from "react-router-dom";
+import { useUi } from "../contexts/UiContext";
 
-function SearchedUser({ user, onUserClick }) {
+function SearchedUser({ user }) {
+  const { toggleSearchView } = useUi();
+
   const { fullname, id, username } = user;
   const navigate = useNavigate();
 
   function handleClick() {
     navigate(`/${id}`);
-    onUserClick(false);
+    toggleSearchView();
   }
 
   return (

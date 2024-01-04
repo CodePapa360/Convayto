@@ -179,3 +179,20 @@ body {
     @apply flex items-center justify-center;
   }
 }
+
+.fadeIn {
+  animation: fadeInAnimation 0.1s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

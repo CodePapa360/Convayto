@@ -4,6 +4,8 @@ const UiContext = createContext();
 
 const InitialState = {
   isSidebarOpen: false,
+  isAccountView: false,
+  isSearchView: false,
 };
 
 function reducer(state, action) {
@@ -18,13 +20,38 @@ function reducer(state, action) {
         ...state,
         isSidebarOpen: false,
       };
+
+    case "TOGGLE_ACCOUNT_VIEW":
+      return {
+        ...state,
+        isAccountView: !state.isAccountView,
+      };
+    case "OPEN_ACCOUNT_VIEW":
+      return {
+        ...state,
+        isAccountView: true,
+      };
+    case "CLOSE_ACCOUNT_VIEW":
+      return {
+        ...state,
+        isAccountView: false,
+      };
+
+    case "TOGGLE_SEARCH_VIEW":
+      return {
+        ...state,
+        isSearchView: !state.isSearchView,
+      };
     default:
       return state;
   }
 }
 
 function UiProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, InitialState);
+  const [{ isSidebarOpen, isAccountView, isSearchView }, dispatch] = useReducer(
+    reducer,
+    InitialState,
+  );
 
   function openSidebar() {
     dispatch({ type: "OPEN_SIDEBAR" });
@@ -34,7 +61,37 @@ function UiProvider({ children }) {
     dispatch({ type: "CLOSE_SIDEBAR" });
   }
 
-  const value = { state, dispatch, openSidebar, closeSidebar };
+  function toggleAccountView() {
+    dispatch({ type: "TOGGLE_ACCOUNT_VIEW" });
+  }
+
+  function closeAccountView() {
+    dispatch({ type: "CLOSE_ACCOUNT_VIEW" });
+  }
+
+  function openAccountView() {
+    dispatch({ type: "OPEN_ACCOUNT_VIEW" });
+  }
+
+  function toggleSearchView() {
+    dispatch({ type: "TOGGLE_SEARCH_VIEW" });
+  }
+
+  const value = {
+    isAccountView,
+    toggleAccountView,
+    openAccountView,
+    closeAccountView,
+
+    dispatch,
+
+    isSidebarOpen,
+    openSidebar,
+    closeSidebar,
+
+    isSearchView,
+    toggleSearchView,
+  };
 
   return <UiContext.Provider value={value}>{children}</UiContext.Provider>;
 }
