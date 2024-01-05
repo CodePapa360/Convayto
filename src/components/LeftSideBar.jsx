@@ -1,17 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import MyAccount from "./Profile/MyAccount";
 import MainSidebarContents from "./MainSidebarContents";
 import { useUi } from "../contexts/UiContext";
 import { useParams } from "react-router-dom";
-import Loader from "./Loader";
 
 function LeftSideBar() {
   const { isSidebarOpen, isAccountView, closeSidebar, openSidebar } = useUi();
   const { userId } = useParams();
-
-  // get the account view states from the context
-
-  // const [accountView, setAccountView] = useState(false);
 
   useEffect(() => {
     if (userId) closeSidebar();
