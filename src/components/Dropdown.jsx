@@ -16,7 +16,7 @@ function Dropdown() {
     email,
     user_metadata: { fullname },
   } = user;
-  const { openAccountView } = useUi();
+  const { openAccountView, isDarkMode, toggleDarkMode } = useUi();
   const { logout, isPending } = useSignout();
 
   return (
@@ -50,7 +50,12 @@ function Dropdown() {
             </span>
 
             <div className="relative flex justify-between">
-              <input type="checkbox" value="" className="peer sr-only" />
+              <input
+                checked={isDarkMode}
+                type="checkbox"
+                onChange={() => toggleDarkMode()}
+                className="peer sr-only"
+              />
               <div className="peer h-5 w-9 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:translate-x-[-100%] dark:border-gray-500 dark:bg-gray-500 dark:peer-focus:ring-blue-800"></div>
             </div>
           </label>

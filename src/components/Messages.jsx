@@ -1,4 +1,4 @@
-import { useMessages } from "../features/converse/useMessages";
+import { useMessages } from "../features/hooks/useMessages";
 import Message from "./Message";
 import { useRef } from "react";
 import { sortMessageByTime } from "../utils/common";

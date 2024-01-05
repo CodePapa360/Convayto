@@ -1,4 +1,5 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
+import { DARK_THEME, LOCAL_STORAGE_KEY } from "../config";
 
 const UiContext = createContext();
 
@@ -6,6 +7,7 @@ const InitialState = {
   isSidebarOpen: false,
   isAccountView: false,
   isSearchView: false,
+  isDarkMode: true,
 };
 
 function reducer(state, action) {
@@ -36,22 +38,25 @@ function reducer(state, action) {
         ...state,
         isAccountView: false,
       };
-
     case "TOGGLE_SEARCH_VIEW":
       return {
         ...state,
         isSearchView: !state.isSearchView,
       };
+    case "UPDATE_DARK_MODE":
+      return {
+        ...state,
+        isDarkMode: action.payload,
+      };
+
     default:
       return state;
   }
 }
 
 function UiProvider({ children }) {
-  const [{ isSidebarOpen, isAccountView, isSearchView }, dispatch] = useReducer(
-    reducer,
-    InitialState,
-  );
+  const [{ isSidebarOpen, isAccountView, isSearchView, isDarkMode }, dispatch] =
+    useReducer(reducer, InitialState);
 
   function openSidebar() {
     dispatch({ type: "OPEN_SIDEBAR" });
@@ -77,6 +82,31 @@ function UiProvider({ children }) {
     dispatch({ type: "TOGGLE_SEARCH_VIEW" });
   }
 
+  function updateDarkMode(newMode) {
+    dispatch({ type: "UPDATE_DARK_MODE", payload: newMode });
+  }
+
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    updateDarkMode(newMode);
+
+    if (newMode) {
+      document.documentElement.setAttribute("data-theme", DARK_THEME);
+      localStorage.setItem(LOCAL_STORAGE_KEY, DARK_THEME);
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.removeItem(LOCAL_STORAGE_KEY);
+    }
+  };
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (savedTheme === DARK_THEME) {
+      updateDarkMode(true);
+      document.documentElement.setAttribute("data-theme", DARK_THEME);
+    }
+  }, []);
+
   const value = {
     isAccountView,
     toggleAccountView,
@@ -91,6 +121,9 @@ function UiProvider({ children }) {
 
     isSearchView,
     toggleSearchView,
+
+    isDarkMode,
+    toggleDarkMode,
   };
 
   return <UiContext.Provider value={value}>{children}</UiContext.Provider>;

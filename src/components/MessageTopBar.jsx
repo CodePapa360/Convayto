@@ -1,5 +1,5 @@
 import { RiArrowLeftLine } from "react-icons/ri";
-import { useMessages } from "../features/converse/useMessages";
+import { useMessages } from "../features/hooks/useMessages";
 import { useUi } from "../contexts/UiContext";
 import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";

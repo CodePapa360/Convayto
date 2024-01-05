@@ -1,8 +1,8 @@
 import { RiSendPlaneFill } from "react-icons/ri";
-import { useMessages } from "../features/converse/useMessages";
+import { useMessages } from "../features/hooks/useMessages";
 import { useUser } from "../features/authentication/useUser";
 import { useRef, useState } from "react";
-import { useSendNewMessage } from "../features/converse/useSendNewMessage";
+import { useSendNewMessage } from "../features/hooks/useSendNewMessage";
 import { v4 as uuid } from "uuid";
 import { useQueryClient } from "@tanstack/react-query";
 import Loader from "./Loader";
