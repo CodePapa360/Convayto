@@ -10,7 +10,7 @@ import { useUi } from "../contexts/UiContext";
 import { useUser } from "../features/authentication/useUser";
 import Loader from "./Loader";
 
-function Dropdown3() {
+function Dropdown() {
   const { user } = useUser();
   const {
     email,
@@ -91,4 +91,4 @@ function Dropdown3() {
   );
 }
 
-export default Dropdown3;
+export default Dropdown;
