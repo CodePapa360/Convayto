@@ -1,6 +1,6 @@
 import { useUser } from "../features/authentication/useUser";
 import SearchedUser from "./SearchedUser";
-import { useSearchedUsers } from "../features/converse/useSearchedUsers";
+import { useSearchedUsers } from "../features/hooks/useSearchedUsers";
 import Loader from "./Loader";
 import { useUi } from "../contexts/UiContext";
 

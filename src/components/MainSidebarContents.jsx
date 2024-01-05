@@ -6,7 +6,7 @@ import {
 } from "react-icons/ri";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "../features/authentication/useUser";
-import { useConversatoins } from "../features/converse/useConversations";
+import { useConversatoins } from "../features/hooks/useConversations";
 import { sortConverseByTime } from "../utils/common";
 import Signout from "../features/authentication/Signout";
 import Conversation from "./Conversation";
