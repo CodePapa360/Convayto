@@ -2,16 +2,8 @@ import { useUser } from "../features/authentication/useUser";
 import SearchedUser from "./SearchedUser";
 import { useSearchedUsers } from "../features/hooks/useSearchedUsers";
 import Loader from "./Loader";
-import { useUi } from "../contexts/UiContext";
 
 function SearchView({ query }) {
-  const { toggleSearchView } = useUi();
-
-  window.history.pushState(null, null, window.location.href);
-  window.onpopstate = () => {
-    toggleSearchView();
-  };
-
   const { users, isLoading, error } = useSearchedUsers(query);
   const { user: myUserDetails } = useUser();
   const filteredUsers = users?.filter((user) => user.id !== myUserDetails.id);

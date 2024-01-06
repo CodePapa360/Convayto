@@ -8,6 +8,7 @@ const InitialState = {
   isAccountView: false,
   isSearchView: false,
   isDarkMode: true,
+  isFriendsSidebarOpen: false,
 };
 
 function reducer(state, action) {
@@ -48,6 +49,16 @@ function reducer(state, action) {
         ...state,
         isDarkMode: action.payload,
       };
+    case "CLOSE_FRIEND_SIDEBAR":
+      return {
+        ...state,
+        isFriendsSidebarOpen: false,
+      };
+    case "OPEN_FRIEND_SIDEBAR":
+      return {
+        ...state,
+        isFriendsSidebarOpen: true,
+      };
 
     default:
       return state;
@@ -55,8 +66,16 @@ function reducer(state, action) {
 }
 
 function UiProvider({ children }) {
-  const [{ isSidebarOpen, isAccountView, isSearchView, isDarkMode }, dispatch] =
-    useReducer(reducer, InitialState);
+  const [
+    {
+      isSidebarOpen,
+      isAccountView,
+      isSearchView,
+      isDarkMode,
+      isFriendsSidebarOpen,
+    },
+    dispatch,
+  ] = useReducer(reducer, InitialState);
 
   function openSidebar() {
     dispatch({ type: "OPEN_SIDEBAR" });
@@ -86,6 +105,14 @@ function UiProvider({ children }) {
     dispatch({ type: "UPDATE_DARK_MODE", payload: newMode });
   }
 
+  function closeFriendSidebar() {
+    dispatch({ type: "CLOSE_FRIEND_SIDEBAR" });
+  }
+
+  function openFriendSidebar() {
+    dispatch({ type: "OPEN_FRIEND_SIDEBAR" });
+  }
+
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     updateDarkMode(newMode);
@@ -108,12 +135,12 @@ function UiProvider({ children }) {
   }, []);
 
   const value = {
+    dispatch,
+
     isAccountView,
     toggleAccountView,
     openAccountView,
     closeAccountView,
-
-    dispatch,
 
     isSidebarOpen,
     openSidebar,
@@ -124,6 +151,10 @@ function UiProvider({ children }) {
 
     isDarkMode,
     toggleDarkMode,
+
+    isFriendsSidebarOpen,
+    closeFriendSidebar,
+    openFriendSidebar,
   };
 
   return <UiContext.Provider value={value}>{children}</UiContext.Provider>;

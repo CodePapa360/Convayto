@@ -145,7 +145,7 @@ function MainSidebarContents() {
 
         <div className="relative">
           <input
-            className="bg-transparentf flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-slate-600 bg-slate-700 p-2 pl-9 outline-none"
+            className="flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-slate-600 bg-slate-700 p-2 pl-9 outline-none"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"

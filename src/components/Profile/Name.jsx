@@ -39,7 +39,7 @@ function Name() {
   }
 
   return (
-    <div className="mt-4">
+    <div className="mt-8">
       <p className="select-none text-sm font-bold tracking-wider text-violet-400 opacity-80">
         Name
       </p>

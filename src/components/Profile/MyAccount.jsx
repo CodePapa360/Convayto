@@ -7,12 +7,6 @@ import { useUi } from "../../contexts/UiContext";
 function MyAccount() {
   const { closeAccountView } = useUi();
 
-  // set history to go back from account view
-  window.history.pushState(null, null, window.location.href);
-  window.onpopstate = () => {
-    closeAccountView();
-  };
-
   function handleGoBack() {
     closeAccountView();
   }
