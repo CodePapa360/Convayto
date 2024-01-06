@@ -21,7 +21,7 @@ function FriendProfileBar({ data }) {
       <div
         className={`${
           isFriendsSidebarOpen ? "right-0 opacity-100" : "-right-full opacity-0"
-        } absolute right-0 top-0 z-30 h-dvh w-4/5 overflow-hidden bg-slate-800 transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] sm:w-[21rem]`}
+        } absolute top-0 z-30 h-dvh w-4/5 overflow-hidden bg-slate-800 transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] sm:w-[21rem]`}
       >
         <div className="flex h-16 items-center justify-start gap-4 bg-slate-700 p-2">
           <button

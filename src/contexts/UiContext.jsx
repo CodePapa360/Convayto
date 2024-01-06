@@ -23,12 +23,6 @@ function reducer(state, action) {
         ...state,
         isSidebarOpen: false,
       };
-
-    case "TOGGLE_ACCOUNT_VIEW":
-      return {
-        ...state,
-        isAccountView: !state.isAccountView,
-      };
     case "OPEN_ACCOUNT_VIEW":
       return {
         ...state,
@@ -85,10 +79,6 @@ function UiProvider({ children }) {
     dispatch({ type: "CLOSE_SIDEBAR" });
   }
 
-  function toggleAccountView() {
-    dispatch({ type: "TOGGLE_ACCOUNT_VIEW" });
-  }
-
   function closeAccountView() {
     dispatch({ type: "CLOSE_ACCOUNT_VIEW" });
   }
@@ -101,10 +91,6 @@ function UiProvider({ children }) {
     dispatch({ type: "TOGGLE_SEARCH_VIEW" });
   }
 
-  function updateDarkMode(newMode) {
-    dispatch({ type: "UPDATE_DARK_MODE", payload: newMode });
-  }
-
   function closeFriendSidebar() {
     dispatch({ type: "CLOSE_FRIEND_SIDEBAR" });
   }
@@ -113,32 +99,43 @@ function UiProvider({ children }) {
     dispatch({ type: "OPEN_FRIEND_SIDEBAR" });
   }
 
+  function updateDarkMode(newMode) {
+    dispatch({ type: "UPDATE_DARK_MODE", payload: newMode });
+
+    if (newMode) {
+      document.documentElement.classList.add(DARK_THEME);
+      localStorage.setItem(LOCAL_STORAGE_KEY, DARK_THEME);
+    } else {
+      document.documentElement.classList.remove(DARK_THEME);
+      localStorage.removeItem(LOCAL_STORAGE_KEY);
+    }
+  }
+
+  useEffect(() => {
+    const isDarkMode = localStorage.getItem(LOCAL_STORAGE_KEY) === DARK_THEME;
+    const prefersDarkMode = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+
+    // prioritize user preference over system preference
+    if (isDarkMode) {
+      updateDarkMode(true);
+    } else if (prefersDarkMode) {
+      updateDarkMode(true);
+    } else {
+      updateDarkMode(false);
+    }
+  }, []);
+
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     updateDarkMode(newMode);
-
-    if (newMode) {
-      document.documentElement.setAttribute("data-theme", DARK_THEME);
-      localStorage.setItem(LOCAL_STORAGE_KEY, DARK_THEME);
-    } else {
-      document.documentElement.removeAttribute("data-theme");
-      localStorage.removeItem(LOCAL_STORAGE_KEY);
-    }
   };
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (savedTheme === DARK_THEME) {
-      updateDarkMode(true);
-      document.documentElement.setAttribute("data-theme", DARK_THEME);
-    }
-  }, []);
 
   const value = {
     dispatch,
 
     isAccountView,
-    toggleAccountView,
     openAccountView,
     closeAccountView,
 
