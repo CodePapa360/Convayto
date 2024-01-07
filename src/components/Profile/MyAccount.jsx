@@ -34,7 +34,7 @@ function MyAccount() {
         <Bio />
 
         <div className="mt-4">
-          <p className="text-lightViolet dark:text-lightViolet-dark select-none text-sm font-bold  tracking-wider opacity-80">
+          <p className="text-textViolet dark:text-textViolet-dark select-none text-sm font-bold  tracking-wider opacity-80">
             Email
           </p>
           <p className="mt-3">test email</p>

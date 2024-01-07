@@ -8,7 +8,7 @@ function Avatar() {
   } = user;
 
   return (
-    <div className="border-lightViolet dark:border-lightViolet-dark mx-auto mt-4 h-52 w-52 overflow-hidden rounded-full border-2">
+    <div className="border-textViolet dark:border-textViolet-dark mx-auto mt-4 h-52 w-52 overflow-hidden rounded-full border-2">
       {avatar_url ? (
         <img
           className="h-full w-full object-cover object-center"

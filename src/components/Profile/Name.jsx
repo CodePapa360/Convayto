@@ -40,7 +40,7 @@ function Name() {
 
   return (
     <div className="mt-8">
-      <p className="text-lightViolet dark:text-lightViolet-dark select-none text-sm font-bold  tracking-wider opacity-80">
+      <p className="text-textViolet dark:text-textViolet-dark select-none text-sm font-bold  tracking-wider opacity-80">
         Name
       </p>
       <div className=" flex h-10 items-center justify-between gap-2">
@@ -55,7 +55,7 @@ function Name() {
                   setNewName(e.target.value);
               }}
               onBlur={handleUpdate}
-              className="border-lightViolet dark:border-lightViolet-dark h-full w-full rounded-md border-b-2 bg-slate-700 px-2 text-base outline-none"
+              className="border-textViolet dark:border-textViolet-dark h-full w-full rounded-md border-b-2 bg-slate-700 px-2 text-base outline-none"
             />
             <span className="w-8 select-none text-sm opacity-60">
               {MAX_NAME_LENGTH - newName.length}
@@ -68,7 +68,7 @@ function Name() {
         <button
           onClick={handleUpdate}
           disabled={newName === ""}
-          className="text-lightViolet dark:text-lightViolet-dark rounded-full p-3 text-xl hover:bg-slate-700/90 disabled:pointer-events-none disabled:text-slate-700/90"
+          className="text-textViolet dark:text-textViolet-dark rounded-full p-3 text-xl hover:bg-slate-700/90 disabled:pointer-events-none disabled:text-slate-700/90"
         >
           {isEditing ? <RiCheckFill /> : <RiEdit2Line />}
         </button>

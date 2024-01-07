@@ -86,7 +86,7 @@ function MessageInputBar() {
         />
 
         <button
-          className={`m-1 flex h-10 w-10 items-center justify-center rounded-full bg-violet-500 text-2xl text-white hover:bg-violet-600 active:scale-95 `}
+          className={`m-1 flex h-10 w-10 items-center justify-center rounded-full bg-lightViolet text-2xl text-white hover:bg-lightViolet/80 active:scale-95 dark:bg-lightViolet-dark `}
           disabled={isPending || isSending}
           onClick={handleSendNewMessage}
           type="submit"

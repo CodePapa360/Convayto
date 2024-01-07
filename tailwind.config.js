@@ -28,9 +28,13 @@ export default {
           DEFAULT: colors.violet[800],
           dark: colors.violet[900],
         },
-        lightViolet: {
+        textViolet: {
           DEFAULT: colors.violet[800],
           dark: colors.violet[400],
+        },
+        lightViolet: {
+          DEFAULT: colors.violet[600],
+          dark: colors.violet[700],
         },
       },
       screens: {

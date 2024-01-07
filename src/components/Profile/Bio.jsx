@@ -46,7 +46,7 @@ function Bio() {
 
   return (
     <div className="mt-4">
-      <p className="text-lightViolet dark:text-lightViolet-dark select-none text-sm font-bold  tracking-wider opacity-80">
+      <p className="text-textViolet dark:text-textViolet-dark select-none text-sm font-bold  tracking-wider opacity-80">
         Bio
       </p>
       <div className=" flex h-auto items-start justify-between gap-2">
@@ -64,7 +64,7 @@ function Bio() {
                 e.target.style.height = e.target.scrollHeight + 2 + "px";
               }}
               onBlur={handleUpdate}
-              className="border-lightViolet dark:border-lightViolet-dark h-10 w-full rounded-md  border-b-2 bg-slate-700 px-2 text-base outline-none"
+              className="border-textViolet dark:border-textViolet-dark h-10 w-full rounded-md  border-b-2 bg-slate-700 px-2 text-base outline-none"
             />
 
             <span className="w-8 select-none text-sm opacity-60 ">
@@ -78,7 +78,7 @@ function Bio() {
         <button
           onClick={handleUpdate}
           // disabled={newBio.trim() === ""}
-          className="text-lightViolet dark:text-lightViolet-dark rounded-full p-3 text-xl hover:bg-slate-700/90 disabled:pointer-events-none disabled:text-slate-700/90"
+          className="text-textViolet dark:text-textViolet-dark rounded-full p-3 text-xl hover:bg-slate-700/90 disabled:pointer-events-none disabled:text-slate-700/90"
         >
           {isEditing ? <RiCheckFill /> : <RiEdit2Line />}
         </button>
