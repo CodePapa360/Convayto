@@ -23,10 +23,10 @@ function MessageTopBar() {
 
   return (
     <>
-      <div className="flex min-h-20 select-none items-center gap-2 rounded-b-xl border-b border-l border-r border-slate-700 bg-slate-800 p-2">
+      <div className="border-borderShade bg-mediumSlate flex min-h-20 select-none items-center gap-2 rounded-b-xl border-b border-l border-r p-2">
         <button
           onClick={handleGoBack}
-          className="rounded-full p-3 text-xl hover:bg-slate-700 active:scale-95 md:hidden "
+          className="hover:bg-lightSlate/50 rounded-full p-3 text-xl active:scale-95 md:hidden "
         >
           <RiArrowLeftLine />
         </button>
@@ -36,7 +36,7 @@ function MessageTopBar() {
         ) : (
           <div
             onClick={() => openFriendSidebar()}
-            className="flex cursor-pointer items-center gap-2 rounded-lg p-2 hover:bg-slate-700"
+            className="hover:bg-lightSlate/50 flex cursor-pointer items-center gap-2 rounded-lg p-2"
           >
             <span className="w-10">
               <img

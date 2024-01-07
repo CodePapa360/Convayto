@@ -86,11 +86,11 @@ function MainSidebarContents() {
 
   return (
     <div className="relative z-30 grid select-none grid-cols-1 grid-rows-[auto_1fr]">
-      <div className="border-b border-gray-700 p-2">
+      <div className="border-borderShade border-b p-2">
         <div className="mb-2 flex items-center justify-between gap-2">
           <div className="relative">
             <button
-              className="relative z-50 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-slate-500/30"
+              className="hover:bg-lightSlate/50 relative z-50 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg"
               onClick={handleMenuBtnClick}
             >
               {isSearchView ? (
@@ -123,7 +123,7 @@ function MainSidebarContents() {
 
           {/* Profile */}
           <div
-            className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] items-center gap-2 truncate  rounded-lg p-2 hover:bg-slate-500/30"
+            className="hover:bg-lightSlate/50 mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] items-center gap-2 truncate rounded-lg p-2"
             onClick={() => openAccountView()}
           >
             <span>
@@ -145,7 +145,7 @@ function MainSidebarContents() {
 
         <div className="relative">
           <input
-            className="flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-slate-600 bg-slate-700 p-2 pl-9 outline-none"
+            className="bg-lightSlate border-borderShade flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border p-2 pl-9 outline-none"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"
@@ -164,7 +164,7 @@ function MainSidebarContents() {
 
         {!isSearchView && (
           <div>
-            <h2 className="mb-2 border-b border-slate-600 pb-2 text-lg">
+            <h2 className="border-borderShade mb-2 border-b pb-2 text-lg">
               Chats
             </h2>
 

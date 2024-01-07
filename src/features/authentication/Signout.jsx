@@ -11,12 +11,12 @@ function Logout() {
 
   return (
     <button
-      className="flex flex-shrink-0 items-center justify-center gap-2 rounded-full p-3 hover:bg-slate-500/30"
+      className="hover:bg-lightSlate/50 flex flex-shrink-0 items-center justify-center gap-2 rounded-full p-3"
       disabled={isPending}
       onClick={handleLogout}
     >
       {isPending ? <Loader /> : <RiLogoutCircleLine />}
-      <span className="xm:block hidden">Sign out</span>
+      <span className="hidden xm:block">Sign out</span>
     </button>
   );
 }

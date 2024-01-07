@@ -20,7 +20,7 @@ function Conversation({ conversation }) {
     <div
       className={`${
         isActiveUser ? "sm:bg-violet-600 sm:hover:bg-violet-800" : ""
-      } flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 hover:bg-slate-700/50 `}
+      } hover:bg-lightSlate/50 flex cursor-pointer select-none items-center gap-2 rounded-lg p-2`}
       onClick={handleClick}
     >
       <span className="w-full max-w-12 overflow-hidden rounded-full">

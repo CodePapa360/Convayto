@@ -55,7 +55,7 @@ function Name() {
                   setNewName(e.target.value);
               }}
               onBlur={handleUpdate}
-              className="h-full w-full rounded-md border-b-2 border-violet-500 bg-slate-700 px-2 text-base text-slate-100 outline-none"
+              className="h-full w-full rounded-md border-b-2 border-violet-500 bg-slate-700 px-2 text-base outline-none"
             />
             <span className="w-8 select-none text-sm opacity-60">
               {MAX_NAME_LENGTH - newName.length}
@@ -68,7 +68,7 @@ function Name() {
         <button
           onClick={handleUpdate}
           disabled={newName === ""}
-          className="rounded-full p-3 text-xl text-violet-500 hover:bg-slate-500/30 disabled:pointer-events-none disabled:text-slate-500"
+          className="rounded-full p-3 text-xl text-violet-500 hover:bg-slate-700/90 disabled:pointer-events-none disabled:text-slate-700/90"
         >
           {isEditing ? <RiCheckFill /> : <RiEdit2Line />}
         </button>

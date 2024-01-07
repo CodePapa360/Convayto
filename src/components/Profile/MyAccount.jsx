@@ -13,7 +13,7 @@ function MyAccount() {
 
   return (
     <div className="fadeIn overflow-hidden">
-      <div className="flex h-16 items-center justify-start gap-4 bg-slate-700 p-2">
+      <div className="flex h-16 items-center justify-start gap-4 p-2 dark:bg-slate-700">
         <button
           className="rounded-full p-3 text-xl hover:bg-slate-600"
           onClick={handleGoBack}

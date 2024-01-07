@@ -28,14 +28,14 @@ function Signin() {
   }
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-slate-900 transition-all duration-200 ease-in-out">
-      <div className="w-full max-w-80 rounded-xl bg-slate-800 p-6">
+    <div className="bg-deepSlate flex min-h-dvh items-center justify-center transition-all duration-200 ease-in-out">
+      <div className="bg-mediumSlate w-full max-w-80 rounded-xl p-6">
         <h1 className="mb-8 text-center text-3xl  uppercase">Sign in</h1>
         <form onSubmit={handleSubmit} className="mb-4 flex flex-col">
           <div className="input-container mb-4 w-full">
             <div className="input-wrapper relative h-12">
               <input
-                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-slate-400 bg-transparent px-4  outline-none focus:border-violet-500"
+                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-white/20 bg-transparent px-4  outline-none focus:border-violet-500"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 id="email"
@@ -57,7 +57,7 @@ function Signin() {
           <div className="input-container mb-4 w-full">
             <div className="input-wrapper relative h-12">
               <input
-                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-slate-400 bg-transparent px-4  outline-none focus:border-violet-500"
+                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-white/20 bg-transparent px-4 outline-none focus:border-violet-500"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 id="password"
