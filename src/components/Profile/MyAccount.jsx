@@ -3,6 +3,8 @@ import Name from "./Name";
 import Username from "./Username";
 import Bio from "./Bio";
 import { useUi } from "../../contexts/UiContext";
+import { HiOutlineUserCircle } from "react-icons/hi2";
+import Avatar from "./Avatar";
 
 function MyAccount() {
   const { closeAccountView } = useUi();
@@ -15,7 +17,7 @@ function MyAccount() {
     <div className="fadeIn overflow-hidden">
       <div className="flex h-16 items-center justify-start gap-4 p-2 dark:bg-slate-700">
         <button
-          className="hover:bg-lightSlate/50 rounded-full p-3 text-xl"
+          className="rounded-full p-3 text-xl hover:bg-lightSlate/50"
           onClick={handleGoBack}
         >
           <RiArrowLeftLine />
@@ -24,13 +26,7 @@ function MyAccount() {
       </div>
 
       <div className="overflow-scroll p-4">
-        <div className="mt-4 flex items-center justify-center overflow-hidden">
-          <img
-            className=" h-full max-h-40 w-full max-w-40 rounded-full border-2 border-violet-500"
-            src="/images/default-avatar.svg"
-            alt="avatar"
-          />
-        </div>
+        <Avatar />
 
         <Name />
 

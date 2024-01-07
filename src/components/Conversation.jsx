@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useUi } from "../contexts/UiContext";
+import { HiOutlineUserCircle } from "react-icons/hi2";
 
 function Conversation({ conversation }) {
   const { friend, messages } = conversation;
@@ -20,11 +21,14 @@ function Conversation({ conversation }) {
     <div
       className={`${
         isActiveUser ? "sm:bg-violet-600 sm:hover:bg-violet-800" : ""
-      } hover:bg-lightSlate/50 flex cursor-pointer select-none items-center gap-2 rounded-lg p-2`}
+      } flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 hover:bg-lightSlate/50`}
       onClick={handleClick}
     >
-      <span className="w-full max-w-12 overflow-hidden rounded-full">
-        <img draggable="false" src="/images/default-avatar.svg" alt="User" />
+      <span className="w-full max-w-12 overflow-hidden rounded-full  text-black  dark:text-white ">
+        <HiOutlineUserCircle
+          style={{ height: "100%", opacity: "0.5", width: "100%" }}
+          strokeWidth="1"
+        />
       </span>
 
       <span className="flex flex-col overflow-hidden ">
