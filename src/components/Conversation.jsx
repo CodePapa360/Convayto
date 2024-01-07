@@ -20,13 +20,15 @@ function Conversation({ conversation }) {
   return (
     <div
       className={`${
-        isActiveUser ? "sm:bg-violet-600 sm:hover:bg-violet-800" : ""
+        isActiveUser
+          ? "text-lightSlate sm:bg-violet-600 sm:hover:bg-violet-800"
+          : ""
       } flex cursor-pointer  select-none items-center gap-2 rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10`}
       onClick={handleClick}
     >
-      <span className="w-full max-w-12 overflow-hidden rounded-full text-black  dark:text-white">
+      <span className="w-full max-w-12 overflow-hidden rounded-full">
         <HiOutlineUserCircle
-          style={{ height: "100%", opacity: "0.5", width: "100%" }}
+          style={{ height: "100%", opacity: "0.7", width: "100%" }}
           strokeWidth="1"
         />
       </span>
