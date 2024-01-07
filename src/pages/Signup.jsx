@@ -28,8 +28,8 @@ function Signup() {
   }
 
   return (
-    <div className="bg-deepSlate flex min-h-dvh items-center justify-center transition-all duration-200 ease-in-out">
-      <div className="bg-mediumSlate w-full max-w-80 rounded-xl p-6">
+    <div className="bg-deepSlate dark:bg-deepSlate-dark flex min-h-dvh items-center justify-center text-black transition-all duration-200 ease-in-out dark:text-white">
+      <div className="bg-mediumSlate dark:bg-mediumSlate-dark w-full max-w-80 rounded-xl p-6">
         <h1 className="mb-8 text-center text-3xl  uppercase">Sign up</h1>
 
         <form onSubmit={handleSubmit} className="mb-4 flex flex-col">

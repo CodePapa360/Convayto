@@ -23,7 +23,7 @@ function MessageTopBar() {
 
   return (
     <>
-      <div className="border-borderShade bg-mediumSlate flex min-h-20 select-none items-center gap-2 rounded-b-xl border-b border-l border-r p-2">
+      <div className="border-borderShade dark:border-borderShade-dark dark:bg-mediumSlate-dark bg-mediumSlate flex min-h-20 select-none items-center gap-2 rounded-b-xl border-b border-l border-r p-2">
         <button
           onClick={handleGoBack}
           className="hover:bg-lightSlate/50 rounded-full p-3 text-xl active:scale-95 md:hidden "

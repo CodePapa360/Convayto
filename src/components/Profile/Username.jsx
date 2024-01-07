@@ -73,7 +73,7 @@ function Username() {
         <button
           onClick={handleUpdate}
           disabled={newUsername === ""}
-          className="rounded-full p-3 text-xl text-violet-500 hover:bg-slate-700/90 disabled:pointer-events-none disabled:text-slate-700/90"
+          className="rounded-full p-3 text-xl text-violet-500 hover:bg-slate-700/90 disabled:pointer-events-none"
         >
           {isEditing ? <RiCheckFill /> : <RiEdit2Line />}
         </button>

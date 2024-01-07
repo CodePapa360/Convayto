@@ -21,9 +21,9 @@ function FriendProfileBar({ data }) {
       <div
         className={`${
           isFriendsSidebarOpen ? "right-0 opacity-100" : "-right-full opacity-0"
-        } bg-mediumSlate absolute top-0 z-30 h-dvh w-4/5 overflow-hidden transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] sm:w-[21rem]`}
+        } bg-mediumSlate dark:bg-mediumSlate-dark absolute top-0 z-30 h-dvh w-4/5 overflow-hidden transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] sm:w-[21rem]`}
       >
-        <div className="bg-mediumSlate flex h-16 items-center justify-start gap-4 p-2">
+        <div className="bg-mediumSlate dark:bg-mediumSlate-dark flex h-16 items-center justify-start gap-4 p-2">
           <button
             className="hover:bg-lightSlate/50 rounded-full p-3 text-xl"
             onClick={handleGoBack}

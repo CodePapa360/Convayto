@@ -30,7 +30,7 @@ function LeftSideBar() {
       <div
         className={`${
           isSidebarOpen ? "left-0 opacity-100" : "-left-full opacity-0"
-        } bg-mediumSlate absolute top-0  z-20 h-dvh w-full overflow-y-auto transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] sm:w-[23rem] md:relative md:left-0 md:opacity-100`}
+        } dark:bg-mediumSlate-dark bg-mediumSlate absolute top-0  z-20 h-dvh w-full overflow-y-auto transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] sm:w-[23rem] md:relative md:left-0 md:opacity-100`}
       >
         <aside>{isAccountView ? <MyAccount /> : <MainSidebarContents />}</aside>
       </div>

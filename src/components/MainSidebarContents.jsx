@@ -86,7 +86,7 @@ function MainSidebarContents() {
 
   return (
     <div className="relative z-30 grid select-none grid-cols-1 grid-rows-[auto_1fr]">
-      <div className="border-borderShade border-b p-2">
+      <div className="border-borderShade dark:border-borderShade-dark border-b p-2">
         <div className="mb-2 flex items-center justify-between gap-2">
           <div className="relative">
             <button
@@ -145,7 +145,7 @@ function MainSidebarContents() {
 
         <div className="relative">
           <input
-            className="bg-lightSlate border-borderShade flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border p-2 pl-9 outline-none"
+            className="bg-lightSlate dark:bg-lightSlate-dark dark:border-borderShade-dark border-borderShade flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border p-2 pl-9 outline-none"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"
@@ -153,7 +153,7 @@ function MainSidebarContents() {
             placeholder="Search people"
           />
 
-          <span className="pointer-events-none absolute left-3 top-3 text-xl text-white opacity-40">
+          <span className="pointer-events-none absolute left-3 top-3 text-xl opacity-40">
             <RiSearchLine />
           </span>
         </div>
@@ -164,7 +164,7 @@ function MainSidebarContents() {
 
         {!isSearchView && (
           <div>
-            <h2 className="border-borderShade mb-2 border-b pb-2 text-lg">
+            <h2 className="border-borderShade dark:border-borderShade-dark mb-2 border-b pb-2 text-lg">
               Chats
             </h2>
 
