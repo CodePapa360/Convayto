@@ -43,7 +43,7 @@ function Username() {
 
   return (
     <div className="mt-4">
-      <p className="select-none text-sm font-bold tracking-wider text-violet-400 opacity-80">
+      <p className="text-lightViolet dark:text-lightViolet-dark select-none text-sm font-bold tracking-wider opacity-80">
         Username
       </p>
       <div className=" flex h-10 items-center justify-between gap-2">
@@ -60,7 +60,7 @@ function Username() {
               onBlur={handleUpdate}
               className={`${
                 isValidUsername
-                  ? "text-lightViolet  dark:text-lightViolet-dark"
+                  ? "border-lightViolet  dark:border-lightViolet-dark"
                   : "border-red-500"
               } h-full w-full rounded-md border-b-2  bg-slate-700 px-2 text-base outline-none`}
             />
