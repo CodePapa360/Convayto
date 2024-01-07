@@ -24,6 +24,14 @@ export default {
           DEFAULT: colors.slate[400],
           dark: colors.slate[900],
         },
+        darkViolet: {
+          DEFAULT: colors.violet[800],
+          dark: colors.violet[900],
+        },
+        lightViolet: {
+          DEFAULT: colors.violet[800],
+          dark: colors.violet[400],
+        },
       },
       screens: {
         xm: "320px",

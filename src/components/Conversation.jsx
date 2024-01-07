@@ -21,9 +21,9 @@ function Conversation({ conversation }) {
     <div
       className={`${
         isActiveUser
-          ? "text-lightSlate sm:bg-violet-600 sm:hover:bg-violet-800"
-          : ""
-      } flex cursor-pointer  select-none items-center gap-2 rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10`}
+          ? "sm:bg-darkViolet dark:bg-darkViolet-dark text-lightSlate"
+          : "hover:bg-black/10 dark:hover:bg-lightSlate/10"
+      } flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 `}
       onClick={handleClick}
     >
       <span className="w-full max-w-12 overflow-hidden rounded-full">

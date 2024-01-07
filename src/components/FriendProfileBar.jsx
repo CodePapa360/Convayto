@@ -35,7 +35,7 @@ function FriendProfileBar({ data }) {
         </div>
 
         <div className="overflow-scroll p-4">
-          <div className="mx-auto mt-4 h-52 w-52 overflow-hidden rounded-full border-2 border-violet-500">
+          <div className="border-lightViolet dark:border-lightViolet-dark mx-auto mt-4 h-52 w-52 overflow-hidden rounded-full border-2">
             {avatar_url ? (
               <img
                 className="h-full w-full object-cover object-center"
@@ -51,21 +51,21 @@ function FriendProfileBar({ data }) {
           </div>
 
           <div className="mt-8">
-            <p className="select-none text-sm font-bold tracking-wider text-violet-400 opacity-80">
+            <p className="text-lightViolet  dark:text-lightViolet-dark select-none text-sm font-bold tracking-wider opacity-80">
               Name
             </p>
             <p className="truncate px-2 text-base">{fullname}</p>
           </div>
 
           <div className="mt-4">
-            <p className="select-none text-sm font-bold tracking-wider text-violet-400 opacity-80">
+            <p className="text-lightViolet dark:text-lightViolet-dark select-none text-sm font-bold  tracking-wider opacity-80">
               Name
             </p>
             <p className="truncate px-2 text-base">{username}</p>
           </div>
 
           <div className="mt-4">
-            <p className="select-none text-sm font-bold tracking-wider text-violet-400 opacity-80">
+            <p className="text-lightViolet dark:text-lightViolet-dark select-none text-sm font-bold  tracking-wider opacity-80">
               Name
             </p>
             <p className="truncate px-2 text-base">{bio}</p>
