@@ -3,7 +3,6 @@ import Name from "./Name";
 import Username from "./Username";
 import Bio from "./Bio";
 import { useUi } from "../../contexts/UiContext";
-import { HiOutlineUserCircle } from "react-icons/hi2";
 import Avatar from "./Avatar";
 
 function MyAccount() {
