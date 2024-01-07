@@ -40,7 +40,7 @@ function Name() {
 
   return (
     <div className="mt-8">
-      <p className="select-none text-sm font-bold tracking-wider text-violet-400 opacity-80">
+      <p className="text-lightViolet dark:text-lightViolet-dark select-none text-sm font-bold  tracking-wider opacity-80">
         Name
       </p>
       <div className=" flex h-10 items-center justify-between gap-2">
