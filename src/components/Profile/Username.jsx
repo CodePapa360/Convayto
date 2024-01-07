@@ -59,7 +59,9 @@ function Username() {
               }}
               onBlur={handleUpdate}
               className={`${
-                isValidUsername ? "border-violet-500" : "border-red-500"
+                isValidUsername
+                  ? "text-lightViolet  dark:text-lightViolet-dark"
+                  : "border-red-500"
               } h-full w-full rounded-md border-b-2  bg-slate-700 px-2 text-base outline-none`}
             />
             <span className="w-8 select-none text-sm opacity-60 ">
@@ -73,7 +75,7 @@ function Username() {
         <button
           onClick={handleUpdate}
           disabled={newUsername === ""}
-          className="rounded-full p-3 text-xl text-violet-500 hover:bg-slate-700/90 disabled:pointer-events-none"
+          className="text-lightViolet dark:text-lightViolet-dark rounded-full p-3  text-xl hover:bg-slate-700/90 disabled:pointer-events-none"
         >
           {isEditing ? <RiCheckFill /> : <RiEdit2Line />}
         </button>
