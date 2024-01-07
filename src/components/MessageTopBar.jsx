@@ -4,6 +4,7 @@ import { useUi } from "../contexts/UiContext";
 import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
 import FriendProfileBar from "./FriendProfileBar";
+import { HiOutlineUserCircle } from "react-icons/hi2";
 
 function MessageTopBar() {
   const { data, isPending } = useMessages();
@@ -23,10 +24,10 @@ function MessageTopBar() {
 
   return (
     <>
-      <div className="border-borderShade dark:border-borderShade-dark dark:bg-mediumSlate-dark bg-mediumSlate flex min-h-20 select-none items-center gap-2 rounded-b-xl border-b border-l border-r p-2">
+      <div className="flex min-h-20 select-none items-center gap-2 rounded-b-xl border-b border-l border-r border-borderShade bg-mediumSlate p-2 dark:border-borderShade-dark dark:bg-mediumSlate-dark">
         <button
           onClick={handleGoBack}
-          className="hover:bg-lightSlate/50 rounded-full p-3 text-xl active:scale-95 md:hidden "
+          className="rounded-full p-3 text-xl hover:bg-black/10 active:scale-95 md:hidden dark:hover:bg-lightSlate/10"
         >
           <RiArrowLeftLine />
         </button>
@@ -36,14 +37,21 @@ function MessageTopBar() {
         ) : (
           <div
             onClick={() => openFriendSidebar()}
-            className="hover:bg-lightSlate/50 flex cursor-pointer items-center gap-2 rounded-lg p-2"
+            className="flex cursor-pointer items-center gap-2 rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
           >
-            <span className="w-10">
-              <img
-                draggable="false"
-                src={avatar_url ? avatar_url : "/images/default-avatar.svg"}
-                alt={fullname}
-              />
+            <span className="h-12 w-12 overflow-hidden rounded-full text-black  dark:text-white">
+              {avatar_url ? (
+                <img
+                  src="/images/images.jpg"
+                  alt="avatar"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <HiOutlineUserCircle
+                  style={{ height: "100%", opacity: "0.5", width: "100%" }}
+                  strokeWidth="1"
+                />
+              )}
             </span>
             <span className="flex flex-col">
               <span>{fullname}</span>

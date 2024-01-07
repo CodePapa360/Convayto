@@ -17,7 +17,7 @@ function MyAccount() {
     <div className="fadeIn overflow-hidden">
       <div className="flex h-16 items-center justify-start gap-4 p-2 dark:bg-slate-700">
         <button
-          className="rounded-full p-3 text-xl hover:bg-lightSlate/50"
+          className="rounded-full p-3 text-xl hover:bg-black/10 dark:hover:bg-lightSlate/10"
           onClick={handleGoBack}
         >
           <RiArrowLeftLine />

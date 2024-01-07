@@ -1,5 +1,6 @@
 import { RiCloseFill } from "react-icons/ri";
 import { useUi } from "../contexts/UiContext";
+import { HiOutlineUserCircle } from "react-icons/hi2";
 
 function FriendProfileBar({ data }) {
   const { avatar_url, fullname, username, bio } = data?.friendDetails ?? {};
@@ -21,11 +22,11 @@ function FriendProfileBar({ data }) {
       <div
         className={`${
           isFriendsSidebarOpen ? "right-0 opacity-100" : "-right-full opacity-0"
-        } bg-mediumSlate dark:bg-mediumSlate-dark absolute top-0 z-30 h-dvh w-4/5 overflow-hidden transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] sm:w-[21rem]`}
+        } absolute top-0 z-30 h-dvh w-4/5 overflow-hidden bg-mediumSlate transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] sm:w-[21rem] dark:bg-mediumSlate-dark`}
       >
-        <div className="bg-mediumSlate dark:bg-mediumSlate-dark flex h-16 items-center justify-start gap-4 p-2">
+        <div className="flex h-16 items-center justify-start gap-4 bg-mediumSlate p-2 dark:bg-mediumSlate-dark">
           <button
-            className="hover:bg-lightSlate/50 rounded-full p-3 text-xl"
+            className="rounded-full p-3 text-xl hover:bg-black/10 dark:hover:bg-lightSlate/10"
             onClick={handleGoBack}
           >
             <RiCloseFill />
@@ -34,12 +35,19 @@ function FriendProfileBar({ data }) {
         </div>
 
         <div className="overflow-scroll p-4">
-          <div className="mt-4 flex items-center justify-center overflow-hidden">
-            <img
-              className=" h-full max-h-40 w-full max-w-40 rounded-full border-2 border-violet-500"
-              src={avatar_url ? avatar_url : "/images/default-avatar.svg"}
-              alt="avatar"
-            />
+          <div className="mx-auto mt-4 h-52 w-52 overflow-hidden rounded-full border-2 border-violet-500">
+            {avatar_url ? (
+              <img
+                className="h-full w-full object-cover object-center"
+                src="/images/test-image.jpg"
+                alt="avatar"
+              />
+            ) : (
+              <HiOutlineUserCircle
+                style={{ height: "100%", opacity: "0.5", width: "100%" }}
+                strokeWidth="1"
+              />
+            )}
           </div>
 
           <div className="mt-8">

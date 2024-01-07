@@ -11,7 +11,7 @@ function Logout() {
 
   return (
     <button
-      className="hover:bg-lightSlate/50 flex flex-shrink-0 items-center justify-center gap-2 rounded-full p-3"
+      className="flex flex-shrink-0 items-center justify-center gap-2 rounded-full p-3 hover:bg-black/10 dark:hover:bg-lightSlate/10"
       disabled={isPending}
       onClick={handleLogout}
     >

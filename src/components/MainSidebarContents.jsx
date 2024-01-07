@@ -16,6 +16,7 @@ import SearchView from "./SearchView";
 import Loader from "./Loader";
 import { useUi } from "../contexts/UiContext";
 import Dropdown from "./Dropdown";
+import { HiOutlineUserCircle } from "react-icons/hi2";
 
 function MainSidebarContents() {
   const { openAccountView, isSearchView, toggleSearchView } = useUi();
@@ -27,7 +28,7 @@ function MainSidebarContents() {
   }, [isSearchView]);
 
   const { user } = useUser();
-  const { fullname, username } = user.user_metadata;
+  const { fullname, username, avatar_url } = user.user_metadata;
 
   const { data: conversations, isPending } = useConversatoins();
   const queryClient = useQueryClient();
@@ -86,11 +87,11 @@ function MainSidebarContents() {
 
   return (
     <div className="relative z-30 grid select-none grid-cols-1 grid-rows-[auto_1fr]">
-      <div className="border-borderShade dark:border-borderShade-dark border-b p-2">
+      <div className="border-b border-borderShade p-2 dark:border-borderShade-dark">
         <div className="mb-2 flex items-center justify-between gap-2">
           <div className="relative">
             <button
-              className="hover:bg-lightSlate/50 relative z-50 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg"
+              className="relative z-50 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-black/10 dark:hover:bg-lightSlate/10"
               onClick={handleMenuBtnClick}
             >
               {isSearchView ? (
@@ -123,15 +124,22 @@ function MainSidebarContents() {
 
           {/* Profile */}
           <div
-            className="hover:bg-lightSlate/50 mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] items-center gap-2 truncate rounded-lg p-2"
+            className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] items-center gap-2 truncate rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
             onClick={() => openAccountView()}
           >
-            <span>
-              <img
-                draggable="false"
-                src="./images/default-avatar.svg"
-                alt="Avatar"
-              />
+            <span className="h-12 w-12 overflow-hidden rounded-full text-black  dark:text-white">
+              {avatar_url ? (
+                <img
+                  src="/images/images.jpg"
+                  alt="avatar"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <HiOutlineUserCircle
+                  style={{ height: "100%", opacity: "0.5", width: "100%" }}
+                  strokeWidth="1"
+                />
+              )}
             </span>
 
             <span className="flex flex-col truncate">
@@ -145,7 +153,7 @@ function MainSidebarContents() {
 
         <div className="relative">
           <input
-            className="bg-lightSlate dark:bg-lightSlate-dark dark:border-borderShade-dark border-borderShade flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border p-2 pl-9 outline-none"
+            className="flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-borderShade bg-lightSlate p-2 pl-9 outline-none dark:border-borderShade-dark dark:bg-lightSlate-dark"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"
@@ -164,7 +172,7 @@ function MainSidebarContents() {
 
         {!isSearchView && (
           <div>
-            <h2 className="border-borderShade dark:border-borderShade-dark mb-2 border-b pb-2 text-lg">
+            <h2 className="mb-2 border-b border-borderShade pb-2 text-lg dark:border-borderShade-dark">
               Chats
             </h2>
 

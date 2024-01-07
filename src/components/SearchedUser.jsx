@@ -14,7 +14,7 @@ function SearchedUser({ user }) {
 
   return (
     <div
-      className={` hover:bg-lightSlate/50 flex cursor-pointer select-none items-center gap-2 rounded-lg p-2`}
+      className={`flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10`}
       onClick={handleClick}
     >
       <span className="w-full max-w-12 overflow-hidden rounded-full">
