@@ -24,7 +24,7 @@ function MessageTopBar() {
 
   return (
     <>
-      <div className="flex min-h-20 select-none items-center gap-2 rounded-b-xl border-b border-l border-r border-borderShade bg-mediumSlate p-2 dark:border-borderShade-dark dark:bg-mediumSlate-dark">
+      <div className="z-10 flex min-h-20 select-none items-center gap-2 rounded-b-xl border-b border-l border-r border-borderShade bg-mediumSlate p-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.3)] dark:border-borderShade-dark dark:bg-mediumSlate-dark">
         <button
           onClick={handleGoBack}
           className="rounded-full p-3 text-xl hover:bg-black/10 active:scale-95 md:hidden dark:hover:bg-lightSlate/10"
