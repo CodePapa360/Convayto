@@ -75,7 +75,7 @@ function MessageInputBar() {
 
   return (
     <div className="px-4 py-2">
-      <form className="mx-auto grid max-w-3xl grid-cols-[1fr_auto] overflow-hidden rounded-full  border border-borderShade bg-lightSlate dark:border-borderShade-dark dark:bg-lightSlate-dark">
+      <form className="mx-auto grid max-w-3xl grid-cols-[1fr_auto] overflow-hidden rounded-full  border  bg-lightSlate shadow-[0px_0px_10px_0px_rgba(0,0,0,0.3)] dark:border-borderShade-dark dark:bg-lightSlate-dark">
         <input
           className="h-12 w-full bg-transparent pl-4 pr-2 outline-none"
           ref={inputRef}

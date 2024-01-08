@@ -153,11 +153,11 @@ function MainSidebarContents() {
 
         <div className="relative">
           <input
-            className="flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-borderShade bg-lightSlate p-2 pl-9 outline-none dark:border-borderShade-dark dark:bg-lightSlate-dark"
+            className="flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-borderShade  bg-lightSlate p-2 pl-9 outline-none transition-all duration-200 ease-in-out focus:ring-2 focus:ring-darkViolet/80 dark:border-borderShade-dark dark:bg-lightSlate-dark"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"
-            onClick={() => toggleSearchView()}
+            onFocus={() => toggleSearchView()}
             placeholder="Search people"
           />
 
