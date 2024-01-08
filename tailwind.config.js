@@ -30,7 +30,7 @@ export default {
         },
         textViolet: {
           DEFAULT: colors.violet[800],
-          dark: colors.violet[400],
+          dark: colors.violet[500],
         },
         lightViolet: {
           DEFAULT: colors.violet[600],

@@ -28,50 +28,49 @@ function Signup() {
   }
 
   return (
-    <div className="bg-deepSlate dark:bg-deepSlate-dark flex min-h-dvh items-center justify-center text-black transition-all duration-200 ease-in-out dark:text-white">
-      <div className="bg-mediumSlate dark:bg-mediumSlate-dark w-full max-w-80 rounded-xl p-6">
+    <div className="flex min-h-dvh items-center justify-center bg-deepSlate text-black transition-all duration-200 ease-in-out dark:bg-deepSlate-dark dark:text-white">
+      <div className="w-full max-w-80 rounded-xl bg-mediumSlate p-6 dark:bg-mediumSlate-dark">
         <h1 className="mb-8 text-center text-3xl  uppercase">Sign up</h1>
 
         <form onSubmit={handleSubmit} className="mb-4 flex flex-col">
           <div className="input-container mb-4 w-full">
-            <div className="input-wrapper relative h-12">
+            <div className="relative">
               <input
-                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-white/20 bg-transparent px-4 outline-none focus:border-violet-500"
                 value={fullname}
                 onChange={(e) => setFullname(e.target.value)}
-                id="fullname"
-                name="fullname"
-                type="fullname"
-                placeholder=" "
                 autoComplete="off"
+                type="text"
+                id="fullname"
+                className="peer block w-full appearance-none rounded-lg border-2 border-deepSlate bg-transparent px-2.5 pb-2.5 pt-4 text-sm focus:border-textViolet-dark focus:outline-none focus:ring-0 dark:focus:border-textViolet-dark"
+                placeholder=" "
               />
               <label
-                className="form-label pointer-events-none absolute left-4 top-[calc(3rem_/_2_-_0.9rem_/_1.5)] z-20 opacity-80 transition-all duration-200 ease-in-out"
                 htmlFor="fullname"
+                className="pointer-events-none absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-mediumSlate px-2 text-sm text-lightSlate-dark transition-all duration-100 ease-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2  peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-textViolet-dark rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:bg-mediumSlate-dark dark:text-gray-400 peer-focus:dark:text-textViolet-dark"
               >
-                Fullname
+                Full name
               </label>
             </div>
+
             {/* <p className="output-message"></p> */}
           </div>
 
           {/* Username */}
 
           <div className="input-container mb-4 w-full">
-            <div className="input-wrapper relative h-12">
+            <div className="relative">
               <input
-                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-white/20 bg-transparent px-4 outline-none focus:border-violet-500"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                id="username"
-                name="username"
-                type="username"
-                placeholder=" "
                 autoComplete="off"
+                type="text"
+                id="username"
+                className="peer block w-full appearance-none rounded-lg border-2 border-deepSlate bg-transparent px-2.5 pb-2.5 pt-4 text-sm focus:border-textViolet-dark focus:outline-none focus:ring-0 dark:focus:border-textViolet-dark"
+                placeholder=" "
               />
               <label
-                className="form-label pointer-events-none absolute left-4 top-[calc(3rem_/_2_-_0.9rem_/_1.5)] z-20 opacity-80 transition-all duration-200 ease-in-out"
                 htmlFor="username"
+                className="pointer-events-none absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-mediumSlate px-2 text-sm text-lightSlate-dark transition-all duration-100 ease-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2  peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-textViolet-dark rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:bg-mediumSlate-dark dark:text-gray-400 peer-focus:dark:text-textViolet-dark"
               >
                 Username
               </label>
@@ -82,48 +81,48 @@ function Signup() {
           {/* Email */}
 
           <div className="input-container mb-4 w-full">
-            <div className="input-wrapper relative h-12">
+            <div className="relative">
               <input
-                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-white/20 bg-transparent px-4 outline-none focus:border-violet-500"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                id="email"
-                name="email"
-                type="email"
-                placeholder=" "
                 autoComplete="off"
+                type="email"
+                id="email"
+                className="peer block w-full appearance-none rounded-lg border-2 border-deepSlate bg-transparent px-2.5 pb-2.5 pt-4 text-sm focus:border-textViolet-dark focus:outline-none focus:ring-0 dark:focus:border-textViolet-dark"
+                placeholder=" "
               />
               <label
-                className="form-label pointer-events-none absolute left-4 top-[calc(3rem_/_2_-_0.9rem_/_1.5)] z-20 opacity-80 transition-all duration-200 ease-in-out"
                 htmlFor="email"
+                className="pointer-events-none absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-mediumSlate px-2 text-sm text-lightSlate-dark transition-all duration-100 ease-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2  peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-textViolet-dark rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:bg-mediumSlate-dark dark:text-gray-400 peer-focus:dark:text-textViolet-dark"
               >
                 Email
               </label>
             </div>
+
             {/* <p className="output-message"></p> */}
           </div>
 
           {/* Password */}
 
           <div className="input-container mb-4 w-full">
-            <div className="input-wrapper relative h-12">
+            <div className="relative">
               <input
-                className="form-input absolute left-0 top-0 z-10 h-full w-full rounded-md border-2 border-white/20 bg-transparent px-4 outline-none focus:border-violet-500"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                id="password"
-                name="password"
-                type="password"
-                placeholder=" "
                 autoComplete="off"
+                type="password"
+                id="password"
+                className="peer block w-full appearance-none rounded-lg border-2 border-deepSlate bg-transparent px-2.5 pb-2.5 pt-4 text-sm focus:border-textViolet-dark focus:outline-none focus:ring-0 dark:focus:border-textViolet-dark"
+                placeholder=" "
               />
               <label
-                className="form-label pointer-events-none absolute left-4 top-[calc(3rem_/_2_-_0.9rem_/_1.5)] z-20 opacity-80 transition-all duration-200 ease-in-out"
                 htmlFor="password"
+                className="pointer-events-none absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-mediumSlate px-2 text-sm text-lightSlate-dark transition-all duration-100 ease-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2  peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-textViolet-dark rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:bg-mediumSlate-dark dark:text-gray-400 peer-focus:dark:text-textViolet-dark"
               >
                 Password
               </label>
             </div>
+
             {/* <p className="output-message"></p> */}
           </div>
 
