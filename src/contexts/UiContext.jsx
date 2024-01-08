@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { DARK_THEME, LOCAL_STORAGE_KEY } from "../config";
+import { DARK_THEME, LIGHT_THEME, LOCAL_STORAGE_KEY } from "../config";
 
 const UiContext = createContext();
 
@@ -107,24 +107,19 @@ function UiProvider({ children }) {
       localStorage.setItem(LOCAL_STORAGE_KEY, DARK_THEME);
     } else {
       document.documentElement.classList.remove(DARK_THEME);
-      localStorage.removeItem(LOCAL_STORAGE_KEY);
+      localStorage.setItem(LOCAL_STORAGE_KEY, LIGHT_THEME);
     }
   }
 
   useEffect(() => {
-    const isDarkMode = localStorage.getItem(LOCAL_STORAGE_KEY) === DARK_THEME;
+    const hasPreviousPreference = localStorage.getItem(LOCAL_STORAGE_KEY);
     const prefersDarkMode = window.matchMedia(
       "(prefers-color-scheme: dark)",
     ).matches;
 
-    // prioritize user preference over system preference
-    if (isDarkMode) {
-      updateDarkMode(true);
-    } else if (prefersDarkMode) {
-      updateDarkMode(true);
-    } else {
-      updateDarkMode(false);
-    }
+    if (!hasPreviousPreference) return updateDarkMode(prefersDarkMode);
+    if (hasPreviousPreference === DARK_THEME) return updateDarkMode(true);
+    if (hasPreviousPreference === LIGHT_THEME) return updateDarkMode(false);
   }, []);
 
   const toggleDarkMode = () => {
