@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useUi } from "../contexts/UiContext";
+import { HiOutlineUserCircle } from "react-icons/hi2";
 
 function SearchedUser({ user }) {
   const { toggleSearchView } = useUi();
@@ -18,7 +19,10 @@ function SearchedUser({ user }) {
       onClick={handleClick}
     >
       <span className="w-full max-w-12 overflow-hidden rounded-full">
-        <img draggable="false" src="/images/default-avatar.svg" alt="User" />
+        <HiOutlineUserCircle
+          style={{ height: "100%", opacity: "0.7", width: "100%" }}
+          strokeWidth="1"
+        />
       </span>
 
       <span className="flex flex-col overflow-hidden ">
