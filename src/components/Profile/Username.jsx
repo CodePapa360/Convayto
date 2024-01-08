@@ -43,7 +43,7 @@ function Username() {
 
   return (
     <div className="mt-4">
-      <p className="text-textViolet dark:text-textViolet-dark select-none text-sm font-bold tracking-wider opacity-80">
+      <p className="select-none text-sm font-bold tracking-wider text-textViolet opacity-80 dark:text-textViolet-dark">
         Username
       </p>
       <div className=" flex h-10 items-center justify-between gap-2">
@@ -57,12 +57,12 @@ function Username() {
                 e.target.value.length <= MAX_USERNAME_LENGTH &&
                   setNewUsername(e.target.value);
               }}
-              onBlur={handleUpdate}
+              // onBlur={handleUpdate}
               className={`${
                 isValidUsername
                   ? "border-textViolet  dark:border-textViolet-dark"
                   : "border-red-500"
-              } h-full w-full rounded-md border-b-2  bg-slate-700 px-2 text-base outline-none`}
+              } h-full w-full rounded-md border-b-2   bg-lightSlate px-2  text-base text-deepSlate-dark outline-none   dark:bg-lightSlate-dark dark:text-lightSlate`}
             />
             <span className="w-8 select-none text-sm opacity-60 ">
               {MAX_USERNAME_LENGTH - newUsername.length}
@@ -75,7 +75,8 @@ function Username() {
         <button
           onClick={handleUpdate}
           disabled={newUsername === ""}
-          className="text-textViolet dark:text-textViolet-dark rounded-full p-3  text-xl hover:bg-slate-700/90 disabled:pointer-events-none"
+          className="rounded-full p-3 text-xl text-textViolet 
+          hover:bg-black/10   dark:text-textViolet-dark dark:hover:bg-lightSlate/10"
         >
           {isEditing ? <RiCheckFill /> : <RiEdit2Line />}
         </button>

@@ -40,7 +40,7 @@ function Name() {
 
   return (
     <div className="mt-8">
-      <p className="text-textViolet dark:text-textViolet-dark select-none text-sm font-bold  tracking-wider opacity-80">
+      <p className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark">
         Name
       </p>
       <div className=" flex h-10 items-center justify-between gap-2">
@@ -54,8 +54,8 @@ function Name() {
                 e.target.value.length <= MAX_NAME_LENGTH &&
                   setNewName(e.target.value);
               }}
-              onBlur={handleUpdate}
-              className="border-textViolet dark:border-textViolet-dark h-full w-full rounded-md border-b-2 bg-slate-700 px-2 text-base outline-none"
+              // onBlur={handleUpdate}
+              className="h-full w-full rounded-md border-b-2 border-textViolet bg-lightSlate px-2 text-base text-deepSlate-dark outline-none dark:border-textViolet-dark dark:bg-lightSlate-dark dark:text-lightSlate"
             />
             <span className="w-8 select-none text-sm opacity-60">
               {MAX_NAME_LENGTH - newName.length}
@@ -68,7 +68,8 @@ function Name() {
         <button
           onClick={handleUpdate}
           disabled={newName === ""}
-          className="text-textViolet dark:text-textViolet-dark rounded-full p-3 text-xl hover:bg-slate-700/90 disabled:pointer-events-none disabled:text-slate-700/90"
+          className="rounded-full p-3 text-xl text-textViolet 
+          hover:bg-black/10   dark:text-textViolet-dark dark:hover:bg-lightSlate/10"
         >
           {isEditing ? <RiCheckFill /> : <RiEdit2Line />}
         </button>
