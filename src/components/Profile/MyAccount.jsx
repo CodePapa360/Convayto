@@ -4,6 +4,7 @@ import Username from "./Username";
 import Bio from "./Bio";
 import { useUi } from "../../contexts/UiContext";
 import Avatar from "./Avatar";
+import ChangePasssword from "./ChangePasssword";
 
 function MyAccount() {
   const { closeAccountView } = useUi();
@@ -33,12 +34,7 @@ function MyAccount() {
 
         <Bio />
 
-        <div className="mt-4">
-          <p className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark">
-            Email
-          </p>
-          <p className="mt-3">test email</p>
-        </div>
+        <ChangePasssword />
       </div>
     </div>
   );

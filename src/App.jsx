@@ -8,6 +8,7 @@ import Signin from "./pages/Signin";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MessageView from "./layouts/MessageView";
 import { UiProvider } from "./contexts/UiContext";
+import ResetPassword from "./pages/ResetPassword";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,6 +37,7 @@ function App() {
             </Route>
             <Route path="signup" element={<Signup />} />
             <Route path="signin" element={<Signin />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
