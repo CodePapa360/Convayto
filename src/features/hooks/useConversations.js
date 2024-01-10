@@ -19,13 +19,7 @@ export function useConversatoins() {
   useEffect(
     function () {
       if (!myUserId) return;
-      // if (myUserId === subscriptionConversation?.subTopic) return;
-
       if (subscriptionConversation) return;
-
-      // if (subscriptionConversation) {
-      //   // subscriptionConversation.unsubscribe();
-      // }
 
       const updateConversation = (payload) => {
         queryClient.setQueryData(["conversations", myUserId], (prevData) => {
@@ -45,16 +39,10 @@ export function useConversatoins() {
 
       subscriptionConversation = subscribeRealtimeConversation({
         myUserId,
-        // conversationIds,
         onUpdate: updateConversation,
       });
-
-      return () => {
-        // subscriptionConversation?.unsubscribe();
-        // console.log("unsubscribed conversations");
-      };
     },
-    [myUserId, queryClient]
+    [myUserId, queryClient],
   );
 
   if (error) {
