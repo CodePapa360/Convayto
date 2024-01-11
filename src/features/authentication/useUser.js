@@ -10,12 +10,12 @@ export function useUser() {
   const user = data?.session?.user;
 
   const updateUser = async () => {
-    // Manually refetch user data to ensure it's up-to-date
     await refetch();
   };
 
   return {
     isLoading,
+    session: data?.session,
     user,
     isAuthenticated: user?.role === "authenticated",
     updateUser,

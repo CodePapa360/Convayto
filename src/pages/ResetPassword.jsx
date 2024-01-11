@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { updateProfile } from "../services/apiProfileUpdate";
+import { useUser } from "../features/authentication/useUser";
 
 function ResetPassword() {
+  const { session } = useUser();
+  const refreshToken = session?.refresh_token;
+  console.log("From user", refreshToken);
+
+  // extract the refreshtocken from the window url
+  const urlRefreshToken = window?.location?.hash?.split("&")[3]?.split("=")[1];
+  console.log("From url", urlRefreshToken);
+
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -21,7 +30,6 @@ function ResetPassword() {
 
   return (
     <div>
-      {/* A form to set new password */}
       <form onSubmit={handleSubmit}>
         <input
           value={newPassword}
