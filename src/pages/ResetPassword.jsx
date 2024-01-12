@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { updateProfile } from "../services/apiProfileUpdate";
 import { useUser } from "../features/authentication/useUser";
 
 function ResetPassword() {
+  const [urlRefreshToken, setUrlRefreshToken] = useState(false);
   const { session } = useUser();
   const refreshToken = session?.refresh_token;
   console.log("From user", refreshToken);
 
   // extract the refreshtocken from the window url
-  const urlRefreshToken = window?.location?.hash?.split("&")[3]?.split("=")[1];
-  console.log("From url", urlRefreshToken);
+  const token = window?.location?.hash?.split("&")[3]?.split("=")[1];
+  console.log("From url", token);
+
+  useEffect(() => {
+    if (token && token !== undefined && token !== "") {
+      return setUrlRefreshToken(token);
+    }
+  }, [token]);
+
+  const isRecovery = refreshToken === urlRefreshToken;
+
+  console.log("isRecovery", isRecovery);
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -30,26 +41,31 @@ function ResetPassword() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          type="password"
-          name="password"
-          placeholder="New Password"
-        />
-        <input
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          type="password"
-          name="password"
-          placeholder="Confirm Password"
-        />
+      {!refreshToken && <p>Loading...</p>}
+      {isRecovery && (
+        <form onSubmit={handleSubmit}>
+          <input
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            type="password"
+            name="password"
+            placeholder="New Password"
+          />
+          <input
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            type="password"
+            name="password"
+            placeholder="Confirm Password"
+          />
 
-        <button type="submit" value="Reset Password">
-          Change
-        </button>
-      </form>
+          <button type="submit" value="Reset Password">
+            Change
+          </button>
+        </form>
+      )}
+
+      {!isRecovery && <p>Invalid token</p>}
     </div>
   );
 }
