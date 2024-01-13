@@ -1,26 +1,30 @@
 import { useEffect, useState } from "react";
 import { updateProfile } from "../services/apiProfileUpdate";
 import { useUser } from "../features/authentication/useUser";
+import { useNavigate } from "react-router-dom";
 
 function ResetPassword() {
+  const navigate = useNavigate();
   const [urlRefreshToken, setUrlRefreshToken] = useState(false);
   const { session } = useUser();
   const refreshToken = session?.refresh_token;
-  console.log("From user", refreshToken);
+  // console.log("From user", refreshToken);
 
   // extract the refreshtocken from the window url
-  const token = window?.location?.hash?.split("&")[3]?.split("=")[1];
-  console.log("From url", token);
+  const urlHash = window?.location?.hash?.split("&");
+  const token = urlHash[3]?.split("=")[1];
+  // const isError = urlHash[2]?.split("=")[1];
+  // console.log("From url", token);
 
   useEffect(() => {
-    if (token && token !== undefined && token !== "") {
+    if (token !== undefined && token !== "") {
       return setUrlRefreshToken(token);
     }
   }, [token]);
 
   const isRecovery = refreshToken === urlRefreshToken;
 
-  console.log("isRecovery", isRecovery);
+  // console.log("isRecovery", isRecovery);
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -40,9 +44,8 @@ function ResetPassword() {
   };
 
   return (
-    <div>
-      {!refreshToken && <p>Loading...</p>}
-      {isRecovery && (
+    <div className="bg- flex min-h-screen items-center justify-center bg-deepSlate text-black dark:bg-deepSlate-dark dark:text-white">
+      {isRecovery ? (
         <form onSubmit={handleSubmit}>
           <input
             value={newPassword}
@@ -63,9 +66,12 @@ function ResetPassword() {
             Change
           </button>
         </form>
+      ) : (
+        <div>
+          <p>Invalid token</p>
+          <button onClick={() => navigate("/")}>Home</button>
+        </div>
       )}
-
-      {!isRecovery && <p>Invalid token</p>}
     </div>
   );
 }
