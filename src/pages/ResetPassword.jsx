@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { updateProfile } from "../services/apiProfileUpdate";
 import { useUser } from "../features/authentication/useUser";
 import { useNavigate } from "react-router-dom";
 import { RiLoginCircleLine } from "react-icons/ri";
@@ -9,16 +8,13 @@ import { useUpdatePassword } from "../features/hooks/useUpdatePassword";
 function ResetPassword() {
   const { isUpdating, updatePassword, error } = useUpdatePassword();
   const navigate = useNavigate();
-  const [urlRefreshToken, setUrlRefreshToken] = useState(false);
+  const [urlRefreshToken, setUrlRefreshToken] = useState("");
   const { session } = useUser();
   const refreshToken = session?.refresh_token;
-  // console.log("From user", refreshToken);
 
   // extract the refreshtocken from the window url
   const urlHash = window?.location?.hash?.split("&");
   const token = urlHash[3]?.split("=")[1];
-  // const isError = urlHash[2]?.split("=")[1];
-  // console.log("From url", token);
 
   useEffect(() => {
     if (token !== undefined && token !== "") {
@@ -27,8 +23,6 @@ function ResetPassword() {
   }, [token]);
 
   const isRecovery = refreshToken === urlRefreshToken;
-
-  // console.log("isRecovery", isRecovery);
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
