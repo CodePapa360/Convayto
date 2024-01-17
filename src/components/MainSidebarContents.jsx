@@ -19,7 +19,8 @@ import Dropdown from "./Dropdown";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 
 function MainSidebarContents() {
-  const { openAccountView, isSearchView, toggleSearchView } = useUi();
+  const { openAccountView, isSearchView, openSearchView, closeSearchView } =
+    useUi();
   const [query, setQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -79,7 +80,7 @@ function MainSidebarContents() {
   function handleMenuBtnClick() {
     // if is searching then close search view else open menu
     if (isSearchView) {
-      toggleSearchView();
+      closeSearchView();
     } else {
       setIsMenuOpen((prev) => !prev);
     }
@@ -157,7 +158,7 @@ function MainSidebarContents() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"
-            onFocus={() => toggleSearchView()}
+            onFocus={() => openSearchView()}
             placeholder="Search people"
           />
 

@@ -33,10 +33,15 @@ function reducer(state, action) {
         ...state,
         isAccountView: false,
       };
-    case "TOGGLE_SEARCH_VIEW":
+    case "OPEN_SEARCH_VIEW":
       return {
         ...state,
-        isSearchView: !state.isSearchView,
+        isSearchView: true,
+      };
+    case "CLOSE_SEARCH_VIEW":
+      return {
+        ...state,
+        isSearchView: false,
       };
     case "UPDATE_DARK_MODE":
       return {
@@ -87,8 +92,12 @@ function UiProvider({ children }) {
     dispatch({ type: "OPEN_ACCOUNT_VIEW" });
   }
 
-  function toggleSearchView() {
-    dispatch({ type: "TOGGLE_SEARCH_VIEW" });
+  function openSearchView() {
+    dispatch({ type: "OPEN_SEARCH_VIEW" });
+  }
+
+  function closeSearchView() {
+    dispatch({ type: "CLOSE_SEARCH_VIEW" });
   }
 
   function closeFriendSidebar() {
@@ -139,7 +148,8 @@ function UiProvider({ children }) {
     closeSidebar,
 
     isSearchView,
-    toggleSearchView,
+    openSearchView,
+    closeSearchView,
 
     isDarkMode,
     toggleDarkMode,

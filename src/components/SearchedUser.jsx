@@ -3,14 +3,14 @@ import { useUi } from "../contexts/UiContext";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 
 function SearchedUser({ user }) {
-  const { toggleSearchView } = useUi();
+  const { closeSearchView } = useUi();
 
   const { fullname, id, username } = user;
   const navigate = useNavigate();
 
   function handleClick() {
     navigate(`/${id}`);
-    toggleSearchView();
+    closeSearchView();
   }
 
   return (
