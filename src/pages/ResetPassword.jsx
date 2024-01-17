@@ -70,7 +70,7 @@ function ResetPassword() {
                   htmlFor="newPassword"
                   className="pointer-events-none absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-mediumSlate px-2 text-sm text-lightSlate-dark transition-all duration-100 ease-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2  peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-textViolet-dark rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:bg-mediumSlate-dark dark:text-gray-400 peer-focus:dark:text-textViolet-dark"
                 >
-                  Password
+                  New password
                 </label>
               </div>
 
@@ -92,7 +92,7 @@ function ResetPassword() {
                   htmlFor="confirmPassword"
                   className="pointer-events-none absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-mediumSlate px-2 text-sm text-lightSlate-dark transition-all duration-100 ease-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2  peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-textViolet-dark rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:bg-mediumSlate-dark dark:text-gray-400 peer-focus:dark:text-textViolet-dark"
                 >
-                  Password
+                  Confirm new password
                 </label>
               </div>
 
