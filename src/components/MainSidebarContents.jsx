@@ -56,27 +56,6 @@ function MainSidebarContents() {
     // prefetch();
   });
 
-  // const menuRef = useRef(null);
-  // const menuBtnRef = useRef(null);
-
-  // useEffect(() => {
-  //   function handleClickOutside(event) {
-  //     if (
-  //       menuRef.current &&
-  //       !menuRef.current.contains(event.target) &&
-  //       menuBtnRef.current &&
-  //       !menuBtnRef.current.contains(event.target)
-  //     ) {
-  //       setIsMenuOpen(false);
-  //     }
-  //   }
-
-  //   document.addEventListener("mouseover", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mouseover", handleClickOutside);
-  //   };
-  // }, [menuRef, menuBtnRef]);
-
   function handleMenuBtnClick() {
     // if is searching then close search view else open menu
     if (isSearchView) {
