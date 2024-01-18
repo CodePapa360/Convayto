@@ -13,7 +13,7 @@ function Avatar() {
   const { updateUser, isUpdating } = useUpdateUser();
 
   function handleUpdateUser(file) {
-    updateUser({ avatar: file });
+    updateUser({ avatar: file, previousAvatar: avatar_url });
   }
 
   return (
