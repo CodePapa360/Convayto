@@ -1,12 +1,15 @@
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { LuImagePlus } from "react-icons/lu";
 import { useUser } from "../../features/authentication/useUser";
+import { useUpdateUser } from "../../features/hooks/useUpdateUser";
 
 function Avatar() {
-  const { user, updateUser } = useUser();
+  const { user } = useUser();
   const {
     user_metadata: { avatar_url },
   } = user;
+
+  const { updateUser, isUpdating } = useUpdateUser();
 
   return (
     <div className="relative mx-auto mt-4 h-52 w-52  rounded-full border-2 border-textViolet dark:border-textViolet-dark">

@@ -9,7 +9,7 @@ export function useUser() {
 
   const user = data?.session?.user;
 
-  const updateUser = async () => {
+  const refetchUser = async () => {
     await refetch();
   };
 
@@ -18,6 +18,6 @@ export function useUser() {
     session: data?.session,
     user,
     isAuthenticated: user?.role === "authenticated",
-    updateUser,
+    refetchUser,
   };
 }
