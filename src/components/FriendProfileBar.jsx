@@ -39,8 +39,8 @@ function FriendProfileBar({ data }) {
             {avatar_url ? (
               <img
                 className="h-full w-full object-cover object-center"
-                src="/images/test-image.jpg"
-                alt="avatar"
+                src={avatar_url}
+                alt={fullname}
               />
             ) : (
               <HiOutlineUserCircle
