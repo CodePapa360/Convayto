@@ -2,7 +2,7 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 import { LuImagePlus } from "react-icons/lu";
 import { useUser } from "../../features/authentication/useUser";
 import { useUpdateUser } from "../../features/hooks/useUpdateUser";
-import { useState } from "react";
+import Loader from "../Loader";
 
 function Avatar() {
   const { user } = useUser();
@@ -10,13 +10,9 @@ function Avatar() {
     user_metadata: { avatar_url },
   } = user;
 
-  const [avatar, setAvatar] = useState(null);
-
   const { updateUser, isUpdating } = useUpdateUser();
 
   function handleUpdateUser(file) {
-    console.log(file);
-    // setAvatar(file);
     updateUser({ avatar: file });
   }
 
@@ -39,7 +35,7 @@ function Avatar() {
           className="absolute bottom-0 right-0 m-2 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-textViolet p-1 text-xl text-white shadow-lg dark:bg-textViolet-dark"
           htmlFor="uploadPhoto"
         >
-          <LuImagePlus />
+          {isUpdating ? <Loader /> : <LuImagePlus />}
         </label>
         <input
           onChange={(e) => handleUpdateUser(e.target.files[0])}

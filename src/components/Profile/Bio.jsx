@@ -4,7 +4,7 @@ import { RiCheckFill, RiEdit2Line } from "react-icons/ri";
 import { updateProfile } from "../../services/apiProfileUpdate";
 
 function Bio() {
-  const { user, refetchUser } = useUser();
+  const { user, invalidateUser } = useUser();
   const {
     user_metadata: { bio },
   } = user;
@@ -38,7 +38,7 @@ function Bio() {
 
     if (isEditing) {
       updateProfile({ data: { bio: trimmedUserName } });
-      refetchUser();
+      invalidateUser();
       setIsEditing(false);
       return;
     }

@@ -5,11 +5,11 @@ import { updateCurrentUser } from "../../services/apiProfileUpdate";
 export function useUpdateUser() {
   const quryClient = useQueryClient();
 
-  const { mutate: updateUser, isLoading: isUpdating } = useMutation({
+  const { mutate: updateUser, isPending: isUpdating } = useMutation({
     mutationFn: updateCurrentUser,
-    onSuccess: ({ user }) => {
+    onSuccess: () => {
       //   toast.success("User account successfully updated.");
-      //   quryClient.setQueriesData(["user"], user);
+      quryClient.invalidateQueries("user");
     },
     onError: (err) => {
       //   toast.error(err.message);
