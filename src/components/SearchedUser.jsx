@@ -5,7 +5,7 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 function SearchedUser({ user }) {
   const { closeSearchView } = useUi();
 
-  const { fullname, id, username } = user;
+  const { fullname, id, username, avatar_url } = user;
   const navigate = useNavigate();
 
   function handleClick() {
@@ -19,10 +19,18 @@ function SearchedUser({ user }) {
       onClick={handleClick}
     >
       <span className="w-full max-w-12 overflow-hidden rounded-full">
-        <HiOutlineUserCircle
-          style={{ height: "100%", opacity: "0.7", width: "100%" }}
-          strokeWidth="1"
-        />
+        {avatar_url ? (
+          <img
+            src={avatar_url}
+            alt={fullname}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <HiOutlineUserCircle
+            style={{ height: "100%", opacity: "0.5", width: "100%" }}
+            strokeWidth="1"
+          />
+        )}
       </span>
 
       <span className="flex flex-col overflow-hidden ">
