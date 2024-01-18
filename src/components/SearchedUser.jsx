@@ -18,7 +18,7 @@ function SearchedUser({ user }) {
       className={`flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10`}
       onClick={handleClick}
     >
-      <span className="w-full max-w-12 overflow-hidden rounded-full">
+      <span className="h-12 w-12 overflow-hidden rounded-full">
         {avatar_url ? (
           <img
             src={avatar_url}

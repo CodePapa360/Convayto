@@ -32,7 +32,7 @@ function Avatar() {
       )}
       <span>
         <label
-          className="absolute bottom-0 right-0 m-2 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-textViolet p-1 text-xl text-white shadow-lg dark:bg-textViolet-dark"
+          className="absolute bottom-0 right-0 m-2 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-darkViolet p-1 text-xl text-white shadow-lg hover:bg-darkViolet-dark dark:bg-textViolet-dark"
           htmlFor="uploadPhoto"
         >
           {isUpdating ? <Loader /> : <LuImagePlus />}

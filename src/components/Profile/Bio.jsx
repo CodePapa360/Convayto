@@ -30,14 +30,13 @@ function Bio() {
   function handleUpdate() {
     if (!isEditing) return setIsEditing(true);
 
-    const trimmedUserName = newBio.trim();
+    const trimedBio = newBio.trim();
 
-    if (trimmedUserName === "")
-      return console.log("The field cannot be empty.");
-    if (trimmedUserName === bio) return setIsEditing(false);
+    if (trimedBio === "") return console.log("The field cannot be empty.");
+    if (trimedBio === bio) return setIsEditing(false);
 
     if (isEditing) {
-      updateProfile({ data: { bio: trimmedUserName } });
+      updateProfile({ data: { bio: trimedBio } });
       invalidateUser();
       setIsEditing(false);
       return;
