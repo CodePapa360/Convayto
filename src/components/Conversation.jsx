@@ -4,7 +4,7 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 
 function Conversation({ conversation }) {
   const { friend, messages } = conversation;
-  const { fullname, id } = friend;
+  const { fullname, id, avatar_url } = friend;
   const messageContent = messages?.content;
   const { userId: currentFriendConvId } = useParams();
   const isActiveUser = currentFriendConvId === id;
@@ -21,16 +21,24 @@ function Conversation({ conversation }) {
     <div
       className={`${
         isActiveUser
-          ? "sm:bg-darkViolet dark:bg-darkViolet-dark text-lightSlate"
+          ? "text-lightSlate sm:bg-darkViolet dark:bg-darkViolet-dark"
           : "hover:bg-black/10 dark:hover:bg-lightSlate/10"
       } flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 `}
       onClick={handleClick}
     >
       <span className="w-full max-w-12 overflow-hidden rounded-full">
-        <HiOutlineUserCircle
-          style={{ height: "100%", opacity: "0.7", width: "100%" }}
-          strokeWidth="1"
-        />
+        {avatar_url ? (
+          <img
+            src={avatar_url}
+            alt={fullname}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <HiOutlineUserCircle
+            style={{ height: "100%", opacity: "0.5", width: "100%" }}
+            strokeWidth="1"
+          />
+        )}
       </span>
 
       <span className="flex flex-col overflow-hidden ">
