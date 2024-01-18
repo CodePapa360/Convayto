@@ -104,10 +104,10 @@ function MainSidebarContents() {
 
           {/* Profile */}
           <div
-            className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] items-center gap-2 truncate rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
+            className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] items-center gap-4 truncate rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
             onClick={() => openAccountView()}
           >
-            <span className="h-12 w-12 overflow-hidden rounded-full text-black  dark:text-white">
+            <span className="h-11 w-11 overflow-hidden rounded-full text-black  dark:text-white">
               {avatar_url ? (
                 <img
                   src={avatar_url}
