@@ -1,4 +1,5 @@
 import { HiOutlineUserCircle } from "react-icons/hi2";
+import { LuImagePlus } from "react-icons/lu";
 import { useUser } from "../../features/authentication/useUser";
 
 function Avatar() {
@@ -8,11 +9,11 @@ function Avatar() {
   } = user;
 
   return (
-    <div className="border-textViolet dark:border-textViolet-dark mx-auto mt-4 h-52 w-52 overflow-hidden rounded-full border-2">
+    <div className="relative mx-auto mt-4 h-52 w-52  rounded-full border-2 border-textViolet dark:border-textViolet-dark">
       {avatar_url ? (
         <img
-          className="h-full w-full object-cover object-center"
-          src="/images/test-image.jpg"
+          className="h-full w-full rounded-full object-cover object-center"
+          src="/images/images.jpg"
           alt="avatar"
         />
       ) : (
@@ -21,6 +22,15 @@ function Avatar() {
           strokeWidth="1"
         />
       )}
+      <span>
+        <label
+          className="absolute bottom-0 right-0 m-2 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-textViolet p-1 text-xl text-white shadow-lg dark:bg-textViolet-dark"
+          htmlFor="uploadPhoto"
+        >
+          <LuImagePlus />
+        </label>
+        <input className="hidden" type="file" name="photo" id="uploadPhoto" />
+      </span>
     </div>
   );
 }
