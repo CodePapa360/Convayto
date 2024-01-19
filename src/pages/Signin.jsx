@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSignin } from "../features/authentication/useSignin";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
@@ -7,11 +7,17 @@ import { useUser } from "../features/authentication/useUser";
 
 function Signin() {
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { isAuthenticated } = useUser();
 
   const [email, setEmail] = useState("tanzil@gmail.com");
   const [password, setPassword] = useState("123456789");
   const { signin, isPending } = useSignin();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/", { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -21,15 +27,16 @@ function Signin() {
     signin(
       { email, password },
       {
-        onSettled: () => {
+        onSuccess: () => {
           setEmail("");
           setPassword("");
+          navigate("/", {
+            replace: true,
+          });
         },
       },
     );
   }
-
-  if (user) return navigate("/");
 
   return (
     <div className="flex min-h-dvh items-center justify-center bg-deepSlate text-black transition-all duration-200 ease-in-out dark:bg-deepSlate-dark dark:text-white">
