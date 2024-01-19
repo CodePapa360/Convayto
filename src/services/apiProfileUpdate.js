@@ -12,7 +12,7 @@ export async function updateProfile(dataObj) {
 
 export async function updateCurrentUser({
   password,
-  fullName,
+  fullname,
   username,
   bio,
   avatar,
@@ -21,7 +21,7 @@ export async function updateCurrentUser({
   // 1. Update password OR fullname
   let updateData;
   if (password) updateData = { password };
-  if (fullName) updateData = { data: { fullName } };
+  if (fullname) updateData = { data: { fullname } };
   if (username) updateData = { data: { username } };
   if (bio) updateData = { data: { bio } };
   const { data, error } = await supabase.auth.updateUser(updateData);

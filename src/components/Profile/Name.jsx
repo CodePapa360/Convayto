@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useUser } from "../../features/authentication/useUser";
 import { RiCheckFill, RiEdit2Line } from "react-icons/ri";
-import { updateProfile } from "../../services/apiProfileUpdate";
+import { useUpdateUser } from "../../features/hooks/useUpdateUser";
+import Loader from "../Loader";
 
 function Name() {
+  const { updateUser, isUpdating } = useUpdateUser();
   const { user, invalidateUser } = useUser();
   const {
     user_metadata: { fullname },
@@ -26,12 +28,11 @@ function Name() {
     if (!isEditing) return setIsEditing(true);
 
     const trimmedName = newName.trim();
-
     if (trimmedName === "") return console.log("The field cannot be empty.");
     if (trimmedName === fullname) return setIsEditing(false);
 
     if (isEditing) {
-      updateProfile({ data: { fullname: trimmedName } });
+      updateUser({ fullname: trimmedName });
       invalidateUser();
       setIsEditing(false);
       return;
@@ -43,9 +44,9 @@ function Name() {
       <p className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark">
         Name
       </p>
-      <div className=" flex h-10 items-center justify-between gap-2">
+      <div className="grid h-auto grid-cols-[1fr_auto] items-start justify-between">
         {isEditing ? (
-          <>
+          <div className="grid grid-cols-[1fr_auto]">
             <input
               type="text"
               ref={inputRef}
@@ -55,23 +56,28 @@ function Name() {
                   setNewName(e.target.value);
               }}
               // onBlur={handleUpdate}
-              className="h-full w-full rounded-md border-b-2 border-textViolet bg-lightSlate px-2 text-base text-deepSlate-dark outline-none dark:border-textViolet-dark dark:bg-lightSlate-dark dark:text-lightSlate"
+              className="h-11 w-full rounded-md border-b-2 border-textViolet bg-lightSlate px-2 text-base text-deepSlate-dark outline-none dark:border-textViolet-dark dark:bg-lightSlate-dark dark:text-lightSlate"
             />
-            <span className="w-8 select-none text-sm opacity-60">
+            <span className="flex w-8 select-none items-start justify-center text-xs opacity-60">
               {MAX_NAME_LENGTH - newName.length}
             </span>
-          </>
+          </div>
         ) : (
           <p className="truncate px-2 text-base">{newName}</p>
         )}
 
         <button
           onClick={handleUpdate}
-          disabled={newName === ""}
-          className="rounded-full p-3 text-xl text-textViolet 
-          hover:bg-black/10   dark:text-textViolet-dark dark:hover:bg-lightSlate/10"
+          className="flex h-11 w-11 items-center justify-center rounded-full text-xl text-textViolet 
+          hover:bg-black/10 dark:text-textViolet-dark dark:hover:bg-lightSlate/10"
         >
-          {isEditing ? <RiCheckFill /> : <RiEdit2Line />}
+          {isUpdating ? (
+            <Loader />
+          ) : isEditing ? (
+            <RiCheckFill />
+          ) : (
+            <RiEdit2Line />
+          )}
         </button>
       </div>
     </div>
