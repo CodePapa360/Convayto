@@ -45,33 +45,10 @@ function Username() {
 
   return (
     <div className="mt-4">
-      <p className="select-none text-sm font-bold tracking-wider text-textViolet opacity-80 dark:text-textViolet-dark">
-        Username
-      </p>
-      <div className="grid h-auto grid-cols-[1fr_auto] items-start justify-between">
-        {isEditing ? (
-          <div className="grid grid-cols-[1fr_auto]">
-            <input
-              type="text"
-              ref={inputRef}
-              value={newUsername}
-              onChange={(e) => {
-                e.target.value.length <= MAX_USERNAME_LENGTH &&
-                  setNewUsername(e.target.value);
-              }}
-              className={`${
-                isValidUsername
-                  ? "border-textViolet  dark:border-textViolet-dark"
-                  : "border-red-500"
-              } h-11 w-full rounded-md border-b-2   bg-lightSlate px-2  text-base text-deepSlate-dark outline-none   dark:bg-lightSlate-dark dark:text-lightSlate`}
-            />
-            <span className="flex w-8 select-none items-start justify-center text-xs opacity-60">
-              {MAX_USERNAME_LENGTH - newUsername.length}
-            </span>
-          </div>
-        ) : (
-          <p className="truncate px-2 text-base">@{newUsername}</p>
-        )}
+      <div className="flex items-center justify-between">
+        <p className="select-none text-sm font-bold tracking-wider text-textViolet opacity-80 dark:text-textViolet-dark">
+          Username
+        </p>
 
         <button
           onClick={handleUpdate}
@@ -87,6 +64,30 @@ function Username() {
           )}
         </button>
       </div>
+
+      {isEditing ? (
+        <div className="flex justify-between">
+          <input
+            type="text"
+            ref={inputRef}
+            value={newUsername}
+            onChange={(e) => {
+              e.target.value.length <= MAX_USERNAME_LENGTH &&
+                setNewUsername(e.target.value);
+            }}
+            className={`${
+              isValidUsername
+                ? "border-textViolet  dark:border-textViolet-dark"
+                : "border-red-500"
+            } h-10 w-full rounded-md border-b-2   bg-lightSlate px-2  text-base text-deepSlate-dark outline-none   dark:bg-lightSlate-dark dark:text-lightSlate`}
+          />
+          <span className="mt-3 flex w-11 select-none items-start justify-center text-xs opacity-60">
+            {MAX_USERNAME_LENGTH - newUsername.length}
+          </span>
+        </div>
+      ) : (
+        <p className="self-center truncate px-2 text-base">@{newUsername}</p>
+      )}
     </div>
   );
 }

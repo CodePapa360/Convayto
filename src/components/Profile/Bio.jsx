@@ -44,33 +44,10 @@ function Bio() {
 
   return (
     <div className="mt-4">
-      <p className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark">
-        Bio
-      </p>
-      <div className="grid h-auto grid-cols-[1fr_auto] items-start justify-between">
-        {isEditing ? (
-          <div className="grid grid-cols-[1fr_auto]">
-            <textarea
-              value={newBio}
-              ref={textareaRef}
-              onChange={(e) => {
-                e.target.value.length <= MAX_BIO_LENGTH &&
-                  setNewBio(e.target.value);
-              }}
-              onInput={(e) => {
-                e.target.style.height = "auto";
-                e.target.style.height = e.target.scrollHeight + 2 + "px";
-              }}
-              className="h-10 w-full rounded-md border-b-2 border-textViolet bg-lightSlate px-2 text-deepSlate-dark outline-none dark:border-textViolet-dark dark:bg-lightSlate-dark dark:text-lightSlate"
-            />
-
-            <span className="flex w-8 select-none items-start justify-center text-xs opacity-60 ">
-              {MAX_BIO_LENGTH - newBio.length}
-            </span>
-          </div>
-        ) : (
-          <p className="break-all px-2 ">{newBio}</p>
-        )}
+      <div className="flex items-center justify-between">
+        <p className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark">
+          Bio
+        </p>
 
         <button
           onClick={handleUpdate}
@@ -86,6 +63,30 @@ function Bio() {
           )}
         </button>
       </div>
+
+      {isEditing ? (
+        <div className="flex justify-between">
+          <textarea
+            value={newBio}
+            ref={textareaRef}
+            onChange={(e) => {
+              e.target.value.length <= MAX_BIO_LENGTH &&
+                setNewBio(e.target.value);
+            }}
+            onInput={(e) => {
+              e.target.style.height = "auto";
+              e.target.style.height = e.target.scrollHeight + 2 + "px";
+            }}
+            className="h-10 w-full rounded-md border-b-2 border-textViolet bg-lightSlate px-2 text-deepSlate-dark outline-none dark:border-textViolet-dark dark:bg-lightSlate-dark dark:text-lightSlate"
+          />
+
+          <span className="mt-3 flex w-11 select-none items-start justify-center text-xs opacity-60">
+            {MAX_BIO_LENGTH - newBio.length}
+          </span>
+        </div>
+      ) : (
+        <p className="self-center break-all px-2">{newBio}</p>
+      )}
     </div>
   );
 }

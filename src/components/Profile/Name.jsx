@@ -40,30 +40,10 @@ function Name() {
 
   return (
     <div className="mt-8">
-      <p className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark">
-        Name
-      </p>
-      <div className="grid h-auto grid-cols-[1fr_auto] items-start justify-between">
-        {isEditing ? (
-          <div className="grid grid-cols-[1fr_auto]">
-            <input
-              type="text"
-              ref={inputRef}
-              value={newName}
-              onChange={(e) => {
-                e.target.value.length <= MAX_NAME_LENGTH &&
-                  setNewName(e.target.value);
-              }}
-              // onBlur={handleUpdate}
-              className="h-11 w-full rounded-md border-b-2 border-textViolet bg-lightSlate px-2 text-base text-deepSlate-dark outline-none dark:border-textViolet-dark dark:bg-lightSlate-dark dark:text-lightSlate"
-            />
-            <span className="flex w-8 select-none items-start justify-center text-xs opacity-60">
-              {MAX_NAME_LENGTH - newName.length}
-            </span>
-          </div>
-        ) : (
-          <p className="truncate px-2 text-base">{newName}</p>
-        )}
+      <div className="flex items-center justify-between">
+        <p className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark">
+          Name
+        </p>
 
         <button
           onClick={handleUpdate}
@@ -79,6 +59,26 @@ function Name() {
           )}
         </button>
       </div>
+
+      {isEditing ? (
+        <div className="flex justify-between">
+          <input
+            type="text"
+            ref={inputRef}
+            value={newName}
+            onChange={(e) => {
+              e.target.value.length <= MAX_NAME_LENGTH &&
+                setNewName(e.target.value);
+            }}
+            className="h-10 w-full rounded-md border-b-2 border-textViolet bg-lightSlate px-2 text-base text-deepSlate-dark outline-none dark:border-textViolet-dark dark:bg-lightSlate-dark dark:text-lightSlate"
+          />
+          <span className="mt-3 flex w-11 select-none items-start justify-center text-xs opacity-60">
+            {MAX_NAME_LENGTH - newName.length}
+          </span>
+        </div>
+      ) : (
+        <p className="self-center truncate px-2 text-base">{newName}</p>
+      )}
     </div>
   );
 }

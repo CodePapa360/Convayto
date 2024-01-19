@@ -16,9 +16,9 @@ function ChangePasssword() {
   return (
     <button
       onClick={handleRequest}
-      className="mt-4 h-10 rounded-md bg-textViolet px-4 text-lightSlate hover:bg-textViolet/50"
+      className="mt-6 h-10 rounded-md bg-textViolet px-4 text-lightSlate hover:bg-textViolet/50"
     >
-      Send password reset email
+      Reset password
     </button>
   );
 }

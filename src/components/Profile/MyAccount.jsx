@@ -5,8 +5,16 @@ import Bio from "./Bio";
 import { useUi } from "../../contexts/UiContext";
 import Avatar from "./Avatar";
 import ChangePasssword from "./ChangePasssword";
+import { useUser } from "../../features/authentication/useUser";
 
 function MyAccount() {
+  const {
+    user: { email },
+  } = useUser();
+  // const {
+  //   user_metadata: { bio },
+  // } = user;
+
   const { closeAccountView } = useUi();
 
   function handleGoBack() {
@@ -33,6 +41,15 @@ function MyAccount() {
         <Username />
 
         <Bio />
+
+        <div className="mt-5">
+          <p className="select-none text-sm font-bold tracking-wider text-textViolet opacity-80 dark:text-textViolet-dark">
+            Email
+          </p>
+          <p className="mt-2 self-center truncate px-2 text-base opacity-80">
+            {email}
+          </p>
+        </div>
 
         <ChangePasssword />
       </div>
