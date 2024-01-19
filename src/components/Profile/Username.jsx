@@ -3,6 +3,7 @@ import { useUser } from "../../features/authentication/useUser";
 import { RiCheckFill, RiEdit2Line } from "react-icons/ri";
 import { useUpdateUser } from "../../features/hooks/useUpdateUser";
 import Loader from "../Loader";
+import { MAX_USERNAME_LENGTH } from "../../config";
 
 function Username() {
   const { updateUser, isUpdating } = useUpdateUser();
@@ -16,9 +17,6 @@ function Username() {
   const usernameRegex = /^[a-z0-9_]{3,30}$/;
   const isValidUsername = usernameRegex.test(newUsername);
   const inputRef = useRef(null);
-
-  // Highest length of a username is 25 characters
-  const MAX_USERNAME_LENGTH = 30;
 
   useEffect(() => {
     if (isEditing) {
@@ -59,7 +57,6 @@ function Username() {
                 e.target.value.length <= MAX_USERNAME_LENGTH &&
                   setNewUsername(e.target.value);
               }}
-              // onBlur={handleUpdate}
               className={`${
                 isValidUsername
                   ? "border-textViolet  dark:border-textViolet-dark"
