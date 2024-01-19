@@ -3,6 +3,7 @@ import { useUser } from "../../features/authentication/useUser";
 import { RiCheckFill, RiEdit2Line } from "react-icons/ri";
 import { useUpdateUser } from "../../features/hooks/useUpdateUser";
 import Loader from "../Loader";
+import { MAX_NAME_LENGTH } from "../../config";
 
 function Name() {
   const { updateUser, isUpdating } = useUpdateUser();
@@ -14,8 +15,6 @@ function Name() {
   const [newName, setNewName] = useState(fullname || "");
   const [isEditing, setIsEditing] = useState(false);
 
-  // Highest length of a name is 25 characters
-  const MAX_NAME_LENGTH = 25;
   const inputRef = useRef(null);
 
   useEffect(() => {
