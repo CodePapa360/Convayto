@@ -3,7 +3,7 @@ import { useUser } from "../../features/authentication/useUser";
 import { RiCheckFill, RiEdit2Line } from "react-icons/ri";
 import { useUpdateUser } from "../../features/hooks/useUpdateUser";
 import Loader from "../Loader";
-import { MAX_USERNAME_LENGTH } from "../../config";
+import { MIN_USERNAME_LENGTH, MAX_USERNAME_LENGTH } from "../../config";
 
 function Username() {
   const { updateUser, isUpdating } = useUpdateUser();
@@ -14,7 +14,9 @@ function Username() {
 
   const [newUsername, setNewUsername] = useState(username);
   const [isEditing, setIsEditing] = useState(false);
-  const usernameRegex = /^[a-z0-9_]{3,30}$/;
+  const usernameRegex = new RegExp(
+    `^[a-z0-9_]{${MIN_USERNAME_LENGTH},${MAX_USERNAME_LENGTH}}$`,
+  );
   const isValidUsername = usernameRegex.test(newUsername);
   const inputRef = useRef(null);
 
