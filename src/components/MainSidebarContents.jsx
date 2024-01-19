@@ -110,6 +110,7 @@ function MainSidebarContents() {
             <span className="h-11 w-11 overflow-hidden rounded-full text-black  dark:text-white">
               {avatar_url ? (
                 <img
+                  draggable="false"
                   src={avatar_url}
                   alt="avatar"
                   className="h-full w-full object-cover"

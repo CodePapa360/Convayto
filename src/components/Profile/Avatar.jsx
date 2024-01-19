@@ -20,6 +20,7 @@ function Avatar() {
     <div className="relative mx-auto mt-4 h-52 w-52  rounded-full border-2 border-textViolet dark:border-textViolet-dark">
       {avatar_url ? (
         <img
+          draggable="false"
           className="h-full w-full rounded-full object-cover object-center"
           src={avatar_url}
           alt="avatar"

@@ -29,6 +29,7 @@ function Conversation({ conversation }) {
       <span className="h-12 w-12 overflow-hidden rounded-full">
         {avatar_url ? (
           <img
+            draggable="false"
             src={avatar_url}
             alt={fullname}
             className="h-full w-full object-cover"
