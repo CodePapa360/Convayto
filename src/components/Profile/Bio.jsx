@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useUser } from "../../features/authentication/useUser";
 import { RiCheckFill, RiEdit2Line } from "react-icons/ri";
-import { updateProfile } from "../../services/apiProfileUpdate";
+import { useUpdateUser } from "../../features/hooks/useUpdateUser";
+import Loader from "../Loader";
+import { MAX_BIO_LENGTH } from "../../config";
 
 function Bio() {
+  const { updateUser, isUpdating } = useUpdateUser();
   const { user, invalidateUser } = useUser();
   const {
     user_metadata: { bio },
@@ -11,9 +14,6 @@ function Bio() {
 
   const [newBio, setNewBio] = useState(bio || "");
   const [isEditing, setIsEditing] = useState(false);
-
-  // Highest length of a name is 25 characters
-  const MAX_BIO_LENGTH = 140;
 
   const textareaRef = useRef(null);
 
@@ -31,12 +31,11 @@ function Bio() {
     if (!isEditing) return setIsEditing(true);
 
     const trimedBio = newBio.trim();
-
     if (trimedBio === "") return console.log("The field cannot be empty.");
     if (trimedBio === bio) return setIsEditing(false);
 
     if (isEditing) {
-      updateProfile({ data: { bio: trimedBio } });
+      updateUser({ bio: trimedBio });
       invalidateUser();
       setIsEditing(false);
       return;
@@ -48,9 +47,9 @@ function Bio() {
       <p className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark">
         Bio
       </p>
-      <div className=" flex h-auto items-start justify-between gap-2">
+      <div className="grid h-auto grid-cols-[1fr_auto] items-start justify-between">
         {isEditing ? (
-          <>
+          <div className="grid grid-cols-[1fr_auto]">
             <textarea
               value={newBio}
               ref={textareaRef}
@@ -62,25 +61,29 @@ function Bio() {
                 e.target.style.height = "auto";
                 e.target.style.height = e.target.scrollHeight + 2 + "px";
               }}
-              // onBlur={handleUpdate}
-              className="h-10 w-full rounded-md border-b-2 border-textViolet bg-lightSlate px-2 text-base text-deepSlate-dark outline-none dark:border-textViolet-dark dark:bg-lightSlate-dark dark:text-lightSlate"
+              className="h-10 w-full rounded-md border-b-2 border-textViolet bg-lightSlate px-2 text-deepSlate-dark outline-none dark:border-textViolet-dark dark:bg-lightSlate-dark dark:text-lightSlate"
             />
 
-            <span className="w-8 select-none text-sm opacity-60 ">
+            <span className="flex w-8 select-none items-start justify-center text-xs opacity-60 ">
               {MAX_BIO_LENGTH - newBio.length}
             </span>
-          </>
+          </div>
         ) : (
-          <p className="break-all px-2 text-base">{newBio}</p>
+          <p className="break-all px-2 ">{newBio}</p>
         )}
 
         <button
           onClick={handleUpdate}
-          // disabled={newBio.trim() === ""}
-          className="rounded-full p-3 text-xl text-textViolet 
-          hover:bg-black/10   dark:text-textViolet-dark dark:hover:bg-lightSlate/10"
+          className="flex h-11 w-11 items-center justify-center rounded-full text-xl text-textViolet 
+          hover:bg-black/10 dark:text-textViolet-dark dark:hover:bg-lightSlate/10"
         >
-          {isEditing ? <RiCheckFill /> : <RiEdit2Line />}
+          {isUpdating ? (
+            <Loader />
+          ) : isEditing ? (
+            <RiCheckFill />
+          ) : (
+            <RiEdit2Line />
+          )}
         </button>
       </div>
     </div>

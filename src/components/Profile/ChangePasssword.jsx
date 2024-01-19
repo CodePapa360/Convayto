@@ -7,7 +7,6 @@ function ChangePasssword() {
 
   function handleRequest() {
     try {
-      // request to change password
       sendPasswordResetEmail(email);
     } catch (error) {
       console.log(error);
@@ -15,14 +14,12 @@ function ChangePasssword() {
   }
 
   return (
-    <div>
-      <button
-        onClick={handleRequest}
-        className="h-10 rounded-md bg-textViolet px-4 text-lightSlate hover:bg-textViolet/50"
-      >
-        Send password reset email
-      </button>
-    </div>
+    <button
+      onClick={handleRequest}
+      className="mt-4 h-10 rounded-md bg-textViolet px-4 text-lightSlate hover:bg-textViolet/50"
+    >
+      Send password reset email
+    </button>
   );
 }
 
