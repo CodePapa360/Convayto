@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { searchPeople } from "../../services/apiAuth";
+import { MINIMUM_SEARCH_LENGTH } from "../../config";
 
 export function useSearchedUsers(query) {
   const [users, setUsers] = useState([]);
@@ -28,7 +29,7 @@ export function useSearchedUsers(query) {
         }
       }
 
-      if (query.length < 3) {
+      if (query.length < MINIMUM_SEARCH_LENGTH) {
         setUsers([]);
         setError("");
         setIsLoading(false); // Reset loading state
