@@ -26,7 +26,7 @@ function Conversation({ conversation }) {
       } flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 `}
       onClick={handleClick}
     >
-      <span className="h-12 w-12 overflow-hidden rounded-full">
+      <span className="h-12 w-12  overflow-hidden rounded-full">
         {avatar_url ? (
           <img
             draggable="false"
@@ -36,7 +36,9 @@ function Conversation({ conversation }) {
           />
         ) : (
           <HiOutlineUserCircle
-            style={{ height: "100%", opacity: "0.5", width: "100%" }}
+            size={55}
+            viewBox="2 2 24 24"
+            opacity={0.5}
             strokeWidth="1"
           />
         )}

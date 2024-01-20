@@ -45,7 +45,7 @@ function FriendProfileBar({ data }) {
               />
             ) : (
               <HiOutlineUserCircle
-                style={{ height: "100%", opacity: "0.5", width: "100%" }}
+                className="h-full w-full opacity-50"
                 strokeWidth="1"
               />
             )}

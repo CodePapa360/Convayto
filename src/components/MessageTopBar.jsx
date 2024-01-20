@@ -49,9 +49,11 @@ function MessageTopBar() {
                 />
               ) : (
                 <HiOutlineUserCircle
-                  style={{ height: "100%", opacity: "0.5", width: "100%" }}
-                  strokeWidth="1"
-                />
+            size={55}
+            viewBox="2 2 24 24"
+            opacity={0.5}
+            strokeWidth="1"
+          />
               )}
             </span>
             <span className="flex flex-col">

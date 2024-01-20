@@ -28,7 +28,9 @@ function SearchedUser({ user }) {
           />
         ) : (
           <HiOutlineUserCircle
-            style={{ height: "100%", opacity: "0.5", width: "100%" }}
+            size={55}
+            viewBox="2 2 24 24"
+            opacity={0.5}
             strokeWidth="1"
           />
         )}
