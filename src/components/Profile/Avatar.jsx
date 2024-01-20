@@ -27,9 +27,7 @@ function Avatar() {
         />
       ) : (
         <HiOutlineUserCircle
-          size={55}
-          viewBox="2 2 24 24"
-          opacity={0.5}
+          className="h-full w-full opacity-50"
           strokeWidth="1"
         />
       )}
@@ -44,7 +42,7 @@ function Avatar() {
           onChange={(e) => handleUpdateUser(e.target.files[0])}
           disabled={isUpdating}
           className="hidden"
-          accept="image/*"
+          accept="image/jpeg,image/png,image/webp"
           type="file"
           name="photo"
           id="uploadPhoto"
