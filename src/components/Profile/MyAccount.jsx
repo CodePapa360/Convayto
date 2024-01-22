@@ -6,27 +6,20 @@ import { useUi } from "../../contexts/UiContext";
 import Avatar from "./Avatar";
 import ChangePasssword from "./ChangePasssword";
 import { useUser } from "../../features/authentication/useUser";
-import { useEffect } from "react";
 
 function MyAccount() {
-  // use browser history so that if user clicks on the privious button in the browser they go back
-
   const {
     user: { email },
   } = useUser();
 
   const { closeAccountView } = useUi();
 
-  function handleGoBack() {
-    closeAccountView();
-  }
-
   return (
     <div className="fadeIn overflow-hidden">
       <div className="flex h-16 items-center justify-start gap-4 p-2 dark:bg-slate-700">
         <button
           className="rounded-full p-3 text-xl hover:bg-black/10 dark:hover:bg-lightSlate/10"
-          onClick={handleGoBack}
+          onClick={() => closeAccountView()}
         >
           <RiArrowLeftLine />
         </button>
