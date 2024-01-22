@@ -11,9 +11,6 @@ function MyAccount() {
   const {
     user: { email },
   } = useUser();
-  // const {
-  //   user_metadata: { bio },
-  // } = user;
 
   const { closeAccountView } = useUi();
 

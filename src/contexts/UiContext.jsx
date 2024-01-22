@@ -84,12 +84,17 @@ function UiProvider({ children }) {
     dispatch({ type: "CLOSE_SIDEBAR" });
   }
 
-  function closeAccountView() {
-    dispatch({ type: "CLOSE_ACCOUNT_VIEW" });
-  }
-
   function openAccountView() {
     dispatch({ type: "OPEN_ACCOUNT_VIEW" });
+    window.history.pushState(null, null, window.location.href);
+    window.onpopstate = () => {
+      closeAccountView();
+    };
+  }
+
+  function closeAccountView() {
+    dispatch({ type: "CLOSE_ACCOUNT_VIEW" });
+    window.history.back();
   }
 
   function openSearchView() {
