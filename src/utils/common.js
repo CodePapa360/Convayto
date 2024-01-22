@@ -40,7 +40,7 @@ export function formatTime(rawTime) {
     return new Intl.DateTimeFormat("en-US", options).format(new Date(rawTime));
 
     // return "Last Week";
-  } else if (year === now.getFullYear()) {
+  } else if (year === thisYear) {
     options.month = "short";
     options.day = "numeric";
 

@@ -1,15 +1,6 @@
 import supabase from "./supabase";
 import { supabaseUrl } from "./supabase";
 
-export async function updateProfile(dataObj) {
-  const { data, error } = await supabase.auth.updateUser(dataObj);
-
-  if (error) throw new Error(error.message);
-
-  console.log(data);
-  return data;
-}
-
 export async function updateCurrentUser({
   password,
   fullname,
@@ -20,6 +11,7 @@ export async function updateCurrentUser({
 }) {
   // 1. Update password OR fullname
   let updateData;
+
   if (password) updateData = { password };
   if (fullname) updateData = { data: { fullname } };
   if (username) updateData = { data: { username } };

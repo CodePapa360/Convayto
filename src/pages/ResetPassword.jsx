@@ -3,10 +3,10 @@ import { useUser } from "../features/authentication/useUser";
 import { useNavigate } from "react-router-dom";
 import { RiLoginCircleLine } from "react-icons/ri";
 import Loader from "../components/Loader";
-import { useUpdatePassword } from "../features/hooks/useUpdatePassword";
+import { useUpdateUser } from "../features/hooks/useUpdateUser";
 
 function ResetPassword() {
-  const { isUpdating, updatePassword, error } = useUpdatePassword();
+  const { updateUser, isUpdating } = useUpdateUser();
   const navigate = useNavigate();
   const [urlRefreshToken, setUrlRefreshToken] = useState("");
   const { session } = useUser();
@@ -34,7 +34,7 @@ function ResetPassword() {
     if (newPassword !== confirmPassword)
       return console.log("Password did not match!");
 
-    updatePassword(
+    updateUser(
       { password: newPassword },
       {
         onSuccess: () => {
