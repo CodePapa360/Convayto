@@ -10,7 +10,7 @@ import { useConversatoins } from "../features/hooks/useConversations";
 import { sortConverseByTime } from "../utils/common";
 import Signout from "../features/authentication/Signout";
 import Conversation from "./Conversation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getMessages } from "../services/apiAuth";
 import SearchView from "./SearchView";
 import Loader from "./Loader";
@@ -24,8 +24,13 @@ function MainSidebarContents() {
   const [query, setQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const inputRef = useRef(null);
+
   useEffect(() => {
     setQuery("");
+    if (!isSearchView && inputRef.current) {
+      inputRef.current.blur();
+    }
   }, [isSearchView]);
 
   const { user } = useUser();
@@ -117,11 +122,11 @@ function MainSidebarContents() {
                 />
               ) : (
                 <HiOutlineUserCircle
-            size={55}
-            viewBox="2 2 24 24"
-            opacity={0.5}
-            strokeWidth="1"
-          />
+                  size={55}
+                  viewBox="2 2 24 24"
+                  opacity={0.5}
+                  strokeWidth="1"
+                />
               )}
             </span>
 
@@ -140,8 +145,9 @@ function MainSidebarContents() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"
-            onFocus={() => openSearchView()}
+            onClick={() => openSearchView()}
             placeholder="Search people"
+            ref={inputRef}
           />
 
           <span className="pointer-events-none absolute left-3 top-3 text-xl opacity-40">
