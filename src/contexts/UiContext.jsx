@@ -84,25 +84,38 @@ function UiProvider({ children }) {
     dispatch({ type: "CLOSE_SIDEBAR" });
   }
 
+  function popAccountBack() {
+    dispatch({ type: "CLOSE_ACCOUNT_VIEW" });
+    window.removeEventListener("popstate", popAccountBack);
+  }
+
   function openAccountView() {
     dispatch({ type: "OPEN_ACCOUNT_VIEW" });
     window.history.pushState(null, null, window.location.href);
-    window.onpopstate = () => {
-      closeAccountView();
-    };
+    window.addEventListener("popstate", popAccountBack);
   }
 
   function closeAccountView() {
     dispatch({ type: "CLOSE_ACCOUNT_VIEW" });
     window.history.back();
+    window.removeEventListener("popstate", popAccountBack);
+  }
+
+  function popSearchBack() {
+    dispatch({ type: "CLOSE_SEARCH_VIEW" });
+    window.removeEventListener("popstate", popSearchBack);
   }
 
   function openSearchView() {
     dispatch({ type: "OPEN_SEARCH_VIEW" });
+    window.history.pushState(null, null, window.location.href);
+    window.addEventListener("popstate", popSearchBack);
   }
 
   function closeSearchView() {
     dispatch({ type: "CLOSE_SEARCH_VIEW" });
+    window.history.back();
+    window.removeEventListener("popstate", popSearchBack);
   }
 
   function closeFriendSidebar() {

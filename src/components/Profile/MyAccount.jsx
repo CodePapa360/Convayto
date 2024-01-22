@@ -6,8 +6,11 @@ import { useUi } from "../../contexts/UiContext";
 import Avatar from "./Avatar";
 import ChangePasssword from "./ChangePasssword";
 import { useUser } from "../../features/authentication/useUser";
+import { useEffect } from "react";
 
 function MyAccount() {
+  // use browser history so that if user clicks on the privious button in the browser they go back
+
   const {
     user: { email },
   } = useUser();
