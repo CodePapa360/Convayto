@@ -1,8 +1,10 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getConversations } from "../../services/apiAuth";
+import { getConversations, getMessages } from "../../services/apiAuth";
 import { useUser } from "../authentication/useUser";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { subscribeRealtimeConversation } from "../../services/apiRealtime";
+import { sortConverseByTime } from "../../utils/common";
+import { MAX_PREFETCHED_CONVERSATIONS } from "../../config";
 
 let subscriptionConversation;
 
@@ -49,5 +51,29 @@ export function useConversatoins() {
     console.error("Error fetching conversations:", error.message);
   }
 
-  return { data, isPending };
+  const sortedConversations =
+    data?.length > 1 ? data?.sort(sortConverseByTime) : data;
+
+  const hasPrefetched = useRef(false);
+
+  useEffect(() => {
+    if (!sortedConversations || hasPrefetched.current) return;
+
+    sortedConversations
+      ?.slice(0, MAX_PREFETCHED_CONVERSATIONS)
+      .forEach((conv) => {
+        const { friend } = conv;
+        const { id: friendUserId } = friend;
+        const myUserId = user?.id;
+
+        queryClient.prefetchQuery({
+          queryKey: ["friend", friendUserId],
+          queryFn: () => getMessages({ myUserId, friendUserId }),
+        });
+      });
+
+    hasPrefetched.current = true;
+  }, [sortedConversations, queryClient, user?.id]);
+
+  return { conversations: sortedConversations, isPending };
 }

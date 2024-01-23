@@ -4,14 +4,11 @@ import {
   RiCloseFill,
   RiArrowLeftLine,
 } from "react-icons/ri";
-import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "../features/authentication/useUser";
 import { useConversatoins } from "../features/hooks/useConversations";
-import { sortConverseByTime } from "../utils/common";
 import Signout from "../features/authentication/Signout";
 import Conversation from "./Conversation";
 import { useEffect, useRef, useState } from "react";
-import { getMessages } from "../services/apiAuth";
 import SearchView from "./SearchView";
 import Loader from "./Loader";
 import { useUi } from "../contexts/UiContext";
@@ -36,30 +33,7 @@ function MainSidebarContents() {
   const { user } = useUser();
   const { fullname, username, avatar_url } = user.user_metadata;
 
-  const { data: conversations, isPending } = useConversatoins();
-  const queryClient = useQueryClient();
-
-  const sortedConversations =
-    conversations?.length > 1
-      ? conversations?.sort(sortConverseByTime)
-      : conversations;
-
-  // prefetching messages of other conversations
-  sortedConversations?.slice(0, 5).forEach((conv) => {
-    const { friend } = conv;
-    const { id: friendUserId } = friend;
-    const myUserId = user?.id;
-
-    const prefetch = async () => {
-      // The results of this query will be cached like a normal query
-      await queryClient.prefetchQuery({
-        queryKey: ["friend", friendUserId],
-        queryFn: () => getMessages({ myUserId, friendUserId }),
-      });
-    };
-
-    // prefetch();
-  });
+  const { conversations, isPending } = useConversatoins();
 
   function handleMenuBtnClick() {
     // if is searching then close search view else open menu
@@ -173,7 +147,7 @@ function MainSidebarContents() {
               )}
 
               {!isPending &&
-                sortedConversations?.map((conv) => (
+                conversations?.map((conv) => (
                   <Conversation key={conv.friend.id} conversation={conv} />
                 ))}
             </div>
