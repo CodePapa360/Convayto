@@ -66,7 +66,7 @@ function MainSidebarContents() {
               <>
                 {/* Overlay */}
                 <div
-                  onClick={handleMenuBtnClick}
+                  onMouseDown={handleMenuBtnClick}
                   className={`${
                     isMenuOpen
                       ? "pointer-events-auto visible"
@@ -74,7 +74,7 @@ function MainSidebarContents() {
                   }  fixed left-0 top-0 z-40  h-dvh w-dvw opacity-0 transition-all duration-200 ease-in-out`}
                 ></div>
 
-                {/* Menu */}
+                {/* DropdownMenu */}
 
                 <Dropdown />
               </>
