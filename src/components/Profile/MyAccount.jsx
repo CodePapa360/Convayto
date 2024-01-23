@@ -15,7 +15,7 @@ function MyAccount() {
   const { closeAccountView } = useUi();
 
   return (
-    <div className="fadeIn overflow-hidden">
+    <div className="fadeIn grid h-dvh grid-rows-[auto_1fr] overflow-hidden">
       <div className="flex h-16 items-center justify-start gap-4 p-2 dark:bg-slate-700">
         <button
           className="rounded-full p-3 text-xl hover:bg-black/10 dark:hover:bg-lightSlate/10"
@@ -26,7 +26,7 @@ function MyAccount() {
         <p className="select-none font-bold tracking-wider">Profile</p>
       </div>
 
-      <div className="overflow-scroll p-4">
+      <div className="h-full overflow-scroll p-4">
         <Avatar />
 
         <Name />
