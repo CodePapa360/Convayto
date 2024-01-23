@@ -9,8 +9,8 @@ function SearchedUser({ user }) {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate(`/${id}`);
     closeSearchView();
+    navigate(`/${id}`);
   }
 
   return (
