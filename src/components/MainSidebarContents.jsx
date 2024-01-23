@@ -67,6 +67,7 @@ function MainSidebarContents() {
                 {/* Overlay */}
                 <div
                   onMouseDown={handleMenuBtnClick}
+                  onTouchStart={handleMenuBtnClick}
                   className={`${
                     isMenuOpen
                       ? "pointer-events-auto visible"
