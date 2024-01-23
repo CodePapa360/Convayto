@@ -84,46 +84,57 @@ function UiProvider({ children }) {
     dispatch({ type: "CLOSE_SIDEBAR" });
   }
 
-  function popAccountBack() {
+  function popAccountViewBack() {
     dispatch({ type: "CLOSE_ACCOUNT_VIEW" });
-    window.removeEventListener("popstate", popAccountBack);
+    window.removeEventListener("popstate", popAccountViewBack);
   }
 
   function openAccountView() {
     dispatch({ type: "OPEN_ACCOUNT_VIEW" });
     window.history.pushState(null, null, window.location.href);
-    window.addEventListener("popstate", popAccountBack);
+    window.addEventListener("popstate", popAccountViewBack);
   }
 
   function closeAccountView() {
     dispatch({ type: "CLOSE_ACCOUNT_VIEW" });
     window.history.back();
-    window.removeEventListener("popstate", popAccountBack);
+    window.removeEventListener("popstate", popAccountViewBack);
   }
 
-  function popSearchBack() {
+  function popSearchViewBack() {
     dispatch({ type: "CLOSE_SEARCH_VIEW" });
-    window.removeEventListener("popstate", popSearchBack);
+    window.removeEventListener("popstate", popSearchViewBack);
   }
 
   function openSearchView() {
     dispatch({ type: "OPEN_SEARCH_VIEW" });
     window.history.pushState(null, null, window.location.href);
-    window.addEventListener("popstate", popSearchBack);
+    window.addEventListener("popstate", popSearchViewBack);
   }
 
   function closeSearchView() {
     dispatch({ type: "CLOSE_SEARCH_VIEW" });
     window.history.back();
-    window.removeEventListener("popstate", popSearchBack);
+    window.removeEventListener("popstate", popSearchViewBack);
   }
 
-  function closeFriendSidebar() {
+  function popFriendSidebarBack() {
     dispatch({ type: "CLOSE_FRIEND_SIDEBAR" });
+    window.removeEventListener("popstate", popFriendSidebarBack);
   }
 
   function openFriendSidebar() {
     dispatch({ type: "OPEN_FRIEND_SIDEBAR" });
+
+    window.history.pushState(null, null, window.location.href);
+    window.addEventListener("popstate", popFriendSidebarBack);
+  }
+
+  function closeFriendSidebar() {
+    dispatch({ type: "CLOSE_FRIEND_SIDEBAR" });
+
+    window.history.back();
+    window.removeEventListener("popstate", popFriendSidebarBack);
   }
 
   function updateDarkMode(newMode) {
