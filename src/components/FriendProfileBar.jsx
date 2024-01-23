@@ -22,7 +22,7 @@ function FriendProfileBar({ data }) {
       <div
         className={`${
           isFriendsSidebarOpen ? "right-0 opacity-100" : "-right-full opacity-0"
-        } absolute top-0 z-30 h-dvh w-4/5 overflow-hidden bg-mediumSlate transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] sm:w-[21rem] dark:bg-mediumSlate-dark`}
+        } absolute top-0 z-30 grid h-dvh w-4/5 grid-rows-[auto_1fr] overflow-hidden bg-mediumSlate transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] dark:bg-mediumSlate-dark sm:w-[21rem] `}
       >
         <div className="flex h-16 items-center justify-start gap-4 bg-mediumSlate p-2 dark:bg-mediumSlate-dark">
           <button
@@ -34,7 +34,7 @@ function FriendProfileBar({ data }) {
           <p className="select-none font-bold tracking-wider">Profile</p>
         </div>
 
-        <div className="overflow-scroll p-4">
+        <div className="h-full overflow-scroll p-4">
           <div className="mx-auto mt-4 h-52 w-52 overflow-hidden rounded-full border-2 border-textViolet dark:border-textViolet-dark">
             {avatar_url ? (
               <img
@@ -69,7 +69,7 @@ function FriendProfileBar({ data }) {
             <p className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark">
               Bio
             </p>
-            <p className="truncate px-2 text-base">{bio}</p>
+            <p className="break-all px-2 text-base">{bio}</p>
           </div>
         </div>
       </div>
