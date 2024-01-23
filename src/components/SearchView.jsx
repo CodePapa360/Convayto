@@ -38,7 +38,7 @@ function SearchView({ query }) {
     );
 
   return (
-    <div className="fadeIn">
+    <div className="fadeIn p-2">
       {filteredUsers?.map((user) => (
         <SearchedUser key={user.id} user={user} />
       ))}
