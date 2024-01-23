@@ -140,7 +140,7 @@ function MainSidebarContents() {
               Chats
             </h2>
 
-            <div className="h-full overflow-auto px-2">
+            <div className="h-full overflow-auto p-2">
               {isPending && (
                 <span className="mt-8 flex flex-col items-center justify-center">
                   <Loader size="medium" text="Loading chats" />
