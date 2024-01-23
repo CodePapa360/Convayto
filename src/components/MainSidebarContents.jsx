@@ -45,7 +45,7 @@ function MainSidebarContents() {
   }
 
   return (
-    <div className="relative z-30 grid select-none grid-cols-1 grid-rows-[auto_1fr]">
+    <div className="relative z-30 grid h-dvh select-none grid-cols-1 grid-rows-[auto_1fr] overflow-hidden">
       <div className="border-b border-borderShade p-2 dark:border-borderShade-dark">
         <div className="mb-2 flex items-center justify-between gap-2">
           <div className="relative">
@@ -131,16 +131,16 @@ function MainSidebarContents() {
         </div>
       </div>
 
-      <div className="p-2">
+      <div className="h-full  overflow-auto">
         {isSearchView && <SearchView query={query} />}
 
         {!isSearchView && (
-          <div>
-            <h2 className="mb-2 border-b border-borderShade pb-2 text-lg dark:border-borderShade-dark">
+          <div className="grid h-full grid-rows-[auto_1fr]">
+            <h2 className="border-borderShadep border-b p-2 text-lg dark:border-borderShade-dark">
               Chats
             </h2>
 
-            <div>
+            <div className="h-full overflow-auto px-2">
               {isPending && (
                 <span className="mt-8 flex flex-col items-center justify-center">
                   <Loader size="medium" text="Loading chats" />
