@@ -84,6 +84,7 @@ function UiProvider({ children }) {
     dispatch({ type: "CLOSE_SIDEBAR" });
   }
 
+  // Account View
   function popAccountViewBack() {
     dispatch({ type: "CLOSE_ACCOUNT_VIEW" });
     window.removeEventListener("popstate", popAccountViewBack);
@@ -101,6 +102,7 @@ function UiProvider({ children }) {
     window.removeEventListener("popstate", popAccountViewBack);
   }
 
+  // Search View
   function popSearchViewBack() {
     dispatch({ type: "CLOSE_SEARCH_VIEW" });
     window.removeEventListener("popstate", popSearchViewBack);
@@ -112,12 +114,13 @@ function UiProvider({ children }) {
     window.addEventListener("popstate", popSearchViewBack);
   }
 
-  function closeSearchView() {
+  function closeSearchView({ back = true } = {}) {
+    back && window.history.back();
     dispatch({ type: "CLOSE_SEARCH_VIEW" });
-    window.history.back();
     window.removeEventListener("popstate", popSearchViewBack);
   }
 
+  // Friends Sidebar
   function popFriendSidebarBack() {
     dispatch({ type: "CLOSE_FRIEND_SIDEBAR" });
     window.removeEventListener("popstate", popFriendSidebarBack);
@@ -137,6 +140,7 @@ function UiProvider({ children }) {
     window.removeEventListener("popstate", popFriendSidebarBack);
   }
 
+  // Dark Mode
   function updateDarkMode(newMode) {
     dispatch({ type: "UPDATE_DARK_MODE", payload: newMode });
 
