@@ -1,9 +1,9 @@
 import { useMessages } from "../features/hooks/useMessages";
+import { scrollToBottom } from "../utils/common";
 import Message from "./Message";
 import { useRef } from "react";
 import { sortMessageByTime } from "../utils/common";
 import Loader from "./Loader";
-import { scrollToBottom } from "../utils/common";
 
 function Messages() {
   const { data, isPending } = useMessages();

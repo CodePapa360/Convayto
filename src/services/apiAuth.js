@@ -1,3 +1,4 @@
+import { MAX_MESSAGES_PER_PAGE } from "../config";
 import supabase from "./supabase";
 
 export async function signup({ email, password, fullname, username }) {
@@ -128,7 +129,7 @@ export async function getUserById(friendUserId) {
 }
 ////////////////
 
-export async function getMessages({ myUserId, friendUserId }) {
+export async function getMessages({ myUserId, friendUserId, range }) {
   const conversationId = await hasPreviousConversation({
     myUserId,
     friendUserId,
@@ -139,10 +140,19 @@ export async function getMessages({ myUserId, friendUserId }) {
   if (!conversationId)
     return { friendDetails, messages: null, conversationId: null };
 
-  const { data: messages, error } = await supabase
+  let query = supabase
     .from("messages")
     .select("*")
     .eq("conversation_id", conversationId);
+
+  if (range) {
+    const from = (range - 1) * MAX_MESSAGES_PER_PAGE;
+    const to = from + MAX_MESSAGES_PER_PAGE - 1;
+
+    query = query.range(from, to);
+  }
+
+  const { data: messages, error } = await query;
 
   if (error) {
     throw new Error(error.message);
