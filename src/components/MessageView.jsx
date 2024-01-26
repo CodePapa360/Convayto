@@ -1,6 +1,6 @@
-import Messages from "../components/Messages";
-import MessageTopBar from "../components/MessageTopBar";
-import MessageInputBar from "../components/MessageInputBar";
+import Messages from "./Messages";
+import MessageTopBar from "./MessageTopBar";
+import MessageInputBar from "./MessageInputBar";
 
 function MessageView() {
   return (
@@ -8,7 +8,9 @@ function MessageView() {
       <MessageTopBar />
 
       <div className="grid grid-cols-1 items-end overflow-y-auto">
-        <Messages />
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-2 px-4 pt-2">
+          <Messages />
+        </div>
       </div>
 
       <MessageInputBar />

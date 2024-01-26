@@ -2,7 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getMessages } from "../../services/apiAuth";
 import { useUser } from "../authentication/useUser";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { subscribeRealtimeMessage } from "../../services/apiRealtime";
 
 let subscription;
@@ -13,11 +13,13 @@ export function useMessages() {
   const queryClient = useQueryClient();
   const myUserId = user.id;
 
+  const [range, setRange] = useState(1);
+
   const { data, isPending, error } = useQuery({
     queryKey: ["friend", friendUserId],
-    queryFn: () => getMessages({ myUserId, friendUserId }),
+    queryFn: () => getMessages({ myUserId, friendUserId, range }),
     // Use previousData to update the messages array
-    select: (data) => ({ ...data, messages: [...(data?.messages || [])] }),
+    // select: (data) => ({ ...data, messages: [...(data?.messages || [])] }),
   });
 
   const conversationId = data?.conversationId;
@@ -83,5 +85,8 @@ export function useMessages() {
     data,
     isPending,
     error,
+    loadMore() {
+      setRange((prevRange) => prevRange + 1);
+    },
   };
 }

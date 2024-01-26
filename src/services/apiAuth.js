@@ -143,7 +143,8 @@ export async function getMessages({ myUserId, friendUserId, range }) {
   let query = supabase
     .from("messages")
     .select("*")
-    .eq("conversation_id", conversationId);
+    .eq("conversation_id", conversationId)
+    .order("created_at", { ascending: false });
 
   if (range) {
     const from = (range - 1) * MAX_MESSAGES_PER_PAGE;

@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./styles/index.css";
-import AppLayout from "./layouts/AppLayout";
+import AppLayout from "./components/AppLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import MessageView from "./layouts/MessageView";
+import MessageView from "./components/MessageView";
 import { UiProvider } from "./contexts/UiContext";
 import ResetPassword from "./pages/ResetPassword";
 
