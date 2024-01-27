@@ -6,14 +6,17 @@ import { useSendNewMessage } from "../features/hooks/useSendNewMessage";
 import { v4 as uuid } from "uuid";
 import { useQueryClient } from "@tanstack/react-query";
 import Loader from "./Loader";
+import { useAppData } from "../contexts/AppDataContext";
 
 function MessageInputBar() {
+  // const { currentConversationId, setCurrentConversationId } = useAppData();
+  // console.log(currentConversationId);
   const [newMessage, setNewMessage] = useState("");
   const { isSending, sendNewMessage } = useSendNewMessage();
   const { user } = useUser();
   const { data, isPending } = useMessages();
   const conversationId = data?.conversationId;
-  const friendUserId = data?.friendDetails.id;
+  const friendUserId = data?.friendDetails?.id;
   const myUserId = user.id;
   const inputRef = useRef(null);
   const queryClient = useQueryClient();

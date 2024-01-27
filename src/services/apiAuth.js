@@ -129,11 +129,13 @@ export async function getUserById(friendUserId) {
 }
 ////////////////
 
-export async function getMessages({ myUserId, friendUserId, range }) {
+export async function getMessages({ myUserId, friendUserId }) {
   const conversationId = await hasPreviousConversation({
     myUserId,
     friendUserId,
   });
+
+  // console.log("page from apiAuth", page);
 
   const friendDetails = await getUserById(friendUserId);
 
@@ -146,12 +148,12 @@ export async function getMessages({ myUserId, friendUserId, range }) {
     .eq("conversation_id", conversationId)
     .order("created_at", { ascending: false });
 
-  if (range) {
-    const from = (range - 1) * MAX_MESSAGES_PER_PAGE;
-    const to = from + MAX_MESSAGES_PER_PAGE - 1;
+  // if (page) {
+  //   const from = (page - 1) * MAX_MESSAGES_PER_PAGE;
+  //   const to = from + MAX_MESSAGES_PER_PAGE - 1;
 
-    query = query.range(from, to);
-  }
+  //   query = query.range(from, to);
+  // }
 
   const { data: messages, error } = await query;
 

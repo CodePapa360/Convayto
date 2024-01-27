@@ -54,7 +54,9 @@ export function useConversatoins() {
   const sortedConversations =
     data?.length > 1 ? data?.sort(sortConverseByTime) : data;
 
-  const hasPrefetched = useRef(false);
+  // Prefetching
+  // set true temporariliiy
+  const hasPrefetched = useRef(true);
 
   useEffect(() => {
     if (!sortedConversations || hasPrefetched.current) return;
@@ -74,6 +76,7 @@ export function useConversatoins() {
 
     hasPrefetched.current = true;
   }, [sortedConversations, queryClient, user?.id]);
+  // prefetch ends
 
   return { conversations: sortedConversations, isPending };
 }
