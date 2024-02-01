@@ -14,26 +14,41 @@ import Loader from "./Loader";
 import { useUi } from "../contexts/UiContext";
 import Dropdown from "./Dropdown";
 import { HiOutlineUserCircle } from "react-icons/hi2";
+import { useParams } from "react-router-dom";
+import { useAppData } from "../contexts/AppDataContext";
 
 function MainSidebarContents() {
+  const { currentConvUser, setCurrentConvUser } = useAppData();
+  const { conversations, isPending } = useConversatoins();
   const { openAccountView, isSearchView, openSearchView, closeSearchView } =
     useUi();
+  const { user } = useUser();
+  const { fullname, username, avatar_url } = user.user_metadata;
   const [query, setQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const inputRef = useRef(null);
+  const { userId: friendUserId } = useParams();
+
+  const searchInputRef = useRef(null);
+
+  useEffect(() => {
+    if (friendUserId && !currentConvUser) {
+      const curConvUser = conversations?.find(
+        (conv) => conv.friend.id === friendUserId,
+      );
+
+      curConvUser && setCurrentConvUser(curConvUser);
+    }
+  }, [conversations, friendUserId, currentConvUser, setCurrentConvUser]);
+
+  console.log(currentConvUser);
 
   useEffect(() => {
     setQuery("");
-    if (!isSearchView && inputRef.current) {
-      inputRef.current.blur();
+    if (!isSearchView && searchInputRef.current) {
+      searchInputRef.current.blur();
     }
   }, [isSearchView]);
-
-  const { user } = useUser();
-  const { fullname, username, avatar_url } = user.user_metadata;
-
-  const { conversations, isPending } = useConversatoins();
 
   function handleMenuBtnClick() {
     // if is searching then close search view else open menu
@@ -122,7 +137,7 @@ function MainSidebarContents() {
             type="text"
             onClick={() => openSearchView()}
             placeholder="Search people"
-            ref={inputRef}
+            ref={searchInputRef}
           />
 
           <span className="pointer-events-none absolute left-3 top-3 text-xl opacity-40">

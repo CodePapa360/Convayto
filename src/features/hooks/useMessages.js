@@ -9,6 +9,7 @@ let subscription;
 
 export function useMessages() {
   const { userId: friendUserId } = useParams();
+
   const { user } = useUser();
   const queryClient = useQueryClient();
   const myUserId = user.id;

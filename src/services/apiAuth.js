@@ -135,9 +135,7 @@ export async function getMessages({ myUserId, friendUserId }) {
     friendUserId,
   });
 
-  // console.log("page from apiAuth", page);
-
-  const friendDetails = await getUserById(friendUserId);
+  // const friendDetails = await getUserById(friendUserId);
 
   if (!conversationId)
     return { friendDetails, messages: null, conversationId: null };
@@ -149,7 +147,7 @@ export async function getMessages({ myUserId, friendUserId }) {
     .order("created_at", { ascending: false });
 
   // if (page) {
-  //   const from = (page - 1) * MAX_MESSAGES_PER_PAGE;
+  //   const from = page  * MAX_MESSAGES_PER_PAGE;
   //   const to = from + MAX_MESSAGES_PER_PAGE - 1;
 
   //   query = query.range(from, to);

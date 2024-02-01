@@ -4,6 +4,7 @@ import Message from "./Message";
 import { useRef } from "react";
 import { sortMessageByTime } from "../utils/common";
 import Loader from "./Loader";
+import { useAppData } from "../contexts/AppDataContext";
 
 function Messages() {
   const { data, isPending } = useMessages();

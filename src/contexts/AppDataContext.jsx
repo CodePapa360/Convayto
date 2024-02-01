@@ -3,15 +3,15 @@ import { createContext, useContext, useReducer } from "react";
 const AppDataContext = createContext();
 
 const InitialState = {
-  currentConversationId: null,
+  currentConvUser: null,
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "SET_CURRENT_CONVERSATION_ID":
+    case "SET_CURRENT_CONV_USER":
       return {
         ...state,
-        currentConversationId: action.payload,
+        currentConvUser: action.payload,
       };
     default:
       return state;
@@ -19,20 +19,20 @@ function reducer(state, action) {
 }
 
 const AppDataProvider = ({ children }) => {
-  const [{ currentConversationId }, dispatch] = useReducer(
-    reducer,
-    InitialState,
-  );
+  const [{ currentConvUser }, dispatch] = useReducer(reducer, InitialState);
 
-  function setCurrentConversationId(conversationId) {
-    dispatch({ type: "SET_CURRENT_CONVERSATION_ID", payload: conversationId });
+  function setCurrentConvUser(user) {
+    dispatch({
+      type: "SET_CURRENT_CONV_USER",
+      payload: user,
+    });
   }
 
   const value = {
     dispatch,
 
-    currentConversationId,
-    setCurrentConversationId,
+    currentConvUser,
+    setCurrentConvUser,
   };
 
   return (
