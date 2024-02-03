@@ -3,7 +3,7 @@ import { createContext, useContext, useReducer } from "react";
 const AppDataContext = createContext();
 
 const InitialState = {
-  currentConvUser: null,
+  currentConversation: null,
 };
 
 function reducer(state, action) {
@@ -11,7 +11,7 @@ function reducer(state, action) {
     case "SET_CURRENT_CONV_USER":
       return {
         ...state,
-        currentConvUser: action.payload,
+        currentConversation: action.payload,
       };
     default:
       return state;
@@ -19,9 +19,9 @@ function reducer(state, action) {
 }
 
 const AppDataProvider = ({ children }) => {
-  const [{ currentConvUser }, dispatch] = useReducer(reducer, InitialState);
+  const [{ currentConversation }, dispatch] = useReducer(reducer, InitialState);
 
-  function setCurrentConvUser(user) {
+  function setCurrentConversation(user) {
     dispatch({
       type: "SET_CURRENT_CONV_USER",
       payload: user,
@@ -31,8 +31,8 @@ const AppDataProvider = ({ children }) => {
   const value = {
     dispatch,
 
-    currentConvUser,
-    setCurrentConvUser,
+    currentConversation,
+    setCurrentConversation,
   };
 
   return (

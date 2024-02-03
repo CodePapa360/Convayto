@@ -9,14 +9,15 @@ import Loader from "./Loader";
 import { useAppData } from "../contexts/AppDataContext";
 
 function MessageInputBar() {
-  // const { currentConversationId, setCurrentConversationId } = useAppData();
+  const { currentConversation, setCurrentConversation } = useAppData();
+  // const { conversation_id } = currentConversation.messages.conversation_id;
   // console.log(currentConversationId);
   const [newMessage, setNewMessage] = useState("");
   const { isSending, sendNewMessage } = useSendNewMessage();
   const { user } = useUser();
-  const { data, isPending } = useMessages();
-  const conversationId = data?.conversationId;
-  const friendUserId = data?.friendDetails?.id;
+  // const { data, isPending } = useMessages();
+  const conversationId = currentConversation.messages.conversation_id;
+  const friendUserId = currentConversation.friend.id;
   const myUserId = user.id;
   const inputRef = useRef(null);
   const queryClient = useQueryClient();
@@ -90,7 +91,7 @@ function MessageInputBar() {
 
         <button
           className={`m-1 flex h-10 w-10 items-center justify-center rounded-full bg-lightViolet text-2xl text-white hover:bg-lightViolet/80 active:scale-95 dark:bg-lightViolet-dark `}
-          disabled={isPending || isSending}
+          disabled={isSending}
           onClick={handleSendNewMessage}
           type="submit"
         >

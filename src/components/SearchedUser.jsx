@@ -5,7 +5,7 @@ import { useAppData } from "../contexts/AppDataContext";
 
 function SearchedUser({ user }) {
   const { closeSearchView } = useUi();
-  const { setCurrentConvUser } = useAppData();
+  const { setCurrentConversation } = useAppData();
 
   const { fullname, id, username, avatar_url } = user;
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ function SearchedUser({ user }) {
   function handleClick() {
     closeSearchView({ back: false });
     navigate(`/${id}`, { replace: true });
-    setCurrentConvUser(user);
+    setCurrentConversation(user);
   }
 
   return (

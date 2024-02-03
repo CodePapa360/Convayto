@@ -18,7 +18,7 @@ import { useParams } from "react-router-dom";
 import { useAppData } from "../contexts/AppDataContext";
 
 function MainSidebarContents() {
-  const { currentConvUser, setCurrentConvUser } = useAppData();
+  const { currentConversation, setCurrentConversation } = useAppData();
   const { conversations, isPending } = useConversatoins();
   const { openAccountView, isSearchView, openSearchView, closeSearchView } =
     useUi();
@@ -32,16 +32,21 @@ function MainSidebarContents() {
   const searchInputRef = useRef(null);
 
   useEffect(() => {
-    if (friendUserId && !currentConvUser) {
+    if (friendUserId && !currentConversation) {
       const curConvUser = conversations?.find(
         (conv) => conv.friend.id === friendUserId,
       );
 
-      curConvUser && setCurrentConvUser(curConvUser);
+      curConvUser && setCurrentConversation(curConvUser);
     }
-  }, [conversations, friendUserId, currentConvUser, setCurrentConvUser]);
+  }, [
+    conversations,
+    friendUserId,
+    currentConversation,
+    setCurrentConversation,
+  ]);
 
-  console.log(currentConvUser);
+  // console.log(currentConversation);
 
   useEffect(() => {
     setQuery("");

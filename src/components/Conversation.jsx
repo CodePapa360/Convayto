@@ -4,7 +4,7 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 import { useAppData } from "../contexts/AppDataContext";
 
 function Conversation({ conversation }) {
-  const { setCurrentConvUser } = useAppData();
+  const { setCurrentConversation } = useAppData();
   const { friend, messages: lastMessage } = conversation;
   const { fullname, id, avatar_url } = friend;
   const lastMessageContent = lastMessage?.content;
@@ -17,7 +17,7 @@ function Conversation({ conversation }) {
   function handleClick() {
     navigate(`/${id}`);
     closeSidebar();
-    setCurrentConvUser(friend);
+    setCurrentConversation(conversation);
   }
 
   return (

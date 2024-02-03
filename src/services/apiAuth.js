@@ -88,6 +88,7 @@ export async function getConversations({ myUserId }) {
     };
   });
 
+  // console.log("combinedArray", combinedArray);
   return combinedArray;
 }
 
@@ -129,21 +130,20 @@ export async function getUserById(friendUserId) {
 }
 ////////////////
 
-export async function getMessages({ myUserId, friendUserId }) {
-  const conversationId = await hasPreviousConversation({
-    myUserId,
-    friendUserId,
-  });
+export async function getMessages({ conversation_id }) {
+  // const conversationId = await hasPreviousConversation({
+  //   myUserId,
+  //   friendUserId,
+  // });
 
   // const friendDetails = await getUserById(friendUserId);
 
-  if (!conversationId)
-    return { friendDetails, messages: null, conversationId: null };
+  if (!conversation_id) return;
 
   let query = supabase
     .from("messages")
     .select("*")
-    .eq("conversation_id", conversationId)
+    .eq("conversation_id", conversation_id)
     .order("created_at", { ascending: false });
 
   // if (page) {
@@ -159,7 +159,9 @@ export async function getMessages({ myUserId, friendUserId }) {
     throw new Error(error.message);
   }
 
-  return { friendDetails, messages, conversationId };
+  console.log("messages", messages);
+
+  return { messages };
 }
 
 ////////////////

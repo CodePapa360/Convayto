@@ -2,8 +2,8 @@ import { RiCloseFill } from "react-icons/ri";
 import { useUi } from "../contexts/UiContext";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 
-function FriendProfileBar({ data }) {
-  const { avatar_url, fullname, username, bio } = data?.friendDetails ?? {};
+function FriendProfileBar({ friend }) {
+  const { avatar_url, fullname, username, bio } = friend ?? {};
   const { closeFriendSidebar, isFriendsSidebarOpen } = useUi();
 
   function handleGoBack() {
