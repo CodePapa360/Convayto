@@ -7,7 +7,7 @@ import Loader from "./Loader";
 // import { useAppData } from "../contexts/AppDataContext";
 
 function Messages() {
-  const { data, isPending } = useMessages();
+  const { data, isPending, fetchNextPage } = useMessages();
   const messages = data?.messages?.sort(sortMessageByTime);
 
   const bottomRef = useRef();
@@ -26,7 +26,7 @@ function Messages() {
 
       {messages && (
         <>
-          <button onClick={() => {}}>Load more</button>
+          <button onClick={() => fetchNextPage}>Load more</button>
 
           {messages.map((message) => (
             <Message message={message} key={message.id} />

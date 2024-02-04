@@ -130,28 +130,19 @@ export async function getUserById(friendUserId) {
 }
 ////////////////
 
-export async function getMessages({ conversation_id }) {
-  // const conversationId = await hasPreviousConversation({
-  //   myUserId,
-  //   friendUserId,
-  // });
-
-  // const friendDetails = await getUserById(friendUserId);
+export async function getMessages({ conversation_id, pageParam }) {
+  const limit = MAX_MESSAGES_PER_PAGE;
+  const from = pageParam * limit;
+  const to = from + limit - 1;
 
   if (!conversation_id) return;
 
-  let query = supabase
+  const query = supabase
     .from("messages")
     .select("*")
     .eq("conversation_id", conversation_id)
-    .order("created_at", { ascending: false });
-
-  // if (page) {
-  //   const from = page  * MAX_MESSAGES_PER_PAGE;
-  //   const to = from + MAX_MESSAGES_PER_PAGE - 1;
-
-  //   query = query.range(from, to);
-  // }
+    .order("created_at", { ascending: false })
+    .range(from, to);
 
   const { data: messages, error } = await query;
 
