@@ -154,6 +154,8 @@ export async function getMessages({ conversation_id, pageParam }) {
 
   const messagesReversed = messages.reverse();
 
+  console.log("messagesReversed", messagesReversed);
+
   return { messages: messagesReversed };
 }
 

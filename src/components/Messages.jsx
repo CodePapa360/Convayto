@@ -10,7 +10,7 @@ function Messages() {
   const { data: { pages } = {}, isPending, fetchNextPage } = useMessages();
   // reverse the pages array to get the latest messages first
   const reversedPages = pages?.slice().reverse();
-  console.log("after reverse", reversedPages);
+  // console.log("after reverse", reversedPages);
   // const messages = data?.messages?.sort(sortMessageByTime);
 
   const bottomRef = useRef();
