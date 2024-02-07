@@ -150,13 +150,9 @@ export async function getMessages({ conversation_id, pageParam }) {
     throw new Error(error.message);
   }
 
-  // console.log("messages", messages);
-
   const messagesReversed = messages.reverse();
 
-  console.log("messagesReversed", messagesReversed);
-
-  return { messages: messagesReversed };
+  return { messages: messagesReversed, pageParam };
 }
 
 ////////////////

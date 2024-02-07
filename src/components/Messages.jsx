@@ -7,11 +7,7 @@ import Loader from "./Loader";
 // import { useAppData } from "../contexts/AppDataContext";
 
 function Messages() {
-  const { data: { pages } = {}, isPending, fetchNextPage } = useMessages();
-  // reverse the pages array to get the latest messages first
-  const reversedPages = pages?.slice().reverse();
-  // console.log("after reverse", reversedPages);
-  // const messages = data?.messages?.sort(sortMessageByTime);
+  const { data, isPending, fetchNextPage } = useMessages();
 
   const bottomRef = useRef();
   // bottomRef.current && scrollToBottom(bottomRef);
@@ -32,7 +28,7 @@ function Messages() {
       {/* <button onClick={test}>Load more</button> */}
       {/* {!messages && <p className="flex-center mb-4 opacity-70">No messages!</p>} */}
 
-      {reversedPages && (
+      {/* {reversedPages && (
         <>
           <button onClick={test}>Load more</button>
 
@@ -41,10 +37,16 @@ function Messages() {
               <Message message={message} key={message.id} />
             )),
           )}
+        </>
+      )} */}
 
-          {/* {messages.map((message) => (
-            <Message message={message} key={message.id} />
-          ))} */}
+      {data && (
+        <>
+          <button onClick={test}>Load more</button>
+
+          {data?.messages.map((message) => {
+            return <Message message={message} key={message.id} />;
+          })}
         </>
       )}
 

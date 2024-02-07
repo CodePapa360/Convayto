@@ -1,34 +1,39 @@
-import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { getMessages } from "../../services/apiAuth";
 import { useParams } from "react-router-dom";
 import { useAppData } from "../../contexts/AppDataContext";
-import { useEffect } from "react";
 
 export function useMessages() {
   const { currentConversation } = useAppData();
   const { conversation_id } = currentConversation.messages;
   const { userId: friendUserId } = useParams();
+
+  const { data, isPending, error } = useQuery({
+    queryKey: ["friend", friendUserId],
+    queryFn: () => getMessages({ conversation_id, pageParam: 0 }),
+  });
+
   const queryClient = useQueryClient();
 
-  useEffect(() => {
-    queryClient.setQueryData(["friend", friendUserId], (prev) => {
-      // console.log("prev", prev);
-      if (prev?.pages.lenth < 2 || !prev) return;
+  async function fetchNextPage() {
+    // need try catch //
+    const currentPage = queryClient.getQueryData(["friend", friendUserId]);
 
-      return prev
-        ? { pages: [prev.pages[0]], pageParams: [prev.pageParams[0]] }
-        : undefined;
+    const nextPageParam = currentPage.pageParam + 1;
+    const nextPageData = await getMessages({
+      conversation_id,
+      pageParam: nextPageParam,
     });
-  }, [friendUserId, queryClient]);
 
-  const { data, fetchNextPage, hasNextPage, isPending, isFetching, error } =
-    useInfiniteQuery({
-      queryKey: ["friend", friendUserId],
-      queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
-      initialPageParam: 0,
-      getNextPageParam: (_lastPage, _allPages, lastPageParam) =>
-        lastPageParam + 1,
+    queryClient.setQueryData(["friend", friendUserId], {
+      ...nextPageData,
+      messages: [...nextPageData.messages, ...currentPage.messages],
     });
+  }
 
   if (error) {
     console.error(
