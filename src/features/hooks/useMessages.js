@@ -17,15 +17,14 @@ export function useMessages() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    queryClient.setQueryData(["friend", friendUserId], (data) => {
-      if (!data) return;
-
+    queryClient.setQueryData(["friend", friendUserId], (prev) => {
+      if (!prev) return;
       return {
-        pages: data.pages.slice(0, 1),
-        pageParams: data.pageParams.slice(0, 1),
+        pages: prev.pages.slice(0, 1),
+        pageParams: prev.pageParams.slice(0, 1),
       };
     });
-  }, [queryClient, friendUserId]);
+  }, [friendUserId, queryClient]);
 
   const {
     data: { pages } = {},
@@ -40,11 +39,14 @@ export function useMessages() {
     queryKey: ["friend", friendUserId],
     queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages, lastPageParam) => {
+    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
       if (lastPage.length === 0) return undefined;
       return lastPageParam + 1;
     },
+    keepPreviousData: true,
   });
+
+  console.log(isFetchingNextPage, "isFetchingNextPage");
 
   if (error) {
     console.error(

@@ -4,6 +4,8 @@ import Message from "./Message";
 import { useEffect, useRef, useState } from "react";
 import { sortMessageByTime } from "../utils/common";
 import Loader from "./Loader";
+import { useParams } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 // import { useAppData } from "../contexts/AppDataContext";
 
 function Messages() {
@@ -45,11 +47,10 @@ function Messages() {
               onClick={test}
             >
               <span>Load more</span>
-              {isFetchingNextPage && <span>{<Loader />}</span>}
+              {isFetching && <span>{<Loader />}</span>}
             </button>
           )}
 
-          {/* render messages from the pages without any extra div */}
           {pages.map((group) => {
             return group.map((msg) => <Message key={msg.id} message={msg} />);
           })}
