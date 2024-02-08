@@ -130,7 +130,7 @@ export async function getUserById(friendUserId) {
 }
 ////////////////
 
-export async function getMessages({ conversation_id, pageParam }) {
+export async function getMessages({ conversation_id, pageParam = 0 }) {
   const limit = MAX_MESSAGES_PER_PAGE;
   const from = pageParam * limit;
   const to = from + limit - 1;
@@ -147,12 +147,14 @@ export async function getMessages({ conversation_id, pageParam }) {
   const { data: messages, error } = await query;
 
   if (error) {
-    throw new Error(error.message);
+    console.log("error from api", error);
+    throw new Error(error);
   }
 
-  const messagesReversed = messages.reverse();
+  // const messagesReversed = messages.reverse();
+  console.log("API Called");
 
-  return { messages: messagesReversed, pageParam };
+  return messages;
 }
 
 ////////////////

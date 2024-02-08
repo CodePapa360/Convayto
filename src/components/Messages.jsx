@@ -1,14 +1,23 @@
 import { useMessages } from "../features/hooks/useMessages";
 import { scrollToBottom } from "../utils/common";
 import Message from "./Message";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { sortMessageByTime } from "../utils/common";
 import Loader from "./Loader";
 // import { useAppData } from "../contexts/AppDataContext";
 
 function Messages() {
-  const { data, isPending, fetchNextPage } = useMessages();
+  const {
+    pages,
+    isFetching,
+    isFetchingNextPage,
+    isPending,
+    fetchNextPage,
+    hasNextPage,
+  } = useMessages();
+  console.log(isFetchingNextPage);
 
+  // console.log(pages);
   const bottomRef = useRef();
   // bottomRef.current && scrollToBottom(bottomRef);
 
@@ -28,24 +37,21 @@ function Messages() {
       {/* <button onClick={test}>Load more</button> */}
       {/* {!messages && <p className="flex-center mb-4 opacity-70">No messages!</p>} */}
 
-      {/* {reversedPages && (
+      {pages && (
         <>
-          <button onClick={test}>Load more</button>
-
-          {reversedPages.map((page) =>
-            page.messages.map((message) => (
-              <Message message={message} key={message.id} />
-            )),
+          {hasNextPage && (
+            <button
+              className="flex items-center justify-center gap-2"
+              onClick={test}
+            >
+              <span>Load more</span>
+              {isFetchingNextPage && <span>{<Loader />}</span>}
+            </button>
           )}
-        </>
-      )} */}
 
-      {data && (
-        <>
-          <button onClick={test}>Load more</button>
-
-          {data?.messages.map((message) => {
-            return <Message message={message} key={message.id} />;
+          {/* render messages from the pages without any extra div */}
+          {pages.map((group) => {
+            return group.map((msg) => <Message key={msg.id} message={msg} />);
           })}
         </>
       )}

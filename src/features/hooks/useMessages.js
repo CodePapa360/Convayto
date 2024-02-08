@@ -6,34 +6,45 @@ import {
 import { getMessages } from "../../services/apiAuth";
 import { useParams } from "react-router-dom";
 import { useAppData } from "../../contexts/AppDataContext";
+import { useEffect, useState } from "react";
+import { MAX_MESSAGES_PER_PAGE } from "../../config";
 
 export function useMessages() {
   const { currentConversation } = useAppData();
   const { conversation_id } = currentConversation.messages;
   const { userId: friendUserId } = useParams();
 
-  const { data, isPending, error } = useQuery({
-    queryKey: ["friend", friendUserId],
-    queryFn: () => getMessages({ conversation_id, pageParam: 0 }),
-  });
-
   const queryClient = useQueryClient();
 
-  async function fetchNextPage() {
-    // need try catch //
-    const currentPage = queryClient.getQueryData(["friend", friendUserId]);
+  useEffect(() => {
+    queryClient.setQueryData(["friend", friendUserId], (data) => {
+      if (!data) return;
 
-    const nextPageParam = currentPage.pageParam + 1;
-    const nextPageData = await getMessages({
-      conversation_id,
-      pageParam: nextPageParam,
+      return {
+        pages: data.pages.slice(0, 1),
+        pageParams: data.pageParams.slice(0, 1),
+      };
     });
+  }, [queryClient, friendUserId]);
 
-    queryClient.setQueryData(["friend", friendUserId], {
-      ...nextPageData,
-      messages: [...nextPageData.messages, ...currentPage.messages],
-    });
-  }
+  const {
+    data: { pages } = {},
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isPending,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    queryKey: ["friend", friendUserId],
+    queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages, lastPageParam) => {
+      if (lastPage.length === 0) return undefined;
+      return lastPageParam + 1;
+    },
+  });
 
   if (error) {
     console.error(
@@ -43,9 +54,12 @@ export function useMessages() {
   }
 
   return {
-    data,
+    pages,
+    isFetching,
     isPending,
     error,
     fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
   };
 }
