@@ -3,15 +3,29 @@ import MyAccount from "./Profile/MyAccount";
 import MainSidebarContents from "./MainSidebarContents";
 import { useUi } from "../contexts/UiContext";
 import { useParams } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 function LeftSideBar() {
   const { isSidebarOpen, isAccountView, closeSidebar, openSidebar } = useUi();
   const { userId } = useParams();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
+    // remove all pages except the first one
+    queryClient.setQueryData(["friend", userId], (prev) => {
+      if (!prev) return;
+      if (prev.pages[1]?.length === 0) return;
+
+      return {
+        pages: prev.pages.slice(0, 1),
+        pageParams: prev.pageParams.slice(0, 1),
+      };
+    });
+
+    // close sidebar if user is not logged in
     if (userId) closeSidebar();
     else openSidebar();
-  }, [userId]);
+  }, [userId, queryClient]);
 
   function handleToggleSidebar() {
     if (!userId) return;
@@ -30,7 +44,7 @@ function LeftSideBar() {
       <div
         className={`${
           isSidebarOpen ? "left-0 opacity-100" : "-left-full opacity-0"
-        } dark:bg-mediumSlate-dark bg-mediumSlate absolute top-0  z-20 h-dvh w-full overflow-y-auto transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] sm:w-[23rem] md:relative md:left-0 md:opacity-100`}
+        } absolute top-0 z-20 h-dvh  w-full overflow-y-auto bg-mediumSlate transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] dark:bg-mediumSlate-dark sm:w-[23rem] md:relative md:left-0 md:opacity-100`}
       >
         <aside>{isAccountView ? <MyAccount /> : <MainSidebarContents />}</aside>
       </div>

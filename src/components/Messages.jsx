@@ -6,7 +6,6 @@ import { sortMessageByTime } from "../utils/common";
 import Loader from "./Loader";
 import { useParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-// import { useAppData } from "../contexts/AppDataContext";
 
 function Messages() {
   const {
@@ -17,7 +16,6 @@ function Messages() {
     fetchNextPage,
     hasNextPage,
   } = useMessages();
-  console.log(isFetchingNextPage);
 
   // console.log(pages);
   const bottomRef = useRef();
@@ -47,7 +45,7 @@ function Messages() {
               onClick={test}
             >
               <span>Load more</span>
-              {isFetching && <span>{<Loader />}</span>}
+              {isFetchingNextPage && <span>{<Loader />}</span>}
             </button>
           )}
 

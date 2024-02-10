@@ -147,12 +147,11 @@ export async function getMessages({ conversation_id, pageParam = 0 }) {
   const { data: messages, error } = await query;
 
   if (error) {
-    console.log("error from api", error);
-    throw new Error(error);
+    throw new Error(error.message);
   }
 
   // const messagesReversed = messages.reverse();
-  // console.log("API Called");
+  console.log("API Called");
 
   return messages;
 }
