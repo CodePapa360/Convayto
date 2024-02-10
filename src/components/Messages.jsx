@@ -6,6 +6,7 @@ import { sortMessageByTime } from "../utils/common";
 import Loader from "./Loader";
 import { useParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import useInView from "../features/hooks/useInView";
 
 function Messages() {
   const {
@@ -17,9 +18,17 @@ function Messages() {
     hasNextPage,
   } = useMessages();
 
-  // console.log(pages);
+  const topRef = useRef(null);
   const bottomRef = useRef();
+
   // bottomRef.current && scrollToBottom(bottomRef);
+  const hasReachedTop = useInView(topRef);
+
+  useEffect(() => {
+    if (hasNextPage && hasReachedTop) {
+      fetchNextPage();
+    }
+  }, [hasReachedTop, hasNextPage, fetchNextPage]);
 
   function test() {
     fetchNextPage();
@@ -44,7 +53,7 @@ function Messages() {
               className="flex items-center justify-center gap-2"
               onClick={test}
             >
-              <span>Load more</span>
+              <span ref={topRef}>Load</span>
               {isFetchingNextPage && <span>{<Loader />}</span>}
             </button>
           )}
