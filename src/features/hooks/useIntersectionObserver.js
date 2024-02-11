@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useIntersectionObserver(element) {
+function useIntersectionObserver(element, options = {}) {
   const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
@@ -10,10 +10,10 @@ function useIntersectionObserver(element) {
       setIsIntersecting(entry.isIntersecting),
     );
 
-    observer.observe(element);
+    observer.observe(element, options);
 
     return () => observer.disconnect();
-  }, [element]);
+  }, [element, options]);
 
   return isIntersecting;
 }

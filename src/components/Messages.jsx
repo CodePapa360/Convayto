@@ -15,17 +15,23 @@ function Messages() {
   } = useMessages();
 
   const topRef = useRef(null);
-  const element = topRef.current;
   const bottomRef = useRef();
+  const [topElement, setTopElement] = useState(null);
 
-  const isIntersecting = useIntersectionObserver(element);
+  const isIntersecting = useIntersectionObserver(topElement);
   isIntersecting && console.log("isIntersecting", isIntersecting);
+
+  useEffect(() => {
+    if (topRef.current) {
+      setTopElement(topRef.current);
+    }
+  }, [hasNextPage]);
 
   useEffect(() => {
     if (isIntersecting && hasNextPage) {
       fetchNextPage();
     }
-  }, [isIntersecting, fetchNextPage, hasNextPage]);
+  }, [isIntersecting, hasNextPage, fetchNextPage]);
 
   if (isPending)
     return (
