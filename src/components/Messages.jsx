@@ -1,12 +1,8 @@
 import { useMessages } from "../features/hooks/useMessages";
-import { scrollToBottom } from "../utils/common";
 import Message from "./Message";
 import { useEffect, useRef, useState } from "react";
-import { sortMessageByTime } from "../utils/common";
 import Loader from "./Loader";
-import { useParams } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
-import useInView from "../features/hooks/useInView";
+import useIntersectionObserver from "../features/hooks/useIntersectionObserver";
 
 function Messages() {
   const {
@@ -19,20 +15,17 @@ function Messages() {
   } = useMessages();
 
   const topRef = useRef(null);
+  const element = topRef.current;
   const bottomRef = useRef();
 
-  // bottomRef.current && scrollToBottom(bottomRef);
-  const hasReachedTop = useInView(topRef);
+  const isIntersecting = useIntersectionObserver(element);
+  isIntersecting && console.log("isIntersecting", isIntersecting);
 
   useEffect(() => {
-    if (hasNextPage && hasReachedTop) {
+    if (isIntersecting && hasNextPage) {
       fetchNextPage();
     }
-  }, [hasReachedTop, hasNextPage, fetchNextPage]);
-
-  function test() {
-    fetchNextPage();
-  }
+  }, [isIntersecting, fetchNextPage, hasNextPage]);
 
   if (isPending)
     return (
@@ -43,17 +36,15 @@ function Messages() {
 
   return (
     <>
-      {/* <button onClick={test}>Load more</button> */}
-      {/* {!messages && <p className="flex-center mb-4 opacity-70">No messages!</p>} */}
-
       {pages && (
         <>
           {hasNextPage && (
             <button
+              ref={topRef}
               className="flex items-center justify-center gap-2"
-              onClick={test}
+              // onClick={test}
             >
-              <span ref={topRef}>Load</span>
+              <span>Load</span>
               {isFetchingNextPage && <span>{<Loader />}</span>}
             </button>
           )}
