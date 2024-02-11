@@ -150,10 +150,10 @@ export async function getMessages({ conversation_id, pageParam = 0 }) {
     throw new Error(error.message);
   }
 
-  // const messagesReversed = messages.reverse();
+  const messagesReversed = messages.reverse();
   // console.log("API Called");
 
-  return messages;
+  return messagesReversed;
 }
 
 ////////////////

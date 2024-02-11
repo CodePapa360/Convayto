@@ -20,12 +20,15 @@ export function useMessages() {
   } = useInfiniteQuery({
     queryKey: ["friend", friendUserId],
     queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
-    initialPageParam: 0,
+    select: (data) => ({
+      pages: [...data.pages].reverse(),
+      pageParams: [...data.pageParams].reverse(),
+    }),
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
       if (lastPage.length === 0) return undefined;
       return lastPageParam + 1;
     },
-    useEffect: false,
+    initialPageParam: 0,
   });
 
   if (error) {

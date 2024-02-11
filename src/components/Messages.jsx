@@ -21,12 +21,14 @@ function Messages() {
   const isIntersecting = useIntersectionObserver(topElement);
   isIntersecting && console.log("isIntersecting", isIntersecting);
 
+  // Top ref depends on hasNextPage so we need to update it when it changes
   useEffect(() => {
     if (topRef.current) {
       setTopElement(topRef.current);
     }
   }, [hasNextPage]);
 
+  // Fetch next page when the bottom ref is in view
   useEffect(() => {
     if (isIntersecting && hasNextPage) {
       fetchNextPage();
@@ -45,14 +47,9 @@ function Messages() {
       {pages && (
         <>
           {hasNextPage && (
-            <button
-              ref={topRef}
-              className="flex items-center justify-center gap-2"
-              // onClick={test}
-            >
-              <span>Load</span>
+            <span ref={topRef}>
               {isFetchingNextPage && <span>{<Loader />}</span>}
-            </button>
+            </span>
           )}
 
           {pages.map((group) => {
