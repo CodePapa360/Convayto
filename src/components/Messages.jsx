@@ -59,10 +59,7 @@ function Messages() {
     );
 
   return (
-    <div
-      ref={parentEl}
-      className="mx-auto flex w-full max-w-3xl flex-col gap-2 px-4 pt-2"
-    >
+    <div ref={parentEl} className="mx-auto flex w-full max-w-3xl flex-col px-4">
       {pages && (
         <>
           {hasNextPage && (
@@ -72,19 +69,22 @@ function Messages() {
           )}
 
           {pages.map((page, i) => (
-            <span key={i} className="flex w-full flex-col gap-2">
-              {page.map((message) => (
-                <Message key={message.id} message={message} />
-              ))}
+            <>
+              <span key={i} className="flex w-full flex-col gap-2 pb-2">
+                {page.map((message) => (
+                  <Message key={message.id} message={message} />
+                ))}
+              </span>
 
-              {i === 0 && (
-                <span
-                  className=""
-                  onClick={handleScroll}
-                  ref={lastPageBtm}
-                ></span>
+              {/* This ref is to track where to keep the view when new page loads on the top */}
+              {i === 0 && <span ref={lastPageBtm}></span>}
+
+              {page.length === 0 && (
+                <span className="my-4 select-none text-center opacity-30">
+                  No more messages
+                </span>
               )}
-            </span>
+            </>
           ))}
         </>
       )}
