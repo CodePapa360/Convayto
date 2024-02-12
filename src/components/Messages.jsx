@@ -38,16 +38,18 @@ function Messages() {
   ///////////
   const parentEl = useRef(null);
   const lastPageBtm = useRef(null);
-  // get the position of the last page bottom ref
-  const position = lastPageBtm.current?.getBoundingClientRect().y;
 
   function handleScroll() {
-    console.log("scrolling");
-    parentEl.current.scrollTo({
-      top: 100,
-      behavior: "smooth",
-    });
+    lastPageBtm.current.scrollIntoView({ behavior: "smooth" });
   }
+
+  useEffect(() => {
+    if (pages?.length > 0 && lastPageBtm.current) {
+      // Scroll to the bottom of the last page with a little bit more pixels top
+
+      lastPageBtm.current.scrollIntoView();
+    }
+  }, [pages]);
 
   if (isPending)
     return (
@@ -70,15 +72,17 @@ function Messages() {
           )}
 
           {pages.map((page, i) => (
-            <span key={i}>
+            <span key={i} className="flex w-full flex-col gap-2">
               {page.map((message) => (
                 <Message key={message.id} message={message} />
               ))}
 
               {i === 0 && (
-                <span onClick={handleScroll} ref={lastPageBtm}>
-                  last page end here
-                </span>
+                <span
+                  className=""
+                  onClick={handleScroll}
+                  ref={lastPageBtm}
+                ></span>
               )}
             </span>
           ))}
