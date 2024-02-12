@@ -19,7 +19,6 @@ function Messages() {
   const [topElement, setTopElement] = useState(null);
 
   const isIntersecting = useIntersectionObserver(topElement);
-  isIntersecting && console.log("isIntersecting", isIntersecting);
 
   // Top ref depends on hasNextPage so we need to update it when it changes
   useEffect(() => {
@@ -35,6 +34,21 @@ function Messages() {
     }
   }, [isIntersecting, hasNextPage, fetchNextPage]);
 
+  ////////////
+  ///////////
+  const parentEl = useRef(null);
+  const lastPageBtm = useRef(null);
+  // get the position of the last page bottom ref
+  const position = lastPageBtm.current?.getBoundingClientRect().y;
+
+  function handleScroll() {
+    console.log("scrolling");
+    parentEl.current.scrollTo({
+      top: 100,
+      behavior: "smooth",
+    });
+  }
+
   if (isPending)
     return (
       <span className="flex-center mb-4 justify-center">
@@ -43,7 +57,10 @@ function Messages() {
     );
 
   return (
-    <>
+    <div
+      ref={parentEl}
+      className="mx-auto flex w-full max-w-3xl flex-col gap-2 px-4 pt-2"
+    >
       {pages && (
         <>
           {hasNextPage && (
@@ -52,14 +69,24 @@ function Messages() {
             </span>
           )}
 
-          {pages.map((group) => {
-            return group.map((msg) => <Message key={msg.id} message={msg} />);
-          })}
+          {pages.map((page, i) => (
+            <span key={i}>
+              {page.map((message) => (
+                <Message key={message.id} message={message} />
+              ))}
+
+              {i === 0 && (
+                <span onClick={handleScroll} ref={lastPageBtm}>
+                  last page end here
+                </span>
+              )}
+            </span>
+          ))}
         </>
       )}
 
       <span ref={bottomRef}></span>
-    </>
+    </div>
   );
 }
 
