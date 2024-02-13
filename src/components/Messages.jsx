@@ -56,14 +56,12 @@ function Messages() {
       {pages && (
         <>
           {hasNextPage && (
-            <span ref={topRef}>
-              {isFetchingNextPage && <span>{<Loader />}</span>}
-            </span>
+            <span ref={topRef}>{isFetchingNextPage && <Loader />}</span>
           )}
 
           {pages.map((page, index) =>
             page.length ? (
-              <span key={index} className="flex w-full flex-col ">
+              <span key={index} className="flex w-full flex-col">
                 {page.map((message) => (
                   <Message key={message.id} message={message} />
                 ))}
