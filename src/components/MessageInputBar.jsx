@@ -16,7 +16,7 @@ function MessageInputBar() {
   const { isSending, sendNewMessage } = useSendNewMessage();
   const { user } = useUser();
   // const { data, isPending } = useMessages();
-  const conversationId = currentConversation.messages.conversation_id;
+  const conversationId = currentConversation.id;
   const friendUserId = currentConversation.friend.id;
   const myUserId = user.id;
   const inputRef = useRef(null);

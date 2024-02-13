@@ -93,27 +93,31 @@ export async function getConversations({ myUserId }) {
 }
 
 ///////////////////
-async function hasPreviousConversation({ myUserId, friendUserId }) {
-  try {
-    // Check for previous conversation
-    const { data, error } = await supabase
-      .from("conversations")
-      .select("id")
-      .in("user1_id", [myUserId, friendUserId])
-      .in("user2_id", [myUserId, friendUserId]);
+export async function getConversationById({ myUserId, friendUserId }) {
+  // Check for previous conversation
+  const { data, error } = await supabase
+    .from("conversations")
+    .select("id")
+    .in("user1_id", [myUserId, friendUserId])
+    .in("user2_id", [myUserId, friendUserId]);
 
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    // Return conversation ID if there is a previous conversation, otherwise null
-    const conversationId = data.length > 0 ? data[0].id : null;
-    return conversationId;
-  } catch (error) {
-    console.error("Error in getPreviousConversation:", error.message);
-    throw error;
+  if (error) {
+    throw new Error(error.message);
   }
+
+  // Return conversation ID if there is a previous conversation, otherwise null
+  const conversationId = data.length > 0 ? data[0].id : null;
+  return conversationId;
 }
+
+const test = await getConversationById({
+  myUserId: "06bd2050-5bbe-4069-95a5-b92e8ce5db71",
+  friendUserId: "16703bb8-a249-4d3f-aa78-2102c65b1985",
+});
+
+console.log("getConversationById", test);
+
+// console.log("getConversationById", getConversationById);
 
 ///////////////////
 export async function getUserById(friendUserId) {

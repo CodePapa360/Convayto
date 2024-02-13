@@ -5,8 +5,13 @@ import { useAppData } from "../../contexts/AppDataContext";
 
 export function useMessages() {
   const { currentConversation } = useAppData();
-  const { conversation_id } = currentConversation.messages;
+  const { id: conversation_id } = currentConversation;
   const { userId: friendUserId } = useParams();
+
+  //If the current conversation is null then do below
+  // 1. check if the conversation already existts in the conversations state
+  // 2. If it does then set the current conversation to that conversation
+  // 3. If it does not then check if "friend" is available in the current conversation
 
   const {
     data: { pages } = {},
