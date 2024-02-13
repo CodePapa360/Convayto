@@ -36,17 +36,10 @@ function Messages() {
 
   ////////////
   ///////////
-  const parentEl = useRef(null);
   const lastPageBtm = useRef(null);
-
-  function handleScroll() {
-    lastPageBtm.current.scrollIntoView({ behavior: "smooth" });
-  }
 
   useEffect(() => {
     if (pages?.length > 0 && lastPageBtm.current) {
-      // Scroll to the bottom of the last page with a little bit more pixels top
-
       lastPageBtm.current.scrollIntoView();
     }
   }, [pages]);
@@ -59,7 +52,7 @@ function Messages() {
     );
 
   return (
-    <div ref={parentEl} className="mx-auto flex w-full max-w-3xl flex-col px-4">
+    <div className="mx-auto flex w-full max-w-3xl flex-col px-4">
       {pages && (
         <>
           {hasNextPage && (
@@ -68,24 +61,24 @@ function Messages() {
             </span>
           )}
 
-          {pages.map((page, i) => (
-            <>
-              <span key={i} className="flex w-full flex-col gap-2 pb-2">
+          {pages.map((page, index) =>
+            page.length ? (
+              <span key={index} className="flex w-full flex-col ">
                 {page.map((message) => (
                   <Message key={message.id} message={message} />
                 ))}
+
+                {index === 0 && <span ref={lastPageBtm}></span>}
               </span>
-
-              {/* This ref is to track where to keep the view when new page loads on the top */}
-              {i === 0 && <span ref={lastPageBtm}></span>}
-
-              {page.length === 0 && (
-                <span className="my-4 select-none text-center opacity-30">
-                  No more messages
-                </span>
-              )}
-            </>
-          ))}
+            ) : (
+              <span
+                key={index}
+                className="my-4 select-none text-center opacity-30"
+              >
+                No more messages
+              </span>
+            ),
+          )}
         </>
       )}
 
