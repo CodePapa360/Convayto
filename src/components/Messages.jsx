@@ -51,9 +51,10 @@ function Messages() {
       </span>
     );
 
+  // console.log(pages, "pages");
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col px-4">
-      {pages && (
+      {pages[0] && (
         <>
           {hasNextPage && (
             <span ref={topRef}>{isFetchingNextPage && <Loader />}</span>

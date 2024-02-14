@@ -110,12 +110,12 @@ export async function getConversationById({ myUserId, friendUserId }) {
   return conversationId;
 }
 
-const test = await getConversationById({
-  myUserId: "06bd2050-5bbe-4069-95a5-b92e8ce5db71",
-  friendUserId: "16703bb8-a249-4d3f-aa78-2102c65b1985",
-});
+// const test = await getConversationById({
+//   myUserId: "06bd2050-5bbe-4069-95a5-b92e8ce5db71",
+//   friendUserId: "16703bb8-a249-4d3f-aa78-2102c65b1985",
+// });
 
-console.log("getConversationById", test);
+// console.log("getConversationById", test);
 
 // console.log("getConversationById", getConversationById);
 
@@ -138,6 +138,7 @@ export async function getMessages({ conversation_id, pageParam = 0 }) {
   const limit = MAX_MESSAGES_PER_PAGE;
   const from = pageParam * limit;
   const to = from + limit - 1;
+  // console.log("Got here");
 
   if (!conversation_id) return;
 

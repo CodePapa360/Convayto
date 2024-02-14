@@ -33,11 +33,11 @@ function MainSidebarContents() {
 
   useEffect(() => {
     if (friendUserId && !currentConversation) {
-      const curConvUser = conversations?.find(
+      const newCurrentConv = conversations?.find(
         (conv) => conv.friend.id === friendUserId,
       );
 
-      curConvUser && setCurrentConversation(curConvUser);
+      newCurrentConv && setCurrentConversation(newCurrentConv);
     }
   }, [
     conversations,
@@ -45,8 +45,6 @@ function MainSidebarContents() {
     currentConversation,
     setCurrentConversation,
   ]);
-
-  // console.log(currentConversation);
 
   useEffect(() => {
     setQuery("");

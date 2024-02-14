@@ -12,9 +12,13 @@ function MessageTopBar() {
   const { currentConversation } = useAppData();
   // const { conversation_id } = currentConversation.messages.conversation_id;
 
-  const { friend } = currentConversation;
+  const friend = currentConversation?.friend;
+  // console.log(currentConversation, "currentConversation");
 
-  const { avatar_url, fullname, username } = friend;
+  // const { avatar_url, fullname, username } = friend;
+  const avatar_url = friend?.avatar_url;
+  const fullname = friend?.fullname;
+  const username = friend?.username;
   const { openSidebar } = useUi();
   const navigate = useNavigate();
 
