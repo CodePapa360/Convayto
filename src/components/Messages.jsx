@@ -3,7 +3,6 @@ import Message from "./Message";
 import { useEffect, useRef, useState } from "react";
 import Loader from "./Loader";
 import useIntersectionObserver from "../features/hooks/useIntersectionObserver";
-import { useAppData } from "../contexts/AppDataContext";
 
 function Messages() {
   const {
