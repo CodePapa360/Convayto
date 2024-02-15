@@ -1,10 +1,12 @@
 import { getMessageById, getUserById } from "./apiAuth";
 import supabase from "./supabase";
 
-export function subscribeRealtimeMessage({ conversationId, callback }) {
-  if (!conversationId) return;
+export function subscribeRealtimeMessage({ conversation_id, callback }) {
+  // console.log("Got here", conversation_id);
 
-  const roomName = conversationId;
+  if (!conversation_id) return;
+
+  const roomName = conversation_id;
 
   const subscription = supabase
     .channel(roomName)
@@ -14,15 +16,15 @@ export function subscribeRealtimeMessage({ conversationId, callback }) {
         event: "*",
         schema: "public",
         table: "messages",
-        filter: `conversation_id=eq.${conversationId}`,
+        filter: `conversation_id=eq.${conversation_id}`,
       },
       (payload) => {
         callback(payload.new);
-      }
+      },
     )
     .subscribe();
 
-  // console.log("subscribed message", conversationId);
+  console.log("subscribed message", conversation_id);
 
   return subscription;
 }
@@ -76,7 +78,7 @@ export function subscribeRealtimeConversation({ myUserId, onUpdate }) {
       async (payload) => {
         const updatedPayload = await getUpdatedPayload({ payload, myUserId });
         onUpdate(updatedPayload);
-      }
+      },
     )
     .on(
       "postgres_changes",
@@ -89,7 +91,7 @@ export function subscribeRealtimeConversation({ myUserId, onUpdate }) {
       async (payload) => {
         const updatedPayload = await getUpdatedPayload({ payload, myUserId });
         onUpdate(updatedPayload);
-      }
+      },
     )
     .subscribe();
 

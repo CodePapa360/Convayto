@@ -38,19 +38,26 @@ function MessageInputBar() {
 
     // Make the actual request to the server
     sendNewMessage(messageObj, {
-      onSuccess: (data) => {
+      onSuccess: (newData) => {
+        // when conversation id is null, it means the conversation is new
         if (conversationId === null) {
           queryClient.setQueryData(
-            ["friend", messageObj.friendUserId],
+            ["friend", messageObj.friendUserId, conversationId],
             (prevData) => ({
               ...prevData,
-              messages:
-                prevData?.messages === null
-                  ? [data]
-                  : prevData.messages.map((message) =>
-                      message.id === data.id ? data : message,
-                    ),
-              conversationId: data.conversation_id,
+
+              pages: prevData.pages
+                .slice()
+                .map((page, index) =>
+                  index === 0
+                    ? page.map((message) =>
+                        message.id === newData.id ? newData : message,
+                      )
+                    : page,
+                ),
+
+              // we need to update the current conversation here
+              // conversationId: data.conversation_id,
             }),
           );
         }
@@ -66,10 +73,15 @@ function MessageInputBar() {
 
     // Update the cache with the optimistic message
     queryClient.setQueryData(
-      ["friend", messageObj.friendUserId],
+      ["friend", messageObj.friendUserId, conversationId],
       (prevData) => ({
         ...prevData,
-        messages: [...(prevData.messages || []), optimisticMessage],
+        // add the optimistic message to the first page's data
+        pages: prevData.pages
+          .slice()
+          .map((page, index) =>
+            index === 0 ? [...page, optimisticMessage] : page,
+          ),
       }),
     );
 
