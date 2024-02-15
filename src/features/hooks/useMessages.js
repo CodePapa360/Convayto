@@ -8,15 +8,14 @@ export function useMessages() {
   const { currentConversation } = useAppData();
   const conversation_id = currentConversation?.id;
   const { userId: friendUserId } = useParams();
-
   const queryClient = useQueryClient();
 
+  // Clear the cache when the conversation changes
   useEffect(() => {
     queryClient.setQueryData(
       ["friend", friendUserId, conversation_id],
       (prev) => {
-        if (!prev) return;
-        if (prev.pages[1]?.length === 0) return;
+        if (!prev || !prev.pages[1]?.length) return;
 
         return {
           pages: prev.pages.slice(0, 1),
