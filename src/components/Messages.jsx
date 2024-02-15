@@ -41,6 +41,8 @@ function Messages() {
   useEffect(() => {
     if (pages?.length > 0 && lastPageBtm.current && isIntersecting) {
       lastPageBtm.current.scrollIntoView();
+    } else {
+      bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [pages]);
 
