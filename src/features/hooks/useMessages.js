@@ -56,63 +56,68 @@ export function useMessages() {
     );
   }
 
+  /////////////////////////////
   // Realtime subscription //
+  /////////////////////////////
+
   const subscriptionRef = useRef(null);
 
   useEffect(
     function () {
       if (!conversation_id) return console.log("no conversation_id");
       if (conversation_id === subscriptionRef.current?.subTopic)
-        return console.log("same conversation_id");
+        return console.log("same conversation_id", subscriptionRef.current);
 
       if (subscriptionRef.current) {
         subscriptionRef.current.unsubscribe();
       }
 
+      function callback(newData) {
+        queryClient.setQueryData(
+          ["friend", friendUserId, conversation_id],
+          (prevData) => {
+            // console.log("newData", newData);
+            // console.log("prevData", prevData);
+            const existingOptimisticMessage = prevData?.pages[0]?.find(
+              (message) => message?.id === newData?.id,
+            );
+
+            if (!existingOptimisticMessage) {
+              // Only update if no optimistic message exists
+              return {
+                ...prevData,
+                // add the new message to the first page's data
+                pages: prevData.pages.slice().map((page, index) => {
+                  // console.log("page", index, page);
+                  return index === 0 ? [...page, newData] : page;
+                }),
+              };
+            }
+
+            if (existingOptimisticMessage) {
+              // replace existing optimistic message with server new message
+              return {
+                ...prevData,
+                // replace the new message to the first page's data which id matches the optimistic message
+                pages: prevData.pages
+                  .slice()
+                  .map((page, index) =>
+                    index === 0
+                      ? page.map((message) =>
+                          message.id === newData.id ? newData : message,
+                        )
+                      : page,
+                  ),
+              };
+            }
+          },
+        );
+      }
+
       // console.log("before sub", conversation_id);
       subscriptionRef.current = subscribeRealtimeMessage({
         conversation_id,
-        callback: (newData) => {
-          queryClient.setQueryData(
-            ["friend", friendUserId, conversation_id],
-            (prevData) => {
-              console.log("newData", newData);
-              console.log("prevData", prevData);
-              const existingOptimisticMessage = prevData?.pages[0]?.find(
-                (message) => message?.id === newData?.id,
-              );
-
-              if (!existingOptimisticMessage) {
-                // Only update if no optimistic message exists
-                return {
-                  ...prevData,
-                  // add the new message to the first page's data
-                  pages: prevData.pages.slice().map((page, index) => {
-                    console.log("page", index, page);
-                    return index === 0 ? [...page, newData] : page;
-                  }),
-                };
-              }
-
-              if (existingOptimisticMessage) {
-                // replace existing optimistic message with server new message
-                return {
-                  ...prevData,
-                  // replace the new message to the first page's data which id matches the optimistic message
-                  pages: prevData.pages
-                    .slice()
-                    .map((page, index) =>
-                      index === 0
-                        ? page.map((message) =>
-                            message.id === newData.id ? newData : message,
-                          )
-                        : page,
-                    ),
-                };
-              }
-            },
-          );
-        },
+        callback,
       });
 
       return () => {

@@ -39,7 +39,7 @@ function Messages() {
   const lastPageBtm = useRef(null);
 
   useEffect(() => {
-    if (pages?.length > 0 && lastPageBtm.current) {
+    if (pages?.length > 0 && lastPageBtm.current && isIntersecting) {
       lastPageBtm.current.scrollIntoView();
     }
   }, [pages]);
