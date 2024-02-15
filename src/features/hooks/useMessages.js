@@ -1,12 +1,30 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import { getMessages } from "../../services/apiAuth";
 import { useParams } from "react-router-dom";
 import { useAppData } from "../../contexts/AppDataContext";
+import { useEffect } from "react";
 
 export function useMessages() {
-  const { currentConversation, setCurrentConversation } = useAppData();
+  const { currentConversation } = useAppData();
   const conversation_id = currentConversation?.id;
   const { userId: friendUserId } = useParams();
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.setQueryData(
+      ["friend", friendUserId, conversation_id],
+      (prev) => {
+        if (!prev) return;
+        if (prev.pages[1]?.length === 0) return;
+
+        return {
+          pages: prev.pages.slice(0, 1),
+          pageParams: prev.pageParams.slice(0, 1),
+        };
+      },
+    );
+  }, [friendUserId, queryClient, conversation_id]);
 
   const {
     data: { pages } = {},

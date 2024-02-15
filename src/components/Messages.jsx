@@ -3,8 +3,16 @@ import Message from "./Message";
 import { useEffect, useRef, useState } from "react";
 import Loader from "./Loader";
 import useIntersectionObserver from "../features/hooks/useIntersectionObserver";
+import { useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import { useAppData } from "../contexts/AppDataContext";
 
 function Messages() {
+  // const { userId: friendUserId } = useParams();
+  const { currentConversation } = useAppData();
+  const friendUserId = currentConversation?.friend.id;
+  const queryClient = useQueryClient();
+
   const {
     pages,
     isFetching,
@@ -52,6 +60,7 @@ function Messages() {
     );
 
   // console.log(pages, "pages");
+
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col px-4">
       {pages[0] && (

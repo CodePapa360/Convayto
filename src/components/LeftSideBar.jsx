@@ -3,29 +3,16 @@ import MyAccount from "./Profile/MyAccount";
 import MainSidebarContents from "./MainSidebarContents";
 import { useUi } from "../contexts/UiContext";
 import { useParams } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
 
 function LeftSideBar() {
   const { isSidebarOpen, isAccountView, closeSidebar, openSidebar } = useUi();
   const { userId } = useParams();
-  const queryClient = useQueryClient();
 
   useEffect(() => {
-    // remove all pages except the first one
-    queryClient.setQueryData(["friend", userId], (prev) => {
-      if (!prev) return;
-      if (prev.pages[1]?.length === 0) return;
-
-      return {
-        pages: prev.pages.slice(0, 1),
-        pageParams: prev.pageParams.slice(0, 1),
-      };
-    });
-
     // close sidebar if user is not logged in
     if (userId) closeSidebar();
     else openSidebar();
-  }, [userId, queryClient]);
+  }, [userId]);
 
   function handleToggleSidebar() {
     if (!userId) return;
