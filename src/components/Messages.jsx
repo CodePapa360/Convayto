@@ -64,14 +64,14 @@ function Messages() {
     if (isIntersectingTop) return lastPageBtm.current.scrollIntoView();
   }, [pages]);
 
+  ////////////
+  // show a loader when fetching the first page
   if (isPending)
     return (
       <span className="flex-center mb-4 justify-center">
         <Loader size="medium" text="Loading messages" />
       </span>
     );
-
-  // console.log(pages, "pages");
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col px-4">

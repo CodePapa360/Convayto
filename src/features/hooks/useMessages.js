@@ -76,8 +76,6 @@ export function useMessages() {
         queryClient.setQueryData(
           ["friend", friendUserId, conversation_id],
           (prevData) => {
-            // console.log("newData", newData);
-            // console.log("prevData", prevData);
             const existingOptimisticMessage = prevData?.pages[0]?.find(
               (message) => message?.id === newData?.id,
             );
@@ -114,7 +112,6 @@ export function useMessages() {
         );
       }
 
-      // console.log("before sub", conversation_id);
       subscriptionRef.current = subscribeRealtimeMessage({
         conversation_id,
         callback,
