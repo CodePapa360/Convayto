@@ -64,9 +64,9 @@ export function useMessages() {
 
   useEffect(
     function () {
-      if (!conversation_id) return console.log("no conversation_id");
-      if (conversation_id === subscriptionRef.current?.subTopic)
-        return console.log("same conversation_id", subscriptionRef.current);
+      if (!conversation_id) return;
+      // if (conversation_id === subscriptionRef.current?.subTopic)
+      //   return console.log("same conversation_id", subscriptionRef.current);
 
       if (subscriptionRef.current) {
         subscriptionRef.current.unsubscribe();

@@ -18,7 +18,8 @@ function Messages() {
   const bottomRef = useRef();
   const [topElement, setTopElement] = useState(null);
 
-  const isIntersecting = useIntersectionObserver(topElement);
+  const isIntersectingTop = useIntersectionObserver(topElement);
+  const isIntersectingBtm = useIntersectionObserver(bottomRef.current);
 
   // Top ref depends on hasNextPage so we need to update it when it changes
   useEffect(() => {
@@ -29,21 +30,38 @@ function Messages() {
 
   // Fetch next page when the bottom ref is in view
   useEffect(() => {
-    if (isIntersecting && hasNextPage) {
+    if (isIntersectingTop && hasNextPage) {
       fetchNextPage();
     }
-  }, [isIntersecting, hasNextPage, fetchNextPage]);
+  }, [isIntersectingTop, hasNextPage, fetchNextPage]);
 
   ////////////
   ///////////
   const lastPageBtm = useRef(null);
 
   useEffect(() => {
-    if (pages?.length > 0 && lastPageBtm.current && isIntersecting) {
-      lastPageBtm.current.scrollIntoView();
-    } else {
-      bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
-    }
+    // 1. if there is no pages, return
+    if (!pages) return;
+
+    // 2. if the bottom ref is in view, scroll to the bottom
+    if (isIntersectingBtm)
+      return bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
+
+    //3. if the conversation id is missing that it is a optimistic message which is sent by me and need to be scrolled to the bottom
+    // 3.1 if there is no pages, return
+    if (!pages[0]) return console.log("no pages");
+    // get the last page
+    const lastPage = pages[pages.length - 1];
+    // get the last message of the last page
+    const lastMessage = lastPage[lastPage.length - 1];
+
+    if (lastMessage?.conversation_id === undefined)
+      return bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
+
+    // 4. if the top ref is in view, scroll to the last page's bottom ref to keep the view where it was
+    if (!pages.length) return;
+    if (!lastPageBtm.current) return;
+    if (isIntersectingTop) return lastPageBtm.current.scrollIntoView();
   }, [pages]);
 
   if (isPending)
