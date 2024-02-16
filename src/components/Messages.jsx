@@ -16,6 +16,7 @@ function Messages() {
 
   const topRef = useRef(null);
   const bottomRef = useRef();
+  const lastPageBtm = useRef(null);
   const [topElement, setTopElement] = useState(null);
 
   const isIntersectingTop = useIntersectionObserver(topElement);
@@ -37,7 +38,6 @@ function Messages() {
 
   ////////////
   ///////////
-  const lastPageBtm = useRef(null);
 
   useEffect(() => {
     // 1. if there is no pages, return

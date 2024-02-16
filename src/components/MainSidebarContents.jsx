@@ -32,7 +32,7 @@ function MainSidebarContents() {
   const searchInputRef = useRef(null);
 
   useEffect(() => {
-    if (friendUserId && !currentConversation) {
+    if (!currentConversation?.id) {
       const newCurrentConv = conversations?.find(
         (conv) => conv.friend.id === friendUserId,
       );
@@ -40,8 +40,8 @@ function MainSidebarContents() {
       newCurrentConv && setCurrentConversation(newCurrentConv);
     }
   }, [
-    conversations,
     friendUserId,
+    conversations,
     currentConversation,
     setCurrentConversation,
   ]);
