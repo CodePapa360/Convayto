@@ -12,19 +12,19 @@ export function useMessages() {
   const queryClient = useQueryClient();
 
   // Clear the cache when the conversation changes
-  useEffect(() => {
-    queryClient.setQueryData(
-      ["friend", friendUserId, conversation_id],
-      (prev) => {
-        if (!prev || !prev.pages[1]?.length) return;
+  // useEffect(() => {
+  //   queryClient.setQueryData(
+  //     ["friend", friendUserId, conversation_id],
+  //     (prev) => {
+  //       if (!prev || !prev.pages[1]?.length) return;
 
-        return {
-          pages: prev.pages.slice(0, 1),
-          pageParams: prev.pageParams.slice(0, 1),
-        };
-      },
-    );
-  }, [friendUserId, queryClient, conversation_id]);
+  //       return {
+  //         pages: prev.pages.slice(0, 1),
+  //         pageParams: prev.pageParams.slice(0, 1),
+  //       };
+  //     },
+  //   );
+  // }, [friendUserId, queryClient, conversation_id]);
 
   const {
     data: { pages } = {},

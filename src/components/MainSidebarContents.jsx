@@ -16,7 +16,6 @@ import Dropdown from "./Dropdown";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { useParams } from "react-router-dom";
 import { useAppData } from "../contexts/AppDataContext";
-import { useQueryClient } from "@tanstack/react-query";
 
 function MainSidebarContents() {
   const { currentConversation, setCurrentConversation } = useAppData();

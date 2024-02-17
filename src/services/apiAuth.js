@@ -197,9 +197,10 @@ export async function sendMessage({
 }) {
   let convId = conversation_id;
 
-  if (convId === null) {
+  if (!convId) {
     const newConvId = await openConversation(friendUserId);
     convId = newConvId;
+    console.log("created conv id", newConvId);
   }
 
   const { data, error } = await supabase
@@ -217,6 +218,7 @@ export async function sendMessage({
 
   if (conversationError) throw new Error(conversationError.message);
 
+  console.log("message successfully sent", data[0]);
   return data[0];
 }
 

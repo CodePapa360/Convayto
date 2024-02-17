@@ -41,7 +41,7 @@ function Messages() {
 
   useEffect(() => {
     // 1. if there is no pages, return
-    if (!pages) return;
+    if (!pages || pages[0] === undefined) return;
 
     // 2. if the bottom ref is in view, scroll to the bottom
     if (isIntersectingBtm)

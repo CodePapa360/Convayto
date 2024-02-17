@@ -5,7 +5,7 @@ import { useAppData } from "../contexts/AppDataContext";
 
 function SearchedUser({ user }) {
   const { closeSearchView } = useUi();
-  const { setCurrentConversation, currentConversation } = useAppData();
+  const { setCurrentConversation } = useAppData();
 
   const { fullname, id, username, avatar_url } = user;
   const navigate = useNavigate();
