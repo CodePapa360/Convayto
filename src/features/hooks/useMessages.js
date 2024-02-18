@@ -12,19 +12,19 @@ export function useMessages() {
   const queryClient = useQueryClient();
 
   // Clear the cache when the conversation changes
-  // useEffect(() => {
-  //   queryClient.setQueryData(
-  //     ["friend", friendUserId, conversation_id],
-  //     (prev) => {
-  //       if (!prev || !prev.pages[1]?.length) return;
+  useEffect(() => {
+    queryClient.setQueryData(
+      ["friend", friendUserId, conversation_id],
+      (prev) => {
+        if (!prev || !prev.pages[1]?.length) return;
 
-  //       return {
-  //         pages: prev.pages.slice(0, 1),
-  //         pageParams: prev.pageParams.slice(0, 1),
-  //       };
-  //     },
-  //   );
-  // }, [friendUserId, queryClient, conversation_id]);
+        return {
+          pages: prev.pages.slice(0, 1),
+          pageParams: prev.pageParams.slice(0, 1),
+        };
+      },
+    );
+  }, [friendUserId, queryClient, conversation_id]);
 
   const {
     data: { pages } = {},
@@ -38,10 +38,15 @@ export function useMessages() {
   } = useInfiniteQuery({
     queryKey: ["friend", friendUserId, conversation_id],
     queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
-    select: (data) => ({
-      pages: [...data.pages].reverse(),
-      pageParams: [...data.pageParams].reverse(),
-    }),
+
+    // Causes re render infinit times
+    select: (data) => {
+      if (!data || data?.pages[0] === undefined) return;
+      return {
+        pages: [...data.pages].reverse(),
+        pageParams: [...data.pageParams].reverse(),
+      };
+    },
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
       if (lastPage?.length === 0) return undefined;
       return lastPageParam + 1;
@@ -65,8 +70,6 @@ export function useMessages() {
   useEffect(
     function () {
       if (!conversation_id) return;
-      // if (conversation_id === subscriptionRef.current?.subTopic)
-      //   return console.log("same conversation_id", subscriptionRef.current);
 
       if (subscriptionRef.current) {
         subscriptionRef.current.unsubscribe();

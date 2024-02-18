@@ -138,7 +138,6 @@ export async function getMessages({ conversation_id, pageParam = 0 }) {
   const limit = MAX_MESSAGES_PER_PAGE;
   const from = pageParam * limit;
   const to = from + limit - 1;
-  // console.log("Got here");
 
   if (!conversation_id) return;
 

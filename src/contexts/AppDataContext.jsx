@@ -10,7 +10,7 @@ function reducer(state, action) {
   switch (action.type) {
     case "SET_CURRENT_CONVERSATION":
       return {
-        ...state,
+        // ...state,
         currentConversation: action.payload,
       };
     default:
@@ -26,8 +26,6 @@ const AppDataProvider = ({ children }) => {
       type: "SET_CURRENT_CONVERSATION",
       payload: conversation,
     });
-
-    // console.log("Updated conversation state", conversation);
   }
 
   const value = {
