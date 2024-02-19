@@ -58,12 +58,17 @@ function Messages() {
     if (lastMessage?.conversation_id === undefined)
       return bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
 
-    // 4. if the top ref is in view, scroll to the last page's bottom ref to keep the view where it was
+    // 4. if there is only one page, then it means it's the first render so we need to scroll to the bottom otherwise it will start fetching the next page automatically
+    if (pages.length === 1)
+      return bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
+
+    // 5. if the top ref is in view, scroll to the last page's bottom ref to keep the view where it was
     if (!pages.length) return;
     if (!lastPageBtm.current) return;
     if (isIntersectingTop) return lastPageBtm.current.scrollIntoView();
   }, [pages]);
 
+  // console.log("pages", pages);
   ////////////
   // show a loader when fetching the first page
   if (isPending)
@@ -75,6 +80,12 @@ function Messages() {
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col px-4">
+      {!pages && (
+        <span className="flex-center my-4 select-none opacity-60">
+          No messages yet
+        </span>
+      )}
+
       {pages && pages[0] && (
         <>
           {hasNextPage && (
@@ -93,10 +104,8 @@ function Messages() {
             ) : (
               <span
                 key={index}
-                className="my-4 select-none text-center opacity-30"
-              >
-                No more messages
-              </span>
+                className="mx-auto my-4 h-2 w-2 select-none  rounded bg-lightSlate opacity-60 dark:bg-lightSlate-dark"
+              ></span>
             ),
           )}
         </>
