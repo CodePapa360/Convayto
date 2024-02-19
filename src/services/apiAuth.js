@@ -219,7 +219,7 @@ export async function sendMessage({
 
   if (conversationError) throw new Error(conversationError.message);
 
-  console.log("message successfully sent", data[0]);
+  // console.log("message successfully sent", data[0]);
   return data[0];
 }
 
