@@ -8,9 +8,7 @@ function MessageView() {
       <MessageTopBar />
 
       <div className="grid grid-cols-1 items-end overflow-y-auto">
-        {/* <div className="mx-auto flex w-full max-w-3xl flex-col gap-2 px-4 pt-2"> */}
         <Messages />
-        {/* </div> */}
       </div>
 
       <MessageInputBar />

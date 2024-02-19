@@ -14,8 +14,9 @@ import Loader from "./Loader";
 import { useUi } from "../contexts/UiContext";
 import Dropdown from "./Dropdown";
 import { HiOutlineUserCircle } from "react-icons/hi2";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppData } from "../contexts/AppDataContext";
+import { getUserById } from "../services/apiAuth";
 
 function MainSidebarContents() {
   const { currentConversation, setCurrentConversation } = useAppData();
@@ -27,6 +28,7 @@ function MainSidebarContents() {
   const [query, setQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { userId: friendUserId } = useParams();
+  const navigate = useNavigate();
 
   const searchInputRef = useRef(null);
 
@@ -36,11 +38,27 @@ function MainSidebarContents() {
         (conv) => conv.friend.id === friendUserId,
       );
 
+      // if the conversation is not found, then check if the user is available in the context states. if not then fetch the user and set it as the current conversation
+      if (!newCurrentConv && !currentConversation.friend) checkFriend();
+
       newCurrentConv && setCurrentConversation(newCurrentConv);
+    }
+
+    async function checkFriend() {
+      try {
+        const newFriend = await getUserById(friendUserId);
+
+        if (!newFriend) return navigate("/");
+
+        setCurrentConversation({ friend: newFriend });
+      } catch (error) {
+        console.log(error, "error from checkFriend");
+      }
     }
   }, [
     friendUserId,
     conversations,
+    navigate,
     currentConversation,
     setCurrentConversation,
   ]);

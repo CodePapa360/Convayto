@@ -121,6 +121,8 @@ export async function getConversationById({ myUserId, friendUserId }) {
 
 ///////////////////
 export async function getUserById(friendUserId) {
+  if (!friendUserId) return;
+
   const { data, error } = await supabase
     .from("users")
     .select("*")
