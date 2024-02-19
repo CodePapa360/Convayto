@@ -122,7 +122,7 @@ export function useMessages() {
 
       return () => {
         subscriptionRef.current?.unsubscribe();
-        console.log("unsubscribed message");
+        // console.log("unsubscribed message");
       };
     },
     [conversation_id, friendUserId, queryClient],

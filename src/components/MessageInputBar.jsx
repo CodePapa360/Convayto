@@ -38,28 +38,28 @@ function MessageInputBar() {
 
     // Make the actual request to the server
     sendNewMessage(messageObj, {
-      onSuccess: (newData) => {
-        // when conversation id is null, it means the conversation is new
-        // if (conversationId === null) {
-        //   queryClient.setQueryData(
-        //     ["friend", messageObj.friendUserId, conversationId],
-        //     (prevData) => ({
-        //       ...prevData,
-        //       pages: prevData.pages
-        //         .slice()
-        //         .map((page, index) =>
-        //           index === 0
-        //             ? page.map((message) =>
-        //                 message.id === newData.id ? newData : message,
-        //               )
-        //             : page,
-        //         ),
-        //       // we need to update the current conversation here
-        //       // conversationId: data.conversation_id,
-        //     }),
-        //   );
-        // }
-      },
+      // onSuccess: (newData) => {
+      // when conversation id is null, it means the conversation is new
+      // if (conversationId === null) {
+      //   queryClient.setQueryData(
+      //     ["friend", messageObj.friendUserId, conversationId],
+      //     (prevData) => ({
+      //       ...prevData,
+      //       pages: prevData.pages
+      //         .slice()
+      //         .map((page, index) =>
+      //           index === 0
+      //             ? page.map((message) =>
+      //                 message.id === newData.id ? newData : message,
+      //               )
+      //             : page,
+      //         ),
+      //       // we need to update the current conversation here
+      //       // conversationId: data.conversation_id,
+      //     }),
+      //   );
+      // }
+      // },
     });
 
     const optimisticMessage = {
@@ -73,7 +73,7 @@ function MessageInputBar() {
     queryClient.setQueryData(
       ["friend", messageObj.friendUserId, conversationId],
       (prevData) => {
-        console.log(prevData);
+        // console.log(prevData);
 
         return {
           ...prevData,

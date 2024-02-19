@@ -24,7 +24,7 @@ export function subscribeRealtimeMessage({ conversation_id, callback }) {
     )
     .subscribe();
 
-  console.log("subscribed message", conversation_id);
+  // console.log("subscribed message", conversation_id);
 
   return subscription;
 }
