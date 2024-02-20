@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 import { subscribeRealtimeConversation } from "../../services/apiRealtime";
 import { sortConverseByTime } from "../../utils/common";
 import { MAX_PREFETCHED_CONVERSATIONS } from "../../config";
-import { useAppData } from "../../contexts/AppDataContext";
 
 let subscriptionConversation;
 
@@ -13,8 +12,6 @@ export function useConversatoins() {
   const queryClient = useQueryClient();
   const { user } = useUser();
   const myUserId = user.id;
-  // const { currentConversation } = useAppData();
-  // const conversation_id = currentConversation?.id;
 
   const { data, isPending, error } = useQuery({
     queryKey: ["conversations", myUserId],
