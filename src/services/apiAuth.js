@@ -201,7 +201,6 @@ export async function sendMessage({
   if (!convId) {
     const newConvId = await openConversation(friendUserId);
     convId = newConvId;
-    console.log("created conv id", newConvId);
   }
 
   const { data, error } = await supabase

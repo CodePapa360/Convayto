@@ -68,7 +68,6 @@ function Messages() {
     if (isIntersectingTop) return lastPageBtm.current.scrollIntoView();
   }, [pages]);
 
-  // console.log("pages", pages);
   ////////////
   // show a loader when fetching the first page
   if (isPending)
