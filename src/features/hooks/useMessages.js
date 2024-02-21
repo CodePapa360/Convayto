@@ -27,7 +27,7 @@ export function useMessages() {
   }, [friendUserId, queryClient, conversation_id]);
 
   const {
-    data: { pages } = {},
+    data: { pages, pageParams } = {},
     error,
     fetchNextPage,
     hasNextPage,
@@ -40,13 +40,15 @@ export function useMessages() {
     queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
 
     // Causes re render infinit times
-    select: (data) => {
-      if (!data || data?.pages[0] === undefined) return;
-      return {
-        pages: [...data.pages].reverse(),
-        pageParams: [...data.pageParams].reverse(),
-      };
-    },
+    // select: (data) => {
+    //   // console.log(data);
+    //   // if (!data || data.pages.length < 2) return data;
+    //   // return {
+    //   //   pages: [...data.pages].reverse(),
+    //   //   pageParams: [...data.pageParams].reverse(),
+    //   // };
+    //   // console.log(data);
+    // },
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
       if (lastPage?.length === 0) return undefined;
       return lastPageParam + 1;
@@ -127,6 +129,8 @@ export function useMessages() {
     },
     [conversation_id, friendUserId, queryClient],
   );
+
+  console.log("pages", pages, "pageParams", pageParams);
 
   return {
     pages,
