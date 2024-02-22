@@ -39,7 +39,6 @@ export function useMessages() {
     queryKey: ["friend", friendUserId, conversation_id],
     queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
 
-    // Causes re render infinit times
     // select: (data) => {
     //   // console.log(data);
     //   // if (!data || data.pages.length < 2) return data;
@@ -129,8 +128,6 @@ export function useMessages() {
     },
     [conversation_id, friendUserId, queryClient],
   );
-
-  console.log("pages", pages, "pageParams", pageParams);
 
   return {
     pages,
