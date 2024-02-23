@@ -46,7 +46,6 @@ export function useMessages() {
     //   //   pages: [...data.pages].reverse(),
     //   //   pageParams: [...data.pageParams].reverse(),
     //   // };
-    //   // console.log(data);
     // },
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
       if (lastPage?.length === 0) return undefined;
