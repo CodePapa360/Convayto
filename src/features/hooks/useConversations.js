@@ -43,7 +43,7 @@ export function useConversatoins() {
         myUserId,
         onUpdate: updateConversation,
       });
-      // console.log("Subscribed to conversations");
+      console.log("Subscribed to conversations");
     },
     [myUserId, queryClient],
   );
