@@ -73,7 +73,7 @@ function MessageInputBar() {
     queryClient.setQueryData(
       ["friend", messageObj.friendUserId, conversationId],
       (prevData) => {
-        console.log(prevData);
+        // console.log(prevData);
 
         return {
           ...prevData,

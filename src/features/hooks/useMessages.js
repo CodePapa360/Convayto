@@ -27,31 +27,30 @@ export function useMessages() {
   }, [friendUserId, queryClient, conversation_id]);
 
   const {
-    data: { pages, pageParams } = {},
+    data: { pages } = {},
     error,
     fetchNextPage,
     hasNextPage,
     isFetching,
     isPending,
     isFetchingNextPage,
-    status,
   } = useInfiniteQuery({
     queryKey: ["friend", friendUserId, conversation_id],
     queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
 
-    // select: (data) => {
-    //   // console.log(data);
-    //   // if (!data || data.pages.length < 2) return data;
-    //   // return {
-    //   //   pages: [...data.pages].reverse(),
-    //   //   pageParams: [...data.pageParams].reverse(),
-    //   // };
-    // },
+    select: (data) => {
+      if (!data || data.pages.length < 2) return data;
+      return {
+        pages: [...data.pages].reverse(),
+        pageParams: [...data.pageParams].reverse(),
+      };
+    },
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
       if (lastPage?.length === 0) return undefined;
       return lastPageParam + 1;
     },
     initialPageParam: 0,
+    enabled: !!conversation_id,
   });
 
   if (error) {
