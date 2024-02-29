@@ -70,26 +70,27 @@ function MessageInputBar() {
     };
 
     // Update the cache with the optimistic message
-    queryClient.setQueryData(
-      ["friend", messageObj.friendUserId, conversationId],
-      (prevData) => {
-        // console.log(prevData);
 
-        return {
-          ...prevData,
-          // add the optimistic message to the first page's data
-          pages: prevData.pages
-            .slice()
-            .map((page, index) =>
-              index === 0
-                ? !page
-                  ? [optimisticMessage]
-                  : [...page, optimisticMessage]
-                : page,
-            ),
-        };
-      },
-    );
+    // queryClient.setQueryData(
+    //   ["friend", messageObj.friendUserId, conversationId],
+    //   (prevData) => {
+    //     // console.log(prevData);
+
+    //     return {
+    //       ...prevData,
+    //       // add the optimistic message to the first page's data
+    //       pages: prevData.pages
+    //         .slice()
+    //         .map((page, index) =>
+    //           index === 0
+    //             ? !page
+    //               ? [optimisticMessage]
+    //               : [...page, optimisticMessage]
+    //             : page,
+    //         ),
+    //     };
+    //   },
+    // );
 
     // Reset the input field
     setNewMessage("");

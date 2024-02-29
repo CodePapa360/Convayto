@@ -6,5 +6,5 @@ export const MAX_NAME_LENGTH = 25;
 export const MIN_USERNAME_LENGTH = 4;
 export const MAX_USERNAME_LENGTH = 20;
 export const MINIMUM_SEARCH_LENGTH = 2;
-export const MAX_PREFETCHED_CONVERSATIONS = 5;
-export const MAX_MESSAGES_PER_PAGE = 15;
+export const MAX_PREFETCHED_CONVERSATIONS = 0;
+export const MAX_MESSAGES_PER_PAGE = 10;

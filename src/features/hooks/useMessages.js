@@ -34,18 +34,19 @@ export function useMessages() {
     isFetching,
     isPending,
     isFetchingNextPage,
+    isLoading,
   } = useInfiniteQuery({
     queryKey: ["friend", friendUserId, conversation_id],
     queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
 
-    // select: (data) => {
-    //   // console.log("data", data);
-    //   if (!data || data.pages.length < 2) return data;
-    //   return {
-    //     pages: [...data.pages].reverse(),
-    //     pageParams: [...data.pageParams].reverse(),
-    //   };
-    // },
+    select: (data) => {
+      console.log("data", data);
+      if (!data || data.pages.length < 2) return data;
+      return {
+        pages: [...data.pages].reverse(),
+        pageParams: [...data.pageParams].reverse(),
+      };
+    },
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
       if (lastPage?.length === 0) return undefined;
       return lastPageParam + 1;
@@ -132,6 +133,7 @@ export function useMessages() {
     pages,
     isFetching,
     isPending,
+    isLoading,
     error,
     fetchNextPage,
     hasNextPage,

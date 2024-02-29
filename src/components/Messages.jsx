@@ -10,9 +10,11 @@ function Messages() {
     isFetching,
     isFetchingNextPage,
     isPending,
+    isLoading,
     fetchNextPage,
     hasNextPage,
   } = useMessages();
+  // console.log("isLoading", isLoading);
 
   const topRef = useRef(null);
   const bottomRef = useRef();
@@ -70,7 +72,7 @@ function Messages() {
 
   ////////////
   // show a loader when fetching the first page
-  if (isPending)
+  if (isLoading)
     return (
       <span className="flex-center mb-4 justify-center">
         <Loader size="medium" text="Loading messages" />
