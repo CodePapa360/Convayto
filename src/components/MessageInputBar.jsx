@@ -70,27 +70,29 @@ function MessageInputBar() {
     };
 
     // Update the cache with the optimistic message
+    // if there is no conversation id, it means the conversation is new and the first message can not be optimistic because to access the query data we need the conversation id as one of the query keys
+    if (conversationId) {
+      queryClient.setQueryData(
+        ["friend", messageObj.friendUserId, conversationId],
+        (prevData) => {
+          // console.log(prevData);
 
-    // queryClient.setQueryData(
-    //   ["friend", messageObj.friendUserId, conversationId],
-    //   (prevData) => {
-    //     // console.log(prevData);
-
-    //     return {
-    //       ...prevData,
-    //       // add the optimistic message to the first page's data
-    //       pages: prevData.pages
-    //         .slice()
-    //         .map((page, index) =>
-    //           index === 0
-    //             ? !page
-    //               ? [optimisticMessage]
-    //               : [...page, optimisticMessage]
-    //             : page,
-    //         ),
-    //     };
-    //   },
-    // );
+          return {
+            ...prevData,
+            // add the optimistic message to the first page's data
+            pages: prevData.pages
+              .slice()
+              .map((page, index) =>
+                index === 0
+                  ? !page
+                    ? [optimisticMessage]
+                    : [...page, optimisticMessage]
+                  : page,
+              ),
+          };
+        },
+      );
+    }
 
     // Reset the input field
     setNewMessage("");
