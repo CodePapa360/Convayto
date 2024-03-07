@@ -2,8 +2,6 @@ import { getMessageById, getUserById } from "./apiAuth";
 import supabase from "./supabase";
 
 export function subscribeRealtimeMessage({ conversation_id, callback }) {
-  // console.log("Got here", conversation_id);
-
   if (!conversation_id) return;
 
   const roomName = conversation_id;
