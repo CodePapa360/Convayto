@@ -148,7 +148,6 @@ export async function getMessages({ conversation_id, pageParam = 0 }) {
   }
 
   const messagesReversed = messages.reverse();
-  // console.log("API Called");
 
   return messagesReversed;
 }
