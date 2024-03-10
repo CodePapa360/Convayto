@@ -88,7 +88,6 @@ export async function getConversations({ myUserId }) {
     };
   });
 
-  // console.log("combinedArray", combinedArray);
   return combinedArray;
 }
 
