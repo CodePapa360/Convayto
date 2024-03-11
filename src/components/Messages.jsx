@@ -14,7 +14,6 @@ function Messages() {
     fetchNextPage,
     hasNextPage,
   } = useMessages();
-  // console.log("isLoading", isLoading);
 
   const topRef = useRef(null);
   const bottomRef = useRef();
