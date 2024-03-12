@@ -7,9 +7,9 @@ import useIntersectionObserver from "../features/hooks/useIntersectionObserver";
 function Messages() {
   const {
     pages,
-    isFetching,
+    // isFetching,
     isFetchingNextPage,
-    isPending,
+    // isPending,
     isLoading,
     fetchNextPage,
     hasNextPage,
@@ -38,7 +38,6 @@ function Messages() {
   }, [isIntersectingTop, hasNextPage, fetchNextPage]);
 
   ////////////
-  ///////////
 
   useEffect(() => {
     // 1. if there is no pages, return
