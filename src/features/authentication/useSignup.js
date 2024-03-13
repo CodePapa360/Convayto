@@ -22,7 +22,7 @@ export function useSignup() {
     },
 
     onError: (err) => {
-      console.log("ERROR", err);
+      // console.log("ERROR", err);
     },
   });
 
