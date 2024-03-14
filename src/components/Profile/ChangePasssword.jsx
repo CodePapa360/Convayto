@@ -21,7 +21,7 @@ function ChangePasssword() {
       }
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+      // console.log(error);
     }
   }
 
