@@ -33,15 +33,30 @@ function MainSidebarContents() {
   const searchInputRef = useRef(null);
 
   useEffect(() => {
-    if (!currentConversation?.id) {
+    const currentConvId = currentConversation?.id;
+    const currentUserId = currentConversation?.friend?.id;
+
+    // conv id isn't available in the context but friend is available
+    // both available but friend id is not same as current url friend id
+    // non of them is available
+
+    if (!currentConvId && !currentUserId) {
       const newCurrentConv = conversations?.find(
         (conv) => conv.friend.id === friendUserId,
       );
 
-      // if the conversation is not found, then check if the user is available in the context states. if not then fetch the user and set it as the current conversation
-      if (!newCurrentConv && !currentConversation.friend) checkFriend();
+      newCurrentConv && setCurrentConversation(newCurrentConv);
+    } else if (currentUserId !== friendUserId) {
+      const newCurrentConv = conversations?.find(
+        (conv) => conv.friend.id === friendUserId,
+      );
 
       newCurrentConv && setCurrentConversation(newCurrentConv);
+    } else if (!currentConvId && friendUserId) {
+      // const newCurrentConv = conversations?.find(
+      //   (conv) => conv.friend.id === friendUserId,
+      // );
+      // newCurrentConv && setCurrentConversation(newCurrentConv);
     }
 
     async function checkFriend() {
