@@ -46,26 +46,26 @@ function MainSidebarContents() {
       );
 
       newCurrentConv ? setCurrentConversation(newCurrentConv) : checkFriend();
-      console.log("1");
+      // console.log("1");
     } else if (currentUserId !== friendUserId) {
       const newCurrentConv = conversations?.find(
         (conv) => conv.friend.id === friendUserId,
       );
 
       newCurrentConv ? setCurrentConversation(newCurrentConv) : checkFriend();
-      console.log("2");
+      // console.log("2");
     } else if (!currentConvId && friendUserId) {
-      // const newCurrentConv = conversations?.find(
-      //   (conv) => conv.friend.id === friendUserId,
-      // );
-      // newCurrentConv ? setCurrentConversation(newCurrentConv) : checkFriend();
+      const newCurrentConv = conversations?.find(
+        (conv) => conv.friend.id === friendUserId,
+      );
+      newCurrentConv && setCurrentConversation(newCurrentConv);
       // console.log("3");
-    } else return;
+    }
 
     async function checkFriend() {
       try {
         if (!friendUserId) return;
-        console.log("checking friend");
+        // console.log("checking friend");
         const newFriend = await getUserById(friendUserId);
 
         if (!newFriend) return navigate("/");
