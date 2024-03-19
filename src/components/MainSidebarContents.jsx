@@ -36,10 +36,6 @@ function MainSidebarContents() {
     const currentConvId = currentConversation?.id;
     const currentUserId = currentConversation?.friend?.id;
 
-    // conv id isn't available in the context but friend is available
-    // both available but friend id is not same as current url friend id
-    // non of them is available
-
     if (!currentConvId && !currentUserId) {
       const newCurrentConv = conversations?.find(
         (conv) => conv.friend.id === friendUserId,
