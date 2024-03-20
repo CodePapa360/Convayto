@@ -37,6 +37,7 @@ function MainSidebarContents() {
     const currentUserId = currentConversation?.friend?.id;
 
     if (!currentConvId && !currentUserId) {
+      // This will generally happen at first load
       const newCurrentConv = conversations?.find(
         (conv) => conv.friend.id === friendUserId,
       );
@@ -44,6 +45,8 @@ function MainSidebarContents() {
       newCurrentConv ? setCurrentConversation(newCurrentConv) : checkFriend();
       // console.log("1");
     } else if (currentUserId !== friendUserId) {
+      // this will mostly happen while navigating
+
       const newCurrentConv = conversations?.find(
         (conv) => conv.friend.id === friendUserId,
       );
