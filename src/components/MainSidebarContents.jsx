@@ -43,7 +43,6 @@ function MainSidebarContents() {
       );
 
       newCurrentConv ? setCurrentConversation(newCurrentConv) : checkFriend();
-      // console.log("1");
     } else if (currentUserId !== friendUserId) {
       // this will mostly happen while navigating
 
