@@ -51,7 +51,6 @@ function MainSidebarContents() {
       );
 
       newCurrentConv ? setCurrentConversation(newCurrentConv) : checkFriend();
-      // console.log("2");
     } else if (!currentConvId && friendUserId) {
       const newCurrentConv = conversations?.find(
         (conv) => conv.friend.id === friendUserId,
