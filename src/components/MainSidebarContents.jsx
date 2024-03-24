@@ -56,7 +56,6 @@ function MainSidebarContents() {
         (conv) => conv.friend.id === friendUserId,
       );
       newCurrentConv && setCurrentConversation(newCurrentConv);
-      // console.log("3");
     }
 
     async function checkFriend() {
