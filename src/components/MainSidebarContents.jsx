@@ -61,7 +61,6 @@ function MainSidebarContents() {
     async function checkFriend() {
       try {
         if (!friendUserId) return;
-        // console.log("checking friend");
         const newFriend = await getUserById(friendUserId);
 
         if (!newFriend) return navigate("/");
