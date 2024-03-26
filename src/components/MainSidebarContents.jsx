@@ -67,7 +67,7 @@ function MainSidebarContents() {
 
         newFriend && setCurrentConversation({ friend: newFriend });
       } catch (error) {
-        console.log(error, "error from checkFriend");
+        // console.log(error, "error from checkFriend");
       }
     }
   }, [
