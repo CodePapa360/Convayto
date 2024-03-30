@@ -94,7 +94,6 @@ function MessageInputBar() {
       );
     }
 
-    // Reset the input field
     setNewMessage("");
   }
 
