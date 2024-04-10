@@ -26,7 +26,12 @@ function Messages() {
   // Top ref depends on hasNextPage so we need to update it when it changes
   useEffect(() => {
     if (topRef.current) {
-      setTopElement(topRef.current);
+      // Set the top element after 1 second to avoid fetching the next page immediately when user loads the page first time.
+      const timeoutId = setTimeout(() => {
+        setTopElement(topRef.current);
+      }, 1000);
+
+      return () => clearTimeout(timeoutId);
     }
   }, [hasNextPage]);
 
