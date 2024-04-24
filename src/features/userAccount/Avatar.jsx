@@ -1,8 +1,8 @@
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { LuImagePlus } from "react-icons/lu";
-import { useUser } from "../../features/authentication/useUser";
+import { useUser } from "../authentication/useUser";
 import { useUpdateUser } from "../../features/hooks/useUpdateUser";
-import Loader from "../Loader";
+import Loader from "../../components/Loader";
 
 function Avatar() {
   const { user } = useUser();

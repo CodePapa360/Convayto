@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import MyAccount from "./Profile/MyAccount";
 import MainSidebarContents from "./MainSidebarContents";
-import { useUi } from "../contexts/UiContext";
+import { useUi } from "../../contexts/UiContext";
 import { useParams } from "react-router-dom";
 
 function LeftSideBar() {

@@ -3,13 +3,13 @@ import "./styles/index.css";
 import AppLayout from "./components/AppLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Signup from "./pages/Signup";
-import Signin from "./pages/Signin";
+import Signup from "./features/authentication/Signup";
+import Signin from "./features/authentication/Signin";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MessageView from "./components/MessageView";
 import { UiProvider } from "./contexts/UiContext";
 import { AppDataProvider } from "./contexts/AppDataContext";
-import ResetPassword from "./pages/ResetPassword";
+import ResetPassword from "./features/authentication/ResetPassword";
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useUi } from "../contexts/UiContext";
+import { useUi } from "../../contexts/UiContext";
 import { HiOutlineUserCircle } from "react-icons/hi2";
-import { useAppData } from "../contexts/AppDataContext";
+import { useAppData } from "../../contexts/AppDataContext";
 
 function Conversation({ conversation }) {
   const { setCurrentConversation } = useAppData();

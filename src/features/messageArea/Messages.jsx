@@ -1,7 +1,7 @@
 import { useMessages } from "../features/hooks/useMessages";
 import Message from "./Message";
 import { useEffect, useRef, useState } from "react";
-import Loader from "./Loader";
+import Loader from "../../components/Loader";
 import useIntersectionObserver from "../features/hooks/useIntersectionObserver";
 
 function Messages() {

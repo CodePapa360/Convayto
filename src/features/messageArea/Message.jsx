@@ -1,5 +1,5 @@
-import { useUser } from "../features/authentication/useUser";
-import { formatTime } from "../utils/common";
+import { useUser } from "../authentication/useUser";
+import { formatTime } from "../../utils/common";
 
 function Message({ message }) {
   const { user } = useUser();

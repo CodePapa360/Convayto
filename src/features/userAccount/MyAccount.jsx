@@ -35,6 +35,7 @@ function MyAccount() {
 
         <Bio />
 
+        {/* Email */}
         <div className="mt-5">
           <p className="select-none text-sm font-bold tracking-wider text-textViolet opacity-80 dark:text-textViolet-dark">
             Email

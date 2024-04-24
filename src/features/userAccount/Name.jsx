@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { useUser } from "../../features/authentication/useUser";
+import { useUser } from "../authentication/useUser";
 import { RiCheckFill, RiEdit2Line } from "react-icons/ri";
 import { useUpdateUser } from "../../features/hooks/useUpdateUser";
-import Loader from "../Loader";
+import Loader from "../../components/Loader";
 import { MAX_NAME_LENGTH } from "../../config";
 
 function Name() {

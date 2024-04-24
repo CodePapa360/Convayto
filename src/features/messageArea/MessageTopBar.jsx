@@ -1,11 +1,11 @@
 import { RiArrowLeftLine } from "react-icons/ri";
 import { useMessages } from "../features/hooks/useMessages";
-import { useUi } from "../contexts/UiContext";
-import Loader from "./Loader";
+import { useUi } from "../../contexts/UiContext";
+import Loader from "../../components/Loader";
 import { useNavigate } from "react-router-dom";
-import FriendProfileBar from "./FriendProfileBar";
+import FriendProfileBar from "../sideBar/FriendProfileBar";
 import { HiOutlineUserCircle } from "react-icons/hi2";
-import { useAppData } from "../contexts/AppDataContext";
+import { useAppData } from "../../contexts/AppDataContext";
 
 function MessageTopBar() {
   // const { data, isPending } = useMessages();

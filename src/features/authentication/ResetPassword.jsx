@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useUser } from "../features/authentication/useUser";
+import { useUser } from "./useUser";
 import { useNavigate } from "react-router-dom";
 import { RiLoginCircleLine } from "react-icons/ri";
-import Loader from "../components/Loader";
-import { useUpdateUser } from "../features/hooks/useUpdateUser";
+import Loader from "../../components/Loader";
+import { useUpdateUser } from "../hooks/useUpdateUser";
 
 function ResetPassword() {
   const { updateUser, isUpdating } = useUpdateUser();
@@ -68,7 +68,7 @@ function ResetPassword() {
                 />
                 <label
                   htmlFor="newPassword"
-                  className="pointer-events-none absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-mediumSlate px-2 text-sm text-lightSlate-dark transition-all duration-100 ease-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2  peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-textViolet-dark rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:bg-mediumSlate-dark dark:text-gray-400 peer-focus:dark:text-textViolet-dark"
+                  className="pointer-events-none absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-mediumSlate px-2 text-sm text-lightSlate-dark transition-all duration-100 ease-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2  peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-textViolet-dark dark:bg-mediumSlate-dark dark:text-gray-400 peer-focus:dark:text-textViolet-dark rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4"
                 >
                   New password
                 </label>
@@ -90,7 +90,7 @@ function ResetPassword() {
                 />
                 <label
                   htmlFor="confirmPassword"
-                  className="pointer-events-none absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-mediumSlate px-2 text-sm text-lightSlate-dark transition-all duration-100 ease-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2  peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-textViolet-dark rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:bg-mediumSlate-dark dark:text-gray-400 peer-focus:dark:text-textViolet-dark"
+                  className="pointer-events-none absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-mediumSlate px-2 text-sm text-lightSlate-dark transition-all duration-100 ease-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2  peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-textViolet-dark dark:bg-mediumSlate-dark dark:text-gray-400 peer-focus:dark:text-textViolet-dark rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4"
                 >
                   Confirm new password
                 </label>

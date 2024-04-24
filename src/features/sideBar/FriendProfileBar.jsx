@@ -1,5 +1,5 @@
 import { RiCloseFill } from "react-icons/ri";
-import { useUi } from "../contexts/UiContext";
+import { useUi } from "../../contexts/UiContext";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 
 function FriendProfileBar({ friend }) {
