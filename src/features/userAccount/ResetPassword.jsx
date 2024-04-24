@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useUser } from "./useUser";
+import { useUser } from "../authentication/useUser";
 import { useNavigate } from "react-router-dom";
 import { RiLoginCircleLine } from "react-icons/ri";
 import Loader from "../../components/Loader";
-import { useUpdateUser } from "../hooks/useUpdateUser";
+import { useUpdateUser } from "./useUpdateUser";
 
 function ResetPassword() {
   const { updateUser, isUpdating } = useUpdateUser();

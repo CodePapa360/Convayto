@@ -30,7 +30,7 @@ export async function signin({ email, password }) {
   return data;
 }
 
-export async function logout() {
+export async function signout() {
   let { error } = await supabase.auth.signOut();
   if (error) throw new Error(error.message);
 }

@@ -6,10 +6,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Signup from "./features/authentication/Signup";
 import Signin from "./features/authentication/Signin";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import MessageView from "./components/MessageView";
+import MessageView from "./features/messageArea/MessageView";
 import { UiProvider } from "./contexts/UiContext";
 import { AppDataProvider } from "./contexts/AppDataContext";
-import ResetPassword from "./features/authentication/ResetPassword";
+import ResetPassword from "./features/userAccount/ResetPassword";
 
 const queryClient = new QueryClient({
   defaultOptions: {

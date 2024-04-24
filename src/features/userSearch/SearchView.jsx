@@ -1,6 +1,6 @@
 import { useUser } from "../authentication/useUser";
 import SearchedUser from "./SearchedUser";
-import { useSearchedUsers } from "../features/hooks/useSearchedUsers";
+import { useSearchedUsers } from "./useSearchedUsers";
 import Loader from "../../components/Loader";
 import { MINIMUM_SEARCH_LENGTH } from "../../config";
 

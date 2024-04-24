@@ -5,14 +5,14 @@ import {
   RiArrowLeftLine,
 } from "react-icons/ri";
 import { useUser } from "../authentication/useUser";
-import { useConversatoins } from "../features/hooks/useConversations";
+import { useConversations } from "./useConversations";
 import Signout from "../authentication/Signout";
 import Conversation from "./Conversation";
 import { useEffect, useRef, useState } from "react";
-import SearchView from "../../components/SearchView";
+import SearchView from "../userSearch/SearchView";
 import Loader from "../../components/Loader";
 import { useUi } from "../../contexts/UiContext";
-import Dropdown from "../../components/Dropdown";
+import Dropdown from "../../components/DropdownMenu";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppData } from "../../contexts/AppDataContext";
@@ -20,7 +20,7 @@ import { getUserById } from "../../services/apiAuth";
 
 function MainSidebarContents() {
   const { currentConversation, setCurrentConversation } = useAppData();
-  const { conversations, isPending } = useConversatoins();
+  const { conversations, isPending } = useConversations();
   const { openAccountView, isSearchView, openSearchView, closeSearchView } =
     useUi();
   const { user } = useUser();

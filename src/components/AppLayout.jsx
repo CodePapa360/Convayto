@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import LeftSideBar from "./LeftSideBar";
+import LeftSideBar from "../features/sideBar/LeftSideBar";
 
 function AppLayout() {
   return (

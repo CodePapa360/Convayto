@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useUser } from "../../features/authentication/useUser";
 import { sendPasswordResetEmail } from "../../services/apiAuth";
-import Loader from "../Loader";
+import Loader from "../../components/Loader";
 
 function ChangePasssword() {
   const { user } = useUser();

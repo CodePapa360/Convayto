@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useUser } from "../authentication/useUser";
 import { RiCheckFill, RiEdit2Line } from "react-icons/ri";
-import { useUpdateUser } from "../../features/hooks/useUpdateUser";
+import { useUpdateUser } from "./useUpdateUser";
 import Loader from "../../components/Loader";
 import { MAX_NAME_LENGTH } from "../../config";
 

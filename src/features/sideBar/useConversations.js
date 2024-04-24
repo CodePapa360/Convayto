@@ -8,7 +8,7 @@ import { MAX_PREFETCHED_CONVERSATIONS } from "../../config";
 
 let subscriptionConversation;
 
-export function useConversatoins() {
+export function useConversations() {
   const queryClient = useQueryClient();
   const { user } = useUser();
   const myUserId = user.id;

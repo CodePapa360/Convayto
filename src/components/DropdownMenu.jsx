@@ -17,7 +17,7 @@ function Dropdown() {
     user_metadata: { fullname },
   } = user;
   const { openAccountView, isDarkMode, toggleDarkMode } = useUi();
-  const { logout, isPending } = useSignout();
+  const { signout, isPending } = useSignout();
 
   return (
     <div
@@ -56,7 +56,7 @@ function Dropdown() {
                 onChange={() => toggleDarkMode()}
                 className="peer sr-only"
               />
-              <div className="peer h-5 w-9 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:translate-x-[-100%] dark:border-gray-500 dark:bg-gray-500 dark:peer-focus:ring-blue-800"></div>
+              <div className="peer h-5 w-9 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-500 dark:bg-gray-500 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:translate-x-[-100%]"></div>
             </div>
           </label>
         </li>
@@ -85,7 +85,7 @@ function Dropdown() {
       </ul>
       <div className="pt-2">
         <button
-          onClick={() => logout()}
+          onClick={() => signout()}
           className="flex w-full items-center gap-2 rounded-md px-4 py-2 text-base text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
         >
           {isPending ? <Loader /> : <RiLogoutCircleLine />}
