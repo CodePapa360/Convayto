@@ -1,5 +1,5 @@
 import supabase from "../../services/supabase";
-import { getMessageById } from "../messageArea/supabaseApi";
+import { getMessageById } from "../messageArea/apiMessage";
 import { getUserById } from "../authentication/supabaseApi";
 
 async function getUpdatedPayload({ payload, myUserId }) {
