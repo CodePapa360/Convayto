@@ -1,5 +1,4 @@
-import supabase from "./supabase";
-import { supabaseUrl } from "./supabase";
+import supabase, { supabaseUrl } from "../../services/supabase";
 
 export async function updateCurrentUser({
   password,
@@ -43,4 +42,16 @@ export async function updateCurrentUser({
     if (deleteError) throw new Error(deleteError.message);
   }
   return updatedUser;
+}
+
+///////////////////////
+
+export async function sendPasswordResetEmail(email) {
+  let { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: "http://localhost:3000/reset-password",
+  });
+
+  if (error) throw new Error(error.message);
+
+  return data;
 }

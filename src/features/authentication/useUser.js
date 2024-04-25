@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getCurrentUser } from "../../services/apiAuth";
+import { getCurrentUser } from "./supabaseApi";
 
 export function useUser() {
   const queryClient = useQueryClient();
