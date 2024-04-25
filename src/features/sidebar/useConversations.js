@@ -1,8 +1,9 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getConversations, getMessages } from "../../services/apiAuth";
+import { getConversations } from "./apiConversation";
+import { getMessages } from "../messageArea/apiMessage";
 import { useUser } from "../authentication/useUser";
 import { useEffect, useRef } from "react";
-import { subscribeRealtimeConversation } from "../../services/apiRealtime";
+import { subscribeRealtimeConversation } from "./apiRealtimeConversation";
 import { sortConverseByTime } from "../../utils/common";
 import { MAX_PREFETCHED_CONVERSATIONS } from "../../config";
 

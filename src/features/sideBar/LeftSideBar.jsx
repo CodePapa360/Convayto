@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import MyAccount from "../userAccount/MyAccount";
+import MyAccount from "../userProfile/MyAccount";
 import MainSidebarContents from "./MainSidebarContents";
 import { useUi } from "../../contexts/UiContext";
 import { useParams } from "react-router-dom";

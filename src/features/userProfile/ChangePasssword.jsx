@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useUser } from "../../features/authentication/useUser";
-import { sendPasswordResetEmail } from "./supabaseApi";
+import { sendPasswordResetEmail } from "./apiUserAccount";
 import Loader from "../../components/Loader";
 
 function ChangePasssword() {

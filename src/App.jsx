@@ -9,7 +9,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MessageView from "./features/messageArea/MessageView";
 import { UiProvider } from "./contexts/UiContext";
 import { AppDataProvider } from "./contexts/AppDataContext";
-import ResetPassword from "./features/userAccount/ResetPassword";
+import ResetPassword from "./features/userProfile/ResetPassword";
 
 const queryClient = new QueryClient({
   defaultOptions: {

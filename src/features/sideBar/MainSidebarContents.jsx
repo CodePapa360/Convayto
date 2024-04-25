@@ -16,7 +16,7 @@ import Dropdown from "../../components/DropdownMenu";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppData } from "../../contexts/AppDataContext";
-import { getUserById } from "../../services/apiAuth";
+import { getUserById } from "../authentication/apiAuth";
 
 function MainSidebarContents() {
   const { currentConversation, setCurrentConversation } = useAppData();

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { signin as signinApi } from "../../services/apiAuth";
+import { signin as signinApi } from "./apiAuth";
 
 export function useSignin() {
   const queryClient = useQueryClient();
@@ -13,7 +13,6 @@ export function useSignin() {
       console.log("ERROR", err);
     },
   });
-
 
   return { signin, isPending };
 }

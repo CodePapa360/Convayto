@@ -1,9 +1,9 @@
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
-import { getMessages } from "../../services/apiAuth";
+import { getMessages } from "./apiMessage";
 import { useParams } from "react-router-dom";
 import { useAppData } from "../../contexts/AppDataContext";
 import { useEffect, useRef } from "react";
-import { subscribeRealtimeMessage } from "../../services/apiRealtime";
+import { subscribeRealtimeMessage } from "./apiRealtimeMessage";
 
 export function useMessages() {
   const { currentConversation } = useAppData();

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { searchPeople } from "../../services/apiAuth";
+import { searchPeople } from "./apiUserSearch";
 import { MINIMUM_SEARCH_LENGTH } from "../../config";
 
 export function useSearchedUsers(query) {

@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { sendMessage } from "../../services/apiAuth";
+import { sendMessage } from "./apiMessage";
 
 export function useSendNewMessage() {
   const { mutate: sendNewMessage, isPending: isSending } = useMutation({

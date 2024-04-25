@@ -1,6 +1,6 @@
 import supabase from "../../services/supabase";
 import { getMessageById } from "../messageArea/apiMessage";
-import { getUserById } from "../authentication/supabaseApi";
+import { getUserById } from "../authentication/apiAuth";
 
 async function getUpdatedPayload({ payload, myUserId }) {
   if (payload.eventType === "INSERT") {
