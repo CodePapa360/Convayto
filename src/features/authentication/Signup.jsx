@@ -30,7 +30,7 @@ function Signup() {
   return (
     <div className="flex min-h-dvh items-center justify-center bg-deepSlate text-black transition-all duration-200 ease-in-out dark:bg-deepSlate-dark dark:text-white">
       <div className="w-full max-w-80 rounded-xl bg-mediumSlate p-6 dark:bg-mediumSlate-dark">
-        <h1 className="mb-8 text-center text-3xl  uppercase">Sign up</h1>
+        <h1 className="mb-8 text-center text-3xl">Sign up</h1>
 
         <form onSubmit={handleSubmit} className="mb-4 flex flex-col">
           <div className="input-container mb-4 w-full">

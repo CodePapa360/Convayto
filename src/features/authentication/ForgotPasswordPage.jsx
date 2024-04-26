@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Loader from "../../components/Loader";
 import useResetPasswordForEmail from "./useResetPasswordForEmail";
+import { Link } from "react-router-dom";
+import { RiArrowLeftSLine } from "react-icons/ri";
 
 function ForgotPasswordPage() {
   const {
@@ -31,7 +33,7 @@ function ForgotPasswordPage() {
   return (
     <div className="bg- flex min-h-screen items-center justify-center bg-deepSlate text-black dark:bg-deepSlate-dark dark:text-white">
       <div className="w-full max-w-80 rounded-xl bg-mediumSlate p-6 dark:bg-mediumSlate-dark">
-        <h1 className="mb-8 text-center text-xl">Reset your password</h1>
+        <h1 className="mb-8 text-center text-2xl">Reset your password</h1>
 
         <p className="mb-4 text-center text-sm">
           Enter your email address below and we'll send you a link to reset your
@@ -70,6 +72,16 @@ function ForgotPasswordPage() {
             <span>Continue</span>
           </button>
         </form>
+
+        <Link
+          to="/login"
+          className="flex items-center justify-center py-2 text-center text-sm underline"
+        >
+          <span className="text-xl">
+            <RiArrowLeftSLine />
+          </span>
+          <span className="opacity-80">Back to Login</span>
+        </Link>
       </div>
     </div>
   );
