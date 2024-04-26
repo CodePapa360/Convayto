@@ -3,7 +3,7 @@ import { useUser } from "../authentication/useUser";
 import { sendPasswordResetEmail } from "./apiUserAccount";
 import Loader from "../../components/Loader";
 
-function RecoverPassword() {
+function RecoverPasswordBtn() {
   const { user } = useUser();
   const { email } = user;
 
@@ -43,4 +43,4 @@ function RecoverPassword() {
   );
 }
 
-export default RecoverPassword;
+export default RecoverPasswordBtn;

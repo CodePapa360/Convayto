@@ -14,8 +14,8 @@ function ForgotPasswordPage() {
         <h1 className="mb-8 text-center text-xl">Reset your password</h1>
 
         <p className="mb-4 text-center text-sm">
-          {" "}
-          Enter your email address to reset your password
+          Enter your email address below and we'll send you a link to reset your
+          password.
         </p>
 
         <form onSubmit={handleSubmit} className="mb-4 flex flex-col">
@@ -46,8 +46,8 @@ function ForgotPasswordPage() {
             disabled={isUpdating}
             className="flex items-center justify-center rounded-md bg-lightViolet p-3 font-bold uppercase leading-6 tracking-wider text-lightSlate transition-all duration-200 hover:bg-darkViolet active:scale-95 disabled:pointer-events-none disabled:bg-darkViolet dark:bg-lightViolet-dark"
           >
-            {isUpdating && <Loader size="small" />}
-            <span className="ml-2"> Continue </span>
+            {isUpdating && <Loader customClasses="mr-2" size="small" />}
+            <span>Continue</span>
           </button>
         </form>
       </div>
