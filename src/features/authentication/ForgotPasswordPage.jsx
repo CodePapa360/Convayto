@@ -1,12 +1,32 @@
 import { useState } from "react";
 import Loader from "../../components/Loader";
+import useResetPasswordForEmail from "./useResetPasswordForEmail";
 
 function ForgotPasswordPage() {
-  // Temporary state to hold the email address
-  const [email, setEmail] = useState("");
-  const isUpdating = false;
+  const {
+    resetPassword,
+    isPending: isResetting,
+    isSuccess,
+    isError,
+    error,
+  } = useResetPasswordForEmail();
 
-  function handleSubmit() {}
+  const [email, setEmail] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    resetPassword(email, {
+      onSuccess: () => {
+        console.log("Password reset email sent successfully");
+        setEmail("");
+      },
+
+      onError: (error) => {
+        console.log("Error sending password reset email: ", error);
+      },
+    });
+  }
 
   return (
     <div className="bg- flex min-h-screen items-center justify-center bg-deepSlate text-black dark:bg-deepSlate-dark dark:text-white">
@@ -43,10 +63,10 @@ function ForgotPasswordPage() {
 
           <button
             type="submit"
-            disabled={isUpdating}
+            disabled={isResetting}
             className="flex items-center justify-center rounded-md bg-lightViolet p-3 font-bold uppercase leading-6 tracking-wider text-lightSlate transition-all duration-200 hover:bg-darkViolet active:scale-95 disabled:pointer-events-none disabled:bg-darkViolet dark:bg-lightViolet-dark"
           >
-            {isUpdating && <Loader customClasses="mr-2" size="small" />}
+            {isResetting && <Loader customClasses="mr-2" size="small" />}
             <span>Continue</span>
           </button>
         </form>
