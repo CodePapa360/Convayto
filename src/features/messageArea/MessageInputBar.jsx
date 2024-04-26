@@ -8,9 +8,7 @@ import Loader from "../../components/Loader";
 import { useAppData } from "../../contexts/AppDataContext";
 
 function MessageInputBar() {
-  const { currentConversation, setCurrentConversation } = useAppData();
-  // const { conversation_id } = currentConversation.messages.conversation_id;
-  // console.log(currentConversationId);
+  const { currentConversation } = useAppData();
   const [newMessage, setNewMessage] = useState("");
   const { isSending, sendNewMessage } = useSendNewMessage();
   const { user } = useUser();

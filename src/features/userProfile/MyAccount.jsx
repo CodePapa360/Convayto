@@ -4,7 +4,7 @@ import Username from "./Username";
 import Bio from "./Bio";
 import { useUi } from "../../contexts/UiContext";
 import Avatar from "./Avatar";
-import ChangePasssword from "./ChangePasssword";
+import RecoverPassword from "./RecoverPassword";
 import { useUser } from "../../features/authentication/useUser";
 
 function MyAccount() {
@@ -45,7 +45,7 @@ function MyAccount() {
           </p>
         </div>
 
-        <ChangePasssword />
+        <RecoverPassword />
       </div>
     </div>
   );

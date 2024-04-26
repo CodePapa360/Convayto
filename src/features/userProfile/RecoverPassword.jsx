@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useUser } from "../../features/authentication/useUser";
+import { useUser } from "../authentication/useUser";
 import { sendPasswordResetEmail } from "./apiUserAccount";
 import Loader from "../../components/Loader";
 
-function ChangePasssword() {
+function RecoverPassword() {
   const { user } = useUser();
   const { email } = user;
 
@@ -33,7 +33,7 @@ function ChangePasssword() {
     >
       {!isSuccess ? (
         <>
-          <span>Reset password</span>
+          <span>Recover password</span>
           {isLoading && <Loader />}
         </>
       ) : (
@@ -43,4 +43,4 @@ function ChangePasssword() {
   );
 }
 
-export default ChangePasssword;
+export default RecoverPassword;
