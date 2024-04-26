@@ -58,7 +58,7 @@ function Signin() {
                 htmlFor="email"
                 className="pointer-events-none absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-mediumSlate px-2 text-sm text-lightSlate-dark transition-all duration-100 ease-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2  peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-textViolet-dark dark:bg-mediumSlate-dark dark:text-gray-400 peer-focus:dark:text-textViolet-dark rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4"
               >
-                Email
+                Email address
               </label>
             </div>
 
@@ -86,6 +86,13 @@ function Signin() {
 
             {/* <p className="output-message"></p> */}
           </div>
+
+          <Link
+            className="mb-4 text-violet-400 underline"
+            to="/forgot-password"
+          >
+            Forgot password?
+          </Link>
 
           <button
             type="submit"

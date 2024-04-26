@@ -9,7 +9,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MessageView from "./features/messageArea/MessageView";
 import { UiProvider } from "./contexts/UiContext";
 import { AppDataProvider } from "./contexts/AppDataContext";
-import NewPasswordPage from "./features/userProfile/NewPasswordPage";
+import NewPasswordPage from "./features/authentication/NewPasswordPage";
+import ForgotPasswordPage from "./features/authentication/ForgotPasswordPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -40,6 +41,7 @@ function App() {
               <Route path="signup" element={<Signup />} />
               <Route path="signin" element={<Signin />} />
               <Route path="/reset-password" element={<NewPasswordPage />} />
+              <Route path="forgot-password" element={<ForgotPasswordPage />} />
             </Routes>
           </BrowserRouter>
         </QueryClientProvider>

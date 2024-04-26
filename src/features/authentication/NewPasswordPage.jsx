@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useUser } from "../authentication/useUser";
+import { useUser } from "./useUser";
 import { useNavigate } from "react-router-dom";
 import { RiLoginCircleLine } from "react-icons/ri";
 import Loader from "../../components/Loader";
-import { useUpdateUser } from "./useUpdateUser";
+import { useUpdateUser } from "../userProfile/useUpdateUser";
 
 function ResetPassword() {
   const { updateUser, isUpdating } = useUpdateUser();
@@ -51,9 +51,7 @@ function ResetPassword() {
     <div className="bg- flex min-h-screen items-center justify-center bg-deepSlate text-black dark:bg-deepSlate-dark dark:text-white">
       {isRecovery ? (
         <div className="w-full max-w-80 rounded-xl bg-mediumSlate p-6 dark:bg-mediumSlate-dark">
-          <h1 className="mb-8 text-center text-xl  uppercase">
-            Update password
-          </h1>
+          <h1 className="mb-8 text-center text-xl ">Set new password</h1>
           <form onSubmit={handleSubmit} className="mb-4 flex flex-col">
             <div className="input-container mb-4 w-full">
               <div className="relative">
