@@ -7,7 +7,7 @@ import {
 import { useUser } from "../authentication/useUser";
 import { useConversations } from "./useConversations";
 import Signout from "../authentication/Signout";
-import Conversation from "./Conversation";
+import ConversationItem from "./ConversationItem";
 import { useEffect, useRef, useState } from "react";
 import SearchView from "../userSearch/SearchView";
 import Loader from "../../components/Loader";
@@ -199,7 +199,7 @@ function MainSidebarContents() {
 
               {!isPending &&
                 conversations?.map((conv) => (
-                  <Conversation key={conv.friend.id} conversation={conv} />
+                  <ConversationItem key={conv.friend.id} conversation={conv} />
                 ))}
             </div>
           </div>

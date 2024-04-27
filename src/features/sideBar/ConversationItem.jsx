@@ -3,7 +3,7 @@ import { useUi } from "../../contexts/UiContext";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { useAppData } from "../../contexts/AppDataContext";
 
-function Conversation({ conversation }) {
+function ConversationItem({ conversation }) {
   const { setCurrentConversation } = useAppData();
   const { friend, messages: lastMessage } = conversation;
   const { fullname, id, avatar_url } = friend;
@@ -58,4 +58,4 @@ function Conversation({ conversation }) {
   );
 }
 
-export default Conversation;
+export default ConversationItem;
