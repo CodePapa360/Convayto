@@ -1,7 +1,7 @@
 import { useUser } from "../authentication/useUser";
 import { formatTime } from "../../utils/common";
 
-function Message({ message }) {
+function MessageItem({ message }) {
   const { user } = useUser();
 
   return (
@@ -22,4 +22,4 @@ function Message({ message }) {
   );
 }
 
-export default Message;
+export default MessageItem;

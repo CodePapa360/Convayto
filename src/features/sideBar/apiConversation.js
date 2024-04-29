@@ -49,10 +49,19 @@ export async function getConversations({ myUserId }) {
 
 ///////////////////
 export async function getConversationById({ myUserId, friendUserId }) {
+  // get user by id first
+  const { data: friend, error: friendError } = await supabase
+    .from("users")
+    .select("*")
+    .eq("id", friendUserId);
+
+  if (friendError)
+    throw new Error("User doesn't exist!😢", friendError.message);
+
   // Check for previous conversation
   const { data, error } = await supabase
     .from("conversations")
-    .select("id")
+    .select("*")
     .in("user1_id", [myUserId, friendUserId])
     .in("user2_id", [myUserId, friendUserId]);
 
@@ -60,7 +69,16 @@ export async function getConversationById({ myUserId, friendUserId }) {
     throw new Error(error.message);
   }
 
+  // console.log(data);
   // Return conversation ID if there is a previous conversation, otherwise null
-  const conversationId = data.length > 0 ? data[0].id : null;
-  return conversationId;
+  const conversation = data.length > 0 ? data[0] : null;
+
+  const finalData = { conversation, friend: friend[0] };
+
+  return finalData;
 }
+
+// getConversationById({
+//   myUserId: "06bd2050-5bbe-4069-95a5-b92e8ce5db71",
+//   friendUserId: "172df3fe-21d2-4c39-9165-7d670bbbb32f",
+// });

@@ -1,5 +1,5 @@
 import { useMessages } from "./useMessages";
-import Message from "./Message";
+import MessageItem from "./MessageItem";
 import { useEffect, useRef, useState } from "react";
 import Loader from "../../components/Loader";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
@@ -100,7 +100,7 @@ function Messages() {
             page.length ? (
               <span key={index} className="flex w-full flex-col">
                 {page.map((message) => (
-                  <Message key={message.id} message={message} />
+                  <MessageItem key={message.id} message={message} />
                 ))}
 
                 {index === 0 && <span ref={lastPageBtm}></span>}

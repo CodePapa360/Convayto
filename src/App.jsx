@@ -12,13 +12,7 @@ import { AppDataProvider } from "./contexts/AppDataContext";
 import NewPasswordPage from "./features/authentication/NewPasswordPage";
 import ForgotPasswordPage from "./features/authentication/ForgotPasswordPage";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 function App() {
   return (
