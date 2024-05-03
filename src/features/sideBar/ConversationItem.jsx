@@ -15,7 +15,7 @@ function ConversationItem({ conversation }) {
   const { closeSidebar } = useUi();
 
   function handleClick() {
-    navigate(`/${id}`);
+    navigate(`/message/${id}`);
     closeSidebar();
     setCurrentConversation(conversation);
   }
