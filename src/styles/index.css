@@ -170,7 +170,7 @@ body {
 }
 
 .fadeIn {
-  animation: fadeInAnimation 0.1s ease-in-out;
+  animation: fadeInAnimation 0.2s ease-in-out;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }
