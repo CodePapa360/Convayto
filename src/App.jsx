@@ -11,7 +11,6 @@ import { UiProvider } from "./contexts/UiContext";
 import { AppDataProvider } from "./contexts/AppDataContext";
 import NewPasswordPage from "./features/authentication/NewPasswordPage";
 import ForgotPasswordPage from "./features/authentication/ForgotPasswordPage";
-import Message from "./features/messageArea/Message";
 
 const queryClient = new QueryClient();
 
@@ -31,10 +30,9 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route path="/message" element={<Message />}>
-                  <Route path=":userId" element={<MessageView />} />
-                </Route>
+                <Route path="message/:userId" element={<MessageView />} />
               </Route>
+
               <Route path="signup" element={<Signup />} />
               <Route path="signin" element={<Signin />} />
               <Route path="/reset-password" element={<NewPasswordPage />} />
