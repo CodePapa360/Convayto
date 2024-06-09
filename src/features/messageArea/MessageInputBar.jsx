@@ -5,16 +5,16 @@ import { useSendNewMessage } from "./useSendNewMessage";
 import { v4 as uuid } from "uuid";
 import { useQueryClient } from "@tanstack/react-query";
 import Loader from "../../components/Loader";
-import { useAppData } from "../../contexts/AppDataContext";
+import useConvInfo from "./useConvInfo";
 
 function MessageInputBar() {
-  const { currentConversation } = useAppData();
+  const { convInfo, isPending, isError } = useConvInfo();
+
   const [newMessage, setNewMessage] = useState("");
   const { isSending, sendNewMessage } = useSendNewMessage();
   const { user } = useUser();
-  // const { data, isPending } = useMessages();
-  const conversationId = currentConversation?.id;
-  const friendUserId = currentConversation?.friend?.id;
+  const conversationId = convInfo?.id;
+  const friendUserId = convInfo?.friend?.id;
   const myUserId = user.id;
   const inputRef = useRef(null);
   const queryClient = useQueryClient();

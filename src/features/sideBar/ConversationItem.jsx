@@ -1,10 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useUi } from "../../contexts/UiContext";
 import { HiOutlineUserCircle } from "react-icons/hi2";
-import { useAppData } from "../../contexts/AppDataContext";
 
 function ConversationItem({ conversation }) {
-  const { setCurrentConversation } = useAppData();
   const { friend, messages: lastMessage } = conversation;
   const { fullname, id, avatar_url } = friend;
   const lastMessageContent = lastMessage?.content;
@@ -15,9 +13,8 @@ function ConversationItem({ conversation }) {
   const { closeSidebar } = useUi();
 
   function handleClick() {
-    navigate(`message/${id}`);
+    navigate(`${id}`);
     closeSidebar();
-    setCurrentConversation(conversation);
   }
 
   return (

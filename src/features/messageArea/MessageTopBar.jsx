@@ -3,17 +3,13 @@ import { useUi } from "../../contexts/UiContext";
 import { useNavigate } from "react-router-dom";
 import FriendProfileBar from "../sideBar/FriendProfileBar";
 import { HiOutlineUserCircle } from "react-icons/hi2";
-import { useAppData } from "../../contexts/AppDataContext";
+import useConvInfo from "./useConvInfo";
 
 function MessageTopBar() {
-  // const { data, isPending } = useMessages();
-  const { currentConversation } = useAppData();
-  // const { conversation_id } = currentConversation.messages.conversation_id;
+  const { convInfo, isPending, isError } = useConvInfo();
 
-  const friend = currentConversation?.friend;
-  // console.log(currentConversation, "currentConversation");
+  const friend = convInfo?.friendInfo;
 
-  // const { avatar_url, fullname, username } = friend;
   const avatar_url = friend?.avatar_url;
   const fullname = friend?.fullname;
   const username = friend?.username;

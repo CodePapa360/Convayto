@@ -14,12 +14,8 @@ import Loader from "../../components/Loader";
 import { useUi } from "../../contexts/UiContext";
 import Dropdown from "../../components/DropdownMenu";
 import { HiOutlineUserCircle } from "react-icons/hi2";
-import { useNavigate, useParams } from "react-router-dom";
-import { useAppData } from "../../contexts/AppDataContext";
-import { getUserById } from "../authentication/apiAuth";
 
 function MainSidebarContents() {
-  const { currentConversation, setCurrentConversation } = useAppData();
   const { conversations, isPending } = useConversations();
   const { openAccountView, isSearchView, openSearchView, closeSearchView } =
     useUi();
@@ -27,56 +23,8 @@ function MainSidebarContents() {
   const { fullname, username, avatar_url } = user.user_metadata;
   const [query, setQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { userId: friendUserId } = useParams();
-  const navigate = useNavigate();
 
   const searchInputRef = useRef(null);
-
-  useEffect(() => {
-    const currentConvId = currentConversation?.id;
-    const currentUserId = currentConversation?.friend?.id;
-
-    if (!currentConvId && !currentUserId) {
-      // This will generally happen at first load
-      const newCurrentConv = conversations?.find(
-        (conv) => conv.friend.id === friendUserId,
-      );
-
-      newCurrentConv ? setCurrentConversation(newCurrentConv) : checkFriend();
-    } else if (currentUserId !== friendUserId) {
-      // this will mostly happen while navigating
-
-      const newCurrentConv = conversations?.find(
-        (conv) => conv.friend.id === friendUserId,
-      );
-
-      newCurrentConv ? setCurrentConversation(newCurrentConv) : checkFriend();
-    } else if (!currentConvId && friendUserId) {
-      const newCurrentConv = conversations?.find(
-        (conv) => conv.friend.id === friendUserId,
-      );
-      newCurrentConv && setCurrentConversation(newCurrentConv);
-    }
-
-    async function checkFriend() {
-      try {
-        if (!friendUserId) return;
-        const newFriend = await getUserById(friendUserId);
-
-        if (!newFriend) return navigate("/");
-
-        newFriend && setCurrentConversation({ friend: newFriend });
-      } catch (error) {
-        console.log(error, "error from checkFriend");
-      }
-    }
-  }, [
-    friendUserId,
-    conversations,
-    navigate,
-    currentConversation,
-    setCurrentConversation,
-  ]);
 
   useEffect(() => {
     setQuery("");

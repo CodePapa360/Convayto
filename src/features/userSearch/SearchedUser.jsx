@@ -1,11 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useUi } from "../../contexts/UiContext";
 import { HiOutlineUserCircle } from "react-icons/hi2";
-import { useAppData } from "../../contexts/AppDataContext";
 
 function SearchedUser({ user }) {
   const { closeSearchView } = useUi();
-  const { setCurrentConversation } = useAppData();
 
   const { fullname, id, username, avatar_url } = user;
   const navigate = useNavigate();
@@ -13,8 +11,6 @@ function SearchedUser({ user }) {
   function handleClick() {
     closeSearchView({ back: false });
     navigate(`/${id}`, { replace: true });
-
-    setCurrentConversation({ friend: user });
   }
 
   return (

@@ -8,7 +8,6 @@ import Signin from "./features/authentication/Signin";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MessageView from "./features/messageArea/MessageView";
 import { UiProvider } from "./contexts/UiContext";
-import { AppDataProvider } from "./contexts/AppDataContext";
 import NewPasswordPage from "./features/authentication/NewPasswordPage";
 import ForgotPasswordPage from "./features/authentication/ForgotPasswordPage";
 
@@ -17,30 +16,28 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <UiProvider>
-      <AppDataProvider>
-        <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools initialIsOpen={false} />
-          <BrowserRouter>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route path="message/:userId" element={<MessageView />} />
-              </Route>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path=":userId" element={<MessageView />} />
+            </Route>
 
-              <Route path="signup" element={<Signup />} />
-              <Route path="signin" element={<Signin />} />
-              <Route path="/reset-password" element={<NewPasswordPage />} />
-              <Route path="forgot-password" element={<ForgotPasswordPage />} />
-            </Routes>
-          </BrowserRouter>
-        </QueryClientProvider>
-      </AppDataProvider>
+            <Route path="signup" element={<Signup />} />
+            <Route path="signin" element={<Signin />} />
+            <Route path="/reset-password" element={<NewPasswordPage />} />
+            <Route path="forgot-password" element={<ForgotPasswordPage />} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
     </UiProvider>
   );
 }
