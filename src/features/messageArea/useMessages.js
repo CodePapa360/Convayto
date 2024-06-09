@@ -1,14 +1,23 @@
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import { getMessages } from "./apiMessage";
-import { useParams } from "react-router-dom";
-import { useAppData } from "../../contexts/AppDataContext";
+// import { useParams } from "react-router-dom";
+// import { useAppData } from "../../contexts/AppDataContext";
 import { useEffect, useRef } from "react";
 import { subscribeRealtimeMessage } from "./apiRealtimeMessage";
+import useConvInfo from "./useConvInfo";
 
 export function useMessages() {
-  const { currentConversation } = useAppData();
-  const conversation_id = currentConversation?.id;
-  const { userId: friendUserId } = useParams();
+  const { convInfo, isPending: isPendingConvInfo, isError } = useConvInfo();
+
+  console.log("convInfo", convInfo);
+
+  const conversation_id = convInfo?.convInfo?.id;
+  const friendUserId = convInfo?.friendInfo?.id;
+
+  // const { currentConversation } = useAppData();
+  // const conversation_id = currentConversation?.id;
+  // const { userId: friendUserId } = useParams();
+
   const queryClient = useQueryClient();
 
   // Clear the cache when the conversation changes
