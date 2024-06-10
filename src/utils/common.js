@@ -6,12 +6,8 @@ export function scrollToBottom(ref) {
   });
 }
 
-export function formatTime(rawTime) {
-  // const rawTime = "Jan 12 2024 00:00:00 GMT+0600 (Bangladesh Standard Time)";
-  if (!rawTime) return "-- : -- --";
-
-  const date = new Date(rawTime);
-  const now = new Date();
+export function formatTime(rawDate) {
+  if (!rawDate) return "-- : --";
 
   //if date is less than today (00 hour) then return 9:3 pm
   //if date is more than today (00 hour) and less than two days (00 hour) then return Yesterdat at 9:3 pm
@@ -19,42 +15,49 @@ export function formatTime(rawTime) {
   //if date is more than 7 days (00 hour) and less than a year (00 hour) then return Jan 15 at 9:3 pm
   // if date is more than a year (00 hour) then return Jan 15 2024 at 9:3 pm
 
-  const day = date.getDate();
-  const today = now.getDate();
-  const year = date.getFullYear();
+  const date = new Date(rawDate);
+  const now = new Date();
 
-  const thisYear = now.getFullYear();
+  // Calculating the time difference in days
+  const diffInDays = Math.round((now - date) / (1000 * 60 * 60 * 24));
 
-  const options = {
+  // Format the time portion
+  const timeString = date.toLocaleTimeString([], {
     hour: "numeric",
-    minute: "numeric",
+    minute: "2-digit",
     hour12: true,
-  };
+  });
 
-  if (today === day) {
-    return new Intl.DateTimeFormat("en-US", options).format(new Date(rawTime));
-
-    // return "Today";
-  } else if (day >= today - 8 && thisYear === year) {
-    options.weekday = "short";
-    return new Intl.DateTimeFormat("en-US", options).format(new Date(rawTime));
-
-    // return "Last Week";
-  } else if (year === thisYear) {
-    options.month = "short";
-    options.day = "numeric";
-
-    return new Intl.DateTimeFormat("en-US", options).format(new Date(rawTime));
-
-    // return "This Year";
+  if (diffInDays === 0) {
+    // Today
+    return timeString.toLowerCase();
+  } else if (diffInDays === 1) {
+    // Yesterday
+    return `Yesterday at ${timeString.toLowerCase()}`;
+  } else if (diffInDays < 7) {
+    // Weekday
+    const weekday = date.toLocaleDateString([], { weekday: "short" });
+    return `${weekday} at ${timeString.toLowerCase()}`;
   } else {
-    options.year = "numeric";
-    options.month = "short";
-    options.day = "numeric";
+    // Check if the year is the same
+    const isSameYear = now.getFullYear() === date.getFullYear();
 
-    return new Intl.DateTimeFormat("en-US", options).format(new Date(rawTime));
-
-    // return "Last Year";
+    if (isSameYear) {
+      // Month and day (within the same year)
+      const monthDayString = date.toLocaleDateString([], {
+        month: "short",
+        day: "numeric",
+      });
+      return `${monthDayString} at ${timeString.toLowerCase()}`;
+    } else {
+      // Year included (different year)
+      const fullDateString = date.toLocaleDateString([], {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+      return `${fullDateString} at ${timeString.toLowerCase()}`;
+    }
   }
 }
 
