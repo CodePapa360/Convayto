@@ -36,7 +36,7 @@ export function useMessages() {
     hasNextPage,
     isFetching,
     isPending,
-    isLoading,
+    isLoading: isLoadingMessages,
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: ["friend", friendUserId, conversation_id],
@@ -132,7 +132,7 @@ export function useMessages() {
     [conversation_id, friendUserId, queryClient],
   );
 
-  // const isPending = isPendingConvInfo || isPendingMessages;
+  const isLoading = isPendingConvInfo || isLoadingMessages;
 
   return {
     pages,

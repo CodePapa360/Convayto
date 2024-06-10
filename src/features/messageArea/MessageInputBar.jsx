@@ -8,7 +8,7 @@ import Loader from "../../components/Loader";
 import useConvInfo from "./useConvInfo";
 
 function MessageInputBar() {
-  const { convInfo, isPending, isError } = useConvInfo();
+  const { convInfo, isPending: isPendingConvInfo, isError } = useConvInfo();
 
   const [newMessage, setNewMessage] = useState("");
   const { isSending, sendNewMessage } = useSendNewMessage();
@@ -107,8 +107,8 @@ function MessageInputBar() {
         />
 
         <button
-          className={`m-1 flex h-10 w-10 items-center justify-center rounded-full bg-lightViolet text-2xl text-white hover:bg-lightViolet/80 active:scale-95 dark:bg-lightViolet-dark `}
-          disabled={isSending}
+          className={`m-1 flex h-10 w-10 items-center justify-center rounded-full bg-lightViolet text-2xl text-white hover:bg-lightViolet/80 active:scale-95 disabled:opacity-70 dark:bg-lightViolet-dark`}
+          disabled={isSending || isPendingConvInfo}
           onClick={handleSendNewMessage}
           type="submit"
         >
