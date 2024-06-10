@@ -4,19 +4,18 @@ import { useNavigate } from "react-router-dom";
 import FriendProfileBar from "../sideBar/FriendProfileBar";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import useConvInfo from "./useConvInfo";
+import Loader from "../../components/Loader";
 
 function MessageTopBar() {
   const { convInfo, isPending, isError } = useConvInfo();
 
   const friend = convInfo?.friendInfo;
-
   const avatar_url = friend?.avatar_url;
   const fullname = friend?.fullname;
   const username = friend?.username;
-  const { openSidebar } = useUi();
   const navigate = useNavigate();
 
-  const { openFriendSidebar } = useUi();
+  const { openFriendSidebar, openSidebar } = useUi();
 
   function handleGoBack() {
     if (window.matchMedia("(max-width: 640px)").matches) {
@@ -36,34 +35,39 @@ function MessageTopBar() {
           <RiArrowLeftLine />
         </button>
 
-        <div
-          onClick={() => openFriendSidebar()}
-          className="flex cursor-pointer items-center gap-2 rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
-        >
-          <span className="h-12 w-12 overflow-hidden rounded-full text-black  dark:text-white">
-            {avatar_url ? (
-              <img
-                draggable="false"
-                src={avatar_url}
-                alt="avatar"
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <HiOutlineUserCircle
-                size={55}
-                viewBox="2 2 24 24"
-                opacity={0.5}
-                strokeWidth="1"
-              />
-            )}
-          </span>
-          <span className="flex flex-col">
-            <span>{fullname}</span>
-            <span className="text-sm  opacity-70">@{username}</span>
-          </span>
-        </div>
+        {isPending ? (
+          <Loader size="medium" text="Loading user" />
+        ) : (
+          <div
+            onClick={() => openFriendSidebar()}
+            className="flex cursor-pointer items-center gap-2 rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
+          >
+            <span className="h-12 w-12 overflow-hidden rounded-full text-black  dark:text-white">
+              {avatar_url ? (
+                <img
+                  draggable="false"
+                  src={avatar_url}
+                  alt="avatar"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <HiOutlineUserCircle
+                  size={55}
+                  viewBox="2 2 24 24"
+                  opacity={0.5}
+                  strokeWidth="1"
+                />
+              )}
+            </span>
+            <span className="flex flex-col">
+              <span>{fullname}</span>
+              <span className="text-sm  opacity-70">@{username}</span>
+            </span>
+          </div>
+        )}
       </div>
 
+      {/* Hidden right side bar which will reveal if clicked on friend's profile info */}
       <FriendProfileBar friend={friend} />
     </>
   );

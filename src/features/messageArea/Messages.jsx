@@ -5,15 +5,8 @@ import Loader from "../../components/Loader";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 
 function Messages() {
-  const {
-    pages,
-    // isFetching,
-    isFetchingNextPage,
-    // isPending,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-  } = useMessages();
+  const { pages, isFetchingNextPage, isLoading, fetchNextPage, hasNextPage } =
+    useMessages();
 
   const topRef = useRef(null);
   const bottomRef = useRef();
@@ -73,8 +66,10 @@ function Messages() {
     if (isIntersectingTop) return lastPageBtm.current.scrollIntoView();
   }, [pages]);
 
-  ////////////
+  /////////////
   // show a loader when fetching the first page
+  /////////////
+
   if (isLoading)
     return (
       <span className="flex-center mb-4 justify-center">
