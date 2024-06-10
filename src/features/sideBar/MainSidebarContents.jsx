@@ -43,7 +43,7 @@ function MainSidebarContents() {
   }
 
   return (
-    <div className="relative z-30 grid h-dvh h-screen h-svh select-none grid-cols-1 grid-rows-[auto_1fr] overflow-hidden">
+    <div className="h-screen-safe relative z-30 grid select-none grid-cols-1 grid-rows-[auto_1fr] overflow-hidden">
       <div className="border-b border-borderShade p-2 dark:border-borderShade-dark">
         <div className="mb-2 flex items-center justify-between gap-2">
           <div className="relative">
@@ -70,7 +70,7 @@ function MainSidebarContents() {
                     isMenuOpen
                       ? "pointer-events-auto visible"
                       : "pointer-events-none invisible"
-                  }  fixed left-0 top-0 z-40 h-dvh h-screen h-svh w-dvw w-screen w-svw opacity-0 transition-all duration-200 ease-in-out`}
+                  }  h-screen-safe w-screen-safe fixed left-0 top-0 z-40 opacity-0 transition-all duration-200 ease-in-out`}
                 ></div>
 
                 {/* DropdownMenu */}

@@ -40,6 +40,19 @@ export default {
       screens: {
         xm: "320px",
       },
+
+      height: {
+        "screen-safe": ["100vh", "100dvh", "100svh"],
+      },
+      width: {
+        "screen-safe": ["100vw", "100dvw", "100svw"],
+      },
+      minHeight: {
+        "screen-safe": ["100vh", "100dvh", "100svh"],
+      },
+      minWidth: {
+        "screen-safe": ["100vw", "100dvw", "100svw"],
+      },
     },
   },
   plugins: [],

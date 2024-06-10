@@ -16,13 +16,13 @@ function FriendProfileBar({ friend }) {
         onClick={handleGoBack}
         className={`${
           isFriendsSidebarOpen ? "visible opacity-100" : "invisible opacity-0"
-        } absolute left-0 top-0 z-20 h-dvh h-screen h-svh w-dvw bg-black/50 transition-all duration-100 ease-in-out `}
+        } h-screen-safe absolute left-0 top-0 z-20 w-dvw bg-black/50 transition-all duration-100 ease-in-out `}
       ></div>
 
       <div
         className={`${
           isFriendsSidebarOpen ? "right-0 opacity-100" : "-right-full opacity-0"
-        } absolute top-0 z-30 grid h-dvh h-screen h-svh w-4/5 grid-rows-[auto_1fr] overflow-hidden bg-mediumSlate transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] dark:bg-mediumSlate-dark sm:w-[21rem] `}
+        } h-screen-safe absolute top-0 z-30 grid w-4/5 grid-rows-[auto_1fr] overflow-hidden bg-mediumSlate transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] dark:bg-mediumSlate-dark sm:w-[21rem] `}
       >
         <div className="flex h-16 items-center justify-start gap-4 bg-mediumSlate p-2 dark:bg-mediumSlate-dark">
           <button

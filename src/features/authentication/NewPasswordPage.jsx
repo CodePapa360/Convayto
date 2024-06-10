@@ -48,7 +48,7 @@ function ResetPassword() {
   };
 
   return (
-    <div className="bg- flex min-h-dvh min-h-screen min-h-svh items-center justify-center bg-deepSlate text-black dark:bg-deepSlate-dark dark:text-white">
+    <div className="min-h-screen-safe flex items-center justify-center bg-deepSlate text-black dark:bg-deepSlate-dark dark:text-white">
       {isRecovery ? (
         <div className="w-full max-w-80 rounded-xl bg-mediumSlate p-6 dark:bg-mediumSlate-dark">
           <h1 className="mb-8 text-center text-xl ">Set new password</h1>
