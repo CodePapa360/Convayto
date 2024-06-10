@@ -3,7 +3,7 @@ import LeftSideBar from "../features/sideBar/LeftSideBar";
 
 function AppLayout() {
   return (
-    <main className="grid min-h-dvh min-h-screen grid-cols-[auto_1fr] overflow-hidden bg-deepSlate text-black dark:bg-deepSlate-dark dark:text-white">
+    <main className="grid min-h-screen min-h-svh grid-cols-[auto_1fr] overflow-hidden bg-deepSlate text-black dark:bg-deepSlate-dark dark:text-white">
       <LeftSideBar />
 
       <Outlet />

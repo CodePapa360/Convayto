@@ -25,14 +25,14 @@ function LeftSideBar() {
         onClick={handleToggleSidebar}
         className={`${
           isSidebarOpen ? "visible opacity-100" : "invisible opacity-0"
-        } absolute left-0 top-0 z-20 hidden h-dvh w-dvw bg-black/50 transition-all duration-200 ease-in-out sm:block md:hidden`}
+        } absolute left-0 top-0 z-20 hidden h-dvh h-screen h-svh w-dvw bg-black/50 transition-all duration-200 ease-in-out sm:block md:hidden`}
       ></div>
 
       {/* Overflow will happen in this container  */}
       <div
         className={`${
           isSidebarOpen ? "left-0 opacity-100" : "-left-full opacity-0"
-        } absolute top-0 z-20 h-dvh w-full overflow-hidden bg-mediumSlate transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] dark:bg-mediumSlate-dark sm:w-[23rem] md:relative md:left-0 md:opacity-100`}
+        } absolute top-0 z-20 h-dvh h-screen h-svh w-full overflow-hidden bg-mediumSlate transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] dark:bg-mediumSlate-dark sm:w-[23rem] md:relative md:left-0 md:opacity-100`}
       >
         <aside>{isAccountView ? <MyAccount /> : <MainSidebarContents />}</aside>
       </div>

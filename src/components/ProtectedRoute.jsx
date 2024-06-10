@@ -20,7 +20,7 @@ function ProtectedRoute({ children }) {
   //3. While loading, show spinner
   if (isLoading)
     return (
-      <p className="flex min-h-screen items-center justify-center bg-mediumSlate text-mediumSlate-dark dark:bg-mediumSlate-dark dark:text-mediumSlate">
+      <p className="flex min-h-dvh min-h-screen min-h-svh items-center justify-center bg-mediumSlate text-mediumSlate-dark dark:bg-mediumSlate-dark dark:text-mediumSlate">
         <Loader size="large" text="Loading app" />
       </p>
     );
