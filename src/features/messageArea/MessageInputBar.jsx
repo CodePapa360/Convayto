@@ -19,8 +19,6 @@ function MessageInputBar() {
   const inputRef = useRef(null);
   const queryClient = useQueryClient();
 
-  console.log("convIDDD", conversationId);
-
   function handleSendNewMessage(e) {
     e.preventDefault();
     inputRef.current.focus();
@@ -46,38 +44,38 @@ function MessageInputBar() {
       },
     });
 
-    const optimisticMessage = {
-      id: messageObj.id,
-      content: messageObj.content,
-      created_at: new Date(),
-      sender_id: messageObj.myUserId,
-    };
+    // const optimisticMessage = {
+    //   id: messageObj.id,
+    //   content: messageObj.content,
+    //   created_at: new Date(),
+    //   sender_id: messageObj.myUserId,
+    // };
 
-    // Update the cache with the optimistic message
-    // if there is no conversation id, it means the conversation is new and the first message can not be optimistic because to access the query data we need the conversation id as one of the query keys
-    if (conversationId) {
-      queryClient.setQueryData(
-        ["friend", messageObj.friendUserId, conversationId],
-        (prevData) => {
-          // console.log(prevData);
+    // // Update the cache with the optimistic message
+    // // if there is no conversation id, it means the conversation is new and the first message can not be optimistic because to access the query data we need the conversation id as one of the query keys
+    // if (conversationId) {
+    //   queryClient.setQueryData(
+    //     ["friend", messageObj.friendUserId, conversationId],
+    //     (prevData) => {
+    //       // console.log(prevData);
 
-          return {
-            ...prevData,
-            // add the optimistic message to the first page's data
+    //       return {
+    //         ...prevData,
+    //         // add the optimistic message to the first page's data
 
-            pages: prevData?.pages
-              .slice()
-              .map((page, index) =>
-                index === 0
-                  ? !page
-                    ? [optimisticMessage]
-                    : [...page, optimisticMessage]
-                  : page,
-              ),
-          };
-        },
-      );
-    }
+    //         pages: prevData?.pages
+    //           .slice()
+    //           .map((page, index) =>
+    //             index === 0
+    //               ? !page
+    //                 ? [optimisticMessage]
+    //                 : [...page, optimisticMessage]
+    //               : page,
+    //           ),
+    //       };
+    //     },
+    //   );
+    // }
 
     setNewMessage("");
   }

@@ -1,7 +1,6 @@
 import supabase from "../../services/supabase";
 
 export async function getConvInfoById({ myUserId, friendUserId }) {
-  console.log("Fetched convinfo now");
   // get user by id first
   const { data: friend, error: friendError } = await supabase
     .from("users")

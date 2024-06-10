@@ -41,7 +41,6 @@ export function useMessages() {
     queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
 
     select: (data) => {
-      console.log("data", data);
       if (!data || data.pages.length < 2) return data;
       return {
         pages: [...data.pages].reverse(),
@@ -91,7 +90,6 @@ export function useMessages() {
                 ...prevData,
                 // add the new message to the first page's data
                 pages: prevData.pages.slice().map((page, index) => {
-                  // console.log("page", index, page);
                   return index === 0 ? [...page, newData] : page;
                 }),
               };

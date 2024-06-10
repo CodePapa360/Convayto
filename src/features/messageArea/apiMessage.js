@@ -63,9 +63,6 @@ export async function sendMessage({
   content,
   friendUserId,
 }) {
-  console.log("sendMessage", id, conversation_id, content, friendUserId);
-  // return null;
-
   let convId = conversation_id;
 
   if (!convId) {
