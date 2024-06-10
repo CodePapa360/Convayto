@@ -79,7 +79,7 @@ function Messages() {
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col px-4">
-      {!pages && (
+      {!pages[0] && (
         <span className="flex-center my-4 select-none opacity-60">
           No messages yet
         </span>
