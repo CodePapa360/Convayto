@@ -10,6 +10,9 @@ export async function getConversationEntries({ myUserId }) {
   return data;
 }
 
+//////////////
+/////////////
+
 export async function getConversations({ myUserId }) {
   const data = await getConversationEntries({ myUserId });
 
@@ -39,7 +42,7 @@ export async function getConversations({ myUserId }) {
     const user = usersMapping[friendId];
 
     return {
-      friend: user,
+      friendInfo: user,
       ...msg,
     };
   });

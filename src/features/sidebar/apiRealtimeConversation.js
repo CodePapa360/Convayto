@@ -11,11 +11,11 @@ async function getUpdatedPayload({ payload, myUserId }) {
         : payload.new.user1_id;
 
     const messages = await getMessageById(messageId);
-    const friend = await getUserById(friendId);
+    const friendInfo = await getUserById(friendId);
 
     const updatedPaylod = {
       ...payload,
-      new: { friend, messages, ...payload.new },
+      new: { friendInfo, messages, ...payload.new },
     };
 
     return updatedPaylod;

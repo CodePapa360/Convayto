@@ -147,7 +147,10 @@ function MainSidebarContents() {
 
               {!isPending &&
                 conversations?.map((conv) => (
-                  <ConversationItem key={conv.friend.id} conversation={conv} />
+                  <ConversationItem
+                    key={conv?.friendInfo?.id}
+                    conversation={conv}
+                  />
                 ))}
             </div>
           </div>

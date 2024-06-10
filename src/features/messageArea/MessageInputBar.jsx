@@ -14,10 +14,12 @@ function MessageInputBar() {
   const { isSending, sendNewMessage } = useSendNewMessage();
   const { user } = useUser();
   const conversationId = convInfo?.id;
-  const friendUserId = convInfo?.friend?.id;
+  const friendUserId = convInfo?.friendInfo?.id;
   const myUserId = user.id;
   const inputRef = useRef(null);
   const queryClient = useQueryClient();
+
+  console.log("convIDDD", conversationId);
 
   function handleSendNewMessage(e) {
     e.preventDefault();
@@ -35,28 +37,13 @@ function MessageInputBar() {
 
     // Make the actual request to the server
     sendNewMessage(messageObj, {
-      // onSuccess: (newData) => {
-      // when conversation id is null, it means the conversation is new
-      // if (conversationId === null) {
-      //   queryClient.setQueryData(
-      //     ["friend", messageObj.friendUserId, conversationId],
-      //     (prevData) => ({
-      //       ...prevData,
-      //       pages: prevData.pages
-      //         .slice()
-      //         .map((page, index) =>
-      //           index === 0
-      //             ? page.map((message) =>
-      //                 message.id === newData.id ? newData : message,
-      //               )
-      //             : page,
-      //         ),
-      //       // we need to update the current conversation here
-      //       // conversationId: data.conversation_id,
-      //     }),
-      //   );
-      // }
-      // },
+      onSuccess: () => {
+        // when conversation id is null, it means the conversation is new
+        if (!conversationId) {
+          // Invalidate the convInfo query
+          queryClient.invalidateQueries(["convInfo", friendUserId]);
+        }
+      },
     });
 
     const optimisticMessage = {
@@ -77,7 +64,8 @@ function MessageInputBar() {
           return {
             ...prevData,
             // add the optimistic message to the first page's data
-            pages: prevData.pages
+
+            pages: prevData?.pages
               .slice()
               .map((page, index) =>
                 index === 0

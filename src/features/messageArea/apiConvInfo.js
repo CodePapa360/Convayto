@@ -25,7 +25,7 @@ export async function getConvInfoById({ myUserId, friendUserId }) {
   // Return conversation ID if there is a previous conversation, otherwise null
   const convInfo = data.length > 0 ? data[0] : null;
 
-  const finalData = { convInfo, friendInfo: friend[0] };
+  const finalData = { ...convInfo, friendInfo: friend[0] };
 
   return finalData;
 }

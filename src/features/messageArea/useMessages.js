@@ -7,9 +7,7 @@ import useConvInfo from "./useConvInfo";
 export function useMessages() {
   const { convInfo, isPending: isPendingConvInfo, isError } = useConvInfo();
 
-  console.log("convInfo", convInfo);
-
-  const conversation_id = convInfo?.convInfo?.id;
+  const conversation_id = convInfo?.id;
   const friendUserId = convInfo?.friendInfo?.id;
 
   const queryClient = useQueryClient();
@@ -43,7 +41,7 @@ export function useMessages() {
     queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
 
     select: (data) => {
-      // console.log("data", data);
+      console.log("data", data);
       if (!data || data.pages.length < 2) return data;
       return {
         pages: [...data.pages].reverse(),
