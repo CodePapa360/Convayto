@@ -67,7 +67,7 @@ export function useConversations() {
       ?.slice(0, MAX_PREFETCHED_CONVERSATIONS)
       .forEach((conv) => {
         const conversation_id = conv.id;
-        const friendUserId = conv.friend.id;
+        const friendUserId = conv.friendInfo.id;
 
         queryClient.prefetchInfiniteQuery({
           queryKey: ["friend", friendUserId, conversation_id],
