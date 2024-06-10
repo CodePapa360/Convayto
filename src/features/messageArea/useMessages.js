@@ -14,17 +14,14 @@ export function useMessages() {
 
   // Clear the cache when the conversation changes
   useEffect(() => {
-    queryClient.setQueryData(
-      ["friend", friendUserId, conversation_id],
-      (prev) => {
-        if (!prev || !prev.pages[1]?.length) return;
+    queryClient.setQueryData(["friend", friendUserId], (prev) => {
+      if (!prev || !prev.pages[1]?.length) return;
 
-        return {
-          pages: prev.pages.slice(0, 1),
-          pageParams: prev.pageParams.slice(0, 1),
-        };
-      },
-    );
+      return {
+        pages: prev.pages.slice(0, 1),
+        pageParams: prev.pageParams.slice(0, 1),
+      };
+    });
   }, [friendUserId, queryClient, conversation_id]);
 
   const {
@@ -37,10 +34,12 @@ export function useMessages() {
     isLoading: isLoadingMessages,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["friend", friendUserId, conversation_id],
+    queryKey: ["friend", friendUserId],
     queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
 
     select: (data) => {
+      // console.log("Data", data);
+
       if (!data || data.pages.length < 2) return data;
       return {
         pages: [...data.pages].reverse(),
@@ -52,7 +51,8 @@ export function useMessages() {
       return lastPageParam + 1;
     },
     initialPageParam: 0,
-    enabled: !!conversation_id,
+    // it should depend and wait untill the conversation_id and friendUserId are available
+    enabled: !!friendUserId,
   });
 
   if (error) {
@@ -77,42 +77,36 @@ export function useMessages() {
       }
 
       function callback(newData) {
-        queryClient.setQueryData(
-          ["friend", friendUserId, conversation_id],
-          (prevData) => {
-            const existingOptimisticMessage = prevData?.pages[0]?.find(
-              (message) => message?.id === newData?.id,
-            );
+        queryClient.setQueryData(["friend", friendUserId], (prevData) => {
+          const existingOptimisticMessage = prevData?.pages[0]?.find(
+            (message) => message?.optimistic,
+          );
 
-            if (!existingOptimisticMessage) {
-              // Only update if no optimistic message exists
-              return {
-                ...prevData,
-                // add the new message to the first page's data
-                pages: prevData.pages.slice().map((page, index) => {
-                  return index === 0 ? [...page, newData] : page;
-                }),
-              };
-            }
-
-            if (existingOptimisticMessage) {
-              // replace existing optimistic message with server new message
-              return {
-                ...prevData,
-                // replace the new message to the first page's data which id matches the optimistic message
-                pages: prevData.pages
-                  .slice()
-                  .map((page, index) =>
-                    index === 0
-                      ? page.map((message) =>
-                          message.id === newData.id ? newData : message,
-                        )
-                      : page,
-                  ),
-              };
-            }
-          },
-        );
+          if (existingOptimisticMessage) {
+            // replace existing optimistic message with server new message
+            return {
+              ...prevData,
+              // replace the new message to the first page's data which id matches the optimistic message
+              pages: prevData.pages
+                .slice()
+                .map((page, index) =>
+                  index === 0
+                    ? page.map((message) =>
+                        message.id === newData.id ? newData : message,
+                      )
+                    : page,
+                ),
+            };
+          } else {
+            return {
+              ...prevData,
+              // add the new message to the first page's data
+              pages: prevData.pages.slice().map((page, index) => {
+                return index === 0 ? [...page, newData] : page;
+              }),
+            };
+          }
+        });
       }
 
       subscriptionRef.current = subscribeRealtimeMessage({

@@ -28,54 +28,29 @@ function MessageInputBar() {
     const messageObj = {
       id: uuid(),
       conversation_id: conversationId,
-      friendUserId,
-      myUserId,
       content: newMessage,
+      friendUserId,
+
+      // for optimistic update in the cache
+      sender_id: myUserId,
+      created_at: new Date(),
+      optimistic: true,
     };
 
     // Make the actual request to the server
     sendNewMessage(messageObj, {
-      onSuccess: () => {
-        // when conversation id is null, it means the conversation is new
+      onSuccess: (newMessage) => {
+        // when conversation id is null, it means the conversation is new. So update the convInfo query data with the new conversation id
         if (!conversationId) {
-          // Invalidate the convInfo query
-          queryClient.invalidateQueries(["convInfo", friendUserId]);
+          queryClient.setQueryData(["convInfo", friendUserId], (prevData) => {
+            return {
+              ...prevData,
+              id: newMessage.conversation_id,
+            };
+          });
         }
       },
     });
-
-    // const optimisticMessage = {
-    //   id: messageObj.id,
-    //   content: messageObj.content,
-    //   created_at: new Date(),
-    //   sender_id: messageObj.myUserId,
-    // };
-
-    // // Update the cache with the optimistic message
-    // // if there is no conversation id, it means the conversation is new and the first message can not be optimistic because to access the query data we need the conversation id as one of the query keys
-    // if (conversationId) {
-    //   queryClient.setQueryData(
-    //     ["friend", messageObj.friendUserId, conversationId],
-    //     (prevData) => {
-    //       // console.log(prevData);
-
-    //       return {
-    //         ...prevData,
-    //         // add the optimistic message to the first page's data
-
-    //         pages: prevData?.pages
-    //           .slice()
-    //           .map((page, index) =>
-    //             index === 0
-    //               ? !page
-    //                 ? [optimisticMessage]
-    //                 : [...page, optimisticMessage]
-    //               : page,
-    //           ),
-    //       };
-    //     },
-    //   );
-    // }
 
     setNewMessage("");
   }

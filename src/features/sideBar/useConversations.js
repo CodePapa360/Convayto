@@ -70,7 +70,7 @@ export function useConversations() {
         const friendUserId = conv.friendInfo.id;
 
         queryClient.prefetchInfiniteQuery({
-          queryKey: ["friend", friendUserId, conversation_id],
+          queryKey: ["friend", friendUserId],
           queryFn: ({ pageParam }) =>
             getMessages({ conversation_id, pageParam }),
           pages: 1,

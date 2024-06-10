@@ -17,39 +17,33 @@ export function useSendNewMessage() {
       // Cancel any outgoing refetches
       // (so they don't overwrite our optimistic update)
       await queryClient.cancelQueries({
-        queryKey: ["friend", friendUserId, conversation_id],
+        queryKey: ["friend", friendUserId],
       });
 
       // Snapshot the previous value
-      const previousTodos = queryClient.getQueryData([
+      const previousMessages = queryClient.getQueryData([
         "friend",
         friendUserId,
-        conversation_id,
       ]);
 
       // Optimistically update to the new value
-      queryClient.setQueryData(
-        ["friend", friendUserId, conversation_id],
-        (oldMessages) => {
-          // console.log(oldMessages);
-
-          return {
-            ...oldMessages,
-            pages: oldMessages?.pages
-              .slice()
-              .map((page, index) =>
-                index === 0
-                  ? !page
-                    ? [newMessage]
-                    : [...page, newMessage]
-                  : page,
-              ),
-          };
-        },
-      );
+      queryClient.setQueryData(["friend", friendUserId], (oldMessages) => {
+        return {
+          ...oldMessages,
+          pages: oldMessages?.pages
+            .slice()
+            .map((page, index) =>
+              index === 0
+                ? !page
+                  ? [newMessage]
+                  : [...page, newMessage]
+                : page,
+            ),
+        };
+      });
 
       // Return a context object with the snapshotted value
-      return { previousTodos };
+      return { previousMessages };
     },
 
     onError: (err) => console.log(err.message),
