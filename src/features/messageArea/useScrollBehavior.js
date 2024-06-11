@@ -25,10 +25,9 @@ function useScrollBehavior({
 
     if (lastPageBtm.current && isIntersectingTop)
       return scrollTo(lastPageBtm, "instant");
-  }, [pages, bottomRef, lastPageBtm]);
 
-  //pages, bottomRef, lastPageBtm
-  //pages, bottomRef, lastPageBtm, isIntersectingTop, isIntersectingBtm
+    // Putting the isIntersectingTop and isIntersectingBtm in the dependency array will cause an unusual behavior. So, we need to remove them.
+  }, [pages, bottomRef, lastPageBtm]);
 }
 
 export default useScrollBehavior;
