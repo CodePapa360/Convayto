@@ -7,8 +7,6 @@ import { subscribeRealtimeConversation } from "./apiRealtimeConversation";
 import { sortConverseByTime } from "../../utils/common";
 import { MAX_PREFETCHED_CONVERSATIONS } from "../../config";
 
-let subscriptionConversation;
-
 export function useConversations() {
   const queryClient = useQueryClient();
   const { user } = useUser();
@@ -19,10 +17,11 @@ export function useConversations() {
     queryFn: () => getConversations({ myUserId }),
   });
 
+  const subscriptionConversationRef = useRef(null);
+
   useEffect(
     function () {
-      if (!myUserId) return;
-      if (subscriptionConversation) return;
+      if (!myUserId || subscriptionConversationRef.current) return;
 
       const updateConversation = (payload) => {
         queryClient.setQueryData(["conversations", myUserId], (prevData) => {
@@ -40,12 +39,20 @@ export function useConversations() {
         });
       };
 
-      subscriptionConversation = subscribeRealtimeConversation({
+      subscriptionConversationRef.current = subscribeRealtimeConversation({
         myUserId,
         onUpdate: updateConversation,
       });
-      // console.log("Subscribed to conversations");
+
+      return () => {
+        if (subscriptionConversationRef.current) {
+          subscriptionConversationRef.current.unsubscribe();
+
+          // console.log("unsubscribed conversation");
+        }
+      };
     },
+
     [myUserId, queryClient],
   );
 
@@ -56,7 +63,9 @@ export function useConversations() {
   const sortedConversations =
     data?.length > 1 ? data?.sort(sortConverseByTime) : data;
 
+  /////////////
   // Prefetching
+  /////////////
   // set true temporariliiy to avoid prefetching
   const hasPrefetched = useRef(false);
 

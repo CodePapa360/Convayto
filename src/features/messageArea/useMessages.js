@@ -72,9 +72,7 @@ export function useMessages() {
     function () {
       if (!conversation_id) return;
 
-      if (subscriptionRef.current) {
-        subscriptionRef.current.unsubscribe();
-      }
+      if (subscriptionRef.current) subscriptionRef.current.unsubscribe();
 
       function callback(newData) {
         queryClient.setQueryData(["friend", friendUserId], (prevData) => {
