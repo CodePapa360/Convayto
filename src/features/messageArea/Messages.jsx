@@ -3,6 +3,7 @@ import MessageItem from "./MessageItem";
 import { useEffect, useRef, useState } from "react";
 import Loader from "../../components/Loader";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import useScrollBehavior from "./useScrollBehavior";
 
 function Messages() {
   const { pages, isFetchingNextPage, isLoading, fetchNextPage, hasNextPage } =
@@ -36,35 +37,15 @@ function Messages() {
   }, [isIntersectingTop, hasNextPage, fetchNextPage]);
 
   ////////////
-
-  useEffect(() => {
-    // 1. if there is no pages, return
-    if (!pages || pages[0] === undefined) return;
-
-    // 2. if the bottom ref is in view, scroll to the bottom
-    if (isIntersectingBtm)
-      return bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
-
-    //3. if the conversation id is missing that it is a optimistic message which is sent by me and need to be scrolled to the bottom
-    // 3.1 if there is no pages, return
-    if (!pages[0]) return console.log("no pages");
-    // get the last page
-    const lastPage = pages[pages.length - 1];
-    // get the last message of the last page
-    const lastMessage = lastPage[lastPage.length - 1];
-
-    if (lastMessage?.conversation_id === undefined)
-      return bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
-
-    // 4. if there is only one page, then it means it's the first render so we need to scroll to the bottom otherwise it will start fetching the next page automatically
-    if (pages.length === 1)
-      return bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
-
-    // 5. if the top ref is in view, scroll to the last page's bottom ref to keep the view where it was
-    if (!pages.length) return;
-    if (!lastPageBtm.current) return;
-    if (isIntersectingTop) return lastPageBtm.current.scrollIntoView();
-  }, [pages]);
+  // Scroll behavior hook
+  ////////////
+  useScrollBehavior({
+    pages,
+    bottomRef,
+    lastPageBtm,
+    isIntersectingTop,
+    isIntersectingBtm,
+  });
 
   /////////////
   // show a loader when fetching the first page
