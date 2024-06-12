@@ -28,7 +28,7 @@ function App() {
                 </ProtectedRoute>
               }
             >
-              <Route path=":userId" element={<MessageView />} />
+              <Route path="/m/:userId" element={<MessageView />} />
             </Route>
 
             <Route path="signup" element={<Signup />} />

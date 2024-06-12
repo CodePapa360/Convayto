@@ -15,7 +15,7 @@ function MessageInputBar() {
   const { user } = useUser();
   const conversationId = convInfo?.id;
   const friendUserId = convInfo?.friendInfo?.id;
-  const myUserId = user.id;
+  const myUserId = user?.id;
   const inputRef = useRef(null);
   const queryClient = useQueryClient();
 

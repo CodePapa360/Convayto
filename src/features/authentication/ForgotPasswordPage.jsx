@@ -31,7 +31,7 @@ function ForgotPasswordPage() {
   }
 
   return (
-    <div className="bg- min-h-screen-safe flex items-center justify-center bg-deepSlate text-black dark:bg-deepSlate-dark dark:text-white">
+    <div className="flex min-h-screen-safe items-center justify-center bg-deepSlate text-black dark:bg-deepSlate-dark dark:text-white">
       <div className="w-full max-w-80 rounded-xl bg-mediumSlate p-6 dark:bg-mediumSlate-dark">
         <h1 className="mb-8 text-center text-2xl">Reset your password</h1>
 
@@ -74,13 +74,13 @@ function ForgotPasswordPage() {
         </form>
 
         <Link
-          to="/login"
+          to="/signin"
           className="flex items-center justify-center py-2 text-center text-sm underline"
         >
           <span className="text-xl">
             <RiArrowLeftSLine />
           </span>
-          <span className="opacity-80">Back to Login</span>
+          <span className="opacity-80">Back to Signin</span>
         </Link>
       </div>
     </div>

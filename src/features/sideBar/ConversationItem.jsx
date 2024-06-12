@@ -13,7 +13,7 @@ function ConversationItem({ conversation }) {
   const { closeSidebar } = useUi();
 
   function handleClick() {
-    navigate(`${id}`);
+    navigate(`/m/${id}`);
     closeSidebar();
   }
 
