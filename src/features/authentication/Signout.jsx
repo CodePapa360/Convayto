@@ -15,7 +15,7 @@ function Signout() {
       disabled={isPending}
       onClick={handleSignout}
     >
-      {isPending ? <Loader /> : <RiLogoutCircleLine />}
+      {isPending ? <Loader /> : <RiLogoutCircleLine aria-label="logout" />}
       <span className="hidden xm:block">Sign out</span>
     </button>
   );

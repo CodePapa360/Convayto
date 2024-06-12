@@ -43,20 +43,21 @@ function MainSidebarContents() {
   }
 
   return (
-    <div className="h-screen-safe relative z-30 grid select-none grid-cols-1 grid-rows-[auto_1fr] overflow-hidden">
+    <div className="relative z-30 grid h-screen-safe select-none grid-cols-1 grid-rows-[auto_1fr] overflow-hidden">
       <div className="border-b border-borderShade p-2 dark:border-borderShade-dark">
         <div className="mb-2 flex items-center justify-between gap-2">
           <div className="relative">
             <button
               className="relative z-50 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-black/10 dark:hover:bg-lightSlate/10"
               onClick={handleMenuBtnClick}
+              aria-label="Menu"
             >
               {isSearchView ? (
-                <RiArrowLeftLine />
+                <RiArrowLeftLine aria-label="Go back" />
               ) : isMenuOpen ? (
-                <RiCloseFill />
+                <RiCloseFill aria-label="Close menu" />
               ) : (
-                <RiMenuLine />
+                <RiMenuLine aria-label="Menu icon" />
               )}
             </button>
 
@@ -70,7 +71,7 @@ function MainSidebarContents() {
                     isMenuOpen
                       ? "pointer-events-auto visible"
                       : "pointer-events-none invisible"
-                  }  h-screen-safe w-screen-safe fixed left-0 top-0 z-40 opacity-0 transition-all duration-200 ease-in-out`}
+                  }  fixed left-0 top-0 z-40 h-screen-safe w-screen-safe opacity-0 transition-all duration-200 ease-in-out`}
                 ></div>
 
                 {/* DropdownMenu */}
@@ -82,31 +83,33 @@ function MainSidebarContents() {
 
           {/* Profile */}
           <div
-            className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] items-center gap-4 truncate rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
+            className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] gap-4 truncate rounded-lg p-2 hover:bg-black/10 focus:bg-green-400 dark:hover:bg-lightSlate/10"
             onClick={() => openAccountView()}
+            type="button"
+            tabIndex={0}
           >
-            <span className="h-11 w-11 overflow-hidden rounded-full text-black  dark:text-white">
+            <div className="h-11 w-11 overflow-hidden rounded-full text-black  dark:text-white">
               {avatar_url ? (
                 <img
                   draggable="false"
                   src={avatar_url}
-                  alt="avatar"
+                  alt="profile"
                   className="h-full w-full object-cover"
                 />
               ) : (
                 <HiOutlineUserCircle
                   size={55}
-                  viewBox="2 2 24 24"
+                  viewBox="2 2 25 25"
                   opacity={0.5}
                   strokeWidth="1"
                 />
               )}
-            </span>
+            </div>
 
-            <span className="flex flex-col truncate">
-              <span className="truncate">{fullname}</span>
-              <span className="truncate text-sm opacity-70">@{username}</span>
-            </span>
+            <div className="truncate text-left">
+              <p className="truncate">{fullname}</p>
+              <p className="truncate text-sm opacity-70">@{username}</p>
+            </div>
           </div>
 
           <Signout />
