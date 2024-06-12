@@ -3,8 +3,9 @@ import supabase from "../../services/supabase";
 export async function getConversationEntries({ myUserId }) {
   const { data, error } = await supabase
     .from("conversations")
-    .select("*, messages(*)")
-    .or(`user1_id.eq.${myUserId},user2_id.eq.${myUserId}`);
+    .select("*")
+    .or(`user1_id.eq.${myUserId},user2_id.eq.${myUserId}`)
+    .order("last_message->created_at", { ascending: true });
 
   if (error) throw new Error(error.message);
   return data;

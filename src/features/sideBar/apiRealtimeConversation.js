@@ -4,35 +4,35 @@ import { getUserById } from "../authentication/apiAuth";
 
 async function getUpdatedPayload({ payload, myUserId }) {
   if (payload.eventType === "INSERT") {
-    const messageId = payload.new.last_message_id;
+    // const messageId = payload.new.last_message_id;
     const friendId =
       payload.new.user1_id === myUserId
         ? payload.new.user2_id
         : payload.new.user1_id;
 
-    const messages = await getMessageById(messageId);
+    // const messages = await getMessageById(messageId);
     const friendInfo = await getUserById(friendId);
 
     const updatedPaylod = {
       ...payload,
-      new: { friendInfo, messages, ...payload.new },
+      new: { friendInfo, ...payload.new },
     };
 
     return updatedPaylod;
   } else if (payload.eventType === "UPDATE") {
-    const messageId = payload.new.last_message_id;
-    const messages = await getMessageById(messageId);
+    // const messageId = payload.new.last_message_id;
+    // const messages = await getMessageById(messageId);
 
     const updatedPaylod = {
       ...payload,
-      new: { ...payload.new, messages },
+      new: { ...payload.new },
     };
 
     return updatedPaylod;
   }
 }
 
-export function subscribeRealtimeConversation({ myUserId, onUpdate }) {
+export function subscribeRealtimeConversation({ myUserId, callback }) {
   // if (!myUserId || !conversationIds) return;
 
   const roomName = myUserId;
@@ -48,7 +48,7 @@ export function subscribeRealtimeConversation({ myUserId, onUpdate }) {
       },
       async (payload) => {
         const updatedPayload = await getUpdatedPayload({ payload, myUserId });
-        onUpdate(updatedPayload);
+        callback(updatedPayload);
       },
     )
     .on(
@@ -61,11 +61,11 @@ export function subscribeRealtimeConversation({ myUserId, onUpdate }) {
       },
       async (payload) => {
         const updatedPayload = await getUpdatedPayload({ payload, myUserId });
-        onUpdate(updatedPayload);
+        callback(updatedPayload);
       },
     )
     .subscribe();
 
-  // console.log("subscribed conversations", myUserId);
+  console.log("subscribed conversations", myUserId);
   return subscription;
 }

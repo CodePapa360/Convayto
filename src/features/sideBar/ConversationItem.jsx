@@ -3,9 +3,9 @@ import { useUi } from "../../contexts/UiContext";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 
 function ConversationItem({ conversation }) {
-  const { friendInfo, messages: lastMessage } = conversation;
+  const { friendInfo, last_message } = conversation;
   const { fullname, id, avatar_url } = friendInfo;
-  const lastMessageContent = lastMessage?.content;
+  const lastMessageContent = last_message?.content;
   const { userId: currentFriendId } = useParams();
   const isActiveUser = currentFriendId === id;
 

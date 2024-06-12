@@ -23,25 +23,25 @@ export function useConversations() {
     function () {
       if (!myUserId || subscriptionConversationRef.current) return;
 
-      const updateConversation = (payload) => {
+      const callback = (payload) => {
         queryClient.setQueryData(["conversations", myUserId], (prevData) => {
           if (payload?.eventType === "INSERT") {
             return [...prevData, payload.new];
           } else if (payload?.eventType === "UPDATE") {
-            const newData = prevData.map((conversation) => {
+            const prevConv = prevData.map((conversation) => {
               if (conversation.id === payload?.new.id) {
                 return { ...conversation, ...payload.new };
               }
               return conversation;
             });
-            return newData;
+            return prevConv;
           }
         });
       };
 
       subscriptionConversationRef.current = subscribeRealtimeConversation({
         myUserId,
-        onUpdate: updateConversation,
+        callback,
       });
 
       return () => {
@@ -49,7 +49,7 @@ export function useConversations() {
           subscriptionConversationRef.current.unsubscribe();
           subscriptionConversationRef.current = null;
 
-          // console.log("unsubscribed conversation");
+          console.log("unsubscribed conversation");
         }
       };
     },
@@ -61,8 +61,9 @@ export function useConversations() {
     console.error("Error fetching conversations:", error.message);
   }
 
-  const sortedConversations =
-    data?.length > 1 ? data?.sort(sortConverseByTime) : data;
+  const sortedConversations = data;
+  // const sortedConversations =
+  // data?.length > 1 ? data?.sort(sortConverseByTime) : data;
 
   /////////////
   // Prefetching
