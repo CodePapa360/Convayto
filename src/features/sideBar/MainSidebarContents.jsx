@@ -83,9 +83,9 @@ function MainSidebarContents() {
 
           {/* Profile */}
           <div
-            className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] gap-4 truncate rounded-lg p-2 hover:bg-black/10 focus:bg-green-400 dark:hover:bg-lightSlate/10"
+            className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] gap-4 truncate rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
             onClick={() => openAccountView()}
-            type="button"
+            role="button"
             tabIndex={0}
           >
             <div className="h-11 w-11 overflow-hidden rounded-full text-black  dark:text-white">
@@ -116,13 +116,18 @@ function MainSidebarContents() {
         </div>
 
         <div className="relative">
+          <label htmlFor="searchPeople" className="sr-only">
+            Search people
+          </label>
           <input
+            id="searchPeople"
             className="flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-borderShade bg-lightSlate p-2 pl-9 outline-none transition-all duration-200 ease-in-out focus:ring-2 focus:ring-darkViolet dark:border-borderShade-dark dark:bg-lightSlate-dark dark:focus:ring-textViolet-dark"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"
             onClick={() => openSearchView()}
             placeholder="Search people"
+            aria-label="Search people"
             ref={searchInputRef}
           />
 
