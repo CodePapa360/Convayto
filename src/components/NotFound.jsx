@@ -2,7 +2,7 @@ import { FaExclamationTriangle } from "react-icons/fa";
 
 const NotFound = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-deepSlate p-4 text-black dark:bg-deepSlate-dark dark:text-white">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-lightSlate p-4 text-black dark:bg-deepSlate-dark dark:text-white">
       <FaExclamationTriangle className="mb-4 text-4xl text-red-500 sm:text-5xl" />
       <h1 className="text-center text-2xl font-bold text-gray-700 dark:text-gray-200 sm:text-3xl lg:text-4xl">
         Oops! We can't seem to find that page.
