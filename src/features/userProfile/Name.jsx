@@ -41,9 +41,12 @@ function Name() {
   return (
     <div className="mt-8">
       <div className="flex items-center justify-between">
-        <p className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark">
+        <label
+          htmlFor="name"
+          className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark"
+        >
           Name
-        </p>
+        </label>
 
         <button
           onClick={handleUpdate}
@@ -53,9 +56,9 @@ function Name() {
           {isUpdating ? (
             <Loader />
           ) : isEditing ? (
-            <RiCheckFill />
+            <RiCheckFill aria-label="Update" />
           ) : (
-            <RiEdit2Line />
+            <RiEdit2Line aria-label="Edit" />
           )}
         </button>
       </div>
@@ -63,6 +66,7 @@ function Name() {
       {isEditing ? (
         <div className="flex justify-between">
           <input
+            id="name"
             type="text"
             ref={inputRef}
             value={newName}

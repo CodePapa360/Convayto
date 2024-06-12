@@ -15,13 +15,13 @@ function MyAccount() {
   const { closeAccountView } = useUi();
 
   return (
-    <div className="fadeIn h-screen-safe grid grid-rows-[auto_1fr] ">
+    <div className="fadeIn grid h-screen-safe grid-rows-[auto_1fr] ">
       <div className="flex h-16 items-center justify-start gap-4 p-2 dark:bg-slate-700">
         <button
           className="rounded-full p-3 text-xl hover:bg-black/10 dark:hover:bg-lightSlate/10"
           onClick={() => closeAccountView()}
         >
-          <RiArrowLeftLine />
+          <RiArrowLeftLine aria-label="go back" />
         </button>
         <p className="select-none font-bold tracking-wider">Profile</p>
       </div>

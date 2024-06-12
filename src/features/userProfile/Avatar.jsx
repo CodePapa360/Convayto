@@ -35,8 +35,11 @@ function Avatar() {
         <label
           className="absolute bottom-0 right-0 m-2 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-darkViolet p-1 text-xl text-white shadow-lg hover:bg-darkViolet-dark dark:bg-textViolet-dark"
           htmlFor="uploadPhoto"
+          // fix accessibility issue Keyboard Warning  Focusable elements should have interactive semantics.
+          role="button"
+          tabIndex={0}
         >
-          {isUpdating ? <Loader /> : <LuImagePlus />}
+          {isUpdating ? <Loader /> : <LuImagePlus aria-label="upload photo" />}
         </label>
         <input
           onChange={(e) => handleUpdateUser(e.target.files[0])}
