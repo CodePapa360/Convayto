@@ -26,15 +26,22 @@ export function useConversations() {
       const callback = (payload) => {
         queryClient.setQueryData(["conversations", myUserId], (prevData) => {
           if (payload?.eventType === "INSERT") {
-            return [...prevData, payload.new];
+            // Insert the new entry at the beginning of the array
+            return [payload.new, ...prevData];
           } else if (payload?.eventType === "UPDATE") {
-            const prevConv = prevData.map((conversation) => {
-              if (conversation.id === payload?.new.id) {
-                return { ...conversation, ...payload.new };
-              }
-              return conversation;
-            });
-            return prevConv;
+            // Find the updated conversation and update it
+            const updatedConversation = prevData.find(
+              (conversation) => conversation.id === payload.new.id,
+            );
+            const otherConversations = prevData.filter(
+              (conversation) => conversation.id !== payload.new.id,
+            );
+
+            // Return the updated conversation at the beginning of the array
+            return [
+              { ...updatedConversation, ...payload.new },
+              ...otherConversations,
+            ];
           }
         });
       };
@@ -61,10 +68,6 @@ export function useConversations() {
     console.error("Error fetching conversations:", error.message);
   }
 
-  const sortedConversations = data;
-  // const sortedConversations =
-  // data?.length > 1 ? data?.sort(sortConverseByTime) : data;
-
   /////////////
   // Prefetching
   /////////////
@@ -72,25 +75,22 @@ export function useConversations() {
   const hasPrefetched = useRef(false);
 
   useEffect(() => {
-    if (!sortedConversations || hasPrefetched.current) return;
+    if (!data || hasPrefetched.current) return;
 
-    sortedConversations
-      ?.slice(0, MAX_PREFETCHED_CONVERSATIONS)
-      .forEach((conv) => {
-        const conversation_id = conv.id;
-        const friendUserId = conv.friendInfo.id;
+    data?.slice(0, MAX_PREFETCHED_CONVERSATIONS).forEach((conv) => {
+      const conversation_id = conv.id;
+      const friendUserId = conv.friendInfo.id;
 
-        queryClient.prefetchInfiniteQuery({
-          queryKey: ["friend", friendUserId],
-          queryFn: ({ pageParam }) =>
-            getMessages({ conversation_id, pageParam }),
-          pages: 1,
-        });
+      queryClient.prefetchInfiniteQuery({
+        queryKey: ["friend", friendUserId],
+        queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
+        pages: 1,
       });
+    });
 
     hasPrefetched.current = true;
-  }, [sortedConversations, queryClient]);
+  }, [data, queryClient]);
   // prefetch ends
 
-  return { conversations: sortedConversations, isPending };
+  return { conversations: data, isPending };
 }
