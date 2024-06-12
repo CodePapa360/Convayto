@@ -32,7 +32,7 @@ function MessageTopBar() {
           onClick={handleGoBack}
           className="rounded-full p-3 text-xl hover:bg-black/10 active:scale-95 dark:hover:bg-lightSlate/10 md:hidden"
         >
-          <RiArrowLeftLine />
+          <RiArrowLeftLine aria-label="go back" />
         </button>
 
         {isPending ? (
@@ -40,29 +40,30 @@ function MessageTopBar() {
         ) : (
           <div
             onClick={() => openFriendSidebar()}
-            className="flex cursor-pointer items-center gap-2 rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
+            className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] gap-4 truncate rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
           >
-            <span className="h-12 w-12 overflow-hidden rounded-full text-black  dark:text-white">
+            <div className="h-12 w-12 overflow-hidden rounded-full text-black  dark:text-white">
               {avatar_url ? (
                 <img
                   draggable="false"
                   src={avatar_url}
-                  alt="avatar"
+                  alt="profile"
                   className="h-full w-full object-cover"
                 />
               ) : (
                 <HiOutlineUserCircle
                   size={55}
-                  viewBox="2 2 24 24"
+                  viewBox="2 2 25 25"
                   opacity={0.5}
                   strokeWidth="1"
                 />
               )}
-            </span>
-            <span className="flex flex-col">
-              <span>{fullname}</span>
-              <span className="text-sm  opacity-70">@{username}</span>
-            </span>
+            </div>
+
+            <div className="truncate text-left">
+              <p className="truncate">{fullname}</p>
+              <p className="truncate text-sm opacity-70">@{username}</p>
+            </div>
           </div>
         )}
       </div>

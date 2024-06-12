@@ -132,7 +132,7 @@ function MainSidebarContents() {
           />
 
           <span className="pointer-events-none absolute left-3 top-3 text-xl opacity-40">
-            <RiSearchLine />
+            <RiSearchLine aria-label="search icon" />
           </span>
         </div>
       </div>

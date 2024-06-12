@@ -25,6 +25,8 @@ function ConversationItem({ conversation }) {
           : "hover:bg-black/10 dark:hover:bg-lightSlate/10"
       } flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 `}
       onClick={handleClick}
+      role="button"
+      tabIndex={0}
     >
       <span className="h-12 w-12  overflow-hidden rounded-full">
         {avatar_url ? (
