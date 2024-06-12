@@ -6,7 +6,6 @@ export function useSendNewMessage() {
   const queryClient = useQueryClient();
   const { convInfo, isPending, isError } = useConvInfo();
 
-  const conversation_id = convInfo?.id;
   const friendUserId = convInfo?.friendInfo?.id;
 
   const { mutate: sendNewMessage, isPending: isSending } = useMutation({
