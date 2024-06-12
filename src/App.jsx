@@ -10,6 +10,7 @@ import MessageView from "./features/messageArea/MessageView";
 import { UiProvider } from "./contexts/UiContext";
 import NewPasswordPage from "./features/authentication/NewPasswordPage";
 import ForgotPasswordPage from "./features/authentication/ForgotPasswordPage";
+import NotFound from "./components/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ function App() {
             <Route path="signin" element={<Signin />} />
             <Route path="/reset-password" element={<NewPasswordPage />} />
             <Route path="forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
