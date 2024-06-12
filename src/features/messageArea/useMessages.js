@@ -114,6 +114,7 @@ export function useMessages() {
 
       return () => {
         subscriptionRef.current?.unsubscribe();
+        subscriptionRef.current = null;
         // console.log("unsubscribed message");
       };
     },

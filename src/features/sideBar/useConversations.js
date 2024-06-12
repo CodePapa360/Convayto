@@ -47,8 +47,9 @@ export function useConversations() {
       return () => {
         if (subscriptionConversationRef.current) {
           subscriptionConversationRef.current.unsubscribe();
+          subscriptionConversationRef.current = null;
 
-          // console.log("unsubscribed conversation");
+          console.log("unsubscribed conversation");
         }
       };
     },

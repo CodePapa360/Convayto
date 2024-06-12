@@ -66,6 +66,6 @@ export function subscribeRealtimeConversation({ myUserId, onUpdate }) {
     )
     .subscribe();
 
-  // console.log("subscribed conversations", myUserId);
+  console.log("subscribed conversations", myUserId);
   return subscription;
 }
