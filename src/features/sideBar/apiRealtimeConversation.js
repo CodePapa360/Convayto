@@ -22,8 +22,6 @@ async function getUpdatedPayload({ payload, myUserId }) {
       new: { ...payload.new },
     };
 
-    console.log("updated payload", updatedPaylod);
-
     return updatedPaylod;
   }
 }

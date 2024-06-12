@@ -5,7 +5,7 @@ export async function getConversationEntries({ myUserId }) {
     .from("conversations")
     .select("*")
     .or(`user1_id.eq.${myUserId},user2_id.eq.${myUserId}`)
-    .order("last_message->created_at", { ascending: true });
+    .order("last_message->created_at", { ascending: false });
 
   if (error) throw new Error(error.message);
   return data;
