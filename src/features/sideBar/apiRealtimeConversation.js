@@ -60,6 +60,6 @@ export function subscribeRealtimeConversation({ myUserId, callback }) {
     )
     .subscribe();
 
-  console.log("subscribed conversations", myUserId);
+  // console.log("subscribed conversations", myUserId);
   return subscription;
 }
