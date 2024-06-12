@@ -77,14 +77,6 @@ export async function sendMessage({
 
   if (error) throw new Error(error.message);
 
-  // update conversation table with the last message id
-  // const { error: conversationError } = await supabase
-  //   .from("conversations")
-  //   .update({ last_message_id: data[0].id })
-  //   .eq("id", convId);
-
-  // if (conversationError) throw new Error(conversationError.message);
-
   const { error: conversationError } = await supabase
     .from("conversations")
     .update({ last_message: data[0] })

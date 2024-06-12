@@ -4,7 +4,6 @@ import { getMessages } from "../messageArea/apiMessage";
 import { useUser } from "../authentication/useUser";
 import { useEffect, useRef } from "react";
 import { subscribeRealtimeConversation } from "./apiRealtimeConversation";
-import { sortConverseByTime } from "../../utils/common";
 import { MAX_PREFETCHED_CONVERSATIONS } from "../../config";
 
 export function useConversations() {

@@ -1,16 +1,13 @@
 import supabase from "../../services/supabase";
-import { getMessageById } from "../messageArea/apiMessage";
 import { getUserById } from "../authentication/apiAuth";
 
 async function getUpdatedPayload({ payload, myUserId }) {
   if (payload.eventType === "INSERT") {
-    // const messageId = payload.new.last_message_id;
     const friendId =
       payload.new.user1_id === myUserId
         ? payload.new.user2_id
         : payload.new.user1_id;
 
-    // const messages = await getMessageById(messageId);
     const friendInfo = await getUserById(friendId);
 
     const updatedPaylod = {
@@ -20,21 +17,18 @@ async function getUpdatedPayload({ payload, myUserId }) {
 
     return updatedPaylod;
   } else if (payload.eventType === "UPDATE") {
-    // const messageId = payload.new.last_message_id;
-    // const messages = await getMessageById(messageId);
-
     const updatedPaylod = {
       ...payload,
       new: { ...payload.new },
     };
+
+    console.log("updated payload", updatedPaylod);
 
     return updatedPaylod;
   }
 }
 
 export function subscribeRealtimeConversation({ myUserId, callback }) {
-  // if (!myUserId || !conversationIds) return;
-
   const roomName = myUserId;
   const subscription = supabase
     .channel(roomName)
