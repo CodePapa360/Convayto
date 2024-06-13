@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import useOutsideClick from "./useOutsideClick";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 export default function ToggleableContent({
   children,
