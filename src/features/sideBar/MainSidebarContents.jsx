@@ -18,12 +18,17 @@ import ToggleableContent from "../../components/ToggleableContent";
 
 function MainSidebarContents() {
   const { conversations, isPending } = useConversations();
-  const { openAccountView, isSearchView, openSearchView, closeSearchView } =
-    useUi();
+  const {
+    openAccountView,
+    isSearchView,
+    openSearchView,
+    closeSearchView,
+    isMenuOpen,
+    toggleMenu,
+  } = useUi();
   const { user } = useUser();
   const { fullname, username, avatar_url } = user.user_metadata;
   const [query, setQuery] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const searchInputRef = useRef(null);
 
@@ -39,7 +44,7 @@ function MainSidebarContents() {
     if (isSearchView) {
       closeSearchView();
     } else {
-      setIsMenuOpen((prev) => !prev);
+      toggleMenu();
     }
   }
 
