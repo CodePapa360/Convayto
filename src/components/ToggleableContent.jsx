@@ -17,8 +17,12 @@ export default function ToggleableContent({
 
   return (
     <>
-      {withOverlay && isOpen && (
-        <div className="fixed inset-0 z-20 bg-black opacity-40" />
+      {isOpen && (
+        // overlay will always be there but with 0 opacity
+        <div
+          onTouchStart={() => toggle()}
+          className={`fixed inset-0 z-20 bg-black opacity-${withOverlay ? 40 : 0}`}
+        />
       )}
       <div ref={ref}>{children}</div>
     </>
