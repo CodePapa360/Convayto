@@ -148,7 +148,6 @@ function UiProvider({ children }) {
 
   function toggleMenu() {
     dispatch({ type: "TOGGLE_MENU" });
-    console.log("menu toggled");
   }
 
   // Dark Mode

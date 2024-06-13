@@ -12,9 +12,8 @@ import { useEffect, useRef, useState } from "react";
 import SearchView from "../userSearch/SearchView";
 import Loader from "../../components/Loader";
 import { useUi } from "../../contexts/UiContext";
-import Dropdown from "../../components/DropdownMenu";
+import DropdownMenu from "../../components/DropdownMenu";
 import { HiOutlineUserCircle } from "react-icons/hi2";
-import ToggleableContent from "../../components/ToggleableContent";
 
 function MainSidebarContents() {
   const { conversations, isPending } = useConversations();
@@ -67,15 +66,7 @@ function MainSidebarContents() {
               )}
             </button>
 
-            {isMenuOpen && (
-              <ToggleableContent
-                isOpen={isMenuOpen}
-                toggle={handleMenuBtnClick}
-                withOverlay={false}
-              >
-                <Dropdown />
-              </ToggleableContent>
-            )}
+            {isMenuOpen && <DropdownMenu />}
           </div>
 
           {/* Profile */}
