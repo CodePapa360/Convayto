@@ -14,6 +14,7 @@ import Loader from "../../components/Loader";
 import { useUi } from "../../contexts/UiContext";
 import Dropdown from "../../components/DropdownMenu";
 import { HiOutlineUserCircle } from "react-icons/hi2";
+import ToggleableContent from "../../components/ToggleableContent";
 
 function MainSidebarContents() {
   const { conversations, isPending } = useConversations();
@@ -62,22 +63,13 @@ function MainSidebarContents() {
             </button>
 
             {isMenuOpen && (
-              <>
-                {/* Overlay */}
-                <div
-                  onMouseDown={handleMenuBtnClick}
-                  onTouchMove={handleMenuBtnClick}
-                  className={`${
-                    isMenuOpen
-                      ? "pointer-events-auto visible"
-                      : "pointer-events-none invisible"
-                  }  fixed left-0 top-0 z-40 h-screen-safe w-screen-safe opacity-0 transition-all duration-200 ease-in-out`}
-                ></div>
-
-                {/* DropdownMenu */}
-
+              <ToggleableContent
+                isOpen={isMenuOpen}
+                toggle={handleMenuBtnClick}
+                withOverlay={false}
+              >
                 <Dropdown />
-              </>
+              </ToggleableContent>
             )}
           </div>
 
