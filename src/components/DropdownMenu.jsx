@@ -10,6 +10,7 @@ import { useUi } from "../contexts/UiContext";
 import { useUser } from "../features/authentication/useUser";
 import Loader from "./Loader";
 import ToggleableContent from "./ToggleableContent";
+import Menu from "./Menu";
 
 export default function DropdownMenu() {
   const { user } = useUser();
@@ -32,7 +33,41 @@ export default function DropdownMenu() {
       toggle={toggleMenu}
       withOverlay={false}
     >
-      <div
+      <Menu>
+        <Menu.Header>
+          <Menu.Header.Name>{fullname}</Menu.Header.Name>
+          <Menu.Header.Email>{email}</Menu.Header.Email>
+        </Menu.Header>
+
+        <Menu.List>
+          <Menu.Item>
+            <RiSettings2Line />
+            <div>My Account</div>
+          </Menu.Item>
+
+          <Menu.Item>
+            <RiMoonClearLine />
+            <div>Dark Mode</div>
+          </Menu.Item>
+
+          <Menu.Item>
+            <RiBugLine />
+            <div>Report Bug</div>
+          </Menu.Item>
+
+          <Menu.Item>
+            <RiInformationLine />
+            <div>About</div>
+          </Menu.Item>
+
+          <Menu.Item>
+            {isPending ? <Loader /> : <RiLogoutCircleLine />}
+            <div>Sign out</div>
+          </Menu.Item>
+        </Menu.List>
+        <Menu.Footer />
+      </Menu>
+      {/* <div
         id="dropdownInformation"
         className="fadeIn absolute left-4 top-12 z-50 w-60 divide-y divide-gray-100 rounded-lg bg-white p-2 shadow-[0_10px_60px_rgba(0,0,0,0.3)] dark:divide-gray-600 dark:bg-gray-700"
       >
@@ -104,7 +139,7 @@ export default function DropdownMenu() {
             <span>Sign out</span>
           </button>
         </div>
-      </div>
+      </div> */}
     </ToggleableContent>
   );
 }
