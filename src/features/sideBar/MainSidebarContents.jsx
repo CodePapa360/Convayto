@@ -17,14 +17,10 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 
 function MainSidebarContents() {
   const { conversations, isPending } = useConversations();
-  const {
-    openAccountView,
-    isSearchView,
-    openSearchView,
-    closeSearchView,
-    isMenuOpen,
-    toggleMenu,
-  } = useUi();
+  const { openAccountView, isSearchView, openSearchView, closeSearchView } =
+    useUi();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const { user } = useUser();
   const { fullname, username, avatar_url } = user.user_metadata;
   const [query, setQuery] = useState("");
@@ -43,7 +39,7 @@ function MainSidebarContents() {
     if (isSearchView) {
       closeSearchView();
     } else {
-      toggleMenu();
+      setIsMenuOpen((prev) => !prev);
     }
   }
 
@@ -53,7 +49,7 @@ function MainSidebarContents() {
         <div className="mb-2 flex items-center justify-between gap-2">
           <div className="relative">
             <button
-              className="relative z-50 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-black/10 dark:hover:bg-lightSlate/10"
+              className="relative flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-black/10 dark:hover:bg-lightSlate/10"
               onClick={handleMenuBtnClick}
               aria-label="Menu"
             >
@@ -66,7 +62,12 @@ function MainSidebarContents() {
               )}
             </button>
 
-            {isMenuOpen && <DropdownMenu />}
+            {isMenuOpen && (
+              <DropdownMenu
+                isMenuOpen={isMenuOpen}
+                toggleMenu={handleMenuBtnClick}
+              />
+            )}
           </div>
 
           {/* Profile */}
