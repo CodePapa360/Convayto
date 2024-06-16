@@ -6,7 +6,7 @@ import {
 } from "react-icons/ri";
 import { useUser } from "../authentication/useUser";
 import { useConversations } from "./useConversations";
-import Signout from "../authentication/Signout";
+import SignoutButton from "../authentication/SignoutButton";
 import ConversationItem from "./ConversationItem";
 import { useEffect, useRef, useState } from "react";
 import SearchView from "../userSearch/SearchView";
@@ -101,7 +101,7 @@ function MainSidebarContents() {
             </div>
           </div>
 
-          <Signout />
+          <SignoutButton />
         </div>
 
         <div className="relative">
