@@ -1,13 +1,16 @@
 import { Outlet } from "react-router-dom";
 import LeftSideBar from "../features/sideBar/LeftSideBar";
+import FullscreenMain from "./FullscreenMain";
 
 function AppLayout() {
   return (
-    <main className="min-h-screen-safe grid grid-cols-[auto_1fr] overflow-hidden bg-deepSlate text-black dark:bg-deepSlate-dark dark:text-white">
-      <LeftSideBar />
+    <FullscreenMain>
+      <div className="grid w-full grid-cols-[auto_1fr]">
+        <LeftSideBar />
 
-      <Outlet />
-    </main>
+        <Outlet />
+      </div>
+    </FullscreenMain>
   );
 }
 
