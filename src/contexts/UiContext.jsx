@@ -9,6 +9,7 @@ const InitialState = {
   isSearchView: false,
   isDarkMode: true,
   isFriendsSidebarOpen: false,
+  isMenuOpen: false,
 };
 
 function reducer(state, action) {
@@ -27,6 +28,7 @@ function reducer(state, action) {
       return {
         ...state,
         isAccountView: true,
+        isMenuOpen: false,
       };
     case "CLOSE_ACCOUNT_VIEW":
       return {
@@ -58,6 +60,13 @@ function reducer(state, action) {
         ...state,
         isFriendsSidebarOpen: true,
       };
+    case "TOGGLE_MENU":
+      return {
+        ...state,
+        isMenuOpen: !state.isMenuOpen,
+      };
+    case "RESET":
+      return InitialState;
 
     default:
       return state;
@@ -72,6 +81,7 @@ function UiProvider({ children }) {
       isSearchView,
       isDarkMode,
       isFriendsSidebarOpen,
+      isMenuOpen,
     },
     dispatch,
   ] = useReducer(reducer, InitialState);
@@ -139,6 +149,14 @@ function UiProvider({ children }) {
     window.removeEventListener("popstate", popFriendSidebarBack);
   }
 
+  function toggleMenu() {
+    dispatch({ type: "TOGGLE_MENU" });
+  }
+
+  function resetUi() {
+    dispatch({ type: "RESET" });
+  }
+
   // Dark Mode
   function updateDarkMode(newMode) {
     dispatch({ type: "UPDATE_DARK_MODE", payload: newMode });
@@ -189,6 +207,11 @@ function UiProvider({ children }) {
     isFriendsSidebarOpen,
     closeFriendSidebar,
     openFriendSidebar,
+
+    isMenuOpen,
+    toggleMenu,
+
+    resetUi,
   };
 
   return <UiContext.Provider value={value}>{children}</UiContext.Provider>;

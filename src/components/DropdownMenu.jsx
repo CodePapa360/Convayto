@@ -12,13 +12,19 @@ import Loader from "./Loader";
 import ToggleableContent from "./ToggleableContent";
 import Menu from "./Menu";
 
-export default function DropdownMenu({ isMenuOpen, toggleMenu }) {
+export default function DropdownMenu() {
   const { user } = useUser();
   const {
     email,
     user_metadata: { fullname },
   } = user;
-  const { openAccountView, isDarkMode, toggleDarkMode } = useUi();
+  const {
+    openAccountView,
+    isDarkMode,
+    toggleDarkMode,
+    isMenuOpen,
+    toggleMenu,
+  } = useUi();
   const { signout, isPending } = useSignout();
 
   return (

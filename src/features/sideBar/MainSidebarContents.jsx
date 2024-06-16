@@ -17,9 +17,14 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 
 function MainSidebarContents() {
   const { conversations, isPending } = useConversations();
-  const { openAccountView, isSearchView, openSearchView, closeSearchView } =
-    useUi();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const {
+    openAccountView,
+    isSearchView,
+    openSearchView,
+    closeSearchView,
+    isMenuOpen,
+    toggleMenu,
+  } = useUi();
 
   const { user } = useUser();
   const { fullname, username, avatar_url } = user.user_metadata;
@@ -39,7 +44,7 @@ function MainSidebarContents() {
     if (isSearchView) {
       closeSearchView();
     } else {
-      setIsMenuOpen((prev) => !prev);
+      toggleMenu();
     }
   }
 
@@ -62,12 +67,7 @@ function MainSidebarContents() {
               )}
             </button>
 
-            {isMenuOpen && (
-              <DropdownMenu
-                isMenuOpen={isMenuOpen}
-                toggleMenu={handleMenuBtnClick}
-              />
-            )}
+            {isMenuOpen && <DropdownMenu />}
           </div>
 
           {/* Profile */}
