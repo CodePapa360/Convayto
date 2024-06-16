@@ -1,4 +1,4 @@
-function Form({ children, onSubmit }) {
+export default function Form({ children, onSubmit }) {
   return (
     <form
       onSubmit={onSubmit}
@@ -8,5 +8,3 @@ function Form({ children, onSubmit }) {
     </form>
   );
 }
-
-export default Form;
