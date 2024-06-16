@@ -1,16 +1,16 @@
 import { Outlet } from "react-router-dom";
 import LeftSideBar from "../features/sideBar/LeftSideBar";
-import FullscreenMain from "./FullscreenMain";
+import MainContainer from "./MainContainer";
 
 function AppLayout() {
   return (
-    <FullscreenMain>
+    <MainContainer>
       <div className="grid w-full grid-cols-[auto_1fr]">
         <LeftSideBar />
 
         <Outlet />
       </div>
-    </FullscreenMain>
+    </MainContainer>
   );
 }
 

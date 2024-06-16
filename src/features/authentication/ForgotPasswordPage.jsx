@@ -3,7 +3,8 @@ import Loader from "../../components/Loader";
 import useResetPasswordForEmail from "./useResetPasswordForEmail";
 import { Link } from "react-router-dom";
 import { RiArrowLeftSLine } from "react-icons/ri";
-import FullscreenMain from "../../components/FullscreenMain";
+import Heading from "../../components/Heading";
+import MainContainer from "../../components/MainContainer";
 
 function ForgotPasswordPage() {
   const {
@@ -32,9 +33,9 @@ function ForgotPasswordPage() {
   }
 
   return (
-    <FullscreenMain>
+    <MainContainer>
       <div className="w-full max-w-80 rounded-xl bg-mediumSlate p-6 dark:bg-mediumSlate-dark">
-        <h1 className="mb-8 text-center text-2xl">Reset your password</h1>
+        <Heading>Reset your password</Heading>
 
         <p className="mb-4 text-center text-sm">
           Enter your email address below and we'll send you a link to reset your
@@ -84,7 +85,7 @@ function ForgotPasswordPage() {
           <span className="opacity-80">Back to Signin</span>
         </Link>
       </div>
-    </FullscreenMain>
+    </MainContainer>
   );
 }
 

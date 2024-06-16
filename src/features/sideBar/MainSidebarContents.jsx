@@ -59,11 +59,17 @@ function MainSidebarContents() {
               aria-label="Menu"
             >
               {isSearchView ? (
-                <RiArrowLeftLine class="h-11 w-11 p-3" aria-label="Go back" />
+                <RiArrowLeftLine
+                  className="h-11 w-11 p-3"
+                  aria-label="Go back"
+                />
               ) : isMenuOpen ? (
-                <RiCloseFill class="h-11 w-11 p-3" aria-label="Close menu" />
+                <RiCloseFill
+                  className="h-11 w-11 p-3"
+                  aria-label="Close menu"
+                />
               ) : (
-                <RiMenuLine class="h-11 w-11 p-3" aria-label="Menu icon" />
+                <RiMenuLine className="h-11 w-11 p-3" aria-label="Menu icon" />
               )}
             </button>
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSignup } from "./useSignup";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Loader";
+import Heading from "../../components/Heading";
 
 function Signup() {
   const [fullname, setFullname] = useState("");
@@ -28,10 +29,9 @@ function Signup() {
   }
 
   return (
-    <div className="min-h-screen-safe flex items-center justify-center bg-deepSlate text-black transition-all duration-200 ease-in-out dark:bg-deepSlate-dark dark:text-white">
+    <div className="flex min-h-screen-safe items-center justify-center bg-deepSlate text-black transition-all duration-200 ease-in-out dark:bg-deepSlate-dark dark:text-white">
       <div className="w-full max-w-80 rounded-xl bg-mediumSlate p-6 dark:bg-mediumSlate-dark">
-        <h1 className="mb-8 text-center text-3xl">Sign up</h1>
-
+        <Heading size="3xl">Sign up</Heading>
         <form onSubmit={handleSubmit} className="mb-4 flex flex-col">
           <div className="input-container mb-4 w-full">
             <div className="relative">
