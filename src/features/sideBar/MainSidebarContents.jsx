@@ -54,16 +54,16 @@ function MainSidebarContents() {
         <div className="mb-2 flex items-center justify-between gap-2">
           <div className="relative">
             <button
-              className="relative z-50 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-black/10 dark:hover:bg-lightSlate/10"
+              className="relative z-50 flex flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-black/10 dark:hover:bg-lightSlate/10"
               onClick={handleMenuBtnClick}
               aria-label="Menu"
             >
               {isSearchView ? (
-                <RiArrowLeftLine aria-label="Go back" />
+                <RiArrowLeftLine class="h-11 w-11 p-3" aria-label="Go back" />
               ) : isMenuOpen ? (
-                <RiCloseFill aria-label="Close menu" />
+                <RiCloseFill class="h-11 w-11 p-3" aria-label="Close menu" />
               ) : (
-                <RiMenuLine aria-label="Menu icon" />
+                <RiMenuLine class="h-11 w-11 p-3" aria-label="Menu icon" />
               )}
             </button>
 
