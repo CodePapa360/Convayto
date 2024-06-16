@@ -34,30 +34,32 @@ export default function DropdownMenu({ isMenuOpen, toggleMenu }) {
         </Menu.Header>
 
         <Menu.List>
-          <Menu.Item onClick={openAccountView}>
+          <Menu.ButtonItem onClick={openAccountView}>
             <RiSettings2Line />
             <div>My Account</div>
-          </Menu.Item>
+          </Menu.ButtonItem>
 
-          <Menu.ToggleItem isChecked={isDarkMode} toggler={toggleDarkMode}>
+          <Menu.TogglerItem isChecked={isDarkMode} toggler={toggleDarkMode}>
             <RiMoonClearLine />
             <div>Dark Mode</div>
-          </Menu.ToggleItem>
+          </Menu.TogglerItem>
 
-          <Menu.Item href={"https://github.com/CodePapa360/ConverseMe/issues"}>
+          <Menu.LinkItem
+            href={"https://github.com/CodePapa360/ConverseMe/issues"}
+          >
             <RiBugLine />
             <div>Report Bug</div>
-          </Menu.Item>
+          </Menu.LinkItem>
 
-          <Menu.Item>
+          <Menu.RouteItem to={"/about"}>
             <RiInformationLine />
             <div>About</div>
-          </Menu.Item>
+          </Menu.RouteItem>
 
-          <Menu.Item onClick={signout}>
+          <Menu.ButtonItem onClick={signout}>
             {isPending ? <Loader /> : <RiLogoutCircleLine />}
             <div>Sign out</div>
-          </Menu.Item>
+          </Menu.ButtonItem>
         </Menu.List>
         <Menu.Footer />
       </Menu>

@@ -35,33 +35,39 @@ function List({ children }) {
   );
 }
 
-function Item({ children, onClick, route, href }) {
-  const classes =
-    "flex w-full items-center gap-2 rounded-md px-4 py-2 text-base text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white";
+////////////
+// Menu Items
+////////////
 
-  if (route) {
-    return (
-      <li className={classes}>
-        <Link to={route}>{children}</Link>
-      </li>
-    );
-  }
+const classes =
+  "focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 cursor-pointer flex w-full items-center gap-2 rounded-md px-4 py-2 text-base text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white";
 
-  if (href) {
-    return (
-      <li>
-        <a
-          className={classes}
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {children}
-        </a>
-      </li>
-    );
-  }
+function LinkItem({ children, href }) {
+  return (
+    <li>
+      <a
+        className={classes}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    </li>
+  );
+}
 
+function RouteItem({ children, to }) {
+  return (
+    <li>
+      <Link to={to} className={classes}>
+        {children}
+      </Link>
+    </li>
+  );
+}
+
+function ButtonItem({ children, onClick }) {
   return (
     <li>
       <button className={classes} onClick={() => onClick()}>
@@ -71,20 +77,30 @@ function Item({ children, onClick, route, href }) {
   );
 }
 
-function ToggleItem({ children, toggler, isChecked }) {
+function TogglerItem({ children, toggler, isChecked }) {
   return (
     <li>
-      <label className="relative flex cursor-pointer items-center justify-between rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-        <span className="flex items-center gap-2 text-base">{children}</span>
+      <label
+        onChange={() => toggler()}
+        onKeyDown={(event) => {
+          if (event.key === "Enter") {
+            toggler();
+          }
+        }}
+        className={classes + " justify-between"}
+        tabIndex={0}
+      >
+        <span className="flex items-center gap-2">{children}</span>
 
-        <div className="relative flex justify-between">
+        <div className="relative flex">
           <input
             checked={isChecked}
             type="checkbox"
             onChange={() => toggler()}
+            tabIndex={-1}
             className="peer sr-only"
           />
-          <div className="peer h-5 w-9 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-500 dark:bg-gray-500 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:translate-x-[-100%]"></div>
+          <div className="peer h-5 w-9 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-500 dark:bg-gray-500  rtl:peer-checked:after:translate-x-[-100%]" />
         </div>
       </label>
     </li>
@@ -106,8 +122,10 @@ Menu.Header = Header;
 Header.Name = Name;
 Header.Email = Email;
 Menu.List = List;
-Menu.Item = Item;
-Menu.ToggleItem = ToggleItem;
+Menu.LinkItem = LinkItem;
+Menu.RouteItem = RouteItem;
+Menu.ButtonItem = ButtonItem;
+Menu.TogglerItem = TogglerItem;
 Menu.Footer = Footer;
 
 export default Menu;
