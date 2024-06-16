@@ -54,7 +54,7 @@ function MainSidebarContents() {
         <div className="mb-2 flex items-center justify-between gap-2">
           <div className="relative">
             <button
-              className="relative flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-black/10 dark:hover:bg-lightSlate/10"
+              className="relative z-50 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-black/10 dark:hover:bg-lightSlate/10"
               onClick={handleMenuBtnClick}
               aria-label="Menu"
             >

@@ -10,7 +10,7 @@ function SearchedUser({ user }) {
 
   function handleClick() {
     closeSearchView({ back: false });
-    navigate(`/${id}`, { replace: true });
+    navigate(`/m/${id}`, { replace: true });
   }
 
   return (
