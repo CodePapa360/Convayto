@@ -1,9 +1,4 @@
-import {
-  RiSearchLine,
-  RiMenuLine,
-  RiCloseFill,
-  RiArrowLeftLine,
-} from "react-icons/ri";
+import { RiSearchLine } from "react-icons/ri";
 import { useUser } from "../authentication/useUser";
 import { useConversations } from "./useConversations";
 import SignoutButton from "../authentication/SignoutButton";
@@ -13,8 +8,8 @@ import SearchView from "../userSearch/SearchView";
 import Loader from "../../components/Loader";
 import { useUi } from "../../contexts/UiContext";
 import DropdownMenu from "../../components/DropdownMenu";
-import { HiOutlineUserCircle } from "react-icons/hi2";
 import Profile from "../../components/Profile";
+import IconButton from "../../components/IconButton";
 
 function MainSidebarContents() {
   const { conversations, isPending } = useConversations();
@@ -55,25 +50,11 @@ function MainSidebarContents() {
       <div className="border-b border-borderShade p-2 dark:border-borderShade-dark">
         <div className="mb-2 flex items-center justify-between gap-2">
           <div className="relative">
-            <button
-              className="relative z-50 flex flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-black/10 dark:hover:bg-lightSlate/10"
-              onClick={handleMenuBtnClick}
-              aria-label="Menu"
-            >
-              {isSearchView ? (
-                <RiArrowLeftLine
-                  className="h-11 w-11 p-3"
-                  aria-label="Go back"
-                />
-              ) : isMenuOpen ? (
-                <RiCloseFill
-                  className="h-11 w-11 p-3"
-                  aria-label="Close menu"
-                />
-              ) : (
-                <RiMenuLine className="h-11 w-11 p-3" aria-label="Menu icon" />
-              )}
-            </button>
+            <IconButton onClick={handleMenuBtnClick}>
+              {isSearchView && <IconButton.Back />}
+              {isMenuOpen && <IconButton.Close />}
+              {!isSearchView && !isMenuOpen && <IconButton.Menu />}
+            </IconButton>
 
             {isMenuOpen && <DropdownMenu />}
           </div>

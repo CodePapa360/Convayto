@@ -1,7 +1,7 @@
-import { RiCloseFill } from "react-icons/ri";
 import { useUi } from "../../contexts/UiContext";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import ToggleableContent from "../../components/ToggleableContent";
+import IconButton from "../../components/IconButton";
 
 function FriendProfileBar({ friend }) {
   const { avatar_url, fullname, username, bio } = friend ?? {};
@@ -19,12 +19,9 @@ function FriendProfileBar({ friend }) {
         } absolute top-0 z-30 grid h-screen-safe w-4/5 grid-rows-[auto_1fr] overflow-hidden bg-mediumSlate transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] dark:bg-mediumSlate-dark sm:w-[21rem] `}
       >
         <div className="flex h-16 items-center justify-start gap-4 bg-mediumSlate p-2 dark:bg-mediumSlate-dark">
-          <button
-            className="rounded-full p-3 text-xl hover:bg-black/10 dark:hover:bg-lightSlate/10"
-            onClick={handleCloseBar}
-          >
-            <RiCloseFill />
-          </button>
+          <IconButton onClick={handleCloseBar}>
+            <IconButton.Close />
+          </IconButton>
           <p className="select-none font-bold tracking-wider">Profile</p>
         </div>
 

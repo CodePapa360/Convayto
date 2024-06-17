@@ -1,4 +1,3 @@
-import { RiArrowLeftLine } from "react-icons/ri";
 import Name from "./Name";
 import Username from "./Username";
 import Bio from "./Bio";
@@ -6,6 +5,7 @@ import { useUi } from "../../contexts/UiContext";
 import Avatar from "./Avatar";
 import RecoverPasswordBtn from "./RecoverPasswordBtn";
 import { useUser } from "../../features/authentication/useUser";
+import IconButton from "../../components/IconButton";
 
 function MyAccount() {
   const {
@@ -17,12 +17,9 @@ function MyAccount() {
   return (
     <div className="fadeIn grid h-screen-safe grid-rows-[auto_1fr] ">
       <div className="flex h-16 items-center justify-start gap-4 p-2 dark:bg-slate-700">
-        <button
-          className="rounded-full p-3 text-xl hover:bg-black/10 dark:hover:bg-lightSlate/10"
-          onClick={() => closeAccountView()}
-        >
-          <RiArrowLeftLine aria-label="go back" />
-        </button>
+        <IconButton onClick={closeAccountView}>
+          <IconButton.Back />
+        </IconButton>
         <p className="select-none font-bold tracking-wider">Profile</p>
       </div>
 
