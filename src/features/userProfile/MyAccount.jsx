@@ -6,11 +6,16 @@ import Avatar from "./Avatar";
 import RecoverPasswordBtn from "./RecoverPasswordBtn";
 import { useUser } from "../../features/authentication/useUser";
 import IconButton from "../../components/IconButton";
+import InfoField from "./InfoField";
+import { MAX_NAME_LENGTH } from "../../config";
 
 function MyAccount() {
-  const {
-    user: { email },
-  } = useUser();
+  const { user } = useUser();
+  //   const {
+  //     user_metadata: { fullname },
+  //   } = user;
+  const { email } = user;
+  const { fullname } = user.user_metadata;
 
   const { closeAccountView } = useUi();
 
@@ -26,7 +31,13 @@ function MyAccount() {
       <div className="h-full overflow-scroll p-4">
         <Avatar />
 
-        <Name />
+        {/* <Name /> */}
+        <InfoField
+          label="Name"
+          oldValue={fullname}
+          minLength={1}
+          maxLength={MAX_NAME_LENGTH}
+        />
 
         <Username />
 

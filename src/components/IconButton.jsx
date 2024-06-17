@@ -12,27 +12,15 @@ function IconButton({ children, onClick }) {
 }
 
 function BackIcon() {
-  return (
-    <IconButton>
-      <RiArrowLeftLine className="h-11 w-11 p-3" aria-label="Back" />
-    </IconButton>
-  );
+  return <RiArrowLeftLine className="h-11 w-11 p-3" aria-label="Back" />;
 }
 
 function MenuIcon() {
-  return (
-    <IconButton>
-      <RiMenuLine className="h-11 w-11 p-3" aria-label="Menu" />
-    </IconButton>
-  );
+  return <RiMenuLine className="h-11 w-11 p-3" aria-label="Menu" />;
 }
 
 function CloseIcon() {
-  return (
-    <IconButton>
-      <RiCloseFill className="h-11 w-11 p-3" aria-label="Close" />
-    </IconButton>
-  );
+  return <RiCloseFill className="h-11 w-11 p-3" aria-label="Close" />;
 }
 
 IconButton.Back = BackIcon;
