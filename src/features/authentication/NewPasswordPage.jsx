@@ -28,8 +28,7 @@ function ResetPassword() {
     }
   }, [token]);
 
-  const isRecovery = true;
-  // const isRecovery = refreshToken === urlRefreshToken;
+  const isRecovery = refreshToken === urlRefreshToken;
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
