@@ -65,7 +65,9 @@ function Signin() {
           htmlFor="password"
         />
 
-        <TextLink to="/forgot-password" text="Forgot password?" />
+        <TextLink to="/forgot-password" addClass="mb-4">
+          Forgot password?
+        </TextLink>
 
         <FormBtn disabled={isPending}>
           {isPending ? <Loader size="small" /> : <RiLoginCircleLine />}
@@ -73,7 +75,7 @@ function Signin() {
         </FormBtn>
 
         <p>
-          Don't have an account? <TextLink to="/signup" text="Sign up" />
+          Don't have an account? <TextLink to="/signup">Sign up</TextLink>
         </p>
       </Form>
     </MainContainer>

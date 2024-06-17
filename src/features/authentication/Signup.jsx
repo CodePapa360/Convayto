@@ -72,7 +72,7 @@ function Signup() {
         </FormBtn>
 
         <p>
-          Already a user? <TextLink to="/signin" text="Sign in" />
+          Already a user? <TextLink to="/signin">Sign in</TextLink>
         </p>
       </Form>
     </MainContainer>

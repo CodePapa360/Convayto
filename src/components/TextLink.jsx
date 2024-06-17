@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 
-function TextLink({ href, text, to }) {
+function TextLink({ children, href, addClass, to }) {
+  const classes = `text-violet-700 underline dark:text-violet-400 ${addClass}`;
+
   if (to)
     return (
-      <Link
-        className="mb-4 text-violet-700 underline dark:text-violet-400"
-        to={to}
-      >
-        {text}
+      <Link className={classes} to={to}>
+        {children}
       </Link>
     );
 
@@ -17,9 +16,9 @@ function TextLink({ href, text, to }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="mb-4 text-violet-700 underline dark:text-violet-400"
+        className={classes}
       >
-        {text}
+        {children}
       </a>
     );
 }
