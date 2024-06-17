@@ -14,6 +14,7 @@ import Loader from "../../components/Loader";
 import { useUi } from "../../contexts/UiContext";
 import DropdownMenu from "../../components/DropdownMenu";
 import { HiOutlineUserCircle } from "react-icons/hi2";
+import Profile from "../../components/Profile";
 
 function MainSidebarContents() {
   const { conversations, isPending } = useConversations();
@@ -27,7 +28,8 @@ function MainSidebarContents() {
   } = useUi();
 
   const { user } = useUser();
-  const { fullname, username, avatar_url } = user.user_metadata;
+  const userData = user?.user_metadata;
+
   const [query, setQuery] = useState("");
 
   const searchInputRef = useRef(null);
@@ -76,36 +78,7 @@ function MainSidebarContents() {
             {isMenuOpen && <DropdownMenu />}
           </div>
 
-          {/* Profile */}
-          <div
-            className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] gap-4 truncate rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
-            onClick={() => openAccountView()}
-            role="button"
-            tabIndex={0}
-          >
-            <div className="h-11 w-11 overflow-hidden rounded-full text-black  dark:text-white">
-              {avatar_url ? (
-                <img
-                  draggable="false"
-                  src={avatar_url}
-                  alt="profile"
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <HiOutlineUserCircle
-                  size={55}
-                  viewBox="2 2 25 25"
-                  opacity={0.5}
-                  strokeWidth="1"
-                />
-              )}
-            </div>
-
-            <div className="truncate text-left">
-              <p className="truncate">{fullname}</p>
-              <p className="truncate text-sm opacity-70">@{username}</p>
-            </div>
-          </div>
+          <Profile userData={userData} onClick={openAccountView} />
 
           <SignoutButton />
         </div>
