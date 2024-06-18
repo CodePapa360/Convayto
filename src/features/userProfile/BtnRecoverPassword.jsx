@@ -2,7 +2,7 @@ import { useUser } from "../authentication/useUser";
 import Loader from "../../components/Loader";
 import useRecoveryPassword from "./useRecoveryPassword";
 
-function RecoverPasswordBtn() {
+function BtnRecoverPassword() {
   const {
     user: { email },
   } = useUser();
@@ -36,4 +36,4 @@ function RecoverPasswordBtn() {
   );
 }
 
-export default RecoverPasswordBtn;
+export default BtnRecoverPassword;

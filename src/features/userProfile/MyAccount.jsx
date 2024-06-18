@@ -1,6 +1,6 @@
 import { useUi } from "../../contexts/UiContext";
 import Avatar from "./Avatar";
-import RecoverPasswordBtn from "./RecoverPasswordBtn";
+import BtnRecoverPassword from "./BtnRecoverPassword";
 import { useUser } from "../../features/authentication/useUser";
 import IconButton from "../../components/IconButton";
 import InfoField from "./InfoField";
@@ -61,7 +61,7 @@ function MyAccount() {
 
         <InfoField label="Email" oldValue={email} />
 
-        <RecoverPasswordBtn />
+        <BtnRecoverPassword />
       </div>
     </div>
   );
