@@ -7,7 +7,11 @@ import RecoverPasswordBtn from "./RecoverPasswordBtn";
 import { useUser } from "../../features/authentication/useUser";
 import IconButton from "../../components/IconButton";
 import InfoField from "./InfoField";
-import { MAX_NAME_LENGTH } from "../../config";
+import {
+  MAX_NAME_LENGTH,
+  MIN_USERNAME_LENGTH,
+  MAX_USERNAME_LENGTH,
+} from "../../config";
 
 function MyAccount() {
   const { user } = useUser();
@@ -15,7 +19,7 @@ function MyAccount() {
   //     user_metadata: { fullname },
   //   } = user;
   const { email } = user;
-  const { fullname } = user.user_metadata;
+  const { fullname, username } = user.user_metadata;
 
   const { closeAccountView } = useUi();
 
@@ -35,8 +39,12 @@ function MyAccount() {
         <InfoField
           label="Name"
           oldValue={fullname}
+          updateKey="fullname"
           minLength={1}
           maxLength={MAX_NAME_LENGTH}
+          // regex should accept letters and numbers and minimum 1 char and max is the variable
+          regex={/^(?!.*\s{2})[a-zA-Z0-9 ]+$/}
+          patternMessage="Only letters, numbers, and single spaces are allowed."
         />
 
         <Username />

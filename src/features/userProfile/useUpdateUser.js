@@ -10,10 +10,10 @@ export function useUpdateUser() {
       //   toast.success("User account successfully updated.");
       quryClient.invalidateQueries("user");
     },
-    onError: (err) => {
-      //   toast.error(err.message);
-      console.log(err.message);
-    },
+    // onError: (err) => {
+    //   //   toast.error(err.message);
+    //   console.log(err.message);
+    // },
   });
 
   return { updateUser, isUpdating };

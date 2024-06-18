@@ -2,44 +2,64 @@ import { RiCheckFill, RiEdit2Line } from "react-icons/ri";
 import Loader from "../../components/Loader";
 import { useEffect, useRef, useState } from "react";
 import { useUpdateUser } from "./useUpdateUser";
-import { useUser } from "../authentication/useUser";
+import { useForm } from "react-hook-form";
 
-function InfoField({ minLength, maxLength, label, oldValue }) {
+function InfoField({
+  minLength,
+  maxLength,
+  label,
+  oldValue,
+  updateKey,
+  regex,
+  patternMessage,
+}) {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setError,
+    formState: { errors },
+  } = useForm({ defaultValues: { [updateKey]: oldValue } });
+  const currentValue = watch(updateKey);
+
   const { updateUser, isUpdating } = useUpdateUser();
-  const { user, invalidateUser } = useUser();
-  //   const {
-  //     user_metadata: { fullname },
-  //   } = user;
-
-  const [newValue, setNewValue] = useState(oldValue || "");
   const [isEditing, setIsEditing] = useState(false);
 
-  const inputRef = useRef(null);
+  // const inputRef = useRef();
 
-  useEffect(() => {
-    if (isEditing) {
-      inputRef.current.focus();
-    }
-  }, [isEditing]);
+  // useEffect(() => {
+  //   if (isEditing && inputRef.current) {
+  //     inputRef.current.focus();
+  //   }
+  // }, [isEditing]);
 
-  function handleUpdate() {
+  function handleUpdate(data, e) {
     if (!isEditing) return setIsEditing(true);
 
-    const trimmedName = newValue.trim();
-    if (trimmedName === "") return console.log("The field cannot be empty.");
-    if (trimmedName === oldValue)
-      return setIsEditing(false), console.log("No changes made.");
+    const cleanValue = data[updateKey].trim();
+    if (cleanValue === oldValue) return setIsEditing(false);
 
     if (isEditing) {
-      updateUser({ oldValue: trimmedName });
-      invalidateUser();
-      setIsEditing(false);
+      updateUser(
+        { [updateKey]: cleanValue },
+        {
+          onSuccess: () => {
+            setIsEditing(false);
+          },
+          onError: (err) => {
+            setError(updateKey, {
+              type: "server",
+              message: err.message,
+            });
+          },
+        },
+      );
       return;
     }
   }
 
   return (
-    <div className="mt-8">
+    <form onSubmit={handleSubmit(handleUpdate)} className="mt-8">
       <div className="flex items-center justify-between">
         <label
           htmlFor="name"
@@ -48,44 +68,67 @@ function InfoField({ minLength, maxLength, label, oldValue }) {
           {label}
         </label>
 
-        <button
-          onClick={handleUpdate}
-          className="flex h-11 w-11 items-center justify-center rounded-full text-xl text-textViolet 
+        {updateKey && (
+          <button
+            type="submit"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-xl text-textViolet 
             hover:bg-black/10 dark:text-textViolet-dark dark:hover:bg-lightSlate/10"
-        >
-          {isUpdating ? (
-            <Loader />
-          ) : isEditing ? (
-            <RiCheckFill aria-label="Update" />
-          ) : (
-            <RiEdit2Line aria-label="Edit" />
-          )}
-        </button>
+          >
+            {isUpdating ? (
+              <Loader />
+            ) : isEditing ? (
+              <RiCheckFill aria-label="Update" />
+            ) : (
+              <RiEdit2Line aria-label="Edit" />
+            )}
+          </button>
+        )}
       </div>
 
       {isEditing ? (
-        <div className="flex justify-between">
-          <input
-            id="name"
-            type="text"
-            ref={inputRef}
-            value={newValue}
-            onChange={(e) => {
-              e.target.value.length <= maxLength && setNewValue(e.target.value);
-            }}
-            className="h-10 w-full rounded-md border-b-2 border-textViolet bg-lightSlate px-2 text-base text-deepSlate-dark outline-none dark:border-textViolet-dark dark:bg-lightSlate-dark dark:text-lightSlate"
-          />
-          <span className="mt-3 flex w-11 select-none items-start justify-center text-xs opacity-60">
-            {maxLength - newValue.length}
-          </span>
+        <div className="flex flex-col">
+          <div className="flex justify-between">
+            <input
+              autoComplete="off"
+              id="name"
+              type="text"
+              // ref={inputRef}
+              maxLength={maxLength}
+              {...register(updateKey, {
+                required: `please enter your ${label}`,
+                pattern: {
+                  value: regex,
+                  message: patternMessage || "Invalid input",
+                },
+                maxLength: {
+                  value: maxLength,
+                  message: `Maximum ${maxLength} characters allowed.`,
+                },
+              })}
+              className={`${
+                errors[updateKey]
+                  ? "border-red-500"
+                  : "border-textViolet  dark:border-textViolet-dark"
+              } h-10 w-full rounded-md border-b-2  bg-lightSlate px-2  text-base text-deepSlate-dark outline-none   dark:bg-lightSlate-dark dark:text-lightSlate`}
+            />
+            <span className="mt-3 flex w-11 select-none items-start justify-center text-xs opacity-60">
+              {maxLength - currentValue.length}
+            </span>
+          </div>
+
+          {errors[updateKey] && (
+            <p className="mt-1 text-xs text-red-500">
+              {errors[updateKey].message}
+            </p>
+          )}
         </div>
       ) : (
         <p className="self-center truncate px-2 text-base">
           {label === "Username" ? "@" : ""}
-          {newValue}
+          {currentValue}
         </p>
       )}
-    </div>
+    </form>
   );
 }
 
