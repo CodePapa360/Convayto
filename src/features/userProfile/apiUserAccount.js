@@ -54,11 +54,11 @@ export async function updateCurrentUser({
 ///////////////////////
 
 export async function sendPasswordResetEmail(email) {
-  let { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+  let { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: "http://localhost:3000/reset-password",
   });
 
   if (error) throw new Error(error.message);
 
-  return data;
+  return null;
 }

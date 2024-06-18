@@ -1,15 +1,10 @@
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { LuImagePlus } from "react-icons/lu";
-import { useUser } from "../authentication/useUser";
 import { useUpdateUser } from "./useUpdateUser";
 import Loader from "../../components/Loader";
 
-function Avatar() {
-  const { user } = useUser();
-  const {
-    user_metadata: { avatar_url },
-  } = user;
-
+function Avatar({ avatar }) {
+  const avatar_url = avatar;
   const { updateUser, isUpdating } = useUpdateUser();
 
   function handleUpdateUser(file) {
@@ -33,9 +28,8 @@ function Avatar() {
       )}
       <span>
         <label
-          className="absolute bottom-0 right-0 m-2 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-darkViolet p-1 text-xl text-white shadow-lg hover:bg-darkViolet-dark dark:bg-textViolet-dark"
+          className="absolute bottom-0 right-0 m-2 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-darkViolet p-1 text-xl text-white shadow-lg hover:bg-darkViolet-dark dark:bg-textViolet-dark dark:hover:bg-darkViolet"
           htmlFor="uploadPhoto"
-          // fix accessibility issue Keyboard Warning  Focusable elements should have interactive semantics.
           role="button"
           tabIndex={0}
         >
@@ -47,7 +41,7 @@ function Avatar() {
           className="hidden"
           accept="image/jpeg,image/png,image/webp"
           type="file"
-          name="photo"
+          name="Profile picture"
           id="uploadPhoto"
         />
       </span>

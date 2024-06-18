@@ -1,44 +1,37 @@
-import { useState } from "react";
 import { useUser } from "../authentication/useUser";
-import { sendPasswordResetEmail } from "./apiUserAccount";
 import Loader from "../../components/Loader";
+import useRecoveryPassword from "./useRecoveryPassword";
 
 function RecoverPasswordBtn() {
-  const { user } = useUser();
-  const { email } = user;
+  const {
+    user: { email },
+  } = useUser();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const { sendRecoveryEmail, isSending, error, canSendAgain } =
+    useRecoveryPassword();
 
-  async function handleRequest() {
-    setIsLoading(true);
-
-    try {
-      const data = await sendPasswordResetEmail(email);
-      if (data) {
-        setIsLoading(false);
-        setIsSuccess(true);
-      }
-    } catch (error) {
-      setIsLoading(false);
-      // console.log(error);
+  function handleRequest() {
+    if (canSendAgain) {
+      sendRecoveryEmail(email);
     }
   }
 
   return (
     <button
-      disabled={isLoading || isSuccess}
+      disabled={isSending || !canSendAgain}
       onClick={handleRequest}
-      className="mt-6 flex h-10 items-center gap-2 rounded-md bg-textViolet px-4 text-lightSlate hover:bg-textViolet/50 disabled:bg-gray-500/30 disabled:opacity-70"
+      className="mt-8 flex h-10 items-center gap-2 rounded-md bg-textViolet px-4 text-lightSlate hover:bg-textViolet/50 disabled:bg-gray-500/30 disabled:opacity-70"
     >
-      {!isSuccess ? (
+      {isSending && (
         <>
-          <span>Recover password</span>
-          {isLoading && <Loader />}
+          <Loader />
+          Sending...
         </>
-      ) : (
-        <span>Sent email</span>
       )}
+
+      {!canSendAgain && <span>Recovery email sent</span>}
+
+      {!isSending && canSendAgain && <span>Recover password</span>}
     </button>
   );
 }

@@ -15,7 +15,7 @@ function MyAccount() {
   const {
     user: {
       email,
-      user_metadata: { fullname, username, bio },
+      user_metadata: { fullname, username, bio, avatar_url },
     },
   } = useUser();
 
@@ -31,7 +31,7 @@ function MyAccount() {
       </div>
 
       <div className="h-full overflow-scroll p-4">
-        <Avatar />
+        <Avatar avatar={avatar_url} />
 
         <InfoField
           label="Name"
