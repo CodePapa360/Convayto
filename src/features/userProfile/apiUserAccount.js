@@ -16,8 +16,6 @@ export async function updateCurrentUser({
   if (username) updateData = { data: { username } };
   if (bio) updateData = { data: { bio } };
 
-  console.log(updateData);
-
   const { data, error } = await supabase.auth.updateUser(updateData);
 
   if (error) throw new Error(error.message);

@@ -1,6 +1,3 @@
-import Name from "./Name";
-import Username from "./Username";
-import Bio from "./Bio";
 import { useUi } from "../../contexts/UiContext";
 import Avatar from "./Avatar";
 import RecoverPasswordBtn from "./RecoverPasswordBtn";
@@ -11,15 +8,16 @@ import {
   MAX_NAME_LENGTH,
   MIN_USERNAME_LENGTH,
   MAX_USERNAME_LENGTH,
+  MAX_BIO_LENGTH,
 } from "../../config";
 
 function MyAccount() {
-  const { user } = useUser();
-  //   const {
-  //     user_metadata: { fullname },
-  //   } = user;
-  const { email } = user;
-  const { fullname, username } = user.user_metadata;
+  const {
+    user: {
+      email,
+      user_metadata: { fullname, username, bio },
+    },
+  } = useUser();
 
   const { closeAccountView } = useUi();
 
@@ -35,31 +33,33 @@ function MyAccount() {
       <div className="h-full overflow-scroll p-4">
         <Avatar />
 
-        {/* <Name /> */}
         <InfoField
           label="Name"
           oldValue={fullname}
           updateKey="fullname"
-          minLength={1}
           maxLength={MAX_NAME_LENGTH}
-          // regex should accept letters and numbers and minimum 1 char and max is the variable
           regex={/^(?!.*\s{2})[a-zA-Z0-9 ]+$/}
           patternMessage="Only letters, numbers, and single spaces are allowed."
         />
 
-        <Username />
+        <InfoField
+          label="Username"
+          oldValue={username}
+          updateKey="username"
+          minLength={MIN_USERNAME_LENGTH}
+          maxLength={MAX_USERNAME_LENGTH}
+          regex={/^[a-z0-9_-]+$/}
+          patternMessage="Only lowercase letters, numbers, underscores, and dashes are allowed."
+        />
 
-        <Bio />
+        <InfoField
+          label="Bio"
+          oldValue={bio}
+          updateKey="bio"
+          maxLength={MAX_BIO_LENGTH}
+        />
 
-        {/* Email */}
-        <div className="mt-5">
-          <p className="select-none text-sm font-bold tracking-wider text-textViolet opacity-80 dark:text-textViolet-dark">
-            Email
-          </p>
-          <p className="mt-2 self-center truncate px-2 text-base opacity-80">
-            {email}
-          </p>
-        </div>
+        <InfoField label="Email" oldValue={email} />
 
         <RecoverPasswordBtn />
       </div>

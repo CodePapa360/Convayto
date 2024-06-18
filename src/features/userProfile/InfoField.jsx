@@ -2,22 +2,22 @@ import { RiCheckFill, RiEdit2Line } from "react-icons/ri";
 import Loader from "../../components/Loader";
 import { useEffect, useRef, useState } from "react";
 import { useUpdateUser } from "./useUpdateUser";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 function InfoField({
-  minLength,
+  minLength = 1,
   maxLength,
   label,
   oldValue,
-  updateKey,
+  updateKey = "none",
   regex,
   patternMessage,
 }) {
   const {
-    register,
     handleSubmit,
     watch,
     setError,
+    control,
     formState: { errors },
   } = useForm({ defaultValues: { [updateKey]: oldValue } });
   const currentValue = watch(updateKey);
@@ -25,15 +25,15 @@ function InfoField({
   const { updateUser, isUpdating } = useUpdateUser();
   const [isEditing, setIsEditing] = useState(false);
 
-  // const inputRef = useRef();
+  const inputRef = useRef(null);
 
-  // useEffect(() => {
-  //   if (isEditing && inputRef.current) {
-  //     inputRef.current.focus();
-  //   }
-  // }, [isEditing]);
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
 
-  function handleUpdate(data, e) {
+  function handleUpdate(data) {
     if (!isEditing) return setIsEditing(true);
 
     const cleanValue = data[updateKey].trim();
@@ -59,16 +59,15 @@ function InfoField({
   }
 
   return (
-    <form onSubmit={handleSubmit(handleUpdate)} className="mt-8">
-      <div className="flex items-center justify-between">
+    <form onSubmit={handleSubmit(handleUpdate)} className="mt-5">
+      <div className="flex h-11 items-center justify-between">
         <label
-          htmlFor="name"
-          className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark"
+          htmlFor={updateKey}
+          className="select-none text-sm font-bold tracking-wider text-textViolet opacity-80 dark:text-textViolet-dark"
         >
           {label}
         </label>
-
-        {updateKey && (
+        {updateKey !== "none" && (
           <button
             type="submit"
             className="flex h-11 w-11 items-center justify-center rounded-full text-xl text-textViolet 
@@ -88,13 +87,10 @@ function InfoField({
       {isEditing ? (
         <div className="flex flex-col">
           <div className="flex justify-between">
-            <input
-              autoComplete="off"
-              id="name"
-              type="text"
-              // ref={inputRef}
-              maxLength={maxLength}
-              {...register(updateKey, {
+            <Controller
+              name={updateKey}
+              control={control}
+              rules={{
                 required: `please enter your ${label}`,
                 pattern: {
                   value: regex,
@@ -104,13 +100,32 @@ function InfoField({
                   value: maxLength,
                   message: `Maximum ${maxLength} characters allowed.`,
                 },
-              })}
-              className={`${
-                errors[updateKey]
-                  ? "border-red-500"
-                  : "border-textViolet  dark:border-textViolet-dark"
-              } h-10 w-full rounded-md border-b-2  bg-lightSlate px-2  text-base text-deepSlate-dark outline-none   dark:bg-lightSlate-dark dark:text-lightSlate`}
+                minLength: {
+                  value: minLength,
+                  message: `Minimum ${minLength} characters required.`,
+                },
+              }}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  autoComplete="off"
+                  autoCapitalize="none"
+                  id={updateKey}
+                  type="text"
+                  ref={(e) => {
+                    field.ref(e);
+                    inputRef.current = e;
+                  }}
+                  maxLength={maxLength}
+                  className={`${
+                    errors[updateKey]
+                      ? "border-red-500"
+                      : "border-textViolet  dark:border-textViolet-dark"
+                  } h-10 w-full rounded-md border-b-2  bg-lightSlate px-2  text-base text-deepSlate-dark outline-none   dark:bg-lightSlate-dark dark:text-lightSlate`}
+                />
+              )}
             />
+
             <span className="mt-3 flex w-11 select-none items-start justify-center text-xs opacity-60">
               {maxLength - currentValue.length}
             </span>
@@ -123,7 +138,7 @@ function InfoField({
           )}
         </div>
       ) : (
-        <p className="self-center truncate px-2 text-base">
+        <p className="self-center text-base">
           {label === "Username" ? "@" : ""}
           {currentValue}
         </p>
