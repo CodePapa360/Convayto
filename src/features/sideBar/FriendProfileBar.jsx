@@ -14,9 +14,9 @@ function FriendProfileBar({ friend }) {
   return (
     <ToggleableContent isOpen={isFriendsSidebarOpen} toggle={handleCloseBar}>
       <div
-        className={`${
-          isFriendsSidebarOpen ? "right-0 opacity-100" : "-right-full opacity-0"
-        } absolute top-0 z-30 grid h-screen-safe w-4/5 grid-rows-[auto_1fr] overflow-hidden bg-mediumSlate transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] dark:bg-mediumSlate-dark sm:w-[21rem] `}
+        className={
+          "slideIn absolute top-0 z-30 grid h-screen-safe w-4/5 grid-rows-[auto_1fr] overflow-hidden bg-mediumSlate opacity-0 transition-all dark:bg-mediumSlate-dark sm:w-[21rem]"
+        }
       >
         <div className="flex h-16 items-center justify-start gap-4 bg-mediumSlate p-2 dark:bg-mediumSlate-dark">
           <IconButton onClick={handleCloseBar}>

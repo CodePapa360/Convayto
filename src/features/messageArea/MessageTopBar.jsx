@@ -8,7 +8,7 @@ import IconButton from "../../components/IconButton";
 
 function MessageTopBar() {
   const { convInfo, isPending, isError } = useConvInfo();
-  const { openFriendSidebar, openSidebar } = useUi();
+  const { openFriendSidebar, isFriendsSidebarOpen, openSidebar } = useUi();
 
   const friend = convInfo?.friendInfo;
   const navigate = useNavigate();
@@ -24,9 +24,11 @@ function MessageTopBar() {
   return (
     <>
       <div className="z-10 flex min-h-20 select-none items-center gap-2 rounded-b-xl border-b border-l border-r border-borderShade bg-mediumSlate p-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.3)] dark:border-borderShade-dark dark:bg-mediumSlate-dark">
-        <IconButton onClick={handleGoBack}>
-          <IconButton.Back />
-        </IconButton>
+        <span>
+          <IconButton onClick={handleGoBack}>
+            <IconButton.Back />
+          </IconButton>
+        </span>
 
         {isPending ? (
           <Loader size="medium" text="Loading user" />
@@ -36,7 +38,7 @@ function MessageTopBar() {
       </div>
 
       {/* Hidden right side bar which will reveal if clicked on friend's profile info */}
-      <FriendProfileBar friend={friend} />
+      {isFriendsSidebarOpen && <FriendProfileBar friend={friend} />}
     </>
   );
 }

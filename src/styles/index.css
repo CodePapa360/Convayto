@@ -169,6 +169,8 @@ body {
   }
 }
 
+/* //////////// Fade in animation ///////////// */
+
 .fadeIn {
   animation: fadeInAnimation 0.2s ease-in-out;
   animation-fill-mode: forwards;
@@ -183,5 +185,23 @@ body {
   100% {
     opacity: 1;
     transform: translateY(0px);
+  }
+}
+
+/* //////////// slide in animation //////// */
+.slideIn {
+  animation: slideInAnimation 0.5s cubic-bezier(0.15, 0.72, 0.08, 0.99);
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes slideInAnimation {
+  0% {
+    opacity: 0;
+    right: -100%;
+  }
+  100% {
+    opacity: 1;
+    right: 0;
   }
 }
