@@ -12,7 +12,8 @@ function ProtectedRoute({ children }) {
   //2. if there isno authenticated user, redirect to the signin page
   useEffect(
     function () {
-      if (!isAuthenticated && !isLoading) navigate("/signin");
+      if (!isAuthenticated && !isLoading)
+        navigate("/signin", { replace: true });
     },
     [isAuthenticated, isLoading, navigate],
   );
@@ -20,7 +21,7 @@ function ProtectedRoute({ children }) {
   //3. While loading, show spinner
   if (isLoading)
     return (
-      <p className="min-h-screen-safe flex items-center justify-center bg-mediumSlate text-mediumSlate-dark dark:bg-mediumSlate-dark dark:text-mediumSlate">
+      <p className="flex min-h-screen-safe items-center justify-center bg-mediumSlate text-mediumSlate-dark dark:bg-mediumSlate-dark dark:text-mediumSlate">
         <Loader size="large" text="Loading app" />
       </p>
     );

@@ -1,15 +1,22 @@
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { useNavigate, useParams } from "react-router-dom";
 
-function UserItem({ name, avatar, subtext, handler, id }) {
+function UserItem({
+  id,
+  name,
+  avatar,
+  subtext,
+  handler,
+  shouldReplace = false,
+}) {
   const { userId: currentFriendId } = useParams();
   const isActiveUser = currentFriendId === id;
 
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate(`/m/${id}`);
     handler();
+    navigate(`/m/${id}`, { replace: shouldReplace });
   }
 
   return (

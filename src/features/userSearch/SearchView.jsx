@@ -51,7 +51,8 @@ function SearchView({ query }) {
             avatar={avatar_url}
             name={fullname}
             subtext={subtext}
-            handler={closeSearchView}
+            handler={() => closeSearchView({ back: false })}
+            shouldReplace={true}
           />
         );
       })}
