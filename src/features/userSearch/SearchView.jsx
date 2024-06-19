@@ -1,13 +1,15 @@
 import { useUser } from "../authentication/useUser";
-import SearchedUser from "./SearchedUser";
 import { useSearchedUsers } from "./useSearchedUsers";
 import Loader from "../../components/Loader";
 import { MINIMUM_SEARCH_LENGTH } from "../../config";
+import UserItem from "../../components/UserItem";
+import { useUi } from "../../contexts/UiContext";
 
 function SearchView({ query }) {
   const { users, isLoading, error } = useSearchedUsers(query);
   const { user: myUserDetails } = useUser();
   const filteredUsers = users?.filter((user) => user.id !== myUserDetails.id);
+  const { closeSearchView } = useUi();
 
   if (query.length < MINIMUM_SEARCH_LENGTH)
     return (
@@ -39,9 +41,20 @@ function SearchView({ query }) {
 
   return (
     <div className="fadeIn p-2">
-      {filteredUsers?.map((user) => (
-        <SearchedUser key={user.id} user={user} />
-      ))}
+      {filteredUsers?.map((user) => {
+        const { id, avatar_url, fullname, username: subtext } = user;
+
+        return (
+          <UserItem
+            key={user.id}
+            id={id}
+            avatar={avatar_url}
+            name={fullname}
+            subtext={subtext}
+            handler={closeSearchView}
+          />
+        );
+      })}
     </div>
   );
 }

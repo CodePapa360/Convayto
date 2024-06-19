@@ -2,7 +2,6 @@ import { RiSearchLine } from "react-icons/ri";
 import { useUser } from "../authentication/useUser";
 import { useConversations } from "./useConversations";
 import SignoutButton from "../authentication/SignoutButton";
-import ConversationItem from "./ConversationItem";
 import { useEffect, useRef, useState } from "react";
 import SearchView from "../userSearch/SearchView";
 import Loader from "../../components/Loader";
@@ -10,6 +9,7 @@ import { useUi } from "../../contexts/UiContext";
 import DropdownMenu from "../../components/DropdownMenu";
 import Profile from "../../components/Profile";
 import IconButton from "../../components/IconButton";
+import UserItem from "../../components/UserItem";
 
 function MainSidebarContents() {
   const { conversations, isPending } = useConversations();
@@ -20,6 +20,7 @@ function MainSidebarContents() {
     closeSearchView,
     isMenuOpen,
     toggleMenu,
+    closeSidebar,
   } = useUi();
 
   const { user } = useUser();
@@ -103,12 +104,22 @@ function MainSidebarContents() {
               )}
 
               {!isPending &&
-                conversations?.map((conv) => (
-                  <ConversationItem
-                    key={conv?.friendInfo?.id}
-                    conversation={conv}
-                  />
-                ))}
+                conversations?.map((conv) => {
+                  const user = conv.friendInfo;
+                  const { id, avatar_url, fullname } = user;
+                  const subtext = conv.last_message.content;
+
+                  return (
+                    <UserItem
+                      key={user.id}
+                      id={id}
+                      avatar={avatar_url}
+                      name={fullname}
+                      subtext={subtext}
+                      handler={closeSidebar}
+                    />
+                  );
+                })}
             </div>
           </div>
         )}

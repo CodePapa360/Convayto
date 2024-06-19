@@ -1,20 +1,15 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useUi } from "../../contexts/UiContext";
 import { HiOutlineUserCircle } from "react-icons/hi2";
+import { useNavigate, useParams } from "react-router-dom";
 
-function ConversationItem({ conversation }) {
-  const { friendInfo, last_message } = conversation;
-  const { fullname, id, avatar_url } = friendInfo;
-  const lastMessageContent = last_message?.content;
+function UserItem({ name, avatar, subtext, handler, id }) {
   const { userId: currentFriendId } = useParams();
   const isActiveUser = currentFriendId === id;
 
   const navigate = useNavigate();
-  const { closeSidebar } = useUi();
 
   function handleClick() {
     navigate(`/m/${id}`);
-    closeSidebar();
+    handler();
   }
 
   return (
@@ -29,11 +24,11 @@ function ConversationItem({ conversation }) {
       tabIndex={0}
     >
       <span className="h-12 w-12  overflow-hidden rounded-full">
-        {avatar_url ? (
+        {avatar ? (
           <img
             draggable="false"
-            src={avatar_url}
-            alt={fullname}
+            src={avatar}
+            alt={name}
             className="h-full w-full object-cover"
           />
         ) : (
@@ -47,14 +42,12 @@ function ConversationItem({ conversation }) {
       </span>
 
       <span className="flex flex-col overflow-hidden ">
-        <span className="truncate font-bold">{fullname}</span>
+        <span className="truncate font-bold">{name}</span>
 
-        <span className="truncate text-sm opacity-70">
-          {lastMessageContent}
-        </span>
+        <span className="truncate text-sm opacity-70">{subtext}</span>
       </span>
     </div>
   );
 }
 
-export default ConversationItem;
+export default UserItem;
