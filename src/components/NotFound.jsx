@@ -8,7 +8,7 @@ const NotFound = () => {
     <MainContainer>
       <FaExclamationTriangle className="mb-4 text-4xl text-red-500 sm:text-5xl" />
 
-      <Heading size="2xl">Oops! We can't seem to find that page.</Heading>
+      <Heading>Oops! We can't seem to find that page.</Heading>
 
       <p className="mb-4 text-center text-gray-500 dark:text-gray-400">
         The page you're looking for might have been removed, or the URL might be

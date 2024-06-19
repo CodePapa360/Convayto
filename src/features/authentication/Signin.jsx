@@ -47,7 +47,7 @@ function Signin() {
   return (
     <MainContainer>
       <Form onSubmit={handleSubmit}>
-        <Heading size="3xl">Sign in</Heading>
+        <Heading addClass="text-3xl">Sign in</Heading>
 
         <InputBox
           type="text"

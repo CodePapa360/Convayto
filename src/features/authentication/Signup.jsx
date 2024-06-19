@@ -35,7 +35,7 @@ function Signup() {
   return (
     <MainContainer>
       <Form onSubmit={handleSubmit}>
-        <Heading size="3xl">Sign up</Heading>
+        <Heading addClass="text-3xl">Sign up</Heading>
 
         <InputBox
           value={fullname}

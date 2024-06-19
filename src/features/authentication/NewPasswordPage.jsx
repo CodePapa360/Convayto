@@ -57,7 +57,7 @@ function ResetPassword() {
     <MainContainer>
       {isRecovery && (
         <Form onSubmit={handleSubmit}>
-          <Heading size="2xl">Set new password</Heading>
+          <Heading>Set new password</Heading>
 
           <InputBox
             type="password"
@@ -86,7 +86,7 @@ function ResetPassword() {
         <>
           <FaExclamationTriangle className="mb-4 text-4xl text-red-500 sm:text-5xl" />
 
-          <Heading size="2xl">
+          <Heading>
             Oops! The password reset link is invalid or expired.
           </Heading>
 
