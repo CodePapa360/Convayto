@@ -119,11 +119,13 @@ function UiProvider({ children }) {
 
   function openSearchView() {
     dispatch({ type: "OPEN_SEARCH_VIEW" });
-    window.history.pushState(null, null, window.location.href);
+    // we need to stop pushing the same url to history stack when search view is already open. Otherwise, it will keep pushing the same url to history stack every time the user clicks on the search bar.
+    !isSearchView && window.history.pushState(null, null, window.location.href);
     window.addEventListener("popstate", popSearchViewBack);
   }
 
   function closeSearchView({ back = true } = {}) {
+    // if back is false, then don't go back in history stack when closing the search view (used in user search view). It is needed when user click on the back button from the app because that button is responsible for both menu and going back when search view is open.
     back && window.history.back();
     dispatch({ type: "CLOSE_SEARCH_VIEW" });
     window.removeEventListener("popstate", popSearchViewBack);
