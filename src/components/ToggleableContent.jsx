@@ -20,6 +20,7 @@ export default function ToggleableContent({
       {isOpen && (
         // overlay will always be there but with 0 opacity
         <div
+          tabIndex={-1}
           onTouchStart={() => toggle()}
           className={`fixed inset-0 z-20 bg-black opacity-${withOverlay ? 40 : 0}`}
         />

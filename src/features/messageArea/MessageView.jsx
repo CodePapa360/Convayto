@@ -4,10 +4,10 @@ import MessageInputBar from "./MessageInputBar";
 
 function MessageView() {
   return (
-    <div className="h-screen-safe relative col-span-2 grid w-full grid-cols-1 grid-rows-[auto_1fr_auto] overflow-hidden md:col-span-1">
+    <div className="relative col-span-2 grid h-screen-safe w-full grid-cols-1 grid-rows-[auto_1fr_auto] overflow-hidden md:col-span-1">
       <MessageTopBar />
 
-      <div className="grid grid-cols-1 items-end overflow-y-auto">
+      <div tabIndex={-1} className="grid grid-cols-1 items-end overflow-y-auto">
         <Messages />
       </div>
 
