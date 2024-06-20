@@ -1,14 +1,3 @@
-import { useSignup } from "./useSignup";
-import Loader from "../../components/Loader";
-import Heading from "../../components/Heading";
-import MainContainer from "../../components/MainContainer";
-import FormContainer from "../../components/FormContainer";
-import InputBox from "../../components/InputBox";
-import SubmitBtn from "../../components/SubmitBtn";
-import TextLink from "../../components/TextLink";
-import { Controller, useForm } from "react-hook-form";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   EMAIL_REGEX,
   MAX_NAME_LENGTH,
@@ -18,7 +7,18 @@ import {
   NAME_REGEX,
   USERNAME_REGEX,
 } from "../../config";
+import { useNavigate } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useSignup } from "./useSignup";
 import useCheckUsernameAvailability from "./useCheckUsernameAvailability";
+import Loader from "../../components/Loader";
+import Heading from "../../components/Heading";
+import MainContainer from "../../components/MainContainer";
+import FormContainer from "../../components/FormContainer";
+import InputBox from "../../components/InputBox";
+import SubmitBtn from "../../components/SubmitBtn";
+import TextLink from "../../components/TextLink";
 
 function Signup() {
   const {
@@ -78,10 +78,6 @@ function Signup() {
             pattern: {
               value: NAME_REGEX,
               message: "Only letters, numbers, and single spaces are allowed",
-            },
-            minLength: {
-              value: 1,
-              message: `Minimum ${1} characters required`,
             },
             maxLength: {
               value: MAX_NAME_LENGTH,
