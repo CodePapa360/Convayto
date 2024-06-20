@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
-import { useUser } from "./useUser";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RiLoginCircleLine } from "react-icons/ri";
-import { FaExclamationTriangle, FaAngleUp } from "react-icons/fa";
 import Loader from "../../components/Loader";
 import { useUpdateUser } from "../userProfile/useUpdateUser";
 import FormContainer from "../../components/FormContainer";
@@ -12,6 +9,8 @@ import InputBox from "../../components/InputBox";
 import Heading from "../../components/Heading";
 import { Controller, useForm } from "react-hook-form";
 import { MIN_PASSWORD_LENGTH } from "../../config";
+import ResetLinkExpired from "../../components/ResetLinkExpired";
+import useCheckRecovery from "./useCheckRecovery";
 
 function ResetPassword() {
   const {
@@ -29,21 +28,8 @@ function ResetPassword() {
 
   const { updateUser, isUpdating } = useUpdateUser();
   const navigate = useNavigate();
-  const [urlRefreshToken, setUrlRefreshToken] = useState("");
-  const { session } = useUser();
-  const refreshToken = session?.refresh_token;
 
-  // extract the refreshtocken from the window url
-  const urlHash = window?.location?.hash?.split("&");
-  const token = urlHash[3]?.split("=")[1];
-
-  useEffect(() => {
-    if (token !== undefined && token !== "") {
-      return setUrlRefreshToken(token);
-    }
-  }, [token]);
-
-  const isRecovery = refreshToken === urlRefreshToken;
+  const { isRecovery, isLoading } = useCheckRecovery();
 
   const onSubmit = ({ newPassword, confirmPassword }) => {
     if (!newPassword || !confirmPassword) return;
@@ -63,7 +49,11 @@ function ResetPassword() {
 
   return (
     <MainContainer>
-      {isRecovery && (
+      {isLoading ? (
+        <Loader size="large" text="Loading" />
+      ) : !isRecovery ? (
+        <ResetLinkExpired />
+      ) : (
         <FormContainer onSubmit={handleSubmit(onSubmit)}>
           <Heading>Set new password</Heading>
 
@@ -113,33 +103,10 @@ function ResetPassword() {
           />
 
           <SubmitBtn disabled={isUpdating}>
-            {isUpdating ? <Loader size="small" /> : <RiLoginCircleLine />}
-            <span className="ml-2">Update</span>
+            {isUpdating && <Loader size="small" />}
+            <span>Update</span>
           </SubmitBtn>
         </FormContainer>
-      )}
-
-      {!isRecovery && (
-        <>
-          <FaExclamationTriangle className="mb-4 text-4xl text-red-500 sm:text-5xl" />
-
-          <Heading>
-            Oops! The password reset link is invalid or expired.
-          </Heading>
-
-          <p className="mb-4 text-center text-gray-500 dark:text-gray-400">
-            The link you clicked to reset your password might be incorrect,
-            expired, or used already. Please request a new password reset.
-          </p>
-
-          <Link
-            to="/reset-password"
-            className="inline-flex items-center gap-1 rounded-md bg-darkViolet px-4 py-2 font-bold text-white"
-          >
-            Request new password reset
-            <FaAngleUp />
-          </Link>
-        </>
       )}
     </MainContainer>
   );

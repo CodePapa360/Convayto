@@ -9,7 +9,7 @@ import SubmitBtn from "../../components/SubmitBtn";
 import TextLink from "../../components/TextLink";
 import { Controller, useForm } from "react-hook-form";
 import { EMAIL_REGEX } from "../../config";
-import EmailSent from "./EmailSent";
+import EmailSent from "../../components/EmailSent";
 
 function ResetPasswordPage() {
   const {
