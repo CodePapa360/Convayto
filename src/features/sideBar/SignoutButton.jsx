@@ -1,6 +1,6 @@
-import Loader from "../../components/Loader";
-import { useSignout } from "./useSignout";
+import { useSignout } from "../authentication/useSignout";
 import { RiLogoutCircleLine } from "react-icons/ri";
+import Loader from "../../components/Loader";
 
 function Signout() {
   const { signout, isPending } = useSignout();

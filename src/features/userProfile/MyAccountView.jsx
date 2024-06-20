@@ -1,7 +1,7 @@
 import { useUi } from "../../contexts/UiContext";
 import Avatar from "./Avatar";
 import BtnRecoverPassword from "./BtnRecoverPassword";
-import { useUser } from "../../features/authentication/useUser";
+import { useUser } from "../authentication/useUser";
 import IconButton from "../../components/IconButton";
 import InfoField from "./InfoField";
 import {
@@ -11,7 +11,7 @@ import {
   MAX_BIO_LENGTH,
 } from "../../config";
 
-function MyAccount() {
+function MyAccountView() {
   const {
     user: {
       email,
@@ -67,4 +67,4 @@ function MyAccount() {
   );
 }
 
-export default MyAccount;
+export default MyAccountView;

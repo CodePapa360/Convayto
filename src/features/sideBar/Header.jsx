@@ -1,0 +1,48 @@
+import { useUser } from "../authentication/useUser";
+import { useUi } from "../../contexts/UiContext";
+import Profile from "../../components/Profile";
+import DropdownMenu from "../../components/DropdownMenu";
+import IconButton from "../../components/IconButton";
+import SignoutButton from "./SignoutButton";
+
+function Header() {
+  const { user } = useUser();
+  const userData = user?.user_metadata;
+
+  const {
+    openAccountView,
+    isSearchView,
+    closeSearchView,
+    isMenuOpen,
+    toggleMenu,
+  } = useUi();
+
+  function handleMenuBtnClick() {
+    // if is searching then close search view else open menu
+    if (isSearchView) {
+      closeSearchView();
+    } else {
+      toggleMenu();
+    }
+  }
+
+  return (
+    <div className="mb-2 flex items-center justify-between gap-2">
+      <div className="relative">
+        <IconButton onClick={handleMenuBtnClick}>
+          {isSearchView && <IconButton.Back />}
+          {isMenuOpen && <IconButton.Close />}
+          {!isSearchView && !isMenuOpen && <IconButton.Menu />}
+        </IconButton>
+
+        {isMenuOpen && <DropdownMenu />}
+      </div>
+
+      <Profile userData={userData} onClick={openAccountView} />
+
+      <SignoutButton />
+    </div>
+  );
+}
+
+export default Header;
