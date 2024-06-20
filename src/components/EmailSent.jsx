@@ -1,6 +1,6 @@
 import { FaCheckCircle } from "react-icons/fa";
-import Heading from "../../components/Heading";
-import TextLink from "../../components/TextLink";
+import Heading from "./Heading";
+import TextLink from "./TextLink";
 import { RiArrowLeftSLine } from "react-icons/ri";
 
 function EmailSent() {
