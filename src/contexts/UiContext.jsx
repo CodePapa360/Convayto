@@ -94,6 +94,8 @@ function UiProvider({ children }) {
     },
     dispatch,
   ] = useReducer(reducer, InitialState);
+  ///////////////////
+  // Sidebar functions
   function openSidebar() {
     dispatch({ type: "OPEN_SIDEBAR" });
   }
@@ -102,7 +104,8 @@ function UiProvider({ children }) {
     dispatch({ type: "CLOSE_SIDEBAR" });
   }
 
-  // Account View
+  ///////////////////
+  // Account View functions
   function popAccountViewBack() {
     dispatch({ type: "CLOSE_ACCOUNT_VIEW" });
     window.removeEventListener("popstate", popAccountViewBack);
@@ -120,6 +123,7 @@ function UiProvider({ children }) {
     window.removeEventListener("popstate", popAccountViewBack);
   }
 
+  ///////////////////
   // Search View
   function popSearchViewBack() {
     dispatch({ type: "CLOSE_SEARCH_VIEW" });
@@ -141,6 +145,7 @@ function UiProvider({ children }) {
     window.removeEventListener("popstate", popSearchViewBack);
   }
 
+  ///////////////////
   // Friends Sidebar
   function popFriendSidebarBack() {
     dispatch({ type: "CLOSE_FRIEND_SIDEBAR" });
@@ -161,14 +166,20 @@ function UiProvider({ children }) {
     window.removeEventListener("popstate", popFriendSidebarBack);
   }
 
+  ///////////////////
+  // Menu functions
   function toggleMenu() {
     dispatch({ type: "TOGGLE_MENU" });
   }
 
+  ///////////////////
+  // Search functions
   function updateSearchQuery(query) {
     dispatch({ type: "UPDATE_SEARCH_QUERY", payload: query });
   }
 
+  ///////////////////
+  // Reset UI
   function resetUi() {
     dispatch({ type: "RESET" });
   }
@@ -189,6 +200,7 @@ function UiProvider({ children }) {
     }
   }
 
+  // Update the dark mode setting when the visitor first visits the site
   useEffect(() => {
     // Check if the user has set dark mode in local storage
     const userPrefersDarkMode = localStorage.getItem(LOCAL_STORAGE_KEY);
