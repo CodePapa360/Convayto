@@ -4,7 +4,7 @@ import useResetPasswordForEmail from "./useResetPasswordForEmail";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import Heading from "../../components/Heading";
 import MainContainer from "../../components/MainContainer";
-import Form from "../../components/Form";
+import FormContainer from "../../components/FormContainer";
 import InputBox from "../../components/InputBox";
 import FormBtn from "../../components/FormBtn";
 import TextLink from "../../components/TextLink";
@@ -37,7 +37,7 @@ function ForgotPasswordPage() {
 
   return (
     <MainContainer>
-      <Form onSubmit={handleSubmit}>
+      <FormContainer onSubmit={handleSubmit}>
         <Heading>Reset your password</Heading>
         <p className="mb-4 text-center text-sm">
           Enter your email address below and we'll send you a link to reset your
@@ -60,7 +60,7 @@ function ForgotPasswordPage() {
           <RiArrowLeftSLine />
           Back to Signin
         </TextLink>
-      </Form>
+      </FormContainer>
     </MainContainer>
   );
 }
