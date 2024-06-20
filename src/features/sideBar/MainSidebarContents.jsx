@@ -86,7 +86,7 @@ function MainSidebarContents() {
         </div>
       </div>
 
-      <div className="h-full  overflow-auto">
+      <div className="h-full overflow-auto">
         {isSearchView && <SearchView />}
 
         {!isSearchView && (
