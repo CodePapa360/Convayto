@@ -55,7 +55,7 @@ export async function updateCurrentUser({
 
 export async function sendPasswordResetEmail(email) {
   let { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: "http://localhost:3000/reset-password",
+    redirectTo: "http://localhost:3000/new-password",
   });
 
   if (error) throw new Error(error.message);
