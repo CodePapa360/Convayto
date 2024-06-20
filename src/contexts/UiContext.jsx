@@ -173,7 +173,10 @@ function UiProvider({ children }) {
     dispatch({ type: "RESET" });
   }
 
+  ///////////////////
   // Dark Mode
+  ///////////////////
+
   function updateDarkMode(newMode) {
     dispatch({ type: "UPDATE_DARK_MODE", payload: newMode });
 
@@ -187,14 +190,25 @@ function UiProvider({ children }) {
   }
 
   useEffect(() => {
-    const hasPreviousPreference = localStorage.getItem(LOCAL_STORAGE_KEY);
-    const prefersDarkMode = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
+    // Check if the user has set dark mode in local storage
+    const userPrefersDarkMode = localStorage.getItem(LOCAL_STORAGE_KEY);
 
-    if (!hasPreviousPreference) return updateDarkMode(prefersDarkMode);
-    if (hasPreviousPreference === DARK_THEME) return updateDarkMode(true);
-    if (hasPreviousPreference === LIGHT_THEME) return updateDarkMode(false);
+    let isDarkMode;
+
+    if (userPrefersDarkMode) {
+      // If user has set dark mode in local storage, use that setting
+      isDarkMode = userPrefersDarkMode === DARK_THEME;
+    } else {
+      // If user has not set dark mode in local storage, check the system preference
+      const systemPrefersDarkMode = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      // Use the system preference
+      isDarkMode = systemPrefersDarkMode;
+    }
+
+    // Update the dark mode setting
+    updateDarkMode(isDarkMode);
   }, []);
 
   const toggleDarkMode = () => {
