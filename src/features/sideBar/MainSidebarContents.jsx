@@ -2,7 +2,7 @@ import { RiSearchLine } from "react-icons/ri";
 import { useUser } from "../authentication/useUser";
 import { useConversations } from "./useConversations";
 import SignoutButton from "../authentication/SignoutButton";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import SearchView from "../userSearch/SearchView";
 import Loader from "../../components/Loader";
 import { useUi } from "../../contexts/UiContext";

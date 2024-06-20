@@ -53,7 +53,7 @@ function Messages() {
 
   if (isLoading)
     return (
-      <span className="mb-4 flex items-center justify-center justify-center">
+      <span className="mb-4 flex items-center justify-center">
         <Loader size="medium" text="Loading messages" />
       </span>
     );
