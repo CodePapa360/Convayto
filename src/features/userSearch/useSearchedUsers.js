@@ -1,9 +1,17 @@
 import { useState, useEffect } from "react";
 import { searchPeople } from "./apiUserSearch";
 import { MINIMUM_SEARCH_LENGTH } from "../../config";
+import { useUi } from "../../contexts/UiContext";
+import { useUser } from "../authentication/useUser";
 
-export function useSearchedUsers(query) {
+export function useSearchedUsers() {
+  const { searchQuery } = useUi();
+  const {
+    user: { id },
+  } = useUser();
   const [users, setUsers] = useState([]);
+  const [isShortQuery, setIsShortQuery] = useState(true);
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -16,10 +24,11 @@ export function useSearchedUsers(query) {
         try {
           setIsLoading(true);
           setError("");
-          const data = await searchPeople(query);
+          const data = await searchPeople(searchQuery);
 
           setUsers(data);
           setError("");
+          setIsShortQuery(false);
         } catch (err) {
           if (err.name !== "AbortError") {
             setError(err.message);
@@ -29,19 +38,21 @@ export function useSearchedUsers(query) {
         }
       }
 
-      if (query.length < MINIMUM_SEARCH_LENGTH) {
-        setUsers([]);
+      if (searchQuery.length < MINIMUM_SEARCH_LENGTH) {
+        setIsShortQuery(true);
         setError("");
-        setIsLoading(false); // Reset loading state
+        setIsLoading(false);
         return;
+      } else {
+        setIsShortQuery(false);
       }
 
-      setIsLoading(true); // Set loading state to true
+      setIsLoading(true);
 
       // Clear the previous timeout
       clearTimeout(timeoutId);
 
-      // Set a new timeout for 2 seconds
+      // Set a new timeout for 1 seconds
       timeoutId = setTimeout(() => {
         fetchUsers();
       }, 1000);
@@ -52,8 +63,9 @@ export function useSearchedUsers(query) {
         clearTimeout(timeoutId);
       };
     },
-    [query],
+    [searchQuery],
   );
 
-  return { users, isLoading, error };
+  const filteredUsers = users?.filter((user) => user.id !== id);
+  return { users: filteredUsers, isShortQuery, isLoading, error };
 }

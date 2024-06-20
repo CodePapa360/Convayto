@@ -10,6 +10,7 @@ const InitialState = {
   isDarkMode: true,
   isFriendsSidebarOpen: false,
   isMenuOpen: false,
+  searchQuery: "",
 };
 
 function reducer(state, action) {
@@ -44,6 +45,7 @@ function reducer(state, action) {
       return {
         ...state,
         isSearchView: false,
+        searchQuery: "",
       };
     case "UPDATE_DARK_MODE":
       return {
@@ -68,6 +70,12 @@ function reducer(state, action) {
     case "RESET":
       return InitialState;
 
+    case "UPDATE_SEARCH_QUERY":
+      return {
+        ...state,
+        searchQuery: action.payload,
+      };
+
     default:
       return state;
   }
@@ -82,6 +90,7 @@ function UiProvider({ children }) {
       isDarkMode,
       isFriendsSidebarOpen,
       isMenuOpen,
+      searchQuery,
     },
     dispatch,
   ] = useReducer(reducer, InitialState);
@@ -155,6 +164,10 @@ function UiProvider({ children }) {
     dispatch({ type: "TOGGLE_MENU" });
   }
 
+  function updateSearchQuery(query) {
+    dispatch({ type: "UPDATE_SEARCH_QUERY", payload: query });
+  }
+
   function resetUi() {
     dispatch({ type: "RESET" });
   }
@@ -212,6 +225,9 @@ function UiProvider({ children }) {
 
     isMenuOpen,
     toggleMenu,
+
+    searchQuery,
+    updateSearchQuery,
 
     resetUi,
   };

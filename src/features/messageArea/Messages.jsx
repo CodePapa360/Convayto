@@ -53,7 +53,7 @@ function Messages() {
 
   if (isLoading)
     return (
-      <span className="flex-center mb-4 justify-center">
+      <span className="mb-4 flex items-center justify-center justify-center">
         <Loader size="medium" text="Loading messages" />
       </span>
     );
@@ -61,7 +61,7 @@ function Messages() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col px-4">
       {!pages[0] && (
-        <span className="flex-center my-4 select-none opacity-60">
+        <span className="my-4 flex select-none items-center justify-center opacity-60">
           No messages yet
         </span>
       )}

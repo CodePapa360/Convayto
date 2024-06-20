@@ -8,7 +8,7 @@ function Loader({ size = "small", text = "", customClasses = "" }) {
   };
 
   return (
-    <span className={`flex-center ${customClasses}`}>
+    <span className={`flex items-center justify-center ${customClasses}`}>
       <RiLoaderFill className={`${sizes[size]} animate-spin`} />
       {text && <span className="ml-2">{text}...</span>}
     </span>

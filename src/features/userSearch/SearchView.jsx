@@ -1,62 +1,66 @@
-import { useUser } from "../authentication/useUser";
 import { useSearchedUsers } from "./useSearchedUsers";
 import Loader from "../../components/Loader";
-import { MINIMUM_SEARCH_LENGTH } from "../../config";
 import UserItem from "../../components/UserItem";
 import { useUi } from "../../contexts/UiContext";
 
-function SearchView({ query }) {
-  const { users, isLoading, error } = useSearchedUsers(query);
-  const { user: myUserDetails } = useUser();
-  const filteredUsers = users?.filter((user) => user.id !== myUserDetails.id);
+function SearchView() {
+  const { users, isShortQuery, isLoading, error } = useSearchedUsers();
   const { closeSearchView } = useUi();
 
-  if (query.length < MINIMUM_SEARCH_LENGTH)
+  if (isShortQuery) {
     return (
-      <span className="flex-center fadeIn mt-4">
+      <RenderMessage>
         <p>Search for people</p>
-      </span>
+      </RenderMessage>
     );
+  }
 
-  if (isLoading)
+  if (isLoading) {
     return (
-      <span className="flex-center fadeIn mt-4">
+      <RenderMessage>
         <Loader text="Loading" size="medium" />
-      </span>
+      </RenderMessage>
     );
+  }
 
-  if (error)
+  if (error) {
     return (
-      <span className="flex-center fadeIn mt-4">
-        <p>Som ething went wrong</p>
-      </span>
+      <RenderMessage>
+        <p>Something went wrong</p>
+      </RenderMessage>
     );
+  }
 
-  if (filteredUsers.length === 0)
+  if (!users.length) {
     return (
-      <span className="flex-center fadeIn mt-4">
+      <RenderMessage>
         <p>No users found</p>
-      </span>
+      </RenderMessage>
     );
+  }
 
   return (
     <div className="fadeIn p-2">
-      {filteredUsers?.map((user) => {
-        const { id, avatar_url, fullname, username: subtext } = user;
-
-        return (
-          <UserItem
-            key={user.id}
-            id={id}
-            avatar={avatar_url}
-            name={fullname}
-            subtext={subtext}
-            handler={() => closeSearchView({ back: false })}
-            shouldReplace={true}
-          />
-        );
-      })}
+      {users.map(({ id, avatar_url, fullname, username }) => (
+        <UserItem
+          key={id}
+          id={id}
+          avatar={avatar_url}
+          name={fullname}
+          subtext={username}
+          handler={() => closeSearchView({ back: false })}
+          shouldReplace={true}
+        />
+      ))}
     </div>
+  );
+}
+
+function RenderMessage({ children }) {
+  return (
+    <span className="fadeIn mt-4 flex items-center justify-center">
+      {children}
+    </span>
   );
 }
 

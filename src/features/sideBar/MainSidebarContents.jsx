@@ -21,17 +21,16 @@ function MainSidebarContents() {
     isMenuOpen,
     toggleMenu,
     closeSidebar,
+    searchQuery,
+    updateSearchQuery,
   } = useUi();
 
   const { user } = useUser();
   const userData = user?.user_metadata;
 
-  const [query, setQuery] = useState("");
-
   const searchInputRef = useRef(null);
 
   useEffect(() => {
-    setQuery("");
     if (!isSearchView && searchInputRef.current) {
       searchInputRef.current.blur();
     }
@@ -72,8 +71,8 @@ function MainSidebarContents() {
           <input
             id="searchPeople"
             className="flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-borderShade bg-lightSlate p-2 pl-9 outline-none transition-all duration-200 ease-in-out focus:ring-2 focus:ring-darkViolet dark:border-borderShade-dark dark:bg-lightSlate-dark dark:focus:ring-textViolet-dark"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            value={searchQuery}
+            onChange={(e) => updateSearchQuery(e.target.value)}
             type="text"
             onClick={() => openSearchView()}
             placeholder="Search people"
@@ -88,7 +87,7 @@ function MainSidebarContents() {
       </div>
 
       <div className="h-full  overflow-auto">
-        {isSearchView && <SearchView query={query} />}
+        {isSearchView && <SearchView />}
 
         {!isSearchView && (
           <div className="grid h-full grid-rows-[auto_1fr]">
@@ -104,22 +103,21 @@ function MainSidebarContents() {
               )}
 
               {!isPending &&
-                conversations?.map((conv) => {
-                  const user = conv.friendInfo;
-                  const { id, avatar_url, fullname } = user;
-                  const subtext = conv.last_message.content;
-
-                  return (
+                conversations?.map(
+                  ({
+                    friendInfo: { id, avatar_url, fullname },
+                    last_message: { content: subtext },
+                  }) => (
                     <UserItem
-                      key={user.id}
+                      key={id}
                       id={id}
                       avatar={avatar_url}
                       name={fullname}
                       subtext={subtext}
                       handler={closeSidebar}
                     />
-                  );
-                })}
+                  ),
+                )}
             </div>
           </div>
         )}

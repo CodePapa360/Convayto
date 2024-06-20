@@ -162,13 +162,6 @@ body {
   }
 }
 
-/* ///////// Applies /////////// */
-@layer components {
-  .flex-center {
-    @apply flex items-center justify-center;
-  }
-}
-
 /* //////////// Fade in animation ///////////// */
 
 .fadeIn {
