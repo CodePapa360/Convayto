@@ -10,8 +10,23 @@ import SubmitBtn from "../../components/SubmitBtn";
 import MainContainer from "../../components/MainContainer";
 import InputBox from "../../components/InputBox";
 import Heading from "../../components/Heading";
+import { Controller, useForm } from "react-hook-form";
+import { MIN_PASSWORD_LENGTH } from "../../config";
 
 function ResetPassword() {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    trigger,
+    getValues,
+  } = useForm({
+    defaultValues: {
+      newPassword: "",
+      confirmPassword: "",
+    },
+  });
+
   const { updateUser, isUpdating } = useUpdateUser();
   const navigate = useNavigate();
   const [urlRefreshToken, setUrlRefreshToken] = useState("");
@@ -30,15 +45,8 @@ function ResetPassword() {
 
   const isRecovery = refreshToken === urlRefreshToken;
 
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!newPassword) return;
-
-    if (newPassword !== confirmPassword)
-      return console.log("Password did not match!");
+  const onSubmit = ({ newPassword, confirmPassword }) => {
+    if (!newPassword || !confirmPassword) return;
 
     updateUser(
       { password: newPassword },
@@ -56,23 +64,52 @@ function ResetPassword() {
   return (
     <MainContainer>
       {isRecovery && (
-        <FormContainer onSubmit={handleSubmit}>
+        <FormContainer onSubmit={handleSubmit(onSubmit)}>
           <Heading>Set new password</Heading>
 
-          <InputBox
-            type="password"
-            value={newPassword}
-            onChange={setNewPassword}
-            placeholder="New password"
-            htmlFor="newPassword"
+          <Controller
+            name="newPassword"
+            control={control}
+            rules={{
+              required: "Password is required",
+              minLength: {
+                value: MIN_PASSWORD_LENGTH,
+                message: `Weak password. Minimum ${MIN_PASSWORD_LENGTH} characters required`,
+              },
+            }}
+            render={({ field }) => (
+              <InputBox
+                type="password"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={() => trigger("newPassword")}
+                placeholder="New password"
+                htmlFor="newPassword"
+                error={errors.newPassword?.message}
+              />
+            )}
           />
 
-          <InputBox
-            type="password"
-            value={confirmPassword}
-            onChange={setConfirmPassword}
-            placeholder="Confirm new password"
-            htmlFor="confirmPassword"
+          <Controller
+            name="confirmPassword"
+            control={control}
+            rules={{
+              required: "Password is required",
+              validate: (value) =>
+                value === getValues().newPassword ||
+                "The passwords do not match",
+            }}
+            render={({ field }) => (
+              <InputBox
+                type="password"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={() => trigger("confirmPassword")}
+                placeholder="Confirm new password"
+                htmlFor="confirmPassword"
+                error={errors.confirmPassword?.message}
+              />
+            )}
           />
 
           <SubmitBtn disabled={isUpdating}>
