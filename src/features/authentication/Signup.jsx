@@ -3,7 +3,7 @@ import { useSignup } from "./useSignup";
 import Loader from "../../components/Loader";
 import Heading from "../../components/Heading";
 import MainContainer from "../../components/MainContainer";
-import Form from "../../components/Form";
+import FormContainer from "../../components/FormContainer";
 import InputBox from "../../components/InputBox";
 import FormBtn from "../../components/FormBtn";
 import TextLink from "../../components/TextLink";
@@ -34,7 +34,7 @@ function Signup() {
 
   return (
     <MainContainer>
-      <Form onSubmit={handleSubmit}>
+      <FormContainer onSubmit={handleSubmit}>
         <Heading addClass="text-3xl">Sign up</Heading>
 
         <InputBox
@@ -74,7 +74,7 @@ function Signup() {
         <p>
           Already a user? <TextLink to="/signin">Sign in</TextLink>
         </p>
-      </Form>
+      </FormContainer>
     </MainContainer>
   );
 }

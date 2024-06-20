@@ -9,7 +9,7 @@ import TextLink from "../../components/TextLink";
 import FormBtn from "../../components/FormBtn";
 import MainContainer from "../../components/MainContainer";
 import { useNavigate } from "react-router-dom";
-import Form from "../../components/Form";
+import FormContainer from "../../components/FormContainer";
 
 function Signin() {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ function Signin() {
 
   return (
     <MainContainer>
-      <Form onSubmit={handleSubmit}>
+      <FormContainer onSubmit={handleSubmit}>
         <Heading addClass="text-3xl">Sign in</Heading>
 
         <InputBox
@@ -77,7 +77,7 @@ function Signin() {
         <p>
           Don't have an account? <TextLink to="/signup">Sign up</TextLink>
         </p>
-      </Form>
+      </FormContainer>
     </MainContainer>
   );
 }

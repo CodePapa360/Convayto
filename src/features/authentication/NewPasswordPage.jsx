@@ -5,7 +5,7 @@ import { RiLoginCircleLine } from "react-icons/ri";
 import { FaExclamationTriangle, FaAngleUp } from "react-icons/fa";
 import Loader from "../../components/Loader";
 import { useUpdateUser } from "../userProfile/useUpdateUser";
-import Form from "../../components/Form";
+import FormContainer from "../../components/FormContainer";
 import FormBtn from "../../components/FormBtn";
 import MainContainer from "../../components/MainContainer";
 import InputBox from "../../components/InputBox";
@@ -56,7 +56,7 @@ function ResetPassword() {
   return (
     <MainContainer>
       {isRecovery && (
-        <Form onSubmit={handleSubmit}>
+        <FormContainer onSubmit={handleSubmit}>
           <Heading>Set new password</Heading>
 
           <InputBox
@@ -79,7 +79,7 @@ function ResetPassword() {
             {isUpdating ? <Loader size="small" /> : <RiLoginCircleLine />}
             <span className="ml-2">Update</span>
           </FormBtn>
-        </Form>
+        </FormContainer>
       )}
 
       {!isRecovery && (
