@@ -1,4 +1,4 @@
-function FormBtn({ children, type = "submit", disabled = false }) {
+function SubmitBtn({ children, type = "submit", disabled = false }) {
   return (
     <button
       type={type}
@@ -10,4 +10,4 @@ function FormBtn({ children, type = "submit", disabled = false }) {
   );
 }
 
-export default FormBtn;
+export default SubmitBtn;

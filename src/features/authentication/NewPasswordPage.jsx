@@ -6,7 +6,7 @@ import { FaExclamationTriangle, FaAngleUp } from "react-icons/fa";
 import Loader from "../../components/Loader";
 import { useUpdateUser } from "../userProfile/useUpdateUser";
 import FormContainer from "../../components/FormContainer";
-import FormBtn from "../../components/FormBtn";
+import SubmitBtn from "../../components/SubmitBtn";
 import MainContainer from "../../components/MainContainer";
 import InputBox from "../../components/InputBox";
 import Heading from "../../components/Heading";
@@ -75,10 +75,10 @@ function ResetPassword() {
             htmlFor="confirmPassword"
           />
 
-          <FormBtn disabled={isUpdating}>
+          <SubmitBtn disabled={isUpdating}>
             {isUpdating ? <Loader size="small" /> : <RiLoginCircleLine />}
             <span className="ml-2">Update</span>
-          </FormBtn>
+          </SubmitBtn>
         </FormContainer>
       )}
 

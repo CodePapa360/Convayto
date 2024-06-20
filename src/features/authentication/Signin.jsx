@@ -6,7 +6,7 @@ import { useUser } from "./useUser";
 import Heading from "../../components/Heading";
 import InputBox from "../../components/InputBox";
 import TextLink from "../../components/TextLink";
-import FormBtn from "../../components/FormBtn";
+import SubmitBtn from "../../components/SubmitBtn";
 import MainContainer from "../../components/MainContainer";
 import { useNavigate } from "react-router-dom";
 import FormContainer from "../../components/FormContainer";
@@ -101,10 +101,10 @@ function Signin() {
           Forgot password?
         </TextLink>
 
-        <FormBtn disabled={isPending}>
+        <SubmitBtn disabled={isPending}>
           {isPending ? <Loader size="small" /> : <RiLoginCircleLine />}
           <span className="ml-2">Sign in</span>
-        </FormBtn>
+        </SubmitBtn>
 
         <p>
           Don't have an account? <TextLink to="/signup">Sign up</TextLink>

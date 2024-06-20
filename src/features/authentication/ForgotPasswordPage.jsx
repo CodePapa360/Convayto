@@ -6,7 +6,7 @@ import Heading from "../../components/Heading";
 import MainContainer from "../../components/MainContainer";
 import FormContainer from "../../components/FormContainer";
 import InputBox from "../../components/InputBox";
-import FormBtn from "../../components/FormBtn";
+import SubmitBtn from "../../components/SubmitBtn";
 import TextLink from "../../components/TextLink";
 
 function ForgotPasswordPage() {
@@ -51,10 +51,10 @@ function ForgotPasswordPage() {
           htmlFor="email"
         />
 
-        <FormBtn isPending={isResetting} disabled={isResetting}>
+        <SubmitBtn isPending={isResetting} disabled={isResetting}>
           {isResetting && <Loader customClasses="mr-2" size="small" />}
           <span>Continue</span>
-        </FormBtn>
+        </SubmitBtn>
 
         <TextLink to="/signin" addClass="flex items-center justify-center">
           <RiArrowLeftSLine />

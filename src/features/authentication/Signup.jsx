@@ -5,7 +5,7 @@ import Heading from "../../components/Heading";
 import MainContainer from "../../components/MainContainer";
 import FormContainer from "../../components/FormContainer";
 import InputBox from "../../components/InputBox";
-import FormBtn from "../../components/FormBtn";
+import SubmitBtn from "../../components/SubmitBtn";
 import TextLink from "../../components/TextLink";
 
 function Signup() {
@@ -66,10 +66,10 @@ function Signup() {
           type="password"
         />
 
-        <FormBtn disabled={isPending}>
+        <SubmitBtn disabled={isPending}>
           {isPending && <Loader size="small" />}
           <span className="ml-2">Sign up</span>
-        </FormBtn>
+        </SubmitBtn>
 
         <p>
           Already a user? <TextLink to="/signin">Sign in</TextLink>
