@@ -3,7 +3,7 @@ import { useUi } from "../../contexts/UiContext";
 import Loader from "../../components/Loader";
 import UserItem from "../../components/UserItem";
 
-function ChatUsers() {
+function Users() {
   const { conversations, isPending } = useConversations();
   const { closeSidebar } = useUi();
 
@@ -43,4 +43,4 @@ function ChatUsers() {
   );
 }
 
-export default ChatUsers;
+export default Users;

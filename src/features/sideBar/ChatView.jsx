@@ -2,7 +2,7 @@ import { useUi } from "../../contexts/UiContext";
 import SearchView from "../userSearch/SearchView";
 import Header from "./Header";
 import SearchBox from "./SearchBox";
-import ChatUsers from "./ChatUsers";
+import Users from "./Users";
 
 function ChatView() {
   const { isSearchView } = useUi();
@@ -15,7 +15,7 @@ function ChatView() {
       </div>
 
       <div className="h-full overflow-auto">
-        {isSearchView ? <SearchView /> : <ChatUsers />}
+        {isSearchView ? <SearchView /> : <Users />}
       </div>
     </div>
   );
