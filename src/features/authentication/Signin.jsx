@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSignin } from "./useSignin";
 import Loader from "../../components/Loader";
 import { RiLoginCircleLine } from "react-icons/ri";
@@ -10,14 +10,24 @@ import FormBtn from "../../components/FormBtn";
 import MainContainer from "../../components/MainContainer";
 import { useNavigate } from "react-router-dom";
 import FormContainer from "../../components/FormContainer";
+import { Controller, useForm } from "react-hook-form";
 
 function Signin() {
+  const { signin, isPending } = useSignin();
   const navigate = useNavigate();
   const { isAuthenticated } = useUser();
 
-  const [email, setEmail] = useState("tanzil@gmail.com");
-  const [password, setPassword] = useState("123456789");
-  const { signin, isPending } = useSignin();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    trigger,
+  } = useForm({
+    defaultValues: {
+      email: "tanzil@gmail.com",
+      password: "123456789",
+    },
+  });
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -25,8 +35,8 @@ function Signin() {
     }
   }, [isAuthenticated, navigate]);
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const onSubmit = (data) => {
+    const { email, password } = data;
 
     if (!email || !password) return;
 
@@ -34,35 +44,57 @@ function Signin() {
       { email, password },
       {
         onSuccess: () => {
-          setEmail("");
-          setPassword("");
           navigate("/", {
             replace: true,
           });
         },
       },
     );
-  }
+  };
 
   return (
     <MainContainer>
-      <FormContainer onSubmit={handleSubmit}>
+      <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <Heading addClass="text-3xl">Sign in</Heading>
 
-        <InputBox
-          type="text"
-          value={email}
-          onChange={setEmail}
-          placeholder="Email address"
-          htmlFor="email"
+        <Controller
+          name="email"
+          control={control}
+          rules={{
+            required: "Email is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+              message: "Invalid email address",
+            },
+          }}
+          render={({ field }) => (
+            <InputBox
+              type="text"
+              value={field.value || ""}
+              onChange={field.onChange}
+              placeholder="Email address"
+              htmlFor="email"
+              error={errors.email?.message}
+              onBlur={() => trigger("email")}
+            />
+          )}
         />
 
-        <InputBox
-          type="password"
-          value={password}
-          onChange={setPassword}
-          placeholder="Password"
-          htmlFor="password"
+        <Controller
+          name="password"
+          control={control}
+          rules={{ required: "Password is required" }}
+          render={({ field }) => (
+            <InputBox
+              type="password"
+              value={field.value || ""}
+              onChange={field.onChange}
+              placeholder="Password"
+              htmlFor="password"
+              error={errors.password?.message}
+              onBlur={() => trigger("password")}
+            />
+          )}
         />
 
         <TextLink to="/forgot-password" addClass="mb-4">

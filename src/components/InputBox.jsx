@@ -1,10 +1,19 @@
-function InputBox({ value, onChange, placeholder, type, error, htmlFor }) {
+function InputBox({
+  value,
+  onChange,
+  onBlur,
+  placeholder,
+  type,
+  error,
+  htmlFor,
+}) {
   return (
     <div className="input-container mb-4 w-full">
       <div className="relative">
         <input
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur}
           autoComplete="off"
           type={type}
           id={htmlFor}
@@ -19,9 +28,7 @@ function InputBox({ value, onChange, placeholder, type, error, htmlFor }) {
         </label>
       </div>
 
-      {error && (
-        <p className="output-message ml-2 text-sm text-red-500">{error}</p>
-      )}
+      {error && <p className="ml-2 mt-1 text-xs text-red-500">{error}</p>}
     </div>
   );
 }
