@@ -9,7 +9,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MessageView from "./features/messageArea/MessageView";
 import { UiProvider } from "./contexts/UiContext";
 import NewPasswordPage from "./features/authentication/NewPasswordPage";
-import ForgotPasswordPage from "./features/authentication/ForgotPasswordPage";
+import ResetPasswordPage from "./features/authentication/ResetPasswordPage";
 import NotFound from "./components/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,8 +34,8 @@ function App() {
 
             <Route path="signup" element={<Signup />} />
             <Route path="signin" element={<Signin />} />
-            <Route path="reset-password" element={<NewPasswordPage />} />
-            <Route path="forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="new-password" element={<NewPasswordPage />} />
+            <Route path="reset-password" element={<ResetPasswordPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

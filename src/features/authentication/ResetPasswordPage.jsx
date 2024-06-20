@@ -9,7 +9,7 @@ import InputBox from "../../components/InputBox";
 import SubmitBtn from "../../components/SubmitBtn";
 import TextLink from "../../components/TextLink";
 
-function ForgotPasswordPage() {
+function ResetPasswordPage() {
   const {
     resetPassword,
     isPending: isResetting,
@@ -65,4 +65,4 @@ function ForgotPasswordPage() {
   );
 }
 
-export default ForgotPasswordPage;
+export default ResetPasswordPage;

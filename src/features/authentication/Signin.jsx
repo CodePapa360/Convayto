@@ -97,7 +97,7 @@ function Signin() {
           )}
         />
 
-        <TextLink to="/forgot-password" addClass="mb-4">
+        <TextLink to="/reset-password" addClass="mb-4">
           Forgot password?
         </TextLink>
 
