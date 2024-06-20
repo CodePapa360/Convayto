@@ -18,6 +18,7 @@ import {
   NAME_REGEX,
   USERNAME_REGEX,
 } from "../../config";
+import useCheckUsernameAvailability from "./useCheckUsernameAvailability";
 
 function Signup() {
   const {
@@ -25,6 +26,7 @@ function Signup() {
     handleSubmit,
     formState: { errors },
     trigger,
+    setError,
   } = useForm({
     defaultValues: {
       fullname: "",
@@ -33,6 +35,8 @@ function Signup() {
       password: "",
     },
   });
+
+  const { isChecking, isTaken, checkUsername } = useCheckUsernameAvailability();
 
   const { signup, isPending } = useSignup();
   const navigate = useNavigate();
@@ -49,12 +53,16 @@ function Signup() {
     const cleanUsername = username.trim();
     const cleanEmail = email.trim();
 
-    signup({
-      fullname: cleanFullname,
-      username: cleanUsername,
-      email: cleanEmail,
-      password,
-    });
+    if (isTaken) setError("username", { message: "Username is already taken" });
+
+    if (!isChecking && !isTaken) {
+      signup({
+        fullname: cleanFullname,
+        username: cleanUsername,
+        email: cleanEmail,
+        password,
+      });
+    }
   };
 
   return (
@@ -117,10 +125,17 @@ function Signup() {
               type="text"
               value={field.value}
               onChange={field.onChange}
-              onBlur={() => trigger("username")}
+              onBlur={() => {
+                trigger("username");
+                checkUsername(field.value);
+              }}
               placeholder="Username"
               htmlFor="username"
-              error={errors.username?.message}
+              error={
+                errors.username?.message ||
+                (isChecking ? "Checking..." : null) ||
+                (isTaken ? "Username is already taken" : null)
+              }
             />
           )}
         />
@@ -172,7 +187,7 @@ function Signup() {
           )}
         />
 
-        <SubmitBtn disabled={isPending} type="submit">
+        <SubmitBtn disabled={isPending || isChecking} type="submit">
           {isPending ? <Loader size="small" /> : "Sign up"}
         </SubmitBtn>
 
