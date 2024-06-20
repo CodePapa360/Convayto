@@ -96,7 +96,7 @@ function ResetPassword() {
           </p>
 
           <Link
-            to="/forgot-password"
+            to="/reset-password"
             className="inline-flex items-center gap-1 rounded-md bg-darkViolet px-4 py-2 font-bold text-white"
           >
             Request new password reset
