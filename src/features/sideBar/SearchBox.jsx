@@ -3,15 +3,15 @@ import { RiSearchLine } from "react-icons/ri";
 import { useUi } from "../../contexts/UiContext";
 
 function SearchBox() {
-  const { isSearchView, openSearchView, searchQuery, updateSearchQuery } =
+  const { isSearchViewOpen, openSearchView, searchQuery, updateSearchQuery } =
     useUi();
   const searchInputRef = useRef(null);
 
   useEffect(() => {
-    if (!isSearchView && searchInputRef.current) {
+    if (!isSearchViewOpen && searchInputRef.current) {
       searchInputRef.current.blur();
     }
-  }, [isSearchView]);
+  }, [isSearchViewOpen]);
 
   return (
     <div className="relative">

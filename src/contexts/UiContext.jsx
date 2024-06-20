@@ -5,8 +5,8 @@ const UiContext = createContext();
 
 const InitialState = {
   isSidebarOpen: false,
-  isAccountView: false,
-  isSearchView: false,
+  isAccountViewOpen: false,
+  isSearchViewOpen: false,
   isDarkMode: true,
   isFriendsSidebarOpen: false,
   isMenuOpen: false,
@@ -28,23 +28,23 @@ function reducer(state, action) {
     case "OPEN_ACCOUNT_VIEW":
       return {
         ...state,
-        isAccountView: true,
+        isAccountViewOpen: true,
         isMenuOpen: false,
       };
     case "CLOSE_ACCOUNT_VIEW":
       return {
         ...state,
-        isAccountView: false,
+        isAccountViewOpen: false,
       };
     case "OPEN_SEARCH_VIEW":
       return {
         ...state,
-        isSearchView: true,
+        isSearchViewOpen: true,
       };
     case "CLOSE_SEARCH_VIEW":
       return {
         ...state,
-        isSearchView: false,
+        isSearchViewOpen: false,
         searchQuery: "",
       };
     case "UPDATE_DARK_MODE":
@@ -85,8 +85,8 @@ function UiProvider({ children }) {
   const [
     {
       isSidebarOpen,
-      isAccountView,
-      isSearchView,
+      isAccountViewOpen,
+      isSearchViewOpen,
       isDarkMode,
       isFriendsSidebarOpen,
       isMenuOpen,
@@ -129,7 +129,8 @@ function UiProvider({ children }) {
   function openSearchView() {
     dispatch({ type: "OPEN_SEARCH_VIEW" });
     // we need to stop pushing the same url to history stack when search view is already open. Otherwise, it will keep pushing the same url to history stack every time the user clicks on the search bar.
-    !isSearchView && window.history.pushState(null, null, window.location.href);
+    !isSearchViewOpen &&
+      window.history.pushState(null, null, window.location.href);
     window.addEventListener("popstate", popSearchViewBack);
   }
 
@@ -204,7 +205,7 @@ function UiProvider({ children }) {
   const value = {
     dispatch,
 
-    isAccountView,
+    isAccountViewOpen,
     openAccountView,
     closeAccountView,
 
@@ -212,7 +213,7 @@ function UiProvider({ children }) {
     openSidebar,
     closeSidebar,
 
-    isSearchView,
+    isSearchViewOpen,
     openSearchView,
     closeSearchView,
 

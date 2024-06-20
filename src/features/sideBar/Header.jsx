@@ -11,7 +11,7 @@ function Header() {
 
   const {
     openAccountView,
-    isSearchView,
+    isSearchViewOpen,
     closeSearchView,
     isMenuOpen,
     toggleMenu,
@@ -19,7 +19,7 @@ function Header() {
 
   function handleMenuBtnClick() {
     // if is searching then close search view else open menu
-    if (isSearchView) {
+    if (isSearchViewOpen) {
       closeSearchView();
     } else {
       toggleMenu();
@@ -30,9 +30,9 @@ function Header() {
     <div className="mb-2 flex items-center justify-between gap-2">
       <div className="relative">
         <IconButton onClick={handleMenuBtnClick}>
-          {isSearchView && <IconButton.Back />}
+          {isSearchViewOpen && <IconButton.Back />}
           {isMenuOpen && <IconButton.Close />}
-          {!isSearchView && !isMenuOpen && <IconButton.Menu />}
+          {!isSearchViewOpen && !isMenuOpen && <IconButton.Menu />}
         </IconButton>
 
         {isMenuOpen && <DropdownMenu />}

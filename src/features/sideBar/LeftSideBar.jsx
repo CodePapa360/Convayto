@@ -6,7 +6,8 @@ import MyAccountView from "../userProfile/MyAccountView";
 import ChatView from "./ChatView";
 
 function LeftSideBar() {
-  const { isSidebarOpen, isAccountView, closeSidebar, openSidebar } = useUi();
+  const { isSidebarOpen, isAccountViewOpen, closeSidebar, openSidebar } =
+    useUi();
   const { userId } = useParams();
 
   useEffect(() => {
@@ -24,7 +25,7 @@ function LeftSideBar() {
           isSidebarOpen ? "left-0 opacity-100" : "-left-full opacity-0"
         } absolute top-0 z-30 h-screen-safe w-full overflow-hidden bg-mediumSlate transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] dark:bg-mediumSlate-dark sm:w-[23rem] md:relative md:left-0 md:opacity-100`}
       >
-        {isAccountView ? <MyAccountView /> : <ChatView />}
+        {isAccountViewOpen ? <MyAccountView /> : <ChatView />}
       </aside>
     </ToggleableContent>
   );

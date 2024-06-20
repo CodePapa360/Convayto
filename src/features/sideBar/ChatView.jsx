@@ -5,7 +5,7 @@ import SearchBox from "./SearchBox";
 import Users from "./Users";
 
 function ChatView() {
-  const { isSearchView } = useUi();
+  const { isSearchViewOpen } = useUi();
 
   return (
     <div className="relative z-30 grid h-screen-safe select-none grid-cols-1 grid-rows-[auto_1fr] overflow-hidden">
@@ -15,7 +15,7 @@ function ChatView() {
       </div>
 
       <div className="h-full overflow-auto">
-        {isSearchView ? <SearchView /> : <Users />}
+        {isSearchViewOpen ? <SearchView /> : <Users />}
       </div>
     </div>
   );
