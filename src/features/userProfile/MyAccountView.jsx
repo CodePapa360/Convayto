@@ -9,6 +9,8 @@ import {
   MIN_USERNAME_LENGTH,
   MAX_USERNAME_LENGTH,
   MAX_BIO_LENGTH,
+  NAME_REGEX,
+  USERNAME_REGEX,
 } from "../../config";
 
 function MyAccountView() {
@@ -38,7 +40,7 @@ function MyAccountView() {
           oldValue={fullname}
           updateKey="fullname"
           maxLength={MAX_NAME_LENGTH}
-          regex={/^(?!.*\s{2})[a-zA-Z0-9 ]+$/}
+          regex={NAME_REGEX}
           patternMessage="Only letters, numbers, and single spaces are allowed."
         />
 
@@ -48,7 +50,7 @@ function MyAccountView() {
           updateKey="username"
           minLength={MIN_USERNAME_LENGTH}
           maxLength={MAX_USERNAME_LENGTH}
-          regex={/^[a-z0-9_-]+$/}
+          regex={USERNAME_REGEX}
           patternMessage="Only lowercase letters, numbers, underscores, and dashes are allowed."
         />
 
