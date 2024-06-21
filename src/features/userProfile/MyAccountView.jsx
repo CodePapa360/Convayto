@@ -12,6 +12,7 @@ import {
   NAME_REGEX,
   USERNAME_REGEX,
 } from "../../config";
+import useCheckUsernameAvailability from "../authentication/useCheckUsernameAvailability";
 
 function MyAccountView() {
   const {
@@ -22,6 +23,8 @@ function MyAccountView() {
   } = useUser();
 
   const { closeAccountView } = useUi();
+
+  const { isChecking, isTaken, checkUsername } = useCheckUsernameAvailability();
 
   return (
     <div className="fadeIn grid h-screen-safe grid-rows-[auto_1fr] ">
@@ -52,6 +55,9 @@ function MyAccountView() {
           maxLength={MAX_USERNAME_LENGTH}
           regex={USERNAME_REGEX}
           patternMessage="Only lowercase letters, numbers, underscores, and dashes are allowed."
+          checkUsername={checkUsername}
+          isChecking={isChecking}
+          isTaken={isTaken}
         />
 
         <InfoField

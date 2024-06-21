@@ -12,6 +12,9 @@ function InfoField({
   updateKey = "none",
   regex,
   patternMessage,
+  checkUsername,
+  isChecking,
+  isTaken,
 }) {
   const {
     handleSubmit,
@@ -33,8 +36,42 @@ function InfoField({
     }
   }, [isEditing]);
 
+  ///////////////
+  // For username checking
+  ///////////////
+  useEffect(() => {
+    if (updateKey !== "username") return;
+
+    if (isChecking) {
+      setError(updateKey, {
+        type: "checking",
+        message: "Checking username availability...",
+      });
+      return;
+    }
+
+    if (isTaken) {
+      setError(updateKey, {
+        type: "server",
+        message: "Username is already taken.",
+      });
+      return;
+    }
+  }, [isChecking, isTaken, setError, updateKey]);
+
   function handleUpdate(data) {
     if (!isEditing) return setIsEditing(true);
+    if (isChecking) return;
+
+    //////////////
+    // For username checking
+    //////////////
+    if (isTaken) {
+      return setError(updateKey, {
+        type: "server",
+        message: "Username is already taken.",
+      });
+    }
 
     const cleanValue = data[updateKey].trim();
     if (cleanValue === oldValue) return setIsEditing(false);
@@ -69,6 +106,7 @@ function InfoField({
         </label>
         {updateKey !== "none" && (
           <button
+            disabled={isUpdating || isChecking || isTaken}
             type="submit"
             className="flex h-11 w-11 items-center justify-center rounded-full text-xl text-textViolet 
             hover:bg-black/10 dark:text-textViolet-dark dark:hover:bg-lightSlate/10"
@@ -104,6 +142,12 @@ function InfoField({
                   value: minLength,
                   message: `Minimum ${minLength} characters required.`,
                 },
+                validate(value) {
+                  if (updateKey === "username" && value !== oldValue) {
+                    return checkUsername(value);
+                  }
+                  return true;
+                },
               }}
               render={({ field }) => (
                 <input
@@ -118,10 +162,10 @@ function InfoField({
                   }}
                   maxLength={maxLength}
                   className={`${
-                    errors[updateKey]
+                    errors[updateKey] && errors[updateKey].type !== "checking"
                       ? "border-red-500"
-                      : "border-textViolet  dark:border-textViolet-dark"
-                  } h-10 w-full rounded-md border-b-2  bg-lightSlate px-2  text-base text-deepSlate-dark outline-none   dark:bg-lightSlate-dark dark:text-lightSlate`}
+                      : "border-textViolet dark:border-textViolet-dark"
+                  } h-10 w-full rounded-md border-b-2 bg-lightSlate px-2 text-base text-deepSlate-dark outline-none dark:bg-lightSlate-dark dark:text-lightSlate`}
                 />
               )}
             />
@@ -132,7 +176,9 @@ function InfoField({
           </div>
 
           {errors[updateKey] && (
-            <p className="mt-1 text-xs text-red-500">
+            <p
+              className={`mt-1 text-xs ${errors[updateKey].type === "checking" ? "text-textViolet-dark" : "text-red-500"}`}
+            >
               {errors[updateKey].message}
             </p>
           )}
