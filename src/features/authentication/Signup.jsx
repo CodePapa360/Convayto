@@ -48,12 +48,28 @@ function Signup() {
     }
   }, [navigate]);
 
+  useEffect(() => {
+    if (isChecking) {
+      setError("username", {
+        type: "checking",
+        message: "Checking...",
+      });
+      return;
+    } else if (isTaken) {
+      setError("username", {
+        type: "server",
+        message: "Username is already taken.",
+      });
+      return;
+    } else {
+      setError("username", {});
+    }
+  }, [isChecking, isTaken, setError]);
+
   const onSubmit = ({ fullname, username, email, password }) => {
     const cleanFullname = fullname.trim();
     const cleanUsername = username.trim();
     const cleanEmail = email.trim();
-
-    if (isTaken) setError("username", { message: "Username is already taken" });
 
     if (!isChecking && !isTaken) {
       signup({
@@ -127,11 +143,7 @@ function Signup() {
               }}
               placeholder="Username"
               htmlFor="username"
-              error={
-                errors.username?.message ||
-                (isChecking ? "Checking..." : null) ||
-                (isTaken ? "Username is already taken" : null)
-              }
+              error={errors.username?.message}
             />
           )}
         />
@@ -183,7 +195,7 @@ function Signup() {
           )}
         />
 
-        <SubmitBtn disabled={isPending || isChecking} type="submit">
+        <SubmitBtn disabled={isPending || isChecking || isTaken} type="submit">
           {isPending ? <Loader size="small" /> : "Sign up"}
         </SubmitBtn>
 
