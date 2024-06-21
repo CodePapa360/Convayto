@@ -45,7 +45,7 @@ function InfoField({
     if (isChecking) {
       setError(updateKey, {
         type: "checking",
-        message: "Checking username availability...",
+        message: "Checking...",
       });
       return;
     }
