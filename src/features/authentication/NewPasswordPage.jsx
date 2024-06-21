@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { RiLoginCircleLine } from "react-icons/ri";
 import Loader from "../../components/Loader";
 import { useUpdateUser } from "../userProfile/useUpdateUser";
 import FormContainer from "../../components/FormContainer";
