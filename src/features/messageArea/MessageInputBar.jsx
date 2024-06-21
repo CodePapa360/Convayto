@@ -67,6 +67,7 @@ function MessageInputBar() {
           type="text"
           placeholder="Message"
           id="inputMessage"
+          autoComplete="off"
         />
 
         <button

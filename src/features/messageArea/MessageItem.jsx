@@ -10,7 +10,7 @@ function MessageItem({ message }) {
         message?.sender_id === user.id
           ? "self-end rounded-br-none bg-darkViolet text-white dark:bg-darkViolet-dark"
           : "rounded-bl-none bg-mediumSlate dark:bg-mediumSlate-dark"
-      } my-1 w-fit max-w-[80%] rounded-2xl px-4 py-2 ${message.optimistic ? "opacity-40" : ""}`}
+      } my-1 w-fit max-w-[80%] rounded-2xl px-4 py-2`}
     >
       <p>
         {message?.content}

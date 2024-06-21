@@ -21,21 +21,23 @@ function ChatUsers() {
         )}
 
         {!isPending &&
-          conversations?.map(
-            ({
-              friendInfo: { id, avatar_url, fullname },
-              last_message: { content: subtext },
-            }) => (
+          conversations?.map((conv) => {
+            const id = conv?.friendInfo?.id;
+            const avatar_url = conv?.friendInfo?.avatar_url;
+            const fullname = conv?.friendInfo?.fullname;
+            const lastMessage = conv?.last_message?.content;
+
+            return (
               <UserItem
                 key={id}
                 id={id}
                 avatar={avatar_url}
                 name={fullname}
-                subtext={subtext}
+                subtext={lastMessage}
                 handler={closeSidebar}
               />
-            ),
-          )}
+            );
+          })}
       </div>
     </div>
   );
