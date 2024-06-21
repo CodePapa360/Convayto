@@ -20,6 +20,7 @@ function InfoField({
     handleSubmit,
     watch,
     setError,
+    clearErrors,
     control,
     formState: { errors },
   } = useForm({ defaultValues: { [updateKey]: oldValue } });
@@ -47,36 +48,31 @@ function InfoField({
         type: "checking",
         message: "Checking...",
       });
-      return;
-    }
-
-    if (isTaken) {
+    } else if (isTaken) {
       setError(updateKey, {
         type: "server",
         message: "Username is already taken.",
       });
-      return;
+    } else {
+      clearErrors(updateKey);
     }
-  }, [isChecking, isTaken, setError, updateKey]);
+  }, [isChecking, isTaken, setError, clearErrors, updateKey]);
 
   function handleUpdate(data) {
-    if (!isEditing) return setIsEditing(true);
-    if (isChecking) return;
-
-    //////////////
-    // For username checking
-    //////////////
-    if (isTaken) {
-      return setError(updateKey, {
-        type: "server",
-        message: "Username is already taken.",
-      });
+    if (!isEditing) {
+      setIsEditing(true);
+      return;
     }
 
-    const cleanValue = data[updateKey].trim();
-    if (cleanValue === oldValue) return setIsEditing(false);
+    if (isChecking) return;
 
-    if (isEditing) {
+    const cleanValue = data[updateKey].trim();
+    if (cleanValue === oldValue) {
+      setIsEditing(false);
+      return;
+    }
+
+    if (!isUpdating && !isChecking && !isTaken) {
       updateUser(
         { [updateKey]: cleanValue },
         {
@@ -91,7 +87,6 @@ function InfoField({
           },
         },
       );
-      return;
     }
   }
 
@@ -129,7 +124,7 @@ function InfoField({
               name={updateKey}
               control={control}
               rules={{
-                required: `please enter your ${label}`,
+                required: `Please enter your ${label}`,
                 pattern: {
                   value: regex,
                   message: patternMessage || "Invalid input",
@@ -142,18 +137,18 @@ function InfoField({
                   value: minLength,
                   message: `Minimum ${minLength} characters required.`,
                 },
-                validate(value) {
-                  if (updateKey === "username" && value !== oldValue) {
-                    return checkUsername(value);
-                  }
-                  return true;
-                },
               }}
               render={({ field }) => (
                 <input
                   {...field}
                   autoComplete="off"
                   autoCapitalize="none"
+                  onBlur={() => {
+                    if (updateKey === "username" && field.value !== oldValue) {
+                      checkUsername(field.value);
+                    }
+                    field.onBlur();
+                  }}
                   id={updateKey}
                   type="text"
                   ref={(e) => {
@@ -175,9 +170,13 @@ function InfoField({
             </span>
           </div>
 
-          {errors[updateKey] && (
+          {errors[updateKey] && errors[updateKey].message && (
             <p
-              className={`mt-1 text-xs ${errors[updateKey].type === "checking" ? "text-textViolet-dark" : "text-red-500"}`}
+              className={`mt-1 text-xs ${
+                errors[updateKey].type === "checking"
+                  ? "text-textViolet-dark"
+                  : "text-red-500"
+              }`}
             >
               {errors[updateKey].message}
             </p>
