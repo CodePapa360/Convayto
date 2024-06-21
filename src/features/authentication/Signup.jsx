@@ -27,6 +27,7 @@ function Signup() {
     formState: { errors },
     trigger,
     setError,
+    clearErrors,
   } = useForm({
     defaultValues: {
       fullname: "",
@@ -62,11 +63,13 @@ function Signup() {
       });
       return;
     } else {
-      setError("username", {});
+      clearErrors("username");
     }
-  }, [isChecking, isTaken, setError]);
+  }, [isChecking, isTaken, setError, clearErrors]);
 
   const onSubmit = ({ fullname, username, email, password }) => {
+    if (isChecking || isTaken) return;
+
     const cleanFullname = fullname.trim();
     const cleanUsername = username.trim();
     const cleanEmail = email.trim();
