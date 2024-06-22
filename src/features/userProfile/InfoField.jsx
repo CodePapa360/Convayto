@@ -64,7 +64,7 @@ function InfoField({
       return;
     }
 
-    if (isChecking) return;
+    // if (isChecking) return;
 
     const cleanValue = data[updateKey].trim();
     if (cleanValue === oldValue) {
@@ -137,6 +137,12 @@ function InfoField({
                   value: minLength,
                   message: `Minimum ${minLength} characters required.`,
                 },
+                validate: (value) => {
+                  if (updateKey === "username" && value !== oldValue)
+                    return checkUsername(value);
+
+                  return true;
+                },
               }}
               render={({ field }) => (
                 <input
@@ -144,9 +150,9 @@ function InfoField({
                   autoComplete="off"
                   autoCapitalize="none"
                   onBlur={() => {
-                    if (updateKey === "username" && field.value !== oldValue) {
-                      checkUsername(field.value);
-                    }
+                    // if (updateKey === "username" && field.value !== oldValue) {
+                    //   checkUsername(field.value);
+                    // }
                     field.onBlur();
                   }}
                   id={updateKey}
