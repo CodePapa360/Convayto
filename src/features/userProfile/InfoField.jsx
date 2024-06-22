@@ -15,6 +15,8 @@ function InfoField({
   checkUsername,
   isChecking,
   isTaken,
+  isBusy,
+  reset,
 }) {
   const {
     handleSubmit,
@@ -64,20 +66,20 @@ function InfoField({
       return;
     }
 
-    // if (isChecking) return;
-
     const cleanValue = data[updateKey].trim();
     if (cleanValue === oldValue) {
       setIsEditing(false);
+      reset();
       return;
     }
 
-    if (!isUpdating && !isChecking && !isTaken) {
+    if (!isUpdating && !isBusy && !isTaken) {
       updateUser(
         { [updateKey]: cleanValue },
         {
           onSuccess: () => {
             setIsEditing(false);
+            reset();
           },
           onError: (err) => {
             setError(updateKey, {
@@ -101,7 +103,7 @@ function InfoField({
         </label>
         {updateKey !== "none" && (
           <button
-            disabled={isUpdating || isChecking || isTaken}
+            disabled={isUpdating || isBusy || isTaken}
             type="submit"
             className="flex h-11 w-11 items-center justify-center rounded-full text-xl text-textViolet 
             hover:bg-black/10 dark:text-textViolet-dark dark:hover:bg-lightSlate/10"
@@ -138,8 +140,8 @@ function InfoField({
                   message: `Minimum ${minLength} characters required.`,
                 },
                 validate: (value) => {
-                  if (updateKey === "username" && value !== oldValue)
-                    return checkUsername(value);
+                  if (updateKey === "username")
+                    return checkUsername(value, oldValue);
 
                   return true;
                 },

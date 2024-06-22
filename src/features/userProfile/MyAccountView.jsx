@@ -15,6 +15,8 @@ import {
 import useCheckUsernameAvailability from "../authentication/useCheckUsernameAvailability";
 
 function MyAccountView() {
+  const { isBusy, isChecking, isTaken, checkUsername, reset } =
+    useCheckUsernameAvailability();
   const {
     user: {
       email,
@@ -23,8 +25,6 @@ function MyAccountView() {
   } = useUser();
 
   const { closeAccountView } = useUi();
-
-  const { isChecking, isTaken, checkUsername } = useCheckUsernameAvailability();
 
   return (
     <div className="fadeIn grid h-screen-safe grid-rows-[auto_1fr] ">
@@ -58,6 +58,8 @@ function MyAccountView() {
           checkUsername={checkUsername}
           isChecking={isChecking}
           isTaken={isTaken}
+          isBusy={isBusy}
+          reset={reset}
         />
 
         <InfoField

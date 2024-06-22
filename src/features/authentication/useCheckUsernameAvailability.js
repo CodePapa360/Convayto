@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import apiCheckUsername from "./apiCheckUsername";
 import {
   MIN_USERNAME_LENGTH,
@@ -7,30 +7,66 @@ import {
 } from "../../config";
 
 function useCheckUsernameAvailability() {
+  const [oldUsername, setOldUsername] = useState("");
+  const [username, setUsername] = useState("");
+  const [isBusy, setIsBusy] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const [isTaken, setIsTaken] = useState(false);
 
-  const checkUsername = async (username) => {
-    const cleanUsername = username.trim();
-    if (!cleanUsername) return;
-    if (cleanUsername.length < MIN_USERNAME_LENGTH) return;
-    if (cleanUsername.length > MAX_USERNAME_LENGTH) return;
-    if (!USERNAME_REGEX.test(cleanUsername)) return;
-
-    setIsChecking(true);
-    try {
-      const data = await apiCheckUsername(cleanUsername);
-      const isTaken = data?.username === cleanUsername;
-
-      setIsTaken(isTaken);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsChecking(false);
+  useEffect(() => {
+    if (
+      !username ||
+      username.length < MIN_USERNAME_LENGTH ||
+      username.length > MAX_USERNAME_LENGTH ||
+      !USERNAME_REGEX.test(username)
+    ) {
+      setIsBusy(false);
+      return;
     }
+
+    const timeoutId = setTimeout(() => {
+      setIsChecking(true);
+      apiCheckUsername(username)
+        .then((data) => {
+          const serverUsername = data?.username === username;
+
+          if (!serverUsername) {
+            setIsTaken(false);
+            return;
+          } else if (oldUsername === username) {
+            setIsTaken(false);
+            return;
+          } else {
+            setIsTaken(true);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+        .finally(() => {
+          setIsChecking(false);
+          setIsBusy(false);
+        });
+    }, 500); // Debounce time of 500ms
+
+    return () => clearTimeout(timeoutId);
+  }, [username, oldUsername]);
+
+  const checkUsername = (newUsername, oldUsername) => {
+    setIsBusy(true);
+    setUsername(newUsername.trim());
+    oldUsername && setOldUsername(oldUsername.trim());
   };
 
-  return { isChecking, isTaken, checkUsername };
+  function reset() {
+    setUsername("");
+    setOldUsername("");
+    setIsBusy(false);
+    setIsChecking(false);
+    setIsTaken(false);
+  }
+
+  return { isBusy, isChecking, isTaken, checkUsername, reset };
 }
 
 export default useCheckUsernameAvailability;
