@@ -69,7 +69,7 @@ function InfoField({
     const cleanValue = data[updateKey].trim();
     if (cleanValue === oldValue) {
       setIsEditing(false);
-      reset();
+      reset && reset();
       return;
     }
 
@@ -79,7 +79,7 @@ function InfoField({
         {
           onSuccess: () => {
             setIsEditing(false);
-            reset();
+            reset && reset();
           },
           onError: (err) => {
             setError(updateKey, {
