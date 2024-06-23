@@ -5,6 +5,7 @@ import { useUser } from "../authentication/useUser";
 import { useEffect, useRef } from "react";
 import { subscribeRealtimeConversation } from "./apiRealtimeConversation";
 import { MAX_PREFETCHED_CONVERSATIONS } from "../../config";
+import { getConvInfoById } from "../messageArea/apiConvInfo";
 
 export function useConversations() {
   const queryClient = useQueryClient();
@@ -80,15 +81,22 @@ export function useConversations() {
       const conversation_id = conv.id;
       const friendUserId = conv.friendInfo.id;
 
+      // prefetch the messages
       queryClient.prefetchInfiniteQuery({
         queryKey: ["friend", friendUserId],
         queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
         pages: 1,
       });
+
+      // prefetch the convInfo
+      queryClient.prefetchQuery({
+        queryKey: ["convInfo", friendUserId],
+        queryFn: () => getConvInfoById({ myUserId, friendUserId }),
+      });
     });
 
     hasPrefetched.current = true;
-  }, [data, queryClient]);
+  }, [data, queryClient, myUserId]);
   // prefetch ends
 
   return { conversations: data, isPending };
