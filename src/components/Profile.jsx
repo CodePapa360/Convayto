@@ -7,6 +7,7 @@ function Profile({ onClick, userData }) {
     <div
       className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] gap-4 truncate rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
       onClick={onClick}
+      onKeyDown={onClick}
       role="button"
       tabIndex={0}
     >
@@ -19,12 +20,7 @@ function Profile({ onClick, userData }) {
             className="h-full w-full object-cover"
           />
         ) : (
-          <HiOutlineUserCircle
-            size={55}
-            viewBox="2 2 25 25"
-            opacity={0.5}
-            strokeWidth="1"
-          />
+          <HiOutlineUserCircle size={45} opacity={0.5} strokeWidth="1" />
         )}
       </div>
 
