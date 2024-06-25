@@ -1,13 +1,16 @@
 import { HiOutlineUserCircle } from "react-icons/hi2";
+import { useEnterKeyPress } from "../utils/useEnterKeyPress";
 
 function Profile({ onClick, userData }) {
   const { fullname, username, avatar_url } = userData;
+
+  const handleKeyDown = useEnterKeyPress(onClick);
 
   return (
     <div
       className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] gap-4 truncate rounded-lg p-2 hover:bg-black/10 dark:hover:bg-lightSlate/10"
       onClick={onClick}
-      onKeyDown={onClick}
+      onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
     >

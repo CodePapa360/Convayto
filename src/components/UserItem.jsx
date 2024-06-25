@@ -1,5 +1,6 @@
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { useNavigate, useParams } from "react-router-dom";
+import { useEnterKeyPress } from "../utils/useEnterKeyPress";
 
 function UserItem({
   id,
@@ -19,6 +20,8 @@ function UserItem({
     navigate(`/m/${id}`, { replace: shouldReplace });
   }
 
+  const handleKeyDown = useEnterKeyPress(handleClick);
+
   return (
     <div
       className={`${
@@ -27,6 +30,7 @@ function UserItem({
           : "hover:bg-black/10 dark:hover:bg-lightSlate/10"
       } flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 `}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
     >
