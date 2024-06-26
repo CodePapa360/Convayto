@@ -32,15 +32,7 @@ function ResetPasswordPage() {
   } = useResetPasswordForEmail();
 
   function onSubmit({ email }) {
-    resetPassword(email, {
-      onSuccess: () => {
-        console.log("Password reset email sent successfully");
-      },
-
-      onError: (error) => {
-        console.log("Error sending password reset email: ", error);
-      },
-    });
+    resetPassword(email);
   }
 
   return (
