@@ -24,7 +24,15 @@ export async function signin({ email, password }) {
     password,
   });
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    if (error.status === 400) {
+      throw new Error(
+        "Incorrect email or password. Please try again or click Forgot password to reset it.",
+      );
+    } else {
+      throw new Error(error.message);
+    }
+  }
 
   return data;
 }
