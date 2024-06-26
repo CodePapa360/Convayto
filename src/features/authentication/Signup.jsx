@@ -190,7 +190,7 @@ function Signup() {
             required: "Password is required",
             minLength: {
               value: MIN_PASSWORD_LENGTH,
-              message: `Weak password. Minimum ${MIN_PASSWORD_LENGTH} characters required`,
+              message: `Password should be at least ${MIN_PASSWORD_LENGTH} characters`,
             },
           }}
           render={({ field }) => (
@@ -202,6 +202,7 @@ function Signup() {
               placeholder="Password"
               htmlFor="password"
               error={errors.password?.message}
+              validate="false"
             />
           )}
         />

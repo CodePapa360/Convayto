@@ -13,7 +13,13 @@ export async function signup({ email, password, fullname, username }) {
     },
   });
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    if (error.message === "Anonymous sign-ins are disabled") {
+      throw new Error("Please provide your email address to sign up");
+    } else {
+      throw new Error(error.message);
+    }
+  }
 
   return data;
 }
