@@ -37,7 +37,8 @@ function Signup() {
     },
   });
 
-  const { isChecking, isTaken, checkUsername } = useCheckUsernameAvailability();
+  const { isChecking, isBusy, isTaken, checkUsername, reset } =
+    useCheckUsernameAvailability();
 
   const { signup, isPending } = useSignup();
   const navigate = useNavigate();
@@ -74,13 +75,20 @@ function Signup() {
     const cleanUsername = username.trim();
     const cleanEmail = email.trim();
 
-    if (!isChecking && !isTaken) {
-      signup({
-        fullname: cleanFullname,
-        username: cleanUsername,
-        email: cleanEmail,
-        password,
-      });
+    if (!isChecking && !isTaken && !isBusy) {
+      signup(
+        {
+          fullname: cleanFullname,
+          username: cleanUsername,
+          email: cleanEmail,
+          password,
+        },
+        {
+          onSuccess: () => {
+            reset();
+          },
+        },
+      );
     }
   };
 
@@ -198,7 +206,10 @@ function Signup() {
           )}
         />
 
-        <SubmitBtn disabled={isPending || isChecking || isTaken} type="submit">
+        <SubmitBtn
+          disabled={isPending || isChecking || isTaken || isBusy}
+          type="submit"
+        >
           {isPending ? <Loader size="small" /> : "Sign up"}
         </SubmitBtn>
 
