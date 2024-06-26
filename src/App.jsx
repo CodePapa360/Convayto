@@ -11,6 +11,7 @@ import { UiProvider } from "./contexts/UiContext";
 import NewPasswordPage from "./features/authentication/NewPasswordPage";
 import ResetPasswordPage from "./features/authentication/ResetPasswordPage";
 import NotFound from "./components/NotFound";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,18 @@ function App() {
     <UiProvider>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            error: {
+              duration: 5000,
+            },
+            style: {
+              maxWidth: "500px",
+            },
+          }}
+        />
+
         <BrowserRouter>
           <Routes>
             <Route
