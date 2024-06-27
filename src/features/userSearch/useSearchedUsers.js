@@ -3,6 +3,7 @@ import { searchPeople } from "./apiUserSearch";
 import { MINIMUM_SEARCH_LENGTH } from "../../config";
 import { useUi } from "../../contexts/UiContext";
 import { useUser } from "../authentication/useUser";
+import toast from "react-hot-toast";
 
 export function useSearchedUsers() {
   const { searchQuery } = useUi();
@@ -32,6 +33,7 @@ export function useSearchedUsers() {
         } catch (err) {
           if (err.name !== "AbortError") {
             setError(err.message);
+            toast.error(err.message);
           }
         } finally {
           setIsLoading(false);
