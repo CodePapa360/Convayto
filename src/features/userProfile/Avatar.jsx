@@ -2,13 +2,22 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 import { LuImagePlus } from "react-icons/lu";
 import { useUpdateUser } from "./useUpdateUser";
 import Loader from "../../components/Loader";
+import toast from "react-hot-toast";
 
 function Avatar({ avatar }) {
   const avatar_url = avatar;
   const { updateUser, isUpdating } = useUpdateUser();
 
   function handleUpdateUser(file) {
-    updateUser({ avatar: file, previousAvatar: avatar_url });
+    updateUser(
+      { avatar: file, previousAvatar: avatar_url },
+      {
+        onSuccess: () => {
+          toast.dismiss();
+          toast.success("Updated profile photo successfully!");
+        },
+      },
+    );
   }
 
   return (

@@ -3,6 +3,7 @@ import Loader from "../../components/Loader";
 import { useEffect, useRef, useState } from "react";
 import { useUpdateUser } from "./useUpdateUser";
 import { Controller, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 function InfoField({
   minLength = 1,
@@ -60,6 +61,10 @@ function InfoField({
     }
   }, [isChecking, isTaken, setError, clearErrors, updateKey]);
 
+  /////////////////
+  // Handle update
+  /////////////////
+
   function handleUpdate(data) {
     if (!isEditing) {
       setIsEditing(true);
@@ -78,6 +83,8 @@ function InfoField({
         { [updateKey]: cleanValue },
         {
           onSuccess: () => {
+            toast.dismiss();
+            toast.success(`Updated ${label.toLowerCase()} successfully!`);
             setIsEditing(false);
             reset && reset();
           },

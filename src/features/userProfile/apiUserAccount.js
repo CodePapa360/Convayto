@@ -1,3 +1,4 @@
+import { MAXIMUM_AVATAR_FILE_SIZE } from "../../config";
 import supabase, { supabaseUrl } from "../../services/supabase";
 
 export async function updateCurrentUser({
@@ -27,7 +28,16 @@ export async function updateCurrentUser({
   const { error: storageError } = await supabase.storage
     .from("avatars")
     .upload(fileName, avatar);
-  if (storageError) throw new Error(storageError.message);
+
+  if (storageError) {
+    if (storageError.statusCode == 413) {
+      throw new Error(
+        `The file is too large. It should be less than ${MAXIMUM_AVATAR_FILE_SIZE}MB.`,
+      );
+    } else {
+      throw new Error(storageError.message);
+    }
+  }
 
   //3. Update the avatar in the user
   const { data: updatedUser, error: error2 } = await supabase.auth.updateUser({
