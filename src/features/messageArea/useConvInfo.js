@@ -19,7 +19,6 @@ function useConvInfo() {
 
     // convInfo is not going to change so we can set staleTime to Infinity
     staleTime: Infinity,
-    retry: false,
   });
 
   return { convInfo, isPending, isError, error };
