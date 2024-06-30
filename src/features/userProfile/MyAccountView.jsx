@@ -35,7 +35,7 @@ function MyAccountView() {
         <p className="select-none font-bold tracking-wider">Profile</p>
       </div>
 
-      <div className="h-full overflow-scroll p-4">
+      <div tabIndex={-1} className="h-full overflow-scroll p-4">
         <Avatar avatar={avatar_url} />
 
         <InfoField
