@@ -78,7 +78,7 @@ function Messages() {
   return (
     <div
       tabIndex={-1}
-      className="mx-auto grid w-full max-w-3xl grid-cols-1 grid-rows-1 items-end overflow-y-auto px-4"
+      className="mx-auto grid w-full max-w-3xl grid-cols-1 grid-rows-[auto] items-end overflow-y-auto px-4"
     >
       {pages && !pages[0] && (
         <span className="my-4 flex select-none items-center justify-center opacity-60">
