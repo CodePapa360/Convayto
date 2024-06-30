@@ -1,37 +1,34 @@
 import { useUser } from "../authentication/useUser";
 import Loader from "../../components/Loader";
-import useRecoveryPassword from "./useRecoveryPassword";
+import useResetPasswordForEmail from "../authentication/useResetPasswordForEmail";
 
 function BtnRecoverPassword() {
   const {
     user: { email },
   } = useUser();
 
-  const { sendRecoveryEmail, isSending, error, canSendAgain } =
-    useRecoveryPassword();
+  const { resetPassword, isPending, isSuccess } = useResetPasswordForEmail();
 
   function handleRequest() {
-    if (canSendAgain) {
-      sendRecoveryEmail(email);
-    }
+    resetPassword(email);
   }
 
   return (
     <button
-      disabled={isSending || !canSendAgain}
+      disabled={isPending || isSuccess}
       onClick={handleRequest}
       className="mt-8 flex h-10 items-center gap-2 rounded-md bg-textViolet px-4 text-lightSlate hover:bg-textViolet/50 disabled:bg-gray-500/30 disabled:opacity-70"
     >
-      {isSending && (
+      {isPending && (
         <>
           <Loader />
           Sending...
         </>
       )}
 
-      {!canSendAgain && <span>Recovery email sent</span>}
+      {isSuccess && <span>Recovery email sent</span>}
 
-      {!isSending && canSendAgain && <span>Recover password</span>}
+      {!isPending && !isSuccess && <span>Recover password</span>}
     </button>
   );
 }

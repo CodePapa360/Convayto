@@ -1,10 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { sendMessage } from "./apiMessage";
 import useConvInfo from "./useConvInfo";
+import toast from "react-hot-toast";
 
 export function useSendNewMessage() {
   const queryClient = useQueryClient();
-  const { convInfo, isPending, isError } = useConvInfo();
+  const { convInfo } = useConvInfo();
+  const conversationId = convInfo?.id;
 
   const friendUserId = convInfo?.friendInfo?.id;
 
@@ -45,7 +47,26 @@ export function useSendNewMessage() {
       return { previousMessages };
     },
 
-    onError: (err) => console.log(err.message),
+    onSuccess: (newMessage) => {
+      // when conversation id is null, it means the conversation is new. So update the convInfo query data with the new conversation id
+      if (!conversationId) {
+        queryClient.setQueryData(["convInfo", friendUserId], (prevData) => {
+          return {
+            ...prevData,
+            id: newMessage.conversation_id,
+          };
+        });
+      }
+    },
+
+    onError: (error, _, context) => {
+      toast.error(error.message);
+      // Roll back to the previous value
+      queryClient.setQueryData(
+        ["friend", friendUserId],
+        context.previousMessages,
+      );
+    },
   });
 
   return { isSending, sendNewMessage };

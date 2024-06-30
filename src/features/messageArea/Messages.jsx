@@ -6,8 +6,14 @@ import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import useScrollBehavior from "./useScrollBehavior";
 
 function Messages() {
-  const { pages, isFetchingNextPage, isLoading, fetchNextPage, hasNextPage } =
-    useMessages();
+  const {
+    pages,
+    isFetchingNextPage,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    error,
+  } = useMessages();
 
   const topRef = useRef(null);
   const bottomRef = useRef();
@@ -48,6 +54,17 @@ function Messages() {
   });
 
   /////////////
+  // show an error message when there is an error
+  /////////////
+
+  if (error)
+    return (
+      <span className="flex items-center justify-center opacity-60">
+        ⚠️ {error.message}
+      </span>
+    );
+
+  /////////////
   // show a loader when fetching the first page
   /////////////
 
@@ -59,8 +76,11 @@ function Messages() {
     );
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col px-4">
-      {!pages[0] && (
+    <div
+      tabIndex={-1}
+      className="mx-auto grid w-full max-w-3xl grid-cols-1 grid-rows-1 items-end overflow-y-auto px-4"
+    >
+      {pages && !pages[0] && (
         <span className="my-4 flex select-none items-center justify-center opacity-60">
           No messages yet
         </span>

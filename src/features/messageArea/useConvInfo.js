@@ -12,6 +12,7 @@ function useConvInfo() {
     data: convInfo,
     isPending,
     isError,
+    error,
   } = useQuery({
     queryKey: ["convInfo", friendUserId],
     queryFn: () => getConvInfoById({ myUserId, friendUserId }),
@@ -20,7 +21,7 @@ function useConvInfo() {
     staleTime: Infinity,
   });
 
-  return { convInfo, isPending, isError };
+  return { convInfo, isPending, isError, error };
 }
 
 export default useConvInfo;

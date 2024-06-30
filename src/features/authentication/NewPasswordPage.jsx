@@ -10,6 +10,7 @@ import { Controller, useForm } from "react-hook-form";
 import { MIN_PASSWORD_LENGTH } from "../../config";
 import ResetLinkExpired from "../../components/ResetLinkExpired";
 import useCheckRecovery from "./useCheckRecovery";
+import toast from "react-hot-toast";
 
 function ResetPassword() {
   const {
@@ -26,7 +27,6 @@ function ResetPassword() {
   });
 
   const { updateUser, isUpdating } = useUpdateUser();
-  const navigate = useNavigate();
 
   const { isRecovery, isLoading } = useCheckRecovery();
 
@@ -37,10 +37,8 @@ function ResetPassword() {
       { password: newPassword },
       {
         onSuccess: () => {
-          navigate("/");
-        },
-        onError: (err) => {
-          console.log(err);
+          toast.dismiss();
+          toast.success("Password updated successfully");
         },
       },
     );

@@ -3,12 +3,15 @@ import { useUser } from "../authentication/useUser";
 import { useRef, useState } from "react";
 import { useSendNewMessage } from "./useSendNewMessage";
 import { v4 as uuid } from "uuid";
-import { useQueryClient } from "@tanstack/react-query";
 import Loader from "../../components/Loader";
 import useConvInfo from "./useConvInfo";
 
 function MessageInputBar() {
-  const { convInfo, isPending: isPendingConvInfo, isError } = useConvInfo();
+  const {
+    convInfo,
+    isPending: isPendingConvInfo,
+    isError: isConvInfoError,
+  } = useConvInfo();
 
   const [newMessage, setNewMessage] = useState("");
   const { isSending, sendNewMessage } = useSendNewMessage();
@@ -17,7 +20,6 @@ function MessageInputBar() {
   const friendUserId = convInfo?.friendInfo?.id;
   const myUserId = user?.id;
   const inputRef = useRef(null);
-  const queryClient = useQueryClient();
 
   function handleSendNewMessage(e) {
     e.preventDefault();
@@ -37,29 +39,24 @@ function MessageInputBar() {
       optimistic: true,
     };
 
+    setNewMessage("");
+
     // Make the actual request to the server
     sendNewMessage(messageObj, {
-      onSuccess: (newMessage) => {
-        // when conversation id is null, it means the conversation is new. So update the convInfo query data with the new conversation id
-        if (!conversationId) {
-          queryClient.setQueryData(["convInfo", friendUserId], (prevData) => {
-            return {
-              ...prevData,
-              id: newMessage.conversation_id,
-            };
-          });
-        }
+      onError: (_, message) => {
+        setNewMessage(message.content);
       },
     });
-
-    setNewMessage("");
   }
+
+  if (isConvInfoError) return null;
 
   return (
     <div className="px-4 py-2">
       <form className="mx-auto grid max-w-3xl grid-cols-[1fr_auto] overflow-hidden rounded-full border bg-lightSlate shadow-md dark:border-borderShade-dark dark:bg-lightSlate-dark">
         <label htmlFor="inputMessage" className="sr-only" />
         <input
+          disabled={isPendingConvInfo}
           className="h-12 w-full bg-transparent pl-4 pr-2 outline-none"
           ref={inputRef}
           value={newMessage}
