@@ -76,41 +76,42 @@ function Messages() {
     );
 
   return (
-    <div tabIndex={-1} className="grid grid-cols-1 items-end overflow-y-auto">
-      <div className="mx-auto flex w-full max-w-3xl flex-col px-4">
-        {pages && !pages[0] && (
-          <span className="my-4 flex select-none items-center justify-center opacity-60">
-            No messages yet
-          </span>
-        )}
+    <div
+      tabIndex={-1}
+      className="mx-auto grid w-full max-w-3xl grid-cols-1 grid-rows-1 items-end overflow-y-auto px-4"
+    >
+      {pages && !pages[0] && (
+        <span className="my-4 flex select-none items-center justify-center opacity-60">
+          No messages yet
+        </span>
+      )}
 
-        {pages && pages[0] && (
-          <>
-            {hasNextPage && (
-              <span ref={topRef}>{isFetchingNextPage && <Loader />}</span>
-            )}
+      {pages && pages[0] && (
+        <>
+          {hasNextPage && (
+            <span ref={topRef}>{isFetchingNextPage && <Loader />}</span>
+          )}
 
-            {pages.map((page, index) =>
-              page.length ? (
-                <span key={index} className="flex w-full flex-col">
-                  {page.map((message) => (
-                    <MessageItem key={message.id} message={message} />
-                  ))}
+          {pages.map((page, index) =>
+            page.length ? (
+              <span key={index} className="flex w-full flex-col">
+                {page.map((message) => (
+                  <MessageItem key={message.id} message={message} />
+                ))}
 
-                  {index === 0 && <span ref={lastPageBtm}></span>}
-                </span>
-              ) : (
-                <span
-                  key={index}
-                  className="mx-auto my-4 h-2 w-2 select-none  rounded bg-lightSlate opacity-60 dark:bg-lightSlate-dark"
-                ></span>
-              ),
-            )}
-          </>
-        )}
+                {index === 0 && <span ref={lastPageBtm}></span>}
+              </span>
+            ) : (
+              <span
+                key={index}
+                className="mx-auto my-4 h-2 w-2 select-none  rounded bg-lightSlate opacity-60 dark:bg-lightSlate-dark"
+              ></span>
+            ),
+          )}
+        </>
+      )}
 
-        <span ref={bottomRef}></span>
-      </div>
+      <span ref={bottomRef}></span>
     </div>
   );
 }
