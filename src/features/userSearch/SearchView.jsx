@@ -2,41 +2,30 @@ import { useSearchedUsers } from "./useSearchedUsers";
 import Loader from "../../components/Loader";
 import UserItem from "../../components/UserItem";
 import { useUi } from "../../contexts/UiContext";
+import ShortTextMessage from "../../components/ShortTextMessage";
 
 function SearchView() {
   const { users, isShortQuery, isLoading, error } = useSearchedUsers();
   const { closeSearchView } = useUi();
 
   if (isShortQuery) {
-    return (
-      <RenderMessage>
-        <p>Search for people</p>
-      </RenderMessage>
-    );
+    return <ShortTextMessage>Search for people</ShortTextMessage>;
   }
 
   if (isLoading) {
     return (
-      <RenderMessage>
+      <ShortTextMessage opacity={100}>
         <Loader text="Loading" size="medium" />
-      </RenderMessage>
+      </ShortTextMessage>
     );
   }
 
   if (error) {
-    return (
-      <RenderMessage>
-        <p>Something went wrong</p>
-      </RenderMessage>
-    );
+    return <ShortTextMessage>⚠️ Something went wrong</ShortTextMessage>;
   }
 
   if (!users.length) {
-    return (
-      <RenderMessage>
-        <p>No users found</p>
-      </RenderMessage>
-    );
+    return <ShortTextMessage>No users found!</ShortTextMessage>;
   }
 
   return (
@@ -53,14 +42,6 @@ function SearchView() {
         />
       ))}
     </div>
-  );
-}
-
-function RenderMessage({ children }) {
-  return (
-    <span className="fadeIn mt-4 flex items-center justify-center">
-      {children}
-    </span>
   );
 }
 

@@ -2,6 +2,7 @@ import { useConversations } from "./useConversations";
 import { useUi } from "../../contexts/UiContext";
 import Loader from "../../components/Loader";
 import UserItem from "../../components/UserItem";
+import ShortTextMessage from "../../components/ShortTextMessage";
 
 function Users() {
   const { conversations, isPending } = useConversations();
@@ -14,10 +15,14 @@ function Users() {
       </h2>
 
       <div tabIndex={-1} className="h-full overflow-auto p-2">
+        {!conversations?.length && !isPending && (
+          <ShortTextMessage>No chats yet</ShortTextMessage>
+        )}
+
         {isPending && (
-          <span className="mt-8 flex flex-col items-center justify-center">
+          <ShortTextMessage opacity={100}>
             <Loader size="medium" text="Loading chats" />
-          </span>
+          </ShortTextMessage>
         )}
 
         {!isPending &&

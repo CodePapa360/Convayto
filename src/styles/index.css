@@ -181,6 +181,21 @@ body {
   }
 }
 
+.slideUpMessage {
+  animation: slideUpMessageAmin 0.2s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes slideUpMessageAmin {
+  0% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 /* //////////// slide in animation //////// */
 .slideIn {
   animation: slideInAnimation 0.5s cubic-bezier(0.15, 0.72, 0.08, 0.99);

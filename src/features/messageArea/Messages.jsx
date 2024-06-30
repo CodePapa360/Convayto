@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Loader from "../../components/Loader";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import useScrollBehavior from "./useScrollBehavior";
+import ShortTextMessage from "../../components/ShortTextMessage";
 
 function Messages() {
   const {
@@ -57,12 +58,7 @@ function Messages() {
   // show an error message when there is an error
   /////////////
 
-  if (error)
-    return (
-      <span className="flex items-center justify-center opacity-60">
-        ⚠️ {error.message}
-      </span>
-    );
+  if (error) return <ShortTextMessage>⚠️ {error.message}</ShortTextMessage>;
 
   /////////////
   // show a loader when fetching the first page
@@ -70,9 +66,9 @@ function Messages() {
 
   if (isLoading)
     return (
-      <span className="mb-4 flex items-center justify-center">
+      <ShortTextMessage opacity={100}>
         <Loader size="medium" text="Loading messages" />
-      </span>
+      </ShortTextMessage>
     );
 
   return (
@@ -81,9 +77,7 @@ function Messages() {
       className="mx-auto grid w-full max-w-3xl grid-cols-1 grid-rows-[auto] items-end overflow-y-auto px-4"
     >
       {pages && !pages[0] && (
-        <span className="my-4 flex select-none items-center justify-center opacity-60">
-          No messages yet
-        </span>
+        <ShortTextMessage>No messages yet</ShortTextMessage>
       )}
 
       {pages && pages[0] && (
