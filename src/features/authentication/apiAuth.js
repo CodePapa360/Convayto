@@ -66,7 +66,13 @@ export async function getUserById(friendUserId) {
     .eq("id", friendUserId);
 
   if (error) {
-    throw new Error(error.message);
+    // code: 22P02 = User doesn't exist.
+
+    if (error.code == "22P02") {
+      throw new Error("User doesn't exist!");
+    } else {
+      throw new Error(error.message);
+    }
   }
 
   return data[0];

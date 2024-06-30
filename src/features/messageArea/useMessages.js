@@ -5,7 +5,11 @@ import { subscribeRealtimeMessage } from "./apiRealtimeMessage";
 import useConvInfo from "./useConvInfo";
 
 export function useMessages() {
-  const { convInfo, isPending: isPendingConvInfo, isError } = useConvInfo();
+  const {
+    convInfo,
+    isPending: isPendingConvInfo,
+    error: convError,
+  } = useConvInfo();
 
   const conversation_id = convInfo?.id;
   const friendUserId = convInfo?.friendInfo?.id;
@@ -26,7 +30,7 @@ export function useMessages() {
 
   const {
     data: { pages } = {},
-    error,
+    error: messagesError,
     fetchNextPage,
     hasNextPage,
     isFetching,
@@ -38,8 +42,6 @@ export function useMessages() {
     queryFn: ({ pageParam }) => getMessages({ conversation_id, pageParam }),
 
     select: (data) => {
-      // console.log("Data", data);
-
       if (!data || data.pages.length < 2) return data;
       return {
         pages: [...data.pages].reverse(),
@@ -54,13 +56,6 @@ export function useMessages() {
     // it should depend and wait untill the conversation_id and friendUserId are available
     enabled: !!friendUserId,
   });
-
-  if (error) {
-    console.error(
-      "Error fetching conversations (from custom hook)",
-      error.message,
-    );
-  }
 
   /////////////////////////////
   // Realtime subscription //
@@ -128,7 +123,7 @@ export function useMessages() {
     isFetching,
     isPending,
     isLoading,
-    error,
+    error: convError || messagesError,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,

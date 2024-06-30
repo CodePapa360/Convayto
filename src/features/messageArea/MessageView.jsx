@@ -7,9 +7,7 @@ function MessageView() {
     <div className="relative col-span-2 grid h-screen-safe w-full grid-cols-1 grid-rows-[auto_1fr_auto] overflow-hidden md:col-span-1">
       <MessageTopBar />
 
-      <div tabIndex={-1} className="grid grid-cols-1 items-end overflow-y-auto">
-        <Messages />
-      </div>
+      <Messages />
 
       <MessageInputBar />
     </div>
