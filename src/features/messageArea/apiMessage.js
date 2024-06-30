@@ -70,8 +70,6 @@ export async function sendMessage({
     convId = newConvId;
   }
 
-  // throw new Error("This is a test error message. Please ignore.");
-
   const { data, error } = await supabase
     .from("messages")
     .insert([{ id, conversation_id: convId, content }])
