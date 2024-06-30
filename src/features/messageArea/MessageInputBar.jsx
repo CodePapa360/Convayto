@@ -8,7 +8,11 @@ import Loader from "../../components/Loader";
 import useConvInfo from "./useConvInfo";
 
 function MessageInputBar() {
-  const { convInfo, isPending: isPendingConvInfo, isError } = useConvInfo();
+  const {
+    convInfo,
+    isPending: isPendingConvInfo,
+    isError: isConvInfoError,
+  } = useConvInfo();
 
   const [newMessage, setNewMessage] = useState("");
   const { isSending, sendNewMessage } = useSendNewMessage();
@@ -55,11 +59,14 @@ function MessageInputBar() {
     setNewMessage("");
   }
 
+  if (isConvInfoError) return null;
+
   return (
     <div className="px-4 py-2">
       <form className="mx-auto grid max-w-3xl grid-cols-[1fr_auto] overflow-hidden rounded-full border bg-lightSlate shadow-md dark:border-borderShade-dark dark:bg-lightSlate-dark">
         <label htmlFor="inputMessage" className="sr-only" />
         <input
+          disabled={isPendingConvInfo}
           className="h-12 w-full bg-transparent pl-4 pr-2 outline-none"
           ref={inputRef}
           value={newMessage}
