@@ -60,7 +60,7 @@ function Messages() {
   if (error)
     return (
       <span className="flex items-center justify-center opacity-60">
-        {error.message}
+        ⚠️ {error.message}
       </span>
     );
 
