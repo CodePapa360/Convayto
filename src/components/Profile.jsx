@@ -2,7 +2,6 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 import { useEnterKeyPress } from "../utils/useEnterKeyPress";
 
 function Profile({ onClick, userData }) {
-  // const { fullname, username, avatar_url } = userData;
   const fullname = userData?.fullname;
   const username = userData?.username;
   const avatar_url = userData?.avatar_url;
