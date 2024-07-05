@@ -72,7 +72,7 @@ function Signin() {
               type="text"
               value={field.value || ""}
               onChange={field.onChange}
-              placeholder="Email address"
+              placeholder="Email"
               htmlFor="email"
               error={errors.email?.message}
               onBlur={() => trigger("email")}

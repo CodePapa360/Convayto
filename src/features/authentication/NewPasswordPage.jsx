@@ -92,7 +92,7 @@ function ResetPassword() {
                 value={field.value}
                 onChange={field.onChange}
                 onBlur={() => trigger("confirmPassword")}
-                placeholder="Confirm new password"
+                placeholder="Confirm password"
                 htmlFor="confirmPassword"
                 error={errors.confirmPassword?.message}
               />

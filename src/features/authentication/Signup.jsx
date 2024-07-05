@@ -176,7 +176,7 @@ function Signup() {
               value={field.value}
               onChange={field.onChange}
               onBlur={() => trigger("email")}
-              placeholder="email"
+              placeholder="Email"
               htmlFor="email"
               error={errors.email?.message}
             />
