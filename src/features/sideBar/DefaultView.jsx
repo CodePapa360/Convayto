@@ -2,9 +2,9 @@ import { useUi } from "../../contexts/UiContext";
 import SearchView from "../userSearch/SearchView";
 import Header from "./Header";
 import SearchBox from "./SearchBox";
-import Users from "./Users";
+import UsersView from "./UsersView";
 
-function ChatView() {
+function DefaultView() {
   const { isSearchViewOpen } = useUi();
 
   return (
@@ -15,10 +15,10 @@ function ChatView() {
       </div>
 
       <div className="h-full overflow-auto">
-        {isSearchViewOpen ? <SearchView /> : <Users />}
+        {isSearchViewOpen ? <SearchView /> : <UsersView />}
       </div>
     </div>
   );
 }
 
-export default ChatView;
+export default DefaultView;

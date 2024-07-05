@@ -64,10 +64,6 @@ export function useConversations() {
     [myUserId, queryClient],
   );
 
-  if (error) {
-    console.error("Error fetching conversations:", error.message);
-  }
-
   /////////////
   // Prefetching
   /////////////
@@ -99,5 +95,5 @@ export function useConversations() {
   }, [data, queryClient, myUserId]);
   // prefetch ends
 
-  return { conversations: data, isPending };
+  return { conversations: data, isPending, error };
 }
