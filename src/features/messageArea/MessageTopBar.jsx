@@ -7,7 +7,7 @@ import Profile from "../../components/Profile";
 import IconButton from "../../components/IconButton";
 
 function MessageTopBar() {
-  const { convInfo, isPending, isError } = useConvInfo();
+  const { convInfo, isPending } = useConvInfo();
   const { openFriendSidebar, isFriendsSidebarOpen, openSidebar } = useUi();
 
   const friend = convInfo?.friendInfo;
