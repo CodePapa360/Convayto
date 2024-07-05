@@ -11,7 +11,7 @@ function Signout() {
 
   return (
     <button
-      className="flex flex-shrink-0 items-center justify-center gap-2 rounded-full p-3 hover:bg-black/10 dark:hover:bg-lightSlate/10"
+      className="flex flex-shrink-0 items-center justify-center gap-2 rounded-full border border-slate-500/20 bg-slate-500/5 p-3 shadow-sm  hover:bg-black/10 dark:hover:bg-lightSlate/10"
       disabled={isPending}
       onClick={handleSignout}
     >

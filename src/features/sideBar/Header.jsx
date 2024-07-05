@@ -27,7 +27,7 @@ function Header() {
   }
 
   return (
-    <div className="mb-2 flex items-center justify-between gap-2">
+    <div className="mb-4 flex items-center justify-between gap-2">
       <div className="relative">
         <IconButton onClick={handleMenuBtnClick}>
           {isSearchViewOpen && <IconButton.Back />}

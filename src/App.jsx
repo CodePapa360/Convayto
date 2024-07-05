@@ -19,7 +19,7 @@ function App() {
   return (
     <UiProvider>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         <Toaster
           position="top-center"
           toastOptions={{

@@ -15,17 +15,17 @@ function FriendProfileBar({ friend }) {
     <ToggleableContent isOpen={isFriendsSidebarOpen} toggle={handleCloseBar}>
       <div
         className={
-          "slideIn absolute top-0 z-30 grid h-screen-safe w-4/5 grid-rows-[auto_1fr] overflow-hidden bg-mediumSlate opacity-0 transition-all dark:bg-mediumSlate-dark sm:w-[21rem]"
+          "slideIn absolute top-0 z-30 grid h-screen-safe w-4/5 grid-rows-[auto_1fr] overflow-hidden bg-white opacity-0 shadow-[-10px_0px_15px_-3px_rgba(0,0,0,0.1),-10px_0px_6px_-2px_rgba(0,0,0,0.05)] transition-all dark:bg-slate-900 sm:w-[21rem]"
         }
       >
-        <div className="flex h-16 items-center justify-start gap-4 bg-mediumSlate p-2 dark:bg-mediumSlate-dark">
+        <div className="flex h-16 items-center justify-start gap-4 rounded-b-lg bg-slate-100 p-2 dark:bg-slate-800">
           <IconButton onClick={handleCloseBar}>
             <IconButton.Close />
           </IconButton>
           <p className="select-none font-bold tracking-wider">Profile</p>
         </div>
 
-        <div className="h-full overflow-scroll p-4">
+        <div className="h-full overflow-scroll p-10">
           <div className="mx-auto mt-4 h-52 w-52 overflow-hidden rounded-full border-2 border-textViolet dark:border-textViolet-dark">
             {avatar_url ? (
               <img
@@ -46,21 +46,21 @@ function FriendProfileBar({ friend }) {
             <p className="select-none  text-sm font-bold tracking-wider text-textViolet opacity-80 dark:text-textViolet-dark">
               Name
             </p>
-            <p className="truncate px-2 text-base">{fullname}</p>
+            <p className="truncate text-base">{fullname}</p>
           </div>
 
           <div className="mt-4">
             <p className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark">
               Username
             </p>
-            <p className="truncate px-2 text-base">{username}</p>
+            <p className="truncate text-base">{username}</p>
           </div>
 
           <div className="mt-4">
             <p className="select-none text-sm font-bold tracking-wider text-textViolet  opacity-80 dark:text-textViolet-dark">
               Bio
             </p>
-            <p className="break-all px-2 text-base">{bio}</p>
+            <p className="break-all text-base">{bio}</p>
           </div>
         </div>
       </div>

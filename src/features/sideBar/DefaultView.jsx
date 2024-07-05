@@ -9,7 +9,7 @@ function DefaultView() {
 
   return (
     <div className="relative z-30 grid h-screen-safe select-none grid-cols-1 grid-rows-[auto_1fr] overflow-hidden">
-      <div className="border-b border-borderShade p-2 dark:border-borderShade-dark">
+      <div className="px-2 py-4">
         <Header />
         <SearchBox />
       </div>

@@ -27,15 +27,15 @@ function MyAccountView() {
   const { closeAccountView } = useUi();
 
   return (
-    <div className="fadeIn grid h-screen-safe grid-rows-[auto_1fr] ">
-      <div className="flex h-16 items-center justify-start gap-4 p-2 dark:bg-slate-700">
+    <div className="fadeIn grid h-screen-safe grid-rows-[auto_1fr] bg-white dark:bg-slate-900">
+      <div className="flex h-16 items-center justify-start gap-4 rounded-b-lg bg-slate-100 p-2 dark:bg-slate-800">
         <IconButton onClick={closeAccountView}>
           <IconButton.Back />
         </IconButton>
         <p className="select-none font-bold tracking-wider">Profile</p>
       </div>
 
-      <div tabIndex={-1} className="h-full overflow-scroll p-4">
+      <div tabIndex={-1} className="h-full overflow-scroll p-10">
         <Avatar avatar={avatar_url} />
 
         <InfoField

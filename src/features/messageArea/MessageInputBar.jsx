@@ -53,7 +53,7 @@ function MessageInputBar() {
 
   return (
     <div className="px-4 py-2">
-      <form className="mx-auto grid max-w-3xl grid-cols-[1fr_auto] overflow-hidden rounded-full border bg-lightSlate shadow-md dark:border-borderShade-dark dark:bg-lightSlate-dark">
+      <form className="mx-auto grid max-w-3xl grid-cols-[1fr_auto] overflow-hidden rounded-full border border-transparent bg-white shadow-lg dark:border-slate-500/20 dark:bg-slate-500/30">
         <label htmlFor="inputMessage" className="sr-only" />
         <input
           disabled={isPendingConvInfo}
