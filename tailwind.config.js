@@ -8,34 +8,69 @@ export default {
   theme: {
     extend: {
       colors: {
-        borderShade: {
-          DEFAULT: "rgba(0, 0, 0, 0.1)",
-          dark: "rgba(255, 255, 255, 0.1)",
-        },
-        lightSlate: {
-          DEFAULT: colors.slate[50],
-          dark: colors.slate[700],
-        },
-        mediumSlate: {
-          DEFAULT: colors.slate[200],
-          dark: colors.slate[800],
-        },
-        deepSlate: {
-          DEFAULT: colors.slate[400],
+        // borderShade: {
+        //   DEFAULT: "rgba(0, 0, 0, 0.1)",
+        //   dark: "rgba(255, 255, 255, 0.1)",
+        // },
+        // lightSlate: {
+        //   DEFAULT: colors.slate[50],
+        //   dark: colors.slate[700],
+        // },
+        // mediumSlate: {
+        //   DEFAULT: colors.slate[200],
+        //   dark: colors.slate[800],
+        // },
+        // deepSlate: {
+        //   DEFAULT: colors.slate[400],
+        //   dark: colors.slate[900],
+        // },
+        // darkViolet: {
+        //   DEFAULT: colors.violet[800],
+        //   dark: colors.violet[900],
+        // },
+        // textViolet: {
+        //   DEFAULT: colors.violet[800],
+        //   dark: colors.violet[500],
+        // },
+        // lightViolet: {
+        //   DEFAULT: colors.violet[600],
+        //   dark: colors.violet[700],
+        // },
+
+        // Background colors
+        bgPrimary: {
+          DEFAULT: colors.white,
           dark: colors.slate[900],
         },
-        darkViolet: {
+
+        bgSecondary: {
+          DEFAULT: colors.slate[200],
+          dark: colors.slate[950],
+        },
+
+        bgTertiary: {
+          DEFAULT: colors.slate[300],
+          dark: colors.slate[800],
+        },
+
+        bgAccent: {
           DEFAULT: colors.violet[800],
           dark: colors.violet[900],
         },
-        textViolet: {
+
+        // Text colors
+        textAccent: {
           DEFAULT: colors.violet[800],
           dark: colors.violet[500],
         },
-        lightViolet: {
-          DEFAULT: colors.violet[600],
-          dark: colors.violet[700],
+
+        textPrimary: {
+          DEFAULT: colors.black,
+          dark: colors.white,
         },
+
+        // It's slate-500 with 20% opacity so that it adapts to both dark and light mode
+        LightShade: "rgba(100, 116, 139, 0.2)",
       },
       screens: {
         xm: "320px",
