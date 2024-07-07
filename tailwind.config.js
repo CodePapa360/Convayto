@@ -44,18 +44,23 @@ export default {
         },
 
         bgSecondary: {
+          DEFAULT: colors.slate[100],
+          dark: colors.slate[800],
+        },
+
+        bgSecondaryDim: {
           DEFAULT: colors.slate[200],
           dark: colors.slate[950],
         },
 
-        bgTertiary: {
-          DEFAULT: colors.slate[300],
-          dark: colors.slate[800],
+        bgAccent: {
+          DEFAULT: colors.violet[600],
+          dark: colors.violet[900],
         },
 
-        bgAccent: {
-          DEFAULT: colors.violet[800],
-          dark: colors.violet[900],
+        bgAccentDim: {
+          DEFAULT: colors.violet[900],
+          dark: colors.violet[950],
         },
 
         // Text colors

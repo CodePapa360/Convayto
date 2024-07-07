@@ -23,7 +23,7 @@ function LeftSideBar() {
       <aside
         className={`${
           isSidebarOpen ? "left-0 opacity-100" : "-left-full opacity-0"
-        } absolute top-0 z-30 h-screen-safe w-full overflow-hidden bg-white shadow-lg transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] dark:bg-slate-900 sm:w-[23rem] md:relative md:left-0 md:opacity-100`}
+        } absolute top-0 z-30 h-screen-safe w-full overflow-hidden bg-bgPrimary shadow-lg transition-all duration-500 ease-[cubic-bezier(.15,.72,.08,.99)] dark:bg-bgPrimary-dark sm:w-[23rem] md:relative md:left-0 md:opacity-100`}
       >
         {isAccountViewOpen ? <MyAccountView /> : <DefaultView />}
       </aside>
