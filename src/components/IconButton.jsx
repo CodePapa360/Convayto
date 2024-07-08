@@ -4,7 +4,7 @@ function IconButton({ children, onClick, addClass = "" }) {
   return (
     <button
       onClick={onClick}
-      className={`${addClass} relative z-50 flex flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-black/10 dark:hover:bg-lightSlate/10`}
+      className={`${addClass} relative z-50 flex flex-shrink-0 items-center justify-center rounded-full text-lg hover:bg-LightShade/20`}
     >
       {children}
     </button>

@@ -28,7 +28,7 @@ function MyAccountView() {
 
   return (
     <div className="fadeIn grid h-screen-safe grid-rows-[auto_1fr] bg-bgPrimary dark:bg-bgPrimary-dark">
-      <div className="flex h-16 items-center justify-start gap-4 bg-LightShade/10 py-2">
+      <div className="flex h-16 items-center justify-start gap-4 bg-LightShade/10 p-2">
         <IconButton onClick={closeAccountView}>
           <IconButton.Back />
         </IconButton>
