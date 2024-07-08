@@ -8,9 +8,9 @@ function MessageItem({ message }) {
     <div
       className={`${
         message?.sender_id === user.id
-          ? "to-bgAccentDim dark:to-bgAccentDim-dark self-end rounded-br-none bg-gradient-to-br from-bgAccent text-textPrimary-dark dark:from-bgAccent-dark"
-          : "rounded-bl-none bg-LightShade"
-      } my-1 w-fit max-w-[80%] rounded-2xl px-4 py-2`}
+          ? "self-end rounded-br-none bg-gradient-to-br from-bgAccent to-bgAccentDim text-textPrimary-dark dark:from-bgAccent-dark dark:to-bgAccentDim-dark"
+          : "rounded-bl-none bg-bgPrimary dark:bg-LightShade/20"
+      } my-1 w-fit max-w-[80%] rounded-2xl px-4 py-2 shadow-md`}
     >
       <p>
         {message?.content}

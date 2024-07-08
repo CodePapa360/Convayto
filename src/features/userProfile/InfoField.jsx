@@ -104,7 +104,7 @@ function InfoField({
       <div className="flex h-11 items-center justify-between">
         <label
           htmlFor={updateKey}
-          className="select-none text-sm font-bold tracking-wider text-textViolet opacity-80 dark:text-textViolet-dark"
+          className="select-none text-sm font-bold tracking-wider text-textAccentDim opacity-80 dark:text-textAccentDim-dark"
         >
           {label}
         </label>
@@ -112,8 +112,8 @@ function InfoField({
           <button
             disabled={isUpdating || isBusy || isTaken}
             type="submit"
-            className="flex h-11 w-11 items-center justify-center rounded-full text-xl text-textViolet 
-            hover:bg-black/10 dark:text-textViolet-dark dark:hover:bg-lightSlate/10"
+            className="dark:hover:bg-lightSlate/10 flex h-11 w-11 items-center justify-center rounded-full text-xl 
+            text-textAccentDim hover:bg-black/10 dark:text-textAccentDim-dark"
           >
             {isUpdating ? (
               <Loader />
@@ -173,14 +173,14 @@ function InfoField({
                   maxLength={maxLength}
                   className={`${
                     errors[updateKey] && errors[updateKey].type !== "checking"
-                      ? "border-red-500"
-                      : "border-textViolet dark:border-textViolet-dark"
-                  } h-10 w-full rounded-md border-b-2 bg-lightSlate px-2 text-base text-deepSlate-dark outline-none dark:bg-lightSlate-dark dark:text-lightSlate`}
+                      ? "border-RedError"
+                      : "border-textAccentDim dark:border-textAccentDim-dark"
+                  } h-10 w-full rounded-md border-b-2 bg-bgSecondary px-2 text-base text-textPrimary outline-none dark:bg-LightShade/20 dark:text-textPrimary-dark`}
                 />
               )}
             />
 
-            <span className="mt-3 flex w-11 select-none items-start justify-center text-xs opacity-60">
+            <span className="mt-3 flex w-11 select-none items-start justify-center text-xs text-textAccentDim opacity-60 dark:text-textAccentDim-dark">
               {maxLength - currentValue.length}
             </span>
           </div>
@@ -189,8 +189,8 @@ function InfoField({
             <p
               className={`mt-1 text-xs ${
                 errors[updateKey].type === "checking"
-                  ? "text-textViolet-dark"
-                  : "text-red-500"
+                  ? "text-textAccentDim-dark"
+                  : "text-RedError"
               }`}
             >
               {errors[updateKey].message}

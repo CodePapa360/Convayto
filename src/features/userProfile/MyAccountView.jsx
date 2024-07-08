@@ -27,8 +27,8 @@ function MyAccountView() {
   const { closeAccountView } = useUi();
 
   return (
-    <div className="fadeIn grid h-screen-safe grid-rows-[auto_1fr] bg-white dark:bg-slate-900">
-      <div className="flex h-16 items-center justify-start gap-4 rounded-b-lg bg-slate-100 p-2 dark:bg-slate-800">
+    <div className="fadeIn grid h-screen-safe grid-rows-[auto_1fr] bg-bgPrimary dark:bg-bgPrimary-dark">
+      <div className="flex h-16 items-center justify-start gap-4 bg-LightShade/10 py-2">
         <IconButton onClick={closeAccountView}>
           <IconButton.Back />
         </IconButton>
