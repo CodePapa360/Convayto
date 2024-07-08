@@ -17,7 +17,7 @@ function BtnRecoverPassword() {
     <button
       disabled={isPending || isSuccess}
       onClick={handleRequest}
-      className="mt-8 flex h-10 items-center gap-2 rounded-md bg-textViolet px-4 text-lightSlate hover:bg-textViolet/50 disabled:bg-gray-500/30 disabled:opacity-70"
+      className="mt-8 flex h-10 items-center gap-2 rounded-md bg-bgAccent px-4 text-textPrimary-dark hover:bg-bgAccentDim disabled:bg-LightShade/50 disabled:text-textPrimary disabled:opacity-70 disabled:dark:text-textPrimary-dark"
     >
       {isPending && (
         <>
