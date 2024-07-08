@@ -26,8 +26,8 @@ function UserItem({
     <div
       className={`${
         isActiveUser
-          ? "sm:from-bgAccentDim bg-gradient-to-r text-textPrimary-dark sm:to-bgAccent"
-          : "hover:bg-LightShade"
+          ? "bg-gradient-to-r text-textPrimary-dark sm:from-bgAccentDim sm:to-bgAccent"
+          : "hover:bg-LightShade/20"
       } flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 `}
       onClick={handleClick}
       onKeyDown={handleKeyDown}

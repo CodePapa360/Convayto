@@ -3,7 +3,7 @@ function SubmitBtn({ children, type = "submit", disabled = false }) {
     <button
       type={type}
       disabled={disabled}
-      className="mb-4 flex items-center justify-center rounded-md bg-lightViolet p-3 font-bold uppercase leading-6 tracking-wider text-lightSlate transition-all duration-200 hover:bg-darkViolet active:scale-95 disabled:pointer-events-none disabled:bg-darkViolet dark:bg-lightViolet-dark"
+      className="mb-4 flex items-center justify-center rounded-md bg-bgAccent p-3 font-bold uppercase leading-6 tracking-wider text-textPrimary-dark transition-all duration-200 hover:bg-bgAccent-dark active:scale-95 disabled:pointer-events-none disabled:bg-bgAccent/50"
     >
       {children}
     </button>

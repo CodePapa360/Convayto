@@ -53,6 +53,8 @@ export default {
           dark: colors.slate[950],
         },
 
+        bgTertiary: colors.slate[800],
+
         bgAccent: {
           DEFAULT: colors.violet[600],
           dark: colors.violet[900],
@@ -65,6 +67,11 @@ export default {
 
         // Text colors
         textAccent: {
+          DEFAULT: colors.violet[600],
+          dark: colors.violet[700],
+        },
+
+        textAccentDim: {
           DEFAULT: colors.violet[800],
           dark: colors.violet[500],
         },
@@ -74,8 +81,15 @@ export default {
           dark: colors.white,
         },
 
-        // It's slate-500 with 20% opacity so that it adapts to both dark and light mode
-        LightShade: "rgba(100, 116, 139, 0.2)",
+        LightGray: {
+          DEFAULT: colors.slate[500],
+          dark: colors.slate[400],
+        },
+
+        // Always use opacity manually in the element to manipulate it.
+        LightShade: colors.slate[500],
+
+        RedError: colors.red[500],
       },
       screens: {
         xm: "320px",

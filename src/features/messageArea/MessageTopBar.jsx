@@ -23,7 +23,7 @@ function MessageTopBar() {
 
   return (
     <>
-      <div className="z-10 flex min-h-20 select-none items-center gap-2 rounded-b-xl border-b border-l border-r border-transparent bg-white p-2 shadow-lg dark:border-slate-800/90 dark:bg-slate-900">
+      <div className="z-10 flex min-h-20 select-none items-center gap-2 rounded-b-xl border-b border-l border-r border-transparent bg-bgPrimary p-2 shadow-lg dark:border-slate-800/90 dark:bg-bgPrimary-dark">
         <IconButton addClass="md:hidden" onClick={handleGoBack}>
           <IconButton.Back />
         </IconButton>
