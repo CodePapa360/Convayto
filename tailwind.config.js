@@ -8,35 +8,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        // borderShade: {
-        //   DEFAULT: "rgba(0, 0, 0, 0.1)",
-        //   dark: "rgba(255, 255, 255, 0.1)",
-        // },
-        // lightSlate: {
-        //   DEFAULT: colors.slate[50],
-        //   dark: colors.slate[700],
-        // },
-        // mediumSlate: {
-        //   DEFAULT: colors.slate[200],
-        //   dark: colors.slate[800],
-        // },
-        // deepSlate: {
-        //   DEFAULT: colors.slate[400],
-        //   dark: colors.slate[900],
-        // },
-        // darkViolet: {
-        //   DEFAULT: colors.violet[800],
-        //   dark: colors.violet[900],
-        // },
-        // textViolet: {
-        //   DEFAULT: colors.violet[800],
-        //   dark: colors.violet[500],
-        // },
-        // lightViolet: {
-        //   DEFAULT: colors.violet[600],
-        //   dark: colors.violet[700],
-        // },
-
         // Background colors
         bgPrimary: {
           DEFAULT: colors.white,
@@ -86,11 +57,11 @@ export default {
           dark: colors.slate[400],
         },
 
-        // Always use opacity manually in the element to manipulate it.
-        LightShade: colors.slate[500],
-
         RedColor: colors.red[500],
         GreenColor: colors.green[500],
+
+        // Always use opacity manually in the element to manipulate it.
+        LightShade: colors.slate[500],
       },
       screens: {
         xm: "320px",

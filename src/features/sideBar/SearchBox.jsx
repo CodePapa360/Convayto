@@ -20,7 +20,7 @@ function SearchBox() {
       </label>
       <input
         id="searchPeople"
-        className="focus:ring-darkViolet dark:focus:ring-textViolet-dark flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-LightShade/20 bg-LightShade/10 p-2 pl-9 outline-none transition-all duration-200 ease-in-out focus:ring-2 focus:ring-bgAccent"
+        className="flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-LightShade/20 bg-LightShade/10 p-2 pl-9 outline-none transition-all duration-200 ease-in-out focus:ring-2 focus:ring-bgAccent"
         value={searchQuery}
         onChange={(e) => updateSearchQuery(e.target.value)}
         type="text"

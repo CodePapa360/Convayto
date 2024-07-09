@@ -99,7 +99,7 @@ function Messages() {
               ) : (
                 <span
                   key={index}
-                  className="dark:bg-lightSlate-dark mx-auto my-4 h-2 w-2 select-none rounded bg-LightShade/50 opacity-50"
+                  className="mx-auto my-4 h-2 w-2 select-none rounded bg-LightShade/50 opacity-50"
                 ></span>
               ),
             )}
