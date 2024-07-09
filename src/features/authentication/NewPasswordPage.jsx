@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { useUpdateUser } from "../userProfile/useUpdateUser";
 import FormContainer from "../../components/FormContainer";

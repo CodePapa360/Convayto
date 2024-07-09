@@ -68,12 +68,12 @@ export default {
         // Text colors
         textAccent: {
           DEFAULT: colors.violet[600],
-          dark: colors.violet[700],
+          dark: colors.violet[500],
         },
 
         textAccentDim: {
           DEFAULT: colors.violet[800],
-          dark: colors.violet[500],
+          dark: colors.violet[700],
         },
 
         textPrimary: {

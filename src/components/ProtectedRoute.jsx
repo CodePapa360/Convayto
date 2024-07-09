@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useUser } from "../features/authentication/useUser";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
+import MainContainer from "./MainContainer";
 
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();
@@ -21,9 +22,9 @@ function ProtectedRoute({ children }) {
   //3. While loading, show spinner
   if (isLoading)
     return (
-      <p className="flex min-h-screen-safe items-center justify-center bg-mediumSlate text-mediumSlate-dark dark:bg-mediumSlate-dark dark:text-mediumSlate">
-        <Loader size="large" text="Loading app" />
-      </p>
+      <MainContainer>
+        <Loader size="large" text="Loading" />
+      </MainContainer>
     );
 
   //4. if there is a user, render the app

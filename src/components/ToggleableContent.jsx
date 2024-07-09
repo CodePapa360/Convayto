@@ -22,7 +22,7 @@ export default function ToggleableContent({
         <div
           tabIndex={-1}
           onTouchStart={() => toggle()}
-          className={`fixed inset-0 z-20 bg-black md:hidden opacity-${withOverlay ? 40 : 0}`}
+          className={`fixed inset-0 z-20 bg-black/5 md:hidden opacity-${withOverlay ? 40 : 0}`}
         />
       )}
       <div ref={ref}>{children}</div>
