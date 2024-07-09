@@ -173,7 +173,7 @@ function InfoField({
                   maxLength={maxLength}
                   className={`${
                     errors[updateKey] && errors[updateKey].type !== "checking"
-                      ? "border-RedError"
+                      ? "border-RedColor"
                       : "border-textAccentDim dark:border-textAccentDim-dark"
                   } h-10 w-full rounded-md border-b-2 bg-bgSecondary px-2 text-base text-textPrimary outline-none dark:bg-LightShade/20 dark:text-textPrimary-dark`}
                 />
@@ -190,7 +190,7 @@ function InfoField({
               className={`mt-1 text-xs ${
                 errors[updateKey].type === "checking"
                   ? "text-textAccentDim-dark"
-                  : "text-RedError"
+                  : "text-RedColor"
               }`}
             >
               {errors[updateKey].message}

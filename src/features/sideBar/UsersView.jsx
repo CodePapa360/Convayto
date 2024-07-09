@@ -3,7 +3,7 @@ import UserList from "./UserList";
 function UsersView() {
   return (
     <div className="grid h-full grid-rows-[auto_1fr]">
-      <h2 className="border-b border-t border-slate-500/20 p-2 text-lg">
+      <h2 className="border-b border-t border-LightShade/20 p-2 text-lg">
         Chats
       </h2>
 

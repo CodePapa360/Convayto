@@ -12,13 +12,13 @@ function Profile({ onClick, userData }) {
 
   return (
     <div
-      className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] gap-4 truncate rounded-lg border border-slate-500/20 bg-slate-500/5 p-2 shadow-sm  hover:bg-black/10 dark:hover:bg-lightSlate/10"
+      className="mr-auto grid cursor-pointer grid-cols-[2.5rem_1fr] gap-4 truncate rounded-lg border border-LightShade/20 bg-LightShade/5 p-2 hover:bg-LightShade/20"
       onClick={onClick}
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
     >
-      <div className="h-11 w-11 overflow-hidden rounded-full text-black  dark:text-white">
+      <div className="h-11 w-11 overflow-hidden rounded-full">
         {avatar_url ? (
           <img
             draggable="false"

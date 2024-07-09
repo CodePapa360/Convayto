@@ -1,4 +1,4 @@
-import { RiLoaderFill } from "react-icons/ri";
+import { RiLoader4Fill } from "react-icons/ri";
 
 function Loader({ size = "small", text = "", customClasses = "" }) {
   const sizes = {
@@ -9,7 +9,7 @@ function Loader({ size = "small", text = "", customClasses = "" }) {
 
   return (
     <span className={`flex items-center justify-center ${customClasses}`}>
-      <RiLoaderFill className={`${sizes[size]} animate-spin`} />
+      <RiLoader4Fill className={`${sizes[size]} animate-spin`} />
       {text && <span className="ml-2">{text}...</span>}
     </span>
   );

@@ -20,7 +20,7 @@ function SearchBox() {
       </label>
       <input
         id="searchPeople"
-        className="flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-slate-500/20 bg-slate-500/10 p-2 pl-9 shadow-sm outline-none transition-all duration-200 ease-in-out focus:ring-2 focus:ring-darkViolet  dark:focus:ring-textViolet-dark"
+        className="focus:ring-darkViolet dark:focus:ring-textViolet-dark flex w-full grow items-center justify-between self-stretch overflow-hidden rounded-full border border-LightShade/20 bg-LightShade/10 p-2 pl-9 outline-none transition-all duration-200 ease-in-out focus:ring-2 focus:ring-bgAccent"
         value={searchQuery}
         onChange={(e) => updateSearchQuery(e.target.value)}
         type="text"
@@ -30,7 +30,7 @@ function SearchBox() {
         ref={searchInputRef}
       />
 
-      <span className="pointer-events-none absolute left-3 top-3 text-xl opacity-40">
+      <span className="pointer-events-none absolute left-3 top-3 text-xl opacity-30">
         <RiSearchLine aria-label="search icon" />
       </span>
     </div>

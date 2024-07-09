@@ -4,16 +4,14 @@ import { Link } from "react-router-dom";
 
 function Menu({ children }) {
   return (
-    <div className="fadeIn absolute left-4 top-12 z-50 w-60 divide-y divide-gray-100 rounded-lg bg-white  p-2 shadow-[0_10px_60px_rgba(0,0,0,0.3)] dark:divide-gray-600  dark:bg-gray-700">
+    <div className="fadeIn absolute left-4 top-12 z-50 w-60 divide-y divide-LightShade/20 rounded-lg bg-bgPrimary p-2 shadow-[0_10px_60px_rgba(0,0,0,0.3)] dark:divide-LightShade/50  dark:bg-bgTertiary">
       {children}
     </div>
   );
 }
 
 function Header({ children }) {
-  return (
-    <div className="px-4 py-3 text-gray-900 dark:text-white">{children}</div>
-  );
+  return <div className="px-4 py-3 text-lg">{children}</div>;
 }
 
 function Name({ children }) {
@@ -26,10 +24,7 @@ function Email({ children }) {
 
 function List({ children }) {
   return (
-    <ul
-      className="py-2 text-base text-gray-700 dark:text-gray-200"
-      aria-labelledby="dropdownInformationButton"
-    >
+    <ul className="py-2" aria-labelledby="dropdownInformationButton">
       {children}
     </ul>
   );
@@ -40,7 +35,7 @@ function List({ children }) {
 ////////////
 
 const classes =
-  "focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 cursor-pointer flex w-full items-center gap-2 rounded-md px-4 py-2 text-base text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white";
+  "focus:outline-none cursor-pointer flex w-full items-center gap-2 rounded-md px-4 py-2 text-base hover:bg-LightShade/10 dark:hover:text-textPrimary-dark focus:ring-2 focus:ring-bgAccent";
 
 function LinkItem({ children, href }) {
   return (
@@ -100,7 +95,7 @@ function TogglerItem({ children, toggler, isChecked }) {
             tabIndex={-1}
             className="peer sr-only"
           />
-          <div className="peer h-5 w-9 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-500 dark:bg-gray-500  rtl:peer-checked:after:translate-x-[-100%]" />
+          <div className="peer h-5 w-9 rounded-full bg-LightShade/20 shadow-sm after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:bg-bgPrimary after:shadow-md after:transition-all after:content-[''] peer-checked:bg-bgAccent peer-checked:after:translate-x-full rtl:peer-checked:after:translate-x-[-100%]" />
         </div>
       </label>
     </li>
@@ -110,8 +105,8 @@ function TogglerItem({ children, toggler, isChecked }) {
 function Footer() {
   // footer will have the app name and version number
   return (
-    <div className="px-4 py-3 text-gray-900 dark:text-white">
-      <div className="truncate text-center text-xs opacity-70">
+    <div className="px-4 py-3">
+      <div className="truncate text-center text-xs opacity-60">
         ConverseMe v1.0.0
       </div>
     </div>

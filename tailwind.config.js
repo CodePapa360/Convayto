@@ -89,7 +89,8 @@ export default {
         // Always use opacity manually in the element to manipulate it.
         LightShade: colors.slate[500],
 
-        RedError: colors.red[500],
+        RedColor: colors.red[500],
+        GreenColor: colors.green[500],
       },
       screens: {
         xm: "320px",

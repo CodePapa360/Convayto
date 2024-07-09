@@ -53,7 +53,7 @@ function MessageInputBar() {
 
   return (
     <div className="px-4 py-2">
-      <form className="mx-auto grid max-w-3xl grid-cols-[1fr_auto] overflow-hidden rounded-full border border-transparent bg-white shadow-lg dark:border-slate-500/20 dark:bg-slate-500/30">
+      <form className="mx-auto grid max-w-3xl grid-cols-[1fr_auto] overflow-hidden rounded-full border border-transparent bg-bgPrimary shadow-lg dark:border-LightShade/20 dark:bg-LightShade/20">
         <label htmlFor="inputMessage" className="sr-only" />
         <input
           disabled={isPendingConvInfo}
@@ -68,7 +68,7 @@ function MessageInputBar() {
         />
 
         <button
-          className={`m-1 flex h-10 w-10 items-center justify-center rounded-full bg-lightViolet text-2xl text-white hover:bg-lightViolet/80 active:scale-95 disabled:opacity-70 dark:bg-lightViolet-dark`}
+          className={`m-1 flex h-10 w-10 items-center justify-center rounded-full bg-bgAccent text-2xl text-textPrimary-dark hover:bg-bgAccentDim active:scale-95 disabled:opacity-70 dark:bg-bgAccent-dark dark:hover:bg-bgAccentDim-dark`}
           disabled={isSending || isPendingConvInfo}
           onClick={handleSendNewMessage}
           type="submit"
