@@ -10,8 +10,10 @@ import { MIN_PASSWORD_LENGTH } from "../../config";
 import ResetLinkExpired from "../../components/ResetLinkExpired";
 import useCheckRecovery from "./useCheckRecovery";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function ResetPassword() {
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -38,17 +40,18 @@ function ResetPassword() {
         onSuccess: () => {
           toast.dismiss();
           toast.success("Password updated successfully");
+          navigate("/");
         },
       },
     );
   };
 
+  if (!isRecovery) return <ResetLinkExpired />;
+
   return (
     <MainContainer>
       {isLoading ? (
         <Loader size="large" text="Loading" />
-      ) : !isRecovery ? (
-        <ResetLinkExpired />
       ) : (
         <FormContainer onSubmit={handleSubmit(onSubmit)}>
           <Heading>Set new password</Heading>
