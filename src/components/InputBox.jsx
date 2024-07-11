@@ -9,7 +9,7 @@ function InputBox({
   disabled,
 }) {
   return (
-    <div className="input-container mb-4 w-full">
+    <div className="input-container mb-6 w-full">
       <div className="relative">
         <input
           value={value}
@@ -30,7 +30,7 @@ function InputBox({
         </label>
       </div>
 
-      {error && <p className="text-RedColor ml-2 mt-1 text-sm">{error}</p>}
+      {error && <p className="ml-2 mt-1 text-sm text-RedColor">{error}</p>}
     </div>
   );
 }
