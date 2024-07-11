@@ -189,7 +189,7 @@ function Signup() {
             required: "Password is required",
             minLength: {
               value: MIN_PASSWORD_LENGTH,
-              message: `Password should be at least ${MIN_PASSWORD_LENGTH} characters.`,
+              message: `Minimum ${MIN_PASSWORD_LENGTH} characters required.`,
             },
           }}
           render={({ field }) => (
