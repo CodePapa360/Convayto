@@ -39,7 +39,7 @@ function ResetPassword() {
       {
         onSuccess: () => {
           toast.dismiss();
-          toast.success("Password updated successfully");
+          toast.success("Password updated successfully!");
           navigate("/");
         },
       },
@@ -60,10 +60,10 @@ function ResetPassword() {
             name="newPassword"
             control={control}
             rules={{
-              required: "Password is required",
+              required: "Enter a password.",
               minLength: {
                 value: MIN_PASSWORD_LENGTH,
-                message: `Weak password. Minimum ${MIN_PASSWORD_LENGTH} characters required`,
+                message: `Weak password. Minimum ${MIN_PASSWORD_LENGTH} characters required.`,
               },
             }}
             render={({ field }) => (
@@ -83,10 +83,9 @@ function ResetPassword() {
             name="confirmPassword"
             control={control}
             rules={{
-              required: "Password is required",
+              required: "Confirm your password.",
               validate: (value) =>
-                value === getValues().newPassword ||
-                "The passwords do not match",
+                value === getValues().newPassword || "Passwords don't match!",
             }}
             render={({ field }) => (
               <InputBox

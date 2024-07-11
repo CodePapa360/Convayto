@@ -3,6 +3,7 @@ import { LuImagePlus } from "react-icons/lu";
 import { useUpdateUser } from "./useUpdateUser";
 import Loader from "../../components/Loader";
 import toast from "react-hot-toast";
+import { ACCEPTED_AVATAR_FILE_TYPES } from "../../config";
 
 function Avatar({ avatar }) {
   const avatar_url = avatar;
@@ -14,7 +15,7 @@ function Avatar({ avatar }) {
       {
         onSuccess: () => {
           toast.dismiss();
-          toast.success("Updated profile photo successfully!");
+          toast.success("Updated profile picture successfully!");
         },
       },
     );
@@ -48,7 +49,7 @@ function Avatar({ avatar }) {
           onChange={(e) => handleUpdateUser(e.target.files[0])}
           disabled={isUpdating}
           className="hidden"
-          accept="image/jpeg,image/png,image/webp"
+          accept={ACCEPTED_AVATAR_FILE_TYPES}
           type="file"
           name="Profile picture"
           id="uploadPhoto"

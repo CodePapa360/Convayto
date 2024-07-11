@@ -12,9 +12,7 @@ export function useSignin() {
     },
     onSuccess: (data) => {
       queryClient.setQueriesData(["user"], data);
-
       toast.dismiss();
-      toast.success("Signed in successfully");
     },
     onError: (error) => {
       toast.dismiss();

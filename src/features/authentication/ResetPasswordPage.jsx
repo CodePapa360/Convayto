@@ -27,8 +27,6 @@ function ResetPasswordPage() {
     resetPassword,
     isPending: isResetting,
     isSuccess,
-    isError,
-    error,
   } = useResetPasswordForEmail();
 
   function onSubmit({ email }) {
@@ -44,7 +42,7 @@ function ResetPasswordPage() {
           <>
             <Heading>Reset your password</Heading>
             <p className="mb-4 text-center text-sm">
-              Enter your email address below and we'll send you a link to reset
+              Enter your email below and we'll send you a recovery link to reset
               your password.
             </p>
 
@@ -52,11 +50,10 @@ function ResetPasswordPage() {
               name="email"
               control={control}
               rules={{
-                required: "Email is required",
+                required: "Enter your email.",
                 pattern: {
                   value: EMAIL_REGEX,
-                  message:
-                    "Invalid email address. Please enter a valid email address",
+                  message: "Invalid email. Please enter a valid email.",
                 },
               }}
               render={({ field }) => (

@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useSignin } from "./useSignin";
 import Loader from "../../components/Loader";
-import { RiLoginCircleLine } from "react-icons/ri";
 import { useUser } from "./useUser";
 import Heading from "../../components/Heading";
 import InputBox from "../../components/InputBox";
@@ -61,10 +60,10 @@ function Signin() {
           name="email"
           control={control}
           rules={{
-            required: "Email is required",
+            required: "Enter your email.",
             pattern: {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-              message: "Invalid email address",
+              message: "Invalid email. Please enter a valid email.",
             },
           }}
           render={({ field }) => (
@@ -83,7 +82,7 @@ function Signin() {
         <Controller
           name="password"
           control={control}
-          rules={{ required: "Password is required" }}
+          rules={{ required: "Enter a password." }}
           render={({ field }) => (
             <InputBox
               type="password"

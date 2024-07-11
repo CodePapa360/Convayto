@@ -1,3 +1,4 @@
+export const DEFAULT_BIO = "Hey there! I'm using ConverseMe.";
 export const DARK_THEME = "dark";
 export const LIGHT_THEME = "light";
 export const LOCAL_STORAGE_KEY = "theme";
@@ -15,4 +16,6 @@ export const NAME_REGEX = /^(?!.*\s{2})[a-zA-Z0-9 ]+$/;
 export const EMAIL_REGEX =
   /^[^\W_]+\w*(?:[.-]\w*)*[^\W_]+@[^\W_]+(?:[.-]?\w*[^\W_]+)*(?:\.[^\W_]{2,})$/;
 
+// This is just for error message. If you want to change the actual file size limit, you need to change it in the backend as well.
 export const MAXIMUM_AVATAR_FILE_SIZE = "5";
+export const ACCEPTED_AVATAR_FILE_TYPES = "image/jpeg,image/png,image/webp";

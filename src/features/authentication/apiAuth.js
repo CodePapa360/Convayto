@@ -1,3 +1,4 @@
+import { DEFAULT_BIO } from "../../config";
 import supabase from "../../services/supabase";
 
 export async function signup({ email, password, fullname, username }) {
@@ -8,14 +9,14 @@ export async function signup({ email, password, fullname, username }) {
       data: {
         fullname,
         username,
-        bio: "Hay there, I'm using ConverseMe!",
+        bio: DEFAULT_BIO,
       },
     },
   });
 
   if (error) {
     if (error.message === "Anonymous sign-ins are disabled") {
-      throw new Error("Please provide your email address to sign up");
+      throw new Error("Please enter your email to sign up.");
     } else {
       throw new Error(error.message);
     }
@@ -33,7 +34,7 @@ export async function signin({ email, password }) {
   if (error) {
     if (error.status === 400) {
       throw new Error(
-        "Incorrect email or password. Please try again or click Forgot password to reset it.",
+        "Wrong password or email. Try again or click Forgot password to reset it.",
       );
     } else {
       throw new Error(error.message);

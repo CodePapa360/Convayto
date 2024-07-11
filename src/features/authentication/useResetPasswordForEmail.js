@@ -17,7 +17,7 @@ function useResetPasswordForEmail() {
     },
     onSuccess: () => {
       toast.dismiss();
-      toast.success("Email sent. Please check your inbox");
+      toast.success("Email sent. Please check your inbox.");
     },
     onError: (error) => {
       toast.dismiss();

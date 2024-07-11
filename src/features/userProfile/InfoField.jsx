@@ -132,10 +132,10 @@ function InfoField({
               name={updateKey}
               control={control}
               rules={{
-                required: `Please enter your ${label}`,
+                required: `Enter your ${label}`,
                 pattern: {
                   value: regex,
-                  message: patternMessage || "Invalid input",
+                  message: patternMessage || "Invalid input.",
                 },
                 maxLength: {
                   value: maxLength,
@@ -157,12 +157,7 @@ function InfoField({
                   {...field}
                   autoComplete="off"
                   autoCapitalize="none"
-                  onBlur={() => {
-                    // if (updateKey === "username" && field.value !== oldValue) {
-                    //   checkUsername(field.value);
-                    // }
-                    field.onBlur();
-                  }}
+                  onBlur={() => field.onBlur()}
                   id={updateKey}
                   type="text"
                   ref={(e) => {

@@ -29,7 +29,7 @@ function MessageTopBar() {
         </IconButton>
 
         {isPending ? (
-          <Loader size="medium" text="Loading user" />
+          <Loader size="medium" />
         ) : (
           <Profile onClick={openFriendSidebar} userData={friend} />
         )}

@@ -15,13 +15,13 @@ function SearchView() {
   if (isLoading) {
     return (
       <ShortTextMessage opacity={100}>
-        <Loader text="Loading" size="medium" />
+        <Loader text="Searching" size="medium" />
       </ShortTextMessage>
     );
   }
 
   if (error) {
-    return <ShortTextMessage>⚠️ Something went wrong</ShortTextMessage>;
+    return <ShortTextMessage>⚠️ Something went wrong!</ShortTextMessage>;
   }
 
   if (!users.length) {

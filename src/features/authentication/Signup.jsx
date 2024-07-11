@@ -101,14 +101,14 @@ function Signup() {
           name="fullname"
           control={control}
           rules={{
-            required: "Name is required",
+            required: "Enter your full name.",
             pattern: {
               value: NAME_REGEX,
-              message: "Only letters, numbers, and single spaces are allowed",
+              message: "Only letters, numbers, and single spaces are allowed.",
             },
             maxLength: {
               value: MAX_NAME_LENGTH,
-              message: `Maximum ${MAX_NAME_LENGTH} characters allowed`,
+              message: `Maximum ${MAX_NAME_LENGTH} characters allowed.`,
             },
           }}
           render={({ field }) => (
@@ -128,19 +128,19 @@ function Signup() {
           name="username"
           control={control}
           rules={{
-            required: "Username is required",
+            required: "Please enter a username.",
             pattern: {
               value: USERNAME_REGEX,
               message:
-                "Only lowercase letters, numbers, underscores, and dashes are allowed",
+                "Only lowercase letters, numbers, underscores, and dashes are allowed.",
             },
             minLength: {
               value: MIN_USERNAME_LENGTH,
-              message: `Minimum ${MIN_USERNAME_LENGTH} characters required`,
+              message: `Minimum ${MIN_USERNAME_LENGTH} characters required.`,
             },
             maxLength: {
               value: MAX_USERNAME_LENGTH,
-              message: `Maximum ${MAX_USERNAME_LENGTH} characters allowed`,
+              message: `Maximum ${MAX_USERNAME_LENGTH} characters allowed.`,
             },
           }}
           render={({ field }) => (
@@ -163,11 +163,10 @@ function Signup() {
           name="email"
           control={control}
           rules={{
-            required: "Email is required",
+            required: "Enter your email.",
             pattern: {
               value: EMAIL_REGEX,
-              message:
-                "Invalid email address. Please enter a valid email address",
+              message: "Invalid email. Please enter a valid email.",
             },
           }}
           render={({ field }) => (
@@ -190,7 +189,7 @@ function Signup() {
             required: "Password is required",
             minLength: {
               value: MIN_PASSWORD_LENGTH,
-              message: `Password should be at least ${MIN_PASSWORD_LENGTH} characters`,
+              message: `Password should be at least ${MIN_PASSWORD_LENGTH} characters.`,
             },
           }}
           render={({ field }) => (

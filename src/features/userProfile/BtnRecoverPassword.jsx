@@ -26,7 +26,7 @@ function BtnRecoverPassword() {
         </>
       )}
 
-      {isSuccess && <span>Recovery email sent</span>}
+      {isSuccess && <span>Recovery email sent!</span>}
 
       {!isPending && !isSuccess && <span>Recover password</span>}
     </button>
