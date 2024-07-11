@@ -102,8 +102,14 @@ function Signin() {
         </TextLink>
 
         <SubmitBtn disabled={isPending}>
-          {isPending ? <Loader size="small" /> : <RiLoginCircleLine />}
-          <span className="ml-2">Sign in</span>
+          {isPending ? (
+            <>
+              <Loader size="small" />
+              <span className="ml-2">Signing in...</span>
+            </>
+          ) : (
+            <span>Sign in</span>
+          )}
         </SubmitBtn>
 
         <p>

@@ -211,7 +211,14 @@ function Signup() {
           disabled={isPending || isChecking || isTaken || isBusy}
           type="submit"
         >
-          {isPending ? <Loader size="small" /> : "Sign up"}
+          {isPending ? (
+            <>
+              <Loader size="small" />
+              <span className="ml-2">Signing up...</span>
+            </>
+          ) : (
+            <span>Sign up</span>
+          )}
         </SubmitBtn>
 
         <p>

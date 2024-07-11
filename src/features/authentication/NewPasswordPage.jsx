@@ -102,8 +102,14 @@ function ResetPassword() {
           />
 
           <SubmitBtn disabled={isUpdating}>
-            {isUpdating && <Loader size="small" />}
-            <span>Update</span>
+            {isUpdating ? (
+              <>
+                <Loader size="small" />
+                <span className="ml-2">Updating...</span>
+              </>
+            ) : (
+              <span>Update</span>
+            )}
           </SubmitBtn>
         </FormContainer>
       )}

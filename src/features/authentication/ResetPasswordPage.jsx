@@ -73,8 +73,14 @@ function ResetPasswordPage() {
             />
 
             <SubmitBtn isPending={isResetting} disabled={isResetting}>
-              {isResetting && <Loader customClasses="mr-2" size="small" />}
-              <span>Send</span>
+              {isResetting ? (
+                <>
+                  <Loader size="small" />
+                  <span className="ml-2">Sending...</span>
+                </>
+              ) : (
+                <span>Send</span>
+              )}
             </SubmitBtn>
 
             <TextLink to="/signin" addClass="flex items-center justify-center">
