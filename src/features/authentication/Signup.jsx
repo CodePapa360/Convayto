@@ -21,6 +21,7 @@ import SubmitBtn from "../../components/SubmitBtn";
 import TextLink from "../../components/TextLink";
 
 function Signup() {
+  const { signup, isPending } = useSignup();
   const {
     control,
     handleSubmit,
@@ -37,11 +38,9 @@ function Signup() {
     },
   });
 
+  const navigate = useNavigate();
   const { isChecking, isBusy, isTaken, checkUsername, reset } =
     useCheckUsernameAvailability();
-
-  const { signup, isPending } = useSignup();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const isAuthenticated = false;
@@ -120,6 +119,7 @@ function Signup() {
               placeholder="Full name"
               htmlFor="fullname"
               error={errors.fullname?.message}
+              disabled={isPending}
             />
           )}
         />
@@ -155,6 +155,7 @@ function Signup() {
               placeholder="Username"
               htmlFor="username"
               error={errors.username?.message}
+              disabled={isPending}
             />
           )}
         />
@@ -178,6 +179,7 @@ function Signup() {
               placeholder="Email"
               htmlFor="email"
               error={errors.email?.message}
+              disabled={isPending}
             />
           )}
         />
@@ -201,7 +203,7 @@ function Signup() {
               placeholder="Password"
               htmlFor="password"
               error={errors.password?.message}
-              validate="false"
+              disabled={isPending}
             />
           )}
         />
