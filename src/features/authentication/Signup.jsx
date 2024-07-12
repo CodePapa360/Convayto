@@ -186,7 +186,7 @@ function Signup() {
           name="password"
           control={control}
           rules={{
-            required: "Password is required",
+            required: "Enter a password.",
             minLength: {
               value: MIN_PASSWORD_LENGTH,
               message: `Minimum ${MIN_PASSWORD_LENGTH} characters required.`,
