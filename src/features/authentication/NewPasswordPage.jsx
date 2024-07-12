@@ -75,6 +75,7 @@ function ResetPassword() {
                 placeholder="New password"
                 htmlFor="newPassword"
                 error={errors.newPassword?.message}
+                disabled={isUpdating}
               />
             )}
           />
@@ -96,6 +97,7 @@ function ResetPassword() {
                 placeholder="Confirm password"
                 htmlFor="confirmPassword"
                 error={errors.confirmPassword?.message}
+                disabled={isUpdating}
               />
             )}
           />
