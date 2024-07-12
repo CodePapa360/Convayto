@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signout as signoutApi } from "./apiAuth";
 import { useNavigate } from "react-router-dom";
 import { useUi } from "../../contexts/UiContext";
+import toast from "react-hot-toast";
 
 export function useSignout() {
   const { resetUi } = useUi();
@@ -14,7 +15,11 @@ export function useSignout() {
     onSuccess: () => {
       queryClient.removeQueries();
       resetUi();
-      navigate("/signin", { replace: true });
+      navigate("/signin");
+    },
+
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 
