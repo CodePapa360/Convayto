@@ -197,7 +197,7 @@ body {
 }
 
 /* //////////// slide in animation //////// */
-.slideLeft {
+/* .slideLeft {
   animation: slideLeftAnimation 0.5s cubic-bezier(0.15, 0.72, 0.08, 0.99);
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
@@ -213,3 +213,20 @@ body {
     right: 0;
   }
 }
+
+.slideRight {
+  animation: slideRightAnimation 0.5s cubic-bezier(0.15, 0.72, 0.08, 0.99);
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes slideRightAnimation {
+  0% {
+    opacity: 0;
+    left: -100%;
+  }
+  100% {
+    opacity: 1;
+    left: 0;
+  }
+} */
