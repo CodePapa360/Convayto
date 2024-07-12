@@ -215,7 +215,6 @@ function UiProvider({ children }) {
 
   // Update the dark mode setting when the visitor first visits the site
   useEffect(() => {
-    console.log("Run the hook");
     // Check if the user has set dark mode in local storage
     const userPrefersDarkMode = localStorage.getItem(LOCAL_STORAGE_KEY);
     const systemPrefersDarkMode = window.matchMedia(
