@@ -25,6 +25,7 @@ function useResetPasswordForEmail() {
     },
   });
 
+  // This is just for developement purpose. We need to dynamically itentify the environment wheather it is production or local so that we don't need to change the link manually every time
   const triggerResetPassword = (email) => {
     const redirectTo =
       import.meta.env.MODE === "production"
