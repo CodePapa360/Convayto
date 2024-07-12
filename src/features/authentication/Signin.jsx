@@ -75,6 +75,7 @@ function Signin() {
               htmlFor="email"
               error={errors.email?.message}
               onBlur={() => trigger("email")}
+              disabled={isPending}
             />
           )}
         />
@@ -92,6 +93,7 @@ function Signin() {
               htmlFor="password"
               error={errors.password?.message}
               onBlur={() => trigger("password")}
+              disabled={isPending}
             />
           )}
         />
