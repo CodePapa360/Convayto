@@ -77,11 +77,14 @@ function ResetPasswordPage() {
                   <span className="ml-2">Sending...</span>
                 </>
               ) : (
-                <span>Send</span>
+                <span className="">Send</span>
               )}
             </SubmitBtn>
 
-            <TextLink to="/signin" addClass="flex items-center justify-center">
+            <TextLink
+              to="/signin"
+              addClass="flex items-center justify-center self-center"
+            >
               <RiArrowLeftSLine />
               Back to Sign in
             </TextLink>
