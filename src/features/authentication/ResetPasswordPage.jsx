@@ -65,6 +65,7 @@ function ResetPasswordPage() {
                   placeholder="Email"
                   htmlFor="email"
                   error={errors.email?.message}
+                  disabled={isResetting}
                 />
               )}
             />
