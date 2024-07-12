@@ -20,60 +20,73 @@ function reducer(state, action) {
         ...state,
         isSidebarOpen: true,
       };
+
     case "CLOSE_SIDEBAR":
       return {
         ...state,
         isSidebarOpen: false,
       };
+
     case "OPEN_ACCOUNT_VIEW":
       return {
         ...state,
         isAccountViewOpen: true,
         isMenuOpen: false,
       };
+
     case "CLOSE_ACCOUNT_VIEW":
       return {
         ...state,
         isAccountViewOpen: false,
       };
+
     case "OPEN_SEARCH_VIEW":
       return {
         ...state,
         isSearchViewOpen: true,
       };
+
     case "CLOSE_SEARCH_VIEW":
       return {
         ...state,
         isSearchViewOpen: false,
         searchQuery: "",
       };
+
     case "UPDATE_DARK_MODE":
       return {
         ...state,
         isDarkMode: action.payload,
       };
+
     case "CLOSE_FRIEND_SIDEBAR":
       return {
         ...state,
         isFriendsSidebarOpen: false,
       };
+
     case "OPEN_FRIEND_SIDEBAR":
       return {
         ...state,
         isFriendsSidebarOpen: true,
       };
+
     case "TOGGLE_MENU":
       return {
         ...state,
         isMenuOpen: !state.isMenuOpen,
       };
-    case "RESET":
-      return InitialState;
 
     case "UPDATE_SEARCH_QUERY":
       return {
         ...state,
         searchQuery: action.payload,
+      };
+
+    case "RESET":
+      return {
+        ...InitialState,
+        isDarkMode: state.isDarkMode,
       };
 
     default:
@@ -202,21 +215,26 @@ function UiProvider({ children }) {
 
   // Update the dark mode setting when the visitor first visits the site
   useEffect(() => {
+    console.log("Run the hook");
     // Check if the user has set dark mode in local storage
     const userPrefersDarkMode = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const systemPrefersDarkMode = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
 
     let isDarkMode;
 
     if (userPrefersDarkMode) {
       // If user has set dark mode in local storage, use that setting
       isDarkMode = userPrefersDarkMode === DARK_THEME;
-    } else {
+    } else if (systemPrefersDarkMode) {
       // If user has not set dark mode in local storage, check the system preference
-      const systemPrefersDarkMode = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
+
       // Use the system preference
       isDarkMode = systemPrefersDarkMode;
+    } else {
+      // If user has not set dark mode in local storage and system preference is not dark mode, use light mode
+      isDarkMode = false;
     }
 
     // Update the dark mode setting
