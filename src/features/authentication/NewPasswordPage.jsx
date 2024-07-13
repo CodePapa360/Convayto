@@ -46,74 +46,77 @@ function ResetPassword() {
     );
   };
 
-  if (!isRecovery) return <ResetLinkExpired />;
+  if (isLoading)
+    return (
+      <MainContainer>
+        <Loader size="large" text="Loading" />
+      </MainContainer>
+    );
+
+  if (!isRecovery && !isLoading) return <ResetLinkExpired />;
 
   return (
     <MainContainer>
-      {isLoading ? (
-        <Loader size="large" text="Loading" />
-      ) : (
-        <FormContainer onSubmit={handleSubmit(onSubmit)}>
-          <Heading>Set new password</Heading>
+      <FormContainer onSubmit={handleSubmit(onSubmit)}>
+        <Heading>Set new password</Heading>
 
-          <Controller
-            name="newPassword"
-            control={control}
-            rules={{
-              required: "Enter a password.",
-              minLength: {
-                value: MIN_PASSWORD_LENGTH,
-                message: `Weak password. Minimum ${MIN_PASSWORD_LENGTH} characters required.`,
-              },
-            }}
-            render={({ field }) => (
-              <InputBox
-                type="password"
-                value={field.value}
-                onChange={field.onChange}
-                onBlur={() => trigger("newPassword")}
-                placeholder="New password"
-                htmlFor="newPassword"
-                error={errors.newPassword?.message}
-                disabled={isUpdating}
-              />
-            )}
-          />
+        <Controller
+          name="newPassword"
+          control={control}
+          rules={{
+            required: "Enter a password.",
+            minLength: {
+              value: MIN_PASSWORD_LENGTH,
+              message: `Weak password. Minimum ${MIN_PASSWORD_LENGTH} characters required.`,
+            },
+          }}
+          render={({ field }) => (
+            <InputBox
+              type="password"
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={() => trigger("newPassword")}
+              placeholder="New password"
+              htmlFor="newPassword"
+              error={errors.newPassword?.message}
+              disabled={isUpdating}
+            />
+          )}
+        />
 
-          <Controller
-            name="confirmPassword"
-            control={control}
-            rules={{
-              required: "Confirm your password.",
-              validate: (value) =>
-                value === getValues().newPassword || "Passwords don't match!",
-            }}
-            render={({ field }) => (
-              <InputBox
-                type="password"
-                value={field.value}
-                onChange={field.onChange}
-                onBlur={() => trigger("confirmPassword")}
-                placeholder="Confirm password"
-                htmlFor="confirmPassword"
-                error={errors.confirmPassword?.message}
-                disabled={isUpdating}
-              />
-            )}
-          />
+        <Controller
+          name="confirmPassword"
+          control={control}
+          rules={{
+            required: "Confirm your password.",
+            validate: (value) =>
+              value === getValues().newPassword || "Passwords don't match!",
+          }}
+          render={({ field }) => (
+            <InputBox
+              type="password"
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={() => trigger("confirmPassword")}
+              placeholder="Confirm password"
+              htmlFor="confirmPassword"
+              error={errors.confirmPassword?.message}
+              disabled={isUpdating}
+            />
+          )}
+        />
 
-          <SubmitBtn disabled={isUpdating}>
-            {isUpdating ? (
-              <>
-                <Loader size="small" />
-                <span className="ml-2">Updating...</span>
-              </>
-            ) : (
-              <span>Update</span>
-            )}
-          </SubmitBtn>
-        </FormContainer>
-      )}
+        <SubmitBtn disabled={isUpdating}>
+          {isUpdating ? (
+            <>
+              <Loader size="small" />
+              <span className="ml-2">Updating...</span>
+            </>
+          ) : (
+            <span>Update</span>
+          )}
+        </SubmitBtn>
+      </FormContainer>
     </MainContainer>
   );
 }

@@ -8,16 +8,18 @@ function useCheckRecovery() {
   const refreshToken = session?.refresh_token;
 
   // Extract the refresh token from the window URL
-  const urlHash = window?.location?.hash?.split("&");
+  const urlHash = window.location?.hash?.split("&");
   const token = urlHash[3]?.split("=")[1];
-  const url = window.location;
-  console.log("The url", url);
 
   useEffect(() => {
     if (token !== undefined && token !== "") {
       setUrlRefreshToken(token);
     }
-    setIsLoading(false);
+
+    // Simulated loading delay
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   }, [token, refreshToken, urlRefreshToken]);
 
   const isRecovery = refreshToken === urlRefreshToken;
