@@ -1,6 +1,10 @@
 import { DEFAULT_BIO } from "../../config";
 import supabase from "../../services/supabase";
 
+///////////////////
+// Sign up function
+///////////////////
+
 export async function signup({ email, password, fullname, username }) {
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -24,6 +28,10 @@ export async function signup({ email, password, fullname, username }) {
 
   return data;
 }
+
+///////////////////
+// Sign in function
+///////////////////
 
 export async function signin({ email, password }) {
   const { data, error } = await supabase.auth.signInWithPassword({

@@ -19,9 +19,11 @@ import FormContainer from "../../components/FormContainer";
 import InputBox from "../../components/InputBox";
 import SubmitBtn from "../../components/SubmitBtn";
 import TextLink from "../../components/TextLink";
+import SignupConfirmation from "../../components/SignupConfirmation";
 
 function Signup() {
-  const { signup, isPending } = useSignup();
+  const { signup, isPending, isSuccess } = useSignup();
+  // const isSuccess = true;
   const {
     control,
     handleSubmit,
@@ -94,137 +96,144 @@ function Signup() {
   return (
     <MainContainer>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
-        <Heading addClass="text-3xl">Sign up</Heading>
+        {isSuccess ? (
+          <SignupConfirmation />
+        ) : (
+          <>
+            <Heading addClass="text-3xl">Sign up</Heading>
 
-        <Controller
-          name="fullname"
-          control={control}
-          rules={{
-            required: "Enter your full name.",
-            pattern: {
-              value: NAME_REGEX,
-              message: "Only letters, numbers, and single spaces are allowed.",
-            },
-            maxLength: {
-              value: MAX_NAME_LENGTH,
-              message: `Maximum ${MAX_NAME_LENGTH} characters allowed.`,
-            },
-          }}
-          render={({ field }) => (
-            <InputBox
-              type="text"
-              value={field.value}
-              onChange={field.onChange}
-              onBlur={() => trigger("fullname")}
-              placeholder="Full name"
-              htmlFor="fullname"
-              error={errors.fullname?.message}
-              disabled={isPending}
-            />
-          )}
-        />
-
-        <Controller
-          name="username"
-          control={control}
-          rules={{
-            required: "Please enter a username.",
-            pattern: {
-              value: USERNAME_REGEX,
-              message:
-                "Only lowercase letters, numbers, underscores, and dashes are allowed.",
-            },
-            minLength: {
-              value: MIN_USERNAME_LENGTH,
-              message: `Minimum ${MIN_USERNAME_LENGTH} characters required.`,
-            },
-            maxLength: {
-              value: MAX_USERNAME_LENGTH,
-              message: `Maximum ${MAX_USERNAME_LENGTH} characters allowed.`,
-            },
-          }}
-          render={({ field }) => (
-            <InputBox
-              type="text"
-              value={field.value}
-              onChange={field.onChange}
-              onBlur={() => {
-                trigger("username");
-                checkUsername(field.value);
+            <Controller
+              name="fullname"
+              control={control}
+              rules={{
+                required: "Enter your full name.",
+                pattern: {
+                  value: NAME_REGEX,
+                  message:
+                    "Only letters, numbers, and single spaces are allowed.",
+                },
+                maxLength: {
+                  value: MAX_NAME_LENGTH,
+                  message: `Maximum ${MAX_NAME_LENGTH} characters allowed.`,
+                },
               }}
-              placeholder="Username"
-              htmlFor="username"
-              error={errors.username?.message}
-              disabled={isPending}
+              render={({ field }) => (
+                <InputBox
+                  type="text"
+                  value={field.value}
+                  onChange={field.onChange}
+                  onBlur={() => trigger("fullname")}
+                  placeholder="Full name"
+                  htmlFor="fullname"
+                  error={errors.fullname?.message}
+                  disabled={isPending}
+                />
+              )}
             />
-          )}
-        />
 
-        <Controller
-          name="email"
-          control={control}
-          rules={{
-            required: "Enter your email.",
-            pattern: {
-              value: EMAIL_REGEX,
-              message: "Invalid email. Please enter a valid email.",
-            },
-          }}
-          render={({ field }) => (
-            <InputBox
-              type="email"
-              value={field.value}
-              onChange={field.onChange}
-              onBlur={() => trigger("email")}
-              placeholder="Email"
-              htmlFor="email"
-              error={errors.email?.message}
-              disabled={isPending}
+            <Controller
+              name="username"
+              control={control}
+              rules={{
+                required: "Please enter a username.",
+                pattern: {
+                  value: USERNAME_REGEX,
+                  message:
+                    "Only lowercase letters, numbers, underscores, and dashes are allowed.",
+                },
+                minLength: {
+                  value: MIN_USERNAME_LENGTH,
+                  message: `Minimum ${MIN_USERNAME_LENGTH} characters required.`,
+                },
+                maxLength: {
+                  value: MAX_USERNAME_LENGTH,
+                  message: `Maximum ${MAX_USERNAME_LENGTH} characters allowed.`,
+                },
+              }}
+              render={({ field }) => (
+                <InputBox
+                  type="text"
+                  value={field.value}
+                  onChange={field.onChange}
+                  onBlur={() => {
+                    trigger("username");
+                    checkUsername(field.value);
+                  }}
+                  placeholder="Username"
+                  htmlFor="username"
+                  error={errors.username?.message}
+                  disabled={isPending}
+                />
+              )}
             />
-          )}
-        />
 
-        <Controller
-          name="password"
-          control={control}
-          rules={{
-            required: "Enter a password.",
-            minLength: {
-              value: MIN_PASSWORD_LENGTH,
-              message: `Minimum ${MIN_PASSWORD_LENGTH} characters required.`,
-            },
-          }}
-          render={({ field }) => (
-            <InputBox
-              type="password"
-              value={field.value}
-              onChange={field.onChange}
-              onBlur={() => trigger("password")}
-              placeholder="Password"
-              htmlFor="password"
-              error={errors.password?.message}
-              disabled={isPending}
+            <Controller
+              name="email"
+              control={control}
+              rules={{
+                required: "Enter your email.",
+                pattern: {
+                  value: EMAIL_REGEX,
+                  message: "Invalid email. Please enter a valid email.",
+                },
+              }}
+              render={({ field }) => (
+                <InputBox
+                  type="email"
+                  value={field.value}
+                  onChange={field.onChange}
+                  onBlur={() => trigger("email")}
+                  placeholder="Email"
+                  htmlFor="email"
+                  error={errors.email?.message}
+                  disabled={isPending}
+                />
+              )}
             />
-          )}
-        />
 
-        <SubmitBtn
-          disabled={isPending || isChecking || isTaken || isBusy}
-          type="submit"
-        >
-          {isPending ? (
-            <>
-              <Loader size="small" />
-              <span className="ml-2">Signing up...</span>
-            </>
-          ) : (
-            <span>Sign up</span>
-          )}
-        </SubmitBtn>
+            <Controller
+              name="password"
+              control={control}
+              rules={{
+                required: "Enter a password.",
+                minLength: {
+                  value: MIN_PASSWORD_LENGTH,
+                  message: `Minimum ${MIN_PASSWORD_LENGTH} characters required.`,
+                },
+              }}
+              render={({ field }) => (
+                <InputBox
+                  type="password"
+                  value={field.value}
+                  onChange={field.onChange}
+                  onBlur={() => trigger("password")}
+                  placeholder="Password"
+                  htmlFor="password"
+                  error={errors.password?.message}
+                  disabled={isPending}
+                />
+              )}
+            />
 
-        <p>
-          Already a user? <TextLink to="/signin">Sign in</TextLink>
-        </p>
+            <SubmitBtn
+              disabled={isPending || isChecking || isTaken || isBusy}
+              type="submit"
+            >
+              {isPending ? (
+                <>
+                  <Loader size="small" />
+                  <span className="ml-2">Signing up...</span>
+                </>
+              ) : (
+                <span>Sign up</span>
+              )}
+            </SubmitBtn>
+
+            <p>
+              Already a user? <TextLink to="/signin">Sign in</TextLink>
+            </p>
+          </>
+        )}
       </FormContainer>
     </MainContainer>
   );
