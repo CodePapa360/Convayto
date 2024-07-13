@@ -27,10 +27,15 @@ function useResetPasswordForEmail() {
 
   // This is just for developement purpose. We need to dynamically itentify the environment wheather it is production or local so that we don't need to change the link manually every time
   const triggerResetPassword = (email) => {
+    // sample in the env file
+    // VITE_REDIRECT_URL_LOCAL = http://localhost:3000
+    // VITE_REDIRECT_URL_PRODUCTION = https://chat-su.vercel.app
+    // The route is /new-password. so we need to append it to the url
+
     const redirectTo =
       import.meta.env.MODE === "production"
-        ? import.meta.env.VITE_REDIRECT_URL_PRODUCTION
-        : import.meta.env.VITE_REDIRECT_URL_LOCAL;
+        ? `${import.meta.env.VITE_REDIRECT_URL_PRODUCTION}/new-password`
+        : `${import.meta.env.VITE_REDIRECT_URL_LOCAL}/new-password`;
 
     queryResetPassword({ email, redirectTo });
   };

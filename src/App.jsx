@@ -12,6 +12,7 @@ import NewPasswordPage from "./features/authentication/NewPasswordPage";
 import ResetPasswordPage from "./features/authentication/ResetPasswordPage";
 import NotFound from "./components/NotFound";
 import { Toaster } from "react-hot-toast";
+import AccountConfirmation from "./components/AccountConfirmation";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,10 @@ function App() {
             <Route path="signin" element={<Signin />} />
             <Route path="new-password" element={<NewPasswordPage />} />
             <Route path="reset-password" element={<ResetPasswordPage />} />
+            <Route
+              path="account-confirmation"
+              element={<AccountConfirmation />}
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

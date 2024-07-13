@@ -5,7 +5,14 @@ import supabase from "../../services/supabase";
 // Sign up function
 ///////////////////
 
-export async function signup({ email, password, fullname, username }) {
+export async function signup({
+  email,
+  password,
+  fullname,
+  username,
+  redirectTo,
+}) {
+  console.log("redirect to", redirectTo);
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -15,6 +22,7 @@ export async function signup({ email, password, fullname, username }) {
         username,
         bio: DEFAULT_BIO,
       },
+      emailRedirectTo: redirectTo,
     },
   });
 

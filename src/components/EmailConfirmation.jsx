@@ -2,7 +2,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import Heading from "./Heading";
 import TextLink from "./TextLink";
 
-function SignupConfirmation() {
+function EmailConfirmation() {
   return (
     <div className="flex flex-col items-center">
       <FaCheckCircle className="mb-4 text-4xl text-GreenColor sm:text-5xl" />
@@ -22,4 +22,4 @@ function SignupConfirmation() {
   );
 }
 
-export default SignupConfirmation;
+export default EmailConfirmation;

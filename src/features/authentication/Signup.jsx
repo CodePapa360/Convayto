@@ -19,7 +19,7 @@ import FormContainer from "../../components/FormContainer";
 import InputBox from "../../components/InputBox";
 import SubmitBtn from "../../components/SubmitBtn";
 import TextLink from "../../components/TextLink";
-import SignupConfirmation from "../../components/SignupConfirmation";
+import EmailConfirmation from "../../components/EmailConfirmation";
 
 function Signup() {
   const { signup, isPending, isSuccess } = useSignup();
@@ -97,7 +97,7 @@ function Signup() {
     <MainContainer>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         {isSuccess ? (
-          <SignupConfirmation />
+          <EmailConfirmation />
         ) : (
           <>
             <Heading addClass="text-3xl">Sign up</Heading>

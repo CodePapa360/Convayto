@@ -10,6 +10,8 @@ function useCheckRecovery() {
   // Extract the refresh token from the window URL
   const urlHash = window?.location?.hash?.split("&");
   const token = urlHash[3]?.split("=")[1];
+  const url = window.location;
+  console.log("The url", url);
 
   useEffect(() => {
     if (token !== undefined && token !== "") {
