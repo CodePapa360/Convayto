@@ -28,7 +28,6 @@ function useCheckUsernameAvailability() {
       setIsChecking(true);
       apiCheckUsername(username)
         .then((data) => {
-          console.log(data);
           const serverUsername = data?.username === username;
 
           if (!serverUsername) {
