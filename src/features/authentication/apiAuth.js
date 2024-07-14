@@ -12,7 +12,6 @@ export async function signup({
   username,
   redirectTo,
 }) {
-  console.log("redirect to", redirectTo);
   const { data, error } = await supabase.auth.signUp({
     email,
     password,

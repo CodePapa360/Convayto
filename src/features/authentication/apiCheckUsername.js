@@ -4,7 +4,7 @@ export default async function apiCheckUsername(username) {
   if (!username) return;
 
   const { data, error } = await supabase
-    .from("users")
+    .from("usernames")
     .select("username")
     .eq("username", username);
 
