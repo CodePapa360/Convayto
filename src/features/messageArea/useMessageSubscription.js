@@ -15,7 +15,7 @@ function useMessageSubscription({ conversation_id, friendUserId }) {
       function callback(newData) {
         queryClient.setQueryData(["friend", friendUserId], (prevData) => {
           const existingOptimisticMessage = prevData?.pages[0]?.find(
-            (message) => message?.optimistic,
+            (message) => message?.id === newData.id,
           );
 
           if (existingOptimisticMessage) {
