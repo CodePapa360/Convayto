@@ -23,8 +23,8 @@ function Signin() {
     trigger,
   } = useForm({
     defaultValues: {
-      email: "tanzil@gmail.com",
-      password: "123456789",
+      email: "",
+      password: "",
     },
   });
 
