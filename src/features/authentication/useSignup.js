@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { signup as apiSignup } from "./apiAuth";
 import toast from "react-hot-toast";
+import { REDIRECT_URL_LOCAL, REDIRECT_URL_PRODUCTION } from "../../config";
 
 export function useSignup() {
   const {
@@ -26,15 +27,10 @@ export function useSignup() {
 
   // This is just for developement purpose. We need to dynamically itentify the environment wheather it is production or local so that we don't need to change the link manually every time
   const triggerResetPassword = ({ email, password, fullname, username }) => {
-    // sample in the env file
-    // VITE_REDIRECT_URL_LOCAL = http://localhost:3000
-    // VITE_REDIRECT_URL_PRODUCTION = https://chat-su.vercel.app
-    // The route is /account-confirmation. so we need to append it to the url
-
     const redirectTo =
       import.meta.env.MODE === "production"
-        ? `${import.meta.env.VITE_REDIRECT_URL_PRODUCTION}/account-confirmation`
-        : `${import.meta.env.VITE_REDIRECT_URL_LOCAL}/account-confirmation`;
+        ? `${REDIRECT_URL_PRODUCTION}/account-confirmation`
+        : `${REDIRECT_URL_LOCAL}/account-confirmation`;
 
     querySignup({ email, password, fullname, username, redirectTo });
   };

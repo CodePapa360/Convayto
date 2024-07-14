@@ -1,3 +1,7 @@
+// Chage the production/local URL according to your environment
+export const REDIRECT_URL_LOCAL = "http://localhost:3000";
+export const REDIRECT_URL_PRODUCTION = "https://chat-su.vercel.app";
+
 export const DEFAULT_BIO = "Hey there! I'm using ConverseMe.";
 export const DARK_THEME = "dark";
 export const LIGHT_THEME = "light";
