@@ -1,6 +1,7 @@
 // Compund component for the menu
 
 import { Link } from "react-router-dom";
+import { APP_NAME } from "../config";
 
 function Menu({ children }) {
   return (
@@ -107,7 +108,7 @@ function Footer() {
   return (
     <div className="px-4 py-3">
       <div className="truncate text-center text-xs opacity-60">
-        ConverseMe v1.0.0
+        {APP_NAME} v1.0.0
       </div>
     </div>
   );

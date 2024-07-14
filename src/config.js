@@ -2,7 +2,12 @@
 export const REDIRECT_URL_LOCAL = "http://localhost:3000";
 export const REDIRECT_URL_PRODUCTION = "https://chat-su.vercel.app";
 
-export const DEFAULT_BIO = "Hey there! I'm using ConverseMe.";
+//name of the app
+export const APP_NAME = "Convayto";
+
+// A nice default bio for new users which will use the app name
+export const DEFAULT_BIO = `Hey there! I'm using ${APP_NAME}`;
+
 export const DARK_THEME = "dark";
 export const LIGHT_THEME = "light";
 export const LOCAL_STORAGE_KEY = "theme";

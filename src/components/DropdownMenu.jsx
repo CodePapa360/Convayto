@@ -11,6 +11,7 @@ import { useUser } from "../features/authentication/useUser";
 import Loader from "./Loader";
 import ToggleableContent from "./ToggleableContent";
 import Menu from "./Menu";
+import { APP_NAME } from "../config";
 
 export default function DropdownMenu() {
   const { user } = useUser();
@@ -51,7 +52,7 @@ export default function DropdownMenu() {
           </Menu.TogglerItem>
 
           <Menu.LinkItem
-            href={"https://github.com/CodePapa360/ConverseMe/issues"}
+            href={`https://github.com/CodePapa360/${APP_NAME}/issues`}
           >
             <RiBugLine />
             <div>Report Bug</div>
