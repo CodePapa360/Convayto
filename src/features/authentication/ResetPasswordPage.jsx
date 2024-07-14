@@ -9,7 +9,7 @@ import SubmitBtn from "../../components/SubmitBtn";
 import TextLink from "../../components/TextLink";
 import { Controller, useForm } from "react-hook-form";
 import { EMAIL_REGEX } from "../../config";
-import EmailSent from "../../components/EmailSent";
+import RecoveryEmailSent from "../../components/RecoveryEmailSent";
 
 function ResetPasswordPage() {
   const {
@@ -37,7 +37,7 @@ function ResetPasswordPage() {
     <MainContainer>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         {isSuccess ? (
-          <EmailSent />
+          <RecoveryEmailSent />
         ) : (
           <>
             <Heading>Reset your password</Heading>
