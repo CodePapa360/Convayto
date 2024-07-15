@@ -5,6 +5,8 @@ import useConvInfo from "./useConvInfo";
 import Loader from "../../components/Loader";
 import Profile from "../../components/Profile";
 import IconButton from "../../components/IconButton";
+import { useEffect } from "react";
+import { APP_NAME } from "../../config";
 
 function MessageTopBar() {
   const { convInfo, isPending } = useConvInfo();
@@ -13,9 +15,14 @@ function MessageTopBar() {
   const friend = convInfo?.friendInfo;
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.title = friend?.fullname || APP_NAME;
+  }, [friend]);
+
   function handleGoBack() {
     if (window.matchMedia("(max-width: 640px)").matches) {
       navigate("/", { replace: true });
+      document.title = APP_NAME;
     } else {
       openSidebar();
     }
