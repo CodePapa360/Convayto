@@ -26,7 +26,7 @@ function UserItem({
     <div
       className={`${
         isActiveUser
-          ? "bg-gradient-to-r text-textPrimary-dark sm:from-bgAccentDim sm:to-bgAccent dark:sm:from-bgAccentDim-dark dark:sm:to-bgAccent-dark"
+          ? "pointer-events-none bg-gradient-to-r text-textPrimary-dark sm:from-bgAccentDim sm:to-bgAccent dark:sm:from-bgAccentDim-dark dark:sm:to-bgAccent-dark"
           : "hover:bg-LightShade/20"
       } flex cursor-pointer select-none items-center gap-2 rounded-lg p-2 `}
       onClick={handleClick}
