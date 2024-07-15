@@ -1,6 +1,6 @@
 import { useUi } from "../../contexts/UiContext";
 import { useNavigate } from "react-router-dom";
-import FriendProfileBar from "../sideBar/FriendProfileBar";
+import ProfileSideBar from "../sideBar/ProfileSideBar";
 import useConvInfo from "./useConvInfo";
 import Loader from "../../components/Loader";
 import Profile from "../../components/Profile";
@@ -36,7 +36,7 @@ function MessageTopBar() {
       </div>
 
       {/* Hidden right side bar which will reveal if clicked on friend's profile info */}
-      <FriendProfileBar friend={friend} />
+      <ProfileSideBar friend={friend} />
     </>
   );
 }

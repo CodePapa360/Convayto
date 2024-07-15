@@ -3,7 +3,7 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 import ToggleableContent from "../../components/ToggleableContent";
 import IconButton from "../../components/IconButton";
 
-function FriendProfileBar({ friend }) {
+function ProfileSideBar({ friend }) {
   const { avatar_url, fullname, username, bio } = friend ?? {};
   const { closeFriendSidebar, isFriendsSidebarOpen } = useUi();
 
@@ -70,4 +70,4 @@ function FriendProfileBar({ friend }) {
   );
 }
 
-export default FriendProfileBar;
+export default ProfileSideBar;
