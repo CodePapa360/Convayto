@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 
 export function useSearchedUsers() {
   const { searchQuery } = useUi();
+  const cleanSearchQuery = searchQuery.trim();
+
   const {
     user: { id },
   } = useUser();
@@ -25,7 +27,7 @@ export function useSearchedUsers() {
         try {
           setIsLoading(true);
           setError("");
-          const data = await searchPeople(searchQuery);
+          const data = await searchPeople(cleanSearchQuery);
 
           setUsers(data);
           setError("");
@@ -40,7 +42,7 @@ export function useSearchedUsers() {
         }
       }
 
-      if (searchQuery.length < MINIMUM_SEARCH_LENGTH) {
+      if (cleanSearchQuery.length < MINIMUM_SEARCH_LENGTH) {
         setIsShortQuery(true);
         setError("");
         setIsLoading(false);
@@ -65,7 +67,7 @@ export function useSearchedUsers() {
         clearTimeout(timeoutId);
       };
     },
-    [searchQuery],
+    [cleanSearchQuery],
   );
 
   const filteredUsers = users?.filter((user) => user.id !== id);
