@@ -68,7 +68,7 @@ function Signin() {
           }}
           render={({ field }) => (
             <InputBox
-              type="text"
+              type="email"
               value={field.value || ""}
               onChange={field.onChange}
               placeholder="Email"
