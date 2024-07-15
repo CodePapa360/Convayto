@@ -58,12 +58,14 @@ function ProfileSideBar({ friend }) {
             <p className="truncate text-base">{username}</p>
           </div>
 
-          <div className="mt-4">
-            <p className="select-none text-sm font-bold tracking-wider text-textAccent  opacity-80 dark:text-textAccent-dark">
-              Bio
-            </p>
-            <p className="break-all text-base">{bio}</p>
-          </div>
+          {bio && (
+            <div className="mt-4">
+              <p className="select-none text-sm font-bold tracking-wider text-textAccent  opacity-80 dark:text-textAccent-dark">
+                Bio
+              </p>
+              <p className="break-all text-base">{bio}</p>
+            </div>
+          )}
         </div>
       </div>
     </ToggleableContent>
