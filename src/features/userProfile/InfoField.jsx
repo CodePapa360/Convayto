@@ -9,7 +9,7 @@ function InfoField({
   minLength = 1,
   maxLength,
   label,
-  oldValue,
+  oldValue = "",
   updateKey = "none",
   regex,
   patternMessage,
@@ -28,6 +28,7 @@ function InfoField({
     formState: { errors },
   } = useForm({ defaultValues: { [updateKey]: oldValue } });
   const currentValue = watch(updateKey);
+  const remainingChars = maxLength - currentValue.length;
 
   const { updateUser, isUpdating } = useUpdateUser();
   const [isEditing, setIsEditing] = useState(false);
@@ -175,7 +176,7 @@ function InfoField({
             />
 
             <span className="mt-3 flex w-11 select-none items-start justify-center text-xs text-textAccent dark:text-textAccent-dark">
-              {maxLength - currentValue.length}
+              {remainingChars}
             </span>
           </div>
 
