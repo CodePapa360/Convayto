@@ -20,6 +20,7 @@ import InputBox from "../../components/InputBox";
 import SubmitBtn from "../../components/SubmitBtn";
 import TextLink from "../../components/TextLink";
 import EmailConfirmation from "../../components/EmailConfirmation";
+import LogoLarge from "../../components/LogoLarge";
 
 function Signup() {
   const { signup, isPending, isSuccess } = useSignup();
@@ -95,6 +96,8 @@ function Signup() {
 
   return (
     <MainContainer>
+      <LogoLarge />
+
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         {isSuccess ? (
           <EmailConfirmation />

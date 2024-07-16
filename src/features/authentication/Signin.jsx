@@ -10,6 +10,7 @@ import MainContainer from "../../components/MainContainer";
 import { useNavigate } from "react-router-dom";
 import FormContainer from "../../components/FormContainer";
 import { Controller, useForm } from "react-hook-form";
+import LogoLarge from "../../components/LogoLarge";
 
 function Signin() {
   const { signin, isPending } = useSignin();
@@ -53,6 +54,8 @@ function Signin() {
 
   return (
     <MainContainer>
+      <LogoLarge />
+
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <Heading addClass="text-3xl">Sign in</Heading>
 

@@ -11,6 +11,7 @@ import ResetLinkExpired from "../../components/ResetLinkExpired";
 import useCheckRecovery from "./useCheckRecovery";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import LogoLarge from "../../components/LogoLarge";
 
 function ResetPassword() {
   const navigate = useNavigate();
@@ -57,6 +58,8 @@ function ResetPassword() {
 
   return (
     <MainContainer>
+      <LogoLarge />
+
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <Heading>Set new password</Heading>
 
