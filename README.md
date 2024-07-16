@@ -39,7 +39,7 @@ Convayto is my learning project where I've explored building a real-time chat ap
 <!-- Screenshot -->
 <a align="center" href="https://convayto.vercel.app">
 
-![Screenshot](./public/thumbnail-preview.png)
+![Screenshot](./public/convayto-mockup.jpg)
 
 </a>
 
