@@ -2,7 +2,7 @@
 
   <img src="./public/Convayto-logo.png" alt="Convayto logo" width="230" height="auto">
 
-  <h1 style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Convayto</h1>
+  <h1 style="position: absolute; left: -9999px;">Convayto</h1>
 
   <h3>
     <a href="https://convayto.vercel.app">
