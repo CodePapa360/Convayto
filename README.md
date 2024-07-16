@@ -1,8 +1,8 @@
 <div align="center">
 
-  <img src="./public/logo-dark.png" alt="logo" width="90" height="auto">
+  <img src="./public/Convayto-logo.png" alt="Convayto logo" width="230" height="auto">
 
-  <h2>Convayto</h2>
+  <h1 style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Convayto</h1>
 
   <h3>
     <a href="https://convayto.vercel.app">
@@ -24,10 +24,10 @@
 <div align="center">
 <br/>
 
-[![Twitter Follow](https://img.shields.io/twitter/follow/CodePapa360?style=social)](https://twitter.com/CodePapa360)  
+[![Twitter Follow](https://img.shields.io/twitter/follow/CodePapa360?style=social&logo=x)](https://x.com/CodePapa360)  
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=social&logo=linkedin)](https://www.linkedin.com/in/CodePapa360)
 
-![version](https://img.shields.io/github/package-json/v/CodePapa360/Convayto)
+![version](https://img.shields.io/github/package-json/v/CodePapa360/Convayto?color=blue)
 
 </div>
 
