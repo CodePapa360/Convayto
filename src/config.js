@@ -1,7 +1,8 @@
-// Chage the production/local URL according to your environment
+// Chage the production/local URL according to the environment
 export const REDIRECT_URL_LOCAL = "http://localhost:3000";
-export const REDIRECT_URL_PRODUCTION = "https://chat-su.vercel.app";
+export const REDIRECT_URL_PRODUCTION = "https://convayto.vercel.app";
 
+// App settings
 export const APP_NAME = "Convayto";
 export const APP_VERSION = "v1.0.0";
 export const DEFAULT_BIO = `Hey there! I'm using ${APP_NAME}!`;
@@ -17,14 +18,14 @@ export const MAX_USERNAME_LENGTH = 30;
 export const MIN_PASSWORD_LENGTH = 6;
 export const MINIMUM_SEARCH_LENGTH = 2;
 export const MAX_PREFETCHED_CONVERSATIONS = 5;
-export const MAX_MESSAGES_PER_PAGE = 20;
+export const MAX_MESSAGES_PER_PAGE = 25;
 
-// Regex for various fields
+// Regex patterns for validation
 export const USERNAME_REGEX = /^[a-z0-9_-]+$/;
 export const NAME_REGEX = /^(?!.*\s{2})[a-zA-Z0-9 ]+$/;
 export const EMAIL_REGEX =
   /^[^\W_]+\w*(?:[.-]\w*)*[^\W_]+@[^\W_]+(?:[.-]?\w*[^\W_]+)*(?:\.[^\W_]{2,})$/;
 
-// This is just for error message. If you want to change the actual file size limit, you need to change it in the backend as well.
-export const MAXIMUM_AVATAR_FILE_SIZE = "5";
+// Avatar settings
+export const MAXIMUM_AVATAR_FILE_SIZE = "5"; // MB
 export const ACCEPTED_AVATAR_FILE_TYPES = "image/jpeg,image/png,image/webp";
