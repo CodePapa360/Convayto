@@ -21,10 +21,9 @@ function Profile({ onClick, userData }) {
       <div className="h-11 w-11 overflow-hidden rounded-full">
         {avatar_url ? (
           <img
-            draggable="false"
             src={avatar_url}
             alt={fullname}
-            className="h-full w-full object-cover"
+            className="pointer-events-none h-full w-full object-cover"
           />
         ) : (
           <HiOutlineUserCircle size={45} opacity={0.5} strokeWidth="1" />

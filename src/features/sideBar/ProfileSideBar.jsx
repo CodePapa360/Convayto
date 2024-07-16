@@ -31,8 +31,7 @@ function ProfileSideBar({ friend }) {
           <div className="mx-auto mt-4 h-52 w-52 overflow-hidden rounded-full border-2 border-bgAccent dark:border-bgAccent-dark">
             {avatar_url ? (
               <img
-                draggable="false"
-                className="h-full w-full object-cover object-center"
+                className="pointer-events-none h-full w-full object-cover object-center"
                 src={avatar_url}
                 alt={fullname}
               />

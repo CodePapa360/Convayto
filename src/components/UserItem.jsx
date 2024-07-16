@@ -37,10 +37,9 @@ function UserItem({
       <span className="h-12 w-12  overflow-hidden rounded-full">
         {avatar ? (
           <img
-            draggable="false"
             src={avatar}
             alt={name}
-            className="h-full w-full object-cover"
+            className="pointer-events-none h-full w-full object-cover"
           />
         ) : (
           <HiOutlineUserCircle
