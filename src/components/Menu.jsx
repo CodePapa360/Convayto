@@ -1,7 +1,7 @@
 // Compund component for the menu
 
 import { Link } from "react-router-dom";
-import { APP_NAME } from "../config";
+import { APP_NAME, APP_VERSION } from "../config";
 
 function Menu({ children }) {
   return (
@@ -107,8 +107,16 @@ function Footer() {
   // footer will have the app name and version number
   return (
     <div className="px-4 py-3">
-      <div className="truncate text-center text-xs opacity-60">
-        {APP_NAME} v1.0.0
+      <div className="flex items-center justify-center gap-2 truncate text-center text-xs">
+        <img
+          className="h-6 rounded-full border-2 border-LightShade/20"
+          src="./convayto-logo-short-circle.png"
+          alt="Convayto logo"
+        />
+        {/* get the version number from package.json */}
+        <span className=" opacity-60">
+          {APP_NAME} {APP_VERSION}
+        </span>
       </div>
     </div>
   );

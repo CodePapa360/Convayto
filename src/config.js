@@ -3,6 +3,7 @@ export const REDIRECT_URL_LOCAL = "http://localhost:3000";
 export const REDIRECT_URL_PRODUCTION = "https://chat-su.vercel.app";
 
 export const APP_NAME = "Convayto";
+export const APP_VERSION = "v1.0.0";
 export const DEFAULT_BIO = `Hey there! I'm using ${APP_NAME}!`;
 export const DARK_THEME = "dark";
 export const LIGHT_THEME = "light";
