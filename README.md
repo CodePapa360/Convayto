@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="./public/Convayto-logo.png" alt="Convayto logo" width="230" height="auto">
+  <img src="./public/images/Convayto-logo.png" alt="Convayto logo" width="230" height="auto">
 
   <!-- <h1>Convayto</h1> -->
 
@@ -39,7 +39,7 @@ Convayto is my learning project where I've explored building a real-time chat ap
 <!-- Screenshot -->
 <a align="center" href="https://convayto.vercel.app">
 
-![Screenshot](./public/convayto-mockup.jpg)
+![Screenshot](./public/images/convayto-mockup.jpg)
 
 </a>
 
