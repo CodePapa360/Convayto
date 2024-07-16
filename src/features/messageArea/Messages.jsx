@@ -2,7 +2,7 @@ import { useMessages } from "./useMessages";
 import MessageItem from "./MessageItem";
 import { useEffect, useRef, useState } from "react";
 import Loader from "../../components/Loader";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import useIntersectionObserver from "./useIntersectionObserver";
 import useScrollBehavior from "./useScrollBehavior";
 import ShortTextMessage from "../../components/ShortTextMessage";
 
