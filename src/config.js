@@ -2,6 +2,12 @@
 export const REDIRECT_URL_LOCAL = "http://localhost:3000";
 export const REDIRECT_URL_PRODUCTION = "https://convayto.vercel.app";
 
+export const getRedirectUrl = () => {
+  return import.meta.env.MODE === "production"
+    ? REDIRECT_URL_PRODUCTION
+    : REDIRECT_URL_LOCAL;
+};
+
 // App settings
 export const APP_NAME = "Convayto";
 export const APP_VERSION = "v1.0.0";
