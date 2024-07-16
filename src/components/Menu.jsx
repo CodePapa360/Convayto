@@ -111,9 +111,8 @@ function Footer() {
         <img
           className="h-6 rounded-full border-2 border-LightShade/20"
           src="./convayto-logo-short-circle.png"
-          alt="Convayto logo"
+          alt="Logo"
         />
-        {/* get the version number from package.json */}
         <span className=" opacity-60">
           {APP_NAME} {APP_VERSION}
         </span>
