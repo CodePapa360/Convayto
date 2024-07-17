@@ -45,17 +45,16 @@ Welcome to Convayto! This is a real-time chat app that I've developed to sharpen
 
 ## Table of Contents
 
-2. [Technologies Used](#technologies-used)
-3. [Features](#features)
-4. [Project Structure](#project-structure)
-5. [Database Design](#database-design)
-6. [Security Considerations](#security-considerations)
-7. [Deployment](#deployment)
-8. [Challenges and Solutions](#challenges-and-solutions)
-9. [Future Improvements](#future-improvements)
-10. [Contributing](#contributing)
-11. [License](#license)
-12. [Author](#author)
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Database Design](#database-design)
+- [Security Considerations](#security-considerations)
+- [Challenges and Solutions](#challenges-and-solutions)
+- [Future Improvements](#future-improvements)
+- [Contributing](#contributing)
+- [License](#license)
+- [Author](#author)
 
 ## Technologies Used
 
