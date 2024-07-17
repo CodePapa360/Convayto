@@ -114,8 +114,6 @@ This structure enhances maintainability and scalability by organizing components
 
 ## Security Considerations
 
-## Deployment
-
 ## Challenges and Solutions
 
 ## Future Improvements
@@ -147,11 +145,13 @@ To contribute to Convayto, follow these steps:
 
 ## License
 
-### Author
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-<b>👤 Alamin</b>
+## Author
 
-- Twitter - [@CodePapa360](https://www.twitter.com/CodePapa360)
-- LinkedIn - [@CodePapa360](https://www.linkedin.com/in/codepapa360)
+**Alamin**
 
-Feel free to contact me with any questions or feedback!
+- LinkedIn: [CodePapa360](https://www.linkedin.com/in/codepapa360)
+- X (formerly Twitter): [CodePapa360](https://twitter.com/CodePapa360)
+
+Feel free to reach out if you have any questions or suggestions regarding the project!
