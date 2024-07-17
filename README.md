@@ -122,6 +122,29 @@ This structure enhances maintainability and scalability by organizing components
 
 ## Contributing
 
+Contributions to Convayto are welcome! Before contributing, please ensure you follow these guidelines:
+
+### .env File
+
+Convayto uses environment variables stored in a `.env` file to manage sensitive information. Ensure you have the following variables set up:
+
+```plaintext
+VITE_SUPABASE_URL=https://your-supabase-url.com
+VITE_SUPABASE_KEY=your-supabase-key
+```
+
+You can find a template for these variables in `.env.example`.
+
+### Getting Started
+
+To contribute to Convayto, follow these steps:
+
+- Fork the repository and clone it locally.
+- Install dependencies: `npm install`.
+- Set up your `.env` file using `.env.example` as a template.
+- Make your changes and test them thoroughly.
+- Submit a pull request with a clear description of your changes and their purpose.
+
 ## License
 
 ### Author
