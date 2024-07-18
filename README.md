@@ -81,33 +81,23 @@ Welcome to Convayto! This is a real-time chat app that I've developed to sharpen
 
 ### Project Structure
 
-The project is organized to maintain clarity and modularity, following a typical React application structure:
-
-- **Root Files**
-
-  - `.env`, `.eslintrc.cjs`, `.gitignore`, `index.html`, `package.json`, `package-lock.json`, `postcss.config.js`, `prettier.config.cjs`, `tailwind.config.js`, `vercel.json`, `vite.config.js`: Configuration and environment files for development, linting, styling, and deployment.
+The project is organized for clarity and modularity, following a typical React application structure:
 
 - **Public Assets**
-
-  - `public/`: Contains static assets such as fonts (`fonts/`), images (`images/`), and essential files like `robots.txt` and `sitemap.xml`.
+  - `public/`: Contains static assets, including fonts, images, `robots.txt`, and `sitemap.xml`.
 
 - **Source Code**
-  - `src/`: Houses the main source code of the application.
-    - `App.jsx`: Entry point of the application, wrapping main components.
-    - `components/`: Reusable UI components used across the app.
-    - `contexts/`: Context providers and hooks for global state management (`UiContext.jsx`).
-    - `features/`: Feature-specific modules grouped by functionality.
-      - `authentication/`: Handles user authentication (`Signin.jsx`, `Signup.jsx`, etc.).
-      - `messageArea/`: Manages real-time messaging (`MessageView.jsx`, `MessageInputBar.jsx`, etc.).
-      - `sideBar/`: Implements sidebar navigation and related components (`LeftSideBar.jsx`, `Header.jsx`, etc.).
-      - `userProfile/`: Manages user profile settings and views (`MyAccountView.jsx`, `Avatar.jsx`, etc.).
-      - `userSearch/`: Facilitates user search functionality (`SearchView.jsx`).
-    - `services/`: Integration with external services such as Supabase (`supabase.js`).
-    - `styles/`: Custom styles and global CSS (`index.css`).
-    - `utils/`: Utility functions and hooks (`common.js`, `useEnterKeyPress.js`).
+  - `src/`: Main application source code.
     - `main.jsx`: Main entry point for rendering the application.
+    - `App.jsx`: Application entry point.
+    - `components/`: Reusable UI components.
+    - `contexts/`: Global state management.
+    - `features/`: Feature-specific modules (authentication, messaging, sidebar, user profile, user search).
+    - `services/`: External service integrations, e.g., Supabase.
+    - `styles/`: Custom and global styles.
+    - `utils/`: Utility functions and hooks.
 
-This structure enhances maintainability and scalability by organizing components, features, and utilities into logical directories. It separates concerns, facilitating independent navigation and enhancement of various application parts. Each directory is purpose-built, promoting code reusability and improving overall project readability.
+This structure ensures maintainability and scalability by logically organizing components, features, and utilities, facilitating independent development and enhancing code reusability.
 
 ## Database Design
 
