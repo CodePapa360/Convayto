@@ -107,19 +107,29 @@ This structure ensures maintainability and scalability by logically organizing c
 
 Here are some of the challenges faced during the development of Convayto and their corresponding solutions:
 
-1. **Real-time Communication**: Implementing real-time chat functionality required handling concurrent updates and ensuring message synchronization across multiple clients. The solution involved using Supabase's real-time subscription feature and managing message state with React Query.
+- **Real-time Communication**: Implementing real-time chat functionality required handling concurrent updates and ensuring message synchronization across multiple clients. The solution involved using Supabase's real-time subscription feature and managing message state with React Query.
 
-2. **User Authentication**: Building a secure authentication system involved handling user registration, login, and password reset processes. The solution was to integrate Supabase's authentication service and utilize its built-in methods for user management.
+- **User Authentication**: Building a secure authentication system involved handling user registration, login, and password reset processes. The solution was to integrate Supabase's authentication service and utilize its built-in methods for user management.
 
-3. **Responsive Design**: Creating a responsive user interface that adapts to different screen sizes and devices was a challenge. The solution was to utilize Tailwind CSS's responsive utility classes and implement media queries to adjust the layout and styling.
+- **Responsive Design**: Creating a responsive user interface that adapts to different screen sizes and devices was a challenge. The solution was to utilize Tailwind CSS's responsive utility classes and implement media queries to adjust the layout and styling.
 
-4. **Error Handling**: Providing meaningful error messages and handling unexpected scenarios was crucial for a smooth user experience. The solution involved implementing toast notifications using a library like react-toastify to display error messages and important updates.
+- **Error Handling**: Providing meaningful error messages and handling unexpected scenarios was crucial for a smooth user experience. The solution involved implementing toast notifications using a library like react-toastify to display error messages and important updates.
 
-5. **Optimized Performance**: Ensuring efficient state management and data fetching was important for a fast and responsive application. The solution was to utilize React Query for data fetching and caching, and React Hook Form for efficient form management.
+- **Optimized Performance**: Ensuring efficient state management and data fetching was important for a fast and responsive application. The solution was to utilize React Query for data fetching and caching, and React Hook Form for efficient form management.
 
 By addressing these challenges, Convayto was able to deliver a robust and user-friendly chat application.
 
 ## Future Improvements
+
+Here are some ideas for future enhancements to Convayto that I plan to implement as I continue learning other technologies:
+
+- **Message Editing and Deletion**: Let users edit and delete their messages to give them more control over their conversations.
+- **Message Reactions**: Add the ability to react to messages with emojis, making chats more expressive and fun.
+- **File Sharing**: Allow users to share files like images and documents directly in the chat, expanding the ways they can communicate.
+- **Notification System**: Introduce notifications for new messages or important updates, so users stay informed even when they're not using the app.
+- **Emoji Picker**: Integrate an emoji picker to make it easy for users to add emojis to their messages, adding a fun and personal touch.
+
+I plan to work on these features in the future as I continue learning and working on other technologies.
 
 ## Contributing
 
