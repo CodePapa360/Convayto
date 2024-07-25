@@ -105,6 +105,20 @@ This structure ensures maintainability and scalability by logically organizing c
 
 ## Challenges and Solutions
 
+Here are some of the challenges faced during the development of Convayto and their corresponding solutions:
+
+1. **Real-time Communication**: Implementing real-time chat functionality required handling concurrent updates and ensuring message synchronization across multiple clients. The solution involved using Supabase's real-time subscription feature and managing message state with React Query.
+
+2. **User Authentication**: Building a secure authentication system involved handling user registration, login, and password reset processes. The solution was to integrate Supabase's authentication service and utilize its built-in methods for user management.
+
+3. **Responsive Design**: Creating a responsive user interface that adapts to different screen sizes and devices was a challenge. The solution was to utilize Tailwind CSS's responsive utility classes and implement media queries to adjust the layout and styling.
+
+4. **Error Handling**: Providing meaningful error messages and handling unexpected scenarios was crucial for a smooth user experience. The solution involved implementing toast notifications using a library like react-toastify to display error messages and important updates.
+
+5. **Optimized Performance**: Ensuring efficient state management and data fetching was important for a fast and responsive application. The solution was to utilize React Query for data fetching and caching, and React Hook Form for efficient form management.
+
+By addressing these challenges, Convayto was able to deliver a robust and user-friendly chat application.
+
 ## Future Improvements
 
 ## Contributing
@@ -138,7 +152,9 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Author
 
-**Alamin**
+<img src="https://github.com/CodePapa360.png" alt="Photo" width="50" height="auto" style="border-radius: 50%;">
+
+**Alamin** 
 
 - LinkedIn: [CodePapa360](https://www.linkedin.com/in/codepapa360)
 - X (formerly Twitter): [CodePapa360](https://twitter.com/CodePapa360)
