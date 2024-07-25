@@ -103,6 +103,14 @@ This structure ensures maintainability and scalability by logically organizing c
 
 ## Security Considerations
 
+Since Convayto is a React web app, it doesn’t have server-side security measures built in. Instead, I rely on Supabase for backend services and database management, which provides the necessary security features.
+
+- **Row-Level Security**: Supabase's Row-Level Security (RLS) feature is utilized to enforce fine-grained access control at the database level. This ensures that users can only access and modify data that they are authorized to.
+
+- **Authentication and Authorization**: I integrated Supabase's authentication service to handle user registration, login, and password reset processes. Supabase provides secure and reliable authentication mechanisms, including email verification and password hashing, to protect user accounts.
+
+- **Protected Routes**: To restrict access to certain pages and features only to authenticated users I used protected routes. This prevents unauthorized access to sensitive information and actions.
+
 ## Challenges and Solutions
 
 Here are some of the challenges faced during the development of Convayto and their corresponding solutions:
