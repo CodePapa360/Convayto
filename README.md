@@ -47,11 +47,11 @@ Welcome to Convayto! This is a real-time chat app that I've developed to sharpen
 
 - [Technologies Used](#technologies-used)
 - [Features](#features)
-- [Project Structure](#project-structure)
 - [Database Design](#database-design)
 - [Security Considerations](#security-considerations)
 - [Challenges and Solutions](#challenges-and-solutions)
 - [Future Improvements](#future-improvements)
+- [Project Structure](#project-structure)
 - [Contributing](#contributing)
 - [License](#license)
 - [Author](#author)
@@ -79,27 +79,133 @@ Welcome to Convayto! This is a real-time chat app that I've developed to sharpen
 - **Error Handling**: Toast notifications to inform users of errors and important updates.
 - **Optimized Performance**: Efficient state management and data fetching with React Query and React Hook Form.
 
-### Project Structure
-
-The project is organized for clarity and modularity, following a typical React application structure:
-
-- **Public Assets**
-  - `public/`: Contains static assets, including fonts, images, `robots.txt`, and `sitemap.xml`.
-
-- **Source Code**
-  - `src/`: Main application source code.
-    - `main.jsx`: Main entry point for rendering the application.
-    - `App.jsx`: Application entry point.
-    - `components/`: Reusable UI components.
-    - `contexts/`: Global state management.
-    - `features/`: Feature-specific modules (authentication, messaging, sidebar, user profile, user search).
-    - `services/`: External service integrations, e.g., Supabase.
-    - `styles/`: Custom and global styles.
-    - `utils/`: Utility functions and hooks.
-
-This structure ensures maintainability and scalability by logically organizing components, features, and utilities, facilitating independent development and enhancing code reusability.
-
 ## Database Design
+
+I've kept the Supabase setup as simple as possible, focusing more on the React side of things. In the public schema, there are two tables and two views derived from `auth.users`. I opted for views instead of separate tables to avoid creating triggers and keeping user data management simpler. Views update automatically based on `auth.users`.
+
+### Tables and Views
+
+#### Tables
+
+1. **Conversations**
+2. **Messages**
+
+#### Views
+
+1. **Users**
+2. **Usernames**
+
+### Why a Separate Usernames Table?
+
+I have a `username` column in the `users` view, so why a separate `usernames` table? It's for security. On the signup page, the user isn't authenticated yet, but they need to pick a username. When they type a username, it checks if it's already taken in the `usernames` table, which is accessible to anonymous users. I didn't want to give anonymous users access to the `users` table, which is why I created the separate `usernames` table. The `users` table is only accessible to authenticated users.
+
+### Conversations Table
+
+The `conversations` table handles the connections between two users. Real-time updates are enabled for this table.
+
+**Row Level Security:**
+
+- **INSERT**: Applied to authenticated users
+- **SELECT**: Applied to authenticated users
+- **UPDATE** (especially the `last_message` column): Applied to authenticated users
+
+**Columns:**
+
+- `id`: UUID, Primary, Default Value: `gen_random_uuid()`
+- `created_at`: Timestamptz, Default Value: `now()`
+- `user1_id`: UUID, Default Value: `auth.uid()`
+- `user2_id`: UUID
+- `last_message`: JSONB, Nullable
+
+### Messages Table
+
+The `messages` table stores message content and related information. Real-time updates are enabled for this table.
+
+**Row Level Security:**
+
+- **INSERT**: Applied to authenticated users
+- **SELECT**: Applied to authenticated users
+
+**Columns:**
+
+- `id`: UUID, Primary
+- `created_at`: Timestamptz, Default Value: `now()`
+- `sender_id`: UUID, Default Value: `auth.uid()`
+- `conversation_id`: UUID
+- `content`: Text
+
+### Views
+
+#### Usernames View
+
+The `usernames` view has a single column for storing usernames.
+
+**Columns:**
+
+- `username`: Text
+
+**SQL Creation:**
+
+```sql
+CREATE VIEW public.usernames AS
+SELECT
+  raw_user_meta_data ->> 'username' AS username
+FROM auth.users;
+```
+
+**Grant Access:**
+
+```sql
+GRANT SELECT ON TABLE public.usernames TO anon;
+```
+
+#### Users View
+
+The `users` view contains essential user information.
+
+**Columns:**
+
+- `id`: UUID
+- `email`: Varchar
+- `username`: Text
+- `fullname`: Text
+- `avatar_url`: Text
+- `bio`: Text
+
+**SQL Creation:**
+
+```sql
+CREATE VIEW public.users AS
+SELECT
+  id,
+  email,
+  raw_user_meta_data->>'username' AS username,
+  raw_user_meta_data->>'fullname' AS fullname,
+  raw_user_meta_data->>'avatar_url' AS avatar_url,
+  raw_user_meta_data->>'bio' AS bio
+FROM auth.users;
+```
+
+**Grant Access:**
+
+```sql
+GRANT SELECT ON TABLE public.users TO authenticated;
+```
+
+### Buckets
+
+I have one bucket to store user profile pictures.
+
+**Bucket Name:**
+
+- `avatars`
+
+**Configuration:**
+
+- Public bucket: Enabled
+- Restrict file upload size: Enabled
+- File size limit: 5 MB
+- Allowed MIME types: `image/jpeg`, `image/png`, `image/webp`
 
 ## Security Considerations
 
@@ -136,8 +242,30 @@ Here are some ideas for future enhancements to Convayto that I plan to implement
 - **File Sharing**: Allow users to share files like images and documents directly in the chat, expanding the ways they can communicate.
 - **Notification System**: Introduce notifications for new messages or important updates, so users stay informed even when they're not using the app.
 - **Emoji Picker**: Integrate an emoji picker to make it easy for users to add emojis to their messages, adding a fun and personal touch.
+- **TypeScript Integration**: Update the entire project with TypeScript for better type safety and code maintainability.
 
 I plan to work on these features in the future as I continue learning and working on other technologies.
+
+### Project Structure
+
+The project is organized for clarity and modularity, following a typical React application structure:
+
+- **Public Assets**
+
+  - `public/`: Contains static assets, including fonts, images, `robots.txt`, and `sitemap.xml`.
+
+- **Source Code**
+  - `src/`: Main application source code.
+    - `main.jsx`: Main entry point for rendering the application.
+    - `App.jsx`: Application entry point.
+    - `components/`: Reusable UI components.
+    - `contexts/`: Global state management.
+    - `features/`: Feature-specific modules (authentication, messaging, sidebar, user profile, user search).
+    - `services/`: External service integrations, e.g., Supabase.
+    - `styles/`: Custom and global styles.
+    - `utils/`: Utility functions and hooks.
+
+This structure ensures maintainability and scalability by logically organizing components, features, and utilities, facilitating independent development and enhancing code reusability.
 
 ## Contributing
 
@@ -172,7 +300,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 <img src="https://github.com/CodePapa360.png" alt="Photo" width="50" height="auto" style="border-radius: 50%;">
 
-**Alamin** 
+**Alamin**
 
 - LinkedIn: [CodePapa360](https://www.linkedin.com/in/codepapa360)
 - X (formerly Twitter): [CodePapa360](https://twitter.com/CodePapa360)
