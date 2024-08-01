@@ -110,7 +110,7 @@ function Footer() {
       <div className="flex items-center justify-center gap-2 truncate text-center text-xs">
         <img
           className="h-6 rounded-full border-2 border-LightShade/20"
-          src="./images/convayto-logo-short-circle.png"
+          src="/images/convayto-logo-short-circle.svg"
           alt="Logo"
         />
         <span className=" opacity-60">
