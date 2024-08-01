@@ -33,7 +33,7 @@
 
 <!-- Brief -->
 <p align="center">
-Welcome to Convayto! This is a real-time chat app that I've developed to sharpen my skills with React.js and Supabase. Featuring user authentication, profile management, and real-time chat, Convayto showcases what modern web development can achieve. Built as a learning exercise, this project includes the basic features you'd expect from a chat app.
+Welcome to Convayto! This real-time chat app uses React.js and Supabase to offer features like user authentication, profile management, and instant messaging. Made as a learning project, Convayto highlights the core functionalities of a modern chat app.
 </p>
 
 <!-- Screenshot -->
@@ -288,7 +288,9 @@ To contribute to Convayto, follow these steps:
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+You are free to use, modify, and distribute this project, but please give credit to the original author.
 
 ## Author
 
