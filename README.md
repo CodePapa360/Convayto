@@ -77,7 +77,7 @@ Welcome to Convayto! This is a real-time chat app that I've developed to sharpen
 - **Sidebar and Menus**: Easy navigation with a collapsible sidebar, friend list, and account settings.
 - **Search Functionality**: Quickly find and connect with other users.
 - **Error Handling**: Toast notifications to inform users of errors and important updates.
-- **Optimized Performance**: Efficient state management and data fetching with React Query and React Hook Form.
+- **Optimized Performance**: Efficient state management and data fetching with React Query.
 
 ## Database Design
 
@@ -219,19 +219,17 @@ Since Convayto is a React web app, it doesn’t have server-side security measur
 
 ## Challenges and Solutions
 
-Here are some of the challenges faced during the development of Convayto and their corresponding solutions:
+During the development of Convayto, I ran into a few challenges and came up with these solutions:
 
-- **Real-time Communication**: Implementing real-time chat functionality required handling concurrent updates and ensuring message synchronization across multiple clients. The solution involved using Supabase's real-time subscription feature and managing message state with React Query.
+1. **Real-time Messaging**: Getting real-time messaging to work was tricky because everything needed to update instantly. I used Supabase's real-time features along with React Query to make sure messages updated smoothly and right away.
 
-- **User Authentication**: Building a secure authentication system involved handling user registration, login, and password reset processes. The solution was to integrate Supabase's authentication service and utilize its built-in methods for user management.
+2. **User Authentication**: Making sure user authentication was secure was super important. I relied on Supabase's built-in authentication tools, including password reset, account confirmation, and secure signup/signin processes.
 
-- **Responsive Design**: Creating a responsive user interface that adapts to different screen sizes and devices was a challenge. The solution was to utilize Tailwind CSS's responsive utility classes and implement media queries to adjust the layout and styling.
+3. **Responsive Design**: Making the app look good on different screen sizes and devices was a challenge. I used Tailwind CSS's responsive utility classes to create a user interface that adapts well to any screen size.
 
-- **Error Handling**: Providing meaningful error messages and handling unexpected scenarios was crucial for a smooth user experience. The solution involved implementing toast notifications using a library like react-toastify to display error messages and important updates.
+4. **Error Handling**: It was crucial to handle errors properly and show clear messages when something went wrong. I used React Toastify to show informative toast notifications for errors and important updates.
 
-- **Optimized Performance**: Ensuring efficient state management and data fetching was important for a fast and responsive application. The solution was to utilize React Query for data fetching and caching, and React Hook Form for efficient form management.
-
-By addressing these challenges, Convayto was able to deliver a robust and user-friendly chat application.
+5. **Optimized Performance**: Ensuring the app performed well with lots of data was a big challenge. I implemented infinite pagination for messages, so the app only fetches chunks of messages as you scroll up. This keeps the initial load times short and the performance smooth, even with long chat histories.
 
 ## Future Improvements
 
@@ -243,8 +241,6 @@ Here are some ideas for future enhancements to Convayto that I plan to implement
 - **Notification System**: Introduce notifications for new messages or important updates, so users stay informed even when they're not using the app.
 - **Emoji Picker**: Integrate an emoji picker to make it easy for users to add emojis to their messages, adding a fun and personal touch.
 - **TypeScript Integration**: Update the entire project with TypeScript for better type safety and code maintainability.
-
-I plan to work on these features in the future as I continue learning and working on other technologies.
 
 ### Project Structure
 
@@ -264,8 +260,6 @@ The project is organized for clarity and modularity, following a typical React a
     - `services/`: External service integrations, e.g., Supabase.
     - `styles/`: Custom and global styles.
     - `utils/`: Utility functions and hooks.
-
-This structure ensures maintainability and scalability by logically organizing components, features, and utilities, facilitating independent development and enhancing code reusability.
 
 ## Contributing
 
