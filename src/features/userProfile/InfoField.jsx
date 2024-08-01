@@ -113,7 +113,7 @@ function InfoField({
           <button
             disabled={isUpdating || isBusy || isTaken}
             type="submit"
-            className="flex h-11 w-11 items-center justify-center rounded-full text-xl text-textAccent dark:text-textAccent-dark dark:hover:bg-LightShade/10"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-xl text-textAccent hover:bg-LightShade/20 dark:text-textAccent-dark"
           >
             {isUpdating ? (
               <Loader />

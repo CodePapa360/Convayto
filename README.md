@@ -270,8 +270,8 @@ Contributions to Convayto are welcome! Before contributing, please ensure you fo
 Convayto uses environment variables stored in a `.env` file to manage sensitive information. Ensure you have the following variables set up:
 
 ```plaintext
-VITE_SUPABASE_URL=https://your-supabase-url.com
-VITE_SUPABASE_KEY=your-supabase-key
+VITE_SUPABASE_URL = https://your-supabase-url.com
+VITE_SUPABASE_KEY = your-supabase-key
 ```
 
 You can find a template for these variables in `.env.example`.
