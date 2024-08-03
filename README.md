@@ -20,20 +20,20 @@
 
 </div>
 
-<!-- Badges -->
-<div align="center">
 <br/>
 
-[![Twitter Follow](https://img.shields.io/twitter/follow/CodePapa360?style=social&logo=x)](https://x.com/CodePapa360)  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=social&logo=linkedin)](https://www.linkedin.com/in/CodePapa360)
+<!-- Badges -->
+<div align="center">
 
+[![Twitter Follow](https://img.shields.io/twitter/follow/CodePapa360?style=social&logo=x)](https://x.com/CodePapa360)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=social&logo=linkedin)](https://www.linkedin.com/in/CodePapa360)
 ![version](https://img.shields.io/github/package-json/v/CodePapa360/Convayto?color=blue)
 
 </div>
 
 <!-- Brief -->
 <p align="center">
-Welcome to Convayto! This real-time chat app uses React.js and Supabase to offer features like user authentication, profile management, and instant messaging. Made as a learning project, Convayto highlights the core functionalities of a modern chat app.
+Welcome to Convayto! This real-time chat app uses React.js and Supabase to offer features like user authentication, profile management, and instant messaging. Built as a learning project, Convayto highlights the core functionalities of a modern chat application.
 </p>
 
 <!-- Screenshot -->
@@ -70,7 +70,7 @@ Welcome to Convayto! This real-time chat app uses React.js and Supabase to offer
 
 - **User Authentication**: Secure signup and signin processes, including password reset and account confirmation.
 - **Profile Management**: Users can update their profiles, including setting a profile picture and editing personal information.
-- **Real-Time Chat**: Send and receive messages in real-time, ensuring seamless communication.
+- **Real-Time Chat**: Send and receive messages instantly.
 - **Protected Routes**: Access control for authenticated users, protecting sensitive routes and data.
 - **Responsive Design**: A user-friendly interface that adapts to various screen sizes and devices.
 - **Dark Mode**: Toggle between dark and light themes based on user preference.
@@ -97,7 +97,7 @@ I've kept the Supabase setup as simple as possible, focusing more on the React s
 
 ### Why a Separate Usernames Table?
 
-I have a `username` column in the `users` view, so why a separate `usernames` table? It's for security. On the signup page, the user isn't authenticated yet, but they need to pick a username. When they type a username, it checks if it's already taken in the `usernames` table, which is accessible to anonymous users. I didn't want to give anonymous users access to the `users` table, which is why I created the separate `usernames` table. The `users` table is only accessible to authenticated users.
+I have a `username` column in the `users` view, so why a separate `usernames` table? It's for security. On the signup page, the user isn't authenticated yet but needs to pick a username. When a username is typed, it checks the `usernames` table to see if it's already taken, accessible to anonymous users. This avoids giving anonymous users access to the `users` table, which is reserved for authenticated users.
 
 ### Conversations Table
 
@@ -194,7 +194,7 @@ GRANT SELECT ON TABLE public.users TO authenticated;
 
 ### Buckets
 
-I have one bucket to store user profile pictures.
+A single bucket is used to store user profile pictures.
 
 **Bucket Name:**
 
@@ -211,7 +211,7 @@ I have one bucket to store user profile pictures.
 
 Since Convayto is a React web app, it doesn’t have server-side security measures built in. Instead, I rely on Supabase for backend services and database management, which provides the necessary security features.
 
-- **Row-Level Security**: Supabase's Row-Level Security (RLS) feature is utilized to enforce fine-grained access control at the database level. This ensures that users can only access and modify data that they are authorized to.
+- **Row-Level Security**: Supabase's Row-Level Security (RLS) ensures users only access and modify authorized data.
 
 - **Authentication and Authorization**: I integrated Supabase's authentication service to handle user registration, login, and password reset processes. Supabase provides secure and reliable authentication mechanisms, including email verification and password hashing, to protect user accounts.
 
@@ -219,27 +219,27 @@ Since Convayto is a React web app, it doesn’t have server-side security measur
 
 ## Challenges and Solutions
 
-During the development of Convayto, I ran into a few challenges and came up with these solutions:
+During the development of Convayto, I encountered several challenges and came up with these solutions:
 
 1. **Real-time Messaging**: Getting real-time messaging to work was tricky because everything needed to update instantly. I used Supabase's real-time features along with React Query to make sure messages updated smoothly and right away.
 
-2. **User Authentication**: Making sure user authentication was secure was super important. I relied on Supabase's built-in authentication tools, including password reset, account confirmation, and secure signup/signin processes.
+2. **User Authentication**: I relied on Supabase's built-in authentication tools, including password reset, account confirmation, and secure signup/signin processes to make sure user authentication was secure.
 
 3. **Responsive Design**: Making the app look good on different screen sizes and devices was a challenge. I used Tailwind CSS's responsive utility classes to create a user interface that adapts well to any screen size.
 
-4. **Error Handling**: It was crucial to handle errors properly and show clear messages when something went wrong. I used React Toastify to show informative toast notifications for errors and important updates.
+4. **Error Handling**: To handle errors properly and display clear messages when something goes wrong, I used the `react-hot-toast` package to show informative toast notifications.
 
-5. **Optimized Performance**: Ensuring the app performed well with lots of data was a big challenge. I implemented infinite pagination for messages, so the app only fetches chunks of messages as you scroll up. This keeps the initial load times short and the performance smooth, even with long chat histories.
+5. **Optimized Performance**: Handling a large amount of data and maintaining performance was a significant challenge. To address this, I implemented infinite pagination for messages, allowing the app to fetch chunks of messages as you scroll up. This approach keeps initial load times short and ensures smooth performance, even with extensive chat histories. Additionally, when a user logs in, it prefetches the first ten conversation histories.
 
 ## Future Improvements
 
 Here are some ideas for future enhancements to Convayto that I plan to implement as I continue learning other technologies:
 
-- **Message Editing and Deletion**: Let users edit and delete their messages to give them more control over their conversations.
-- **Message Reactions**: Add the ability to react to messages with emojis, making chats more expressive and fun.
-- **File Sharing**: Allow users to share files like images and documents directly in the chat, expanding the ways they can communicate.
-- **Notification System**: Introduce notifications for new messages or important updates, so users stay informed even when they're not using the app.
-- **Emoji Picker**: Integrate an emoji picker to make it easy for users to add emojis to their messages, adding a fun and personal touch.
+- **Message Editing and Deletion**: Allow users to modify and remove their messages.
+- **Message Reactions**: Enable emoji reactions for messages.
+- **File Sharing**: Support sharing images and documents in chat.
+- **Notification System**: Introduce notifications for new messages or updates.
+- **Emoji Picker**: Add an emoji picker for easier message personalization.
 - **TypeScript Integration**: Update the entire project with TypeScript for better type safety and code maintainability.
 
 ### Project Structure
@@ -276,7 +276,7 @@ VITE_SUPABASE_KEY = your-supabase-key
 
 You can find a template for these variables in `.env.example`.
 
-### Getting Started
+### Installation
 
 To contribute to Convayto, follow these steps:
 
@@ -296,9 +296,7 @@ You are free to use, modify, and distribute this project, but please give credit
 
 <img src="https://github.com/CodePapa360.png" alt="Photo" width="50" height="auto" style="border-radius: 50%;">
 
-**Alamin**
+I'm **Alamin**, a passionate web developer constantly learning and building projects. Connect with me on LinkedIn and Twitter.
 
 - LinkedIn: [CodePapa360](https://www.linkedin.com/in/codepapa360)
-- X (formerly Twitter): [CodePapa360](https://twitter.com/CodePapa360)
-
-Feel free to reach out if you have any questions or suggestions regarding the project!
+- X (Twitter): [CodePapa360](https://twitter.com/CodePapa360)
