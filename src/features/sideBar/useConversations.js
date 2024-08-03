@@ -30,8 +30,10 @@ export function useConversations() {
     if (!data || hasPrefetched.current) return;
 
     data?.slice(0, MAX_PREFETCHED_CONVERSATIONS).forEach((conv) => {
-      const conversation_id = conv.id;
-      const friendUserId = conv.friendInfo.id;
+      const conversation_id = conv?.id;
+      const friendUserId = conv?.friendInfo?.id;
+
+      if (!conversation_id || !friendUserId) return;
 
       // prefetch the messages
       queryClient.prefetchInfiniteQuery({

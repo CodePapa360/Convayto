@@ -27,6 +27,9 @@ function UserList() {
   if (conversations)
     return conversations.map((conv) => {
       const id = conv?.friendInfo?.id;
+
+      if (!id) return null;
+
       const avatar_url = conv?.friendInfo?.avatar_url;
       const fullname = conv?.friendInfo?.fullname;
       const lastMessage = conv?.last_message?.content;
