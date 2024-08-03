@@ -31,6 +31,11 @@
     <priority>0.64</priority>
   </url>
   <url>
+    <loc>https://convayto.vercel.app/about</loc>
+    <lastmod>2024-08-03</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://convayto.vercel.app/*</loc>
     <lastmod>2024-07-16</lastmod>
     <priority>0.5</priority>

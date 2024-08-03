@@ -14,6 +14,7 @@ import NotFound from "./components/NotFound";
 import { Toaster } from "react-hot-toast";
 import AccountConfirmation from "./components/AccountConfirmation";
 import AllRoutesWrapper from "./components/AllRoutesWrapper";
+import AboutPage from "./components/AboutPage";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ function App() {
                 path="account-confirmation"
                 element={<AccountConfirmation />}
               />
+              <Route path="about" element={<AboutPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AllRoutesWrapper>
