@@ -1,9 +1,6 @@
-function DemoAccounts({ onDemoLogin }) {
-  const demoAccounts = [
-    { email: "demo1@example.com", password: "demopassword1" },
-    { email: "demo2@example.com", password: "demopassword2" },
-  ];
+import { demoAccounts } from "../../config";
 
+export default function DemoAccounts({ onDemoLogin }) {
   return (
     <div className="flex w-full items-center justify-between py-4">
       {demoAccounts.map((account, index) => (
@@ -19,5 +16,3 @@ function DemoAccounts({ onDemoLogin }) {
     </div>
   );
 }
-
-export default DemoAccounts;

@@ -8,6 +8,12 @@ export const getRedirectUrl = () => {
     : REDIRECT_URL_LOCAL;
 };
 
+// Demo accounts for testing
+export const demoAccounts = [
+  { email: "demo1@example.com", password: "demopassword1" },
+  { email: "demo2@example.com", password: "demopassword2" },
+];
+
 // App settings
 export const APP_NAME = "Convayto";
 export const APP_VERSION = "v1.0.1";
