@@ -10,7 +10,7 @@ export default function DemoAccounts({ onDemoLogin }) {
           className="rounded-md bg-bgAccent/20 p-2 px-4"
           onClick={() => onDemoLogin(account.email, account.password)}
         >
-          Demo account {index + 1}
+          Demo ID {index + 1}
         </button>
       ))}
     </div>
