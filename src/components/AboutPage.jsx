@@ -43,12 +43,14 @@ const AboutPage = () => {
 
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">Developer</h2>
-          <div className="mb-4 flex items-center">
+
+          <div className="mb-4 flex flex-col items-center gap-4 sm:flex-row">
             <img
               src="https://github.com/CodePapa360.png"
               alt="Alamin's Photo"
-              className="mr-4 h-16 w-16 rounded-full"
+              className="h-36 w-36 rounded-md"
             />
+
             <div>
               <p className="mb-2">
                 Convayto is developed and maintained by{" "}
@@ -58,54 +60,54 @@ const AboutPage = () => {
                 , a passionate web developer dedicated to building and learning.
                 Connect with me on LinkedIn, Twitter, and GitHub.
               </p>
-              <div className="flex space-x-4 text-textAccent dark:text-textAccent-dark">
-                <a
-                  href="https://www.linkedin.com/in/codepapa360"
-                  className="flex items-center hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaLinkedin className="mr-2" /> LinkedIn
-                </a>
-                <a
-                  href="https://twitter.com/CodePapa360"
-                  className="flex items-center hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaTwitter className="mr-2" /> X (Twitter)
-                </a>
-                <a
-                  href="https://github.com/CodePapa360"
-                  className="flex items-center hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaGithub className="mr-2" /> GitHub
-                </a>
-              </div>
             </div>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-2 text-textAccent dark:text-textAccent-dark">
+            <a
+              href="https://www.linkedin.com/in/codepapa360"
+              className="flex items-center hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedin className="mr-2" /> LinkedIn
+            </a>
+            <a
+              href="https://twitter.com/CodePapa360"
+              className="flex items-center hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaTwitter className="mr-2" /> X (Twitter)
+            </a>
+            <a
+              href="https://github.com/CodePapa360"
+              className="flex items-center hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithub className="mr-2" /> GitHub
+            </a>
           </div>
         </section>
 
-        <section className="mt-8 flex items-center justify-center gap-2">
+        <section className="mt-8 grid grid-cols-1 grid-rows-2 gap-2 sm:grid-cols-2">
           <a
             href="https://github.com/CodePapa360/Convayto"
             className="flex items-center justify-center rounded-lg bg-gray-800 px-6 py-3 text-white hover:bg-gray-700"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span>View Source Code</span>
+            <span>Source Code</span>
             <FaGithub className="ml-2" />
           </a>
 
           <a
             href="https://convayto.vercel.app"
-            className="flex items-center justify-center rounded-lg bg-textAccent px-6 py-3 text-white hover:bg-textAccentDim dark:bg-textAccentDim  dark:hover:bg-textAccentDim-dark"
-            target="_blank"
+            className="flex items-center justify-center rounded-lg bg-textAccent px-6 py-3 text-white hover:bg-textAccentDim dark:bg-textAccentDim dark:hover:bg-textAccentDim-dark"
             rel="noopener noreferrer"
           >
-            <span>Visit Convayto</span>
+            <span>Convayto</span>
             <MdOpenInNew className="ml-2" />
           </a>
         </section>
