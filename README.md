@@ -46,6 +46,7 @@ Welcome to Convayto! This real-time chat app uses React.js and Supabase to offer
 
 ## Table of Contents
 
+- [Links](#links)
 - [Technologies Used](#technologies-used)
 - [Features](#features)
 - [Database Design](#database-design)
@@ -56,6 +57,11 @@ Welcome to Convayto! This real-time chat app uses React.js and Supabase to offer
 - [Contributing](#contributing)
 - [License](#license)
 - [Author](#author)
+
+## Links
+
+- **Live Website:** [Convayto](https://convayto.vercel.app)
+- **Video Preview:** [Watch on YouTube](https://youtu.be/Oc0spL9-gQk)
 
 ## Technologies Used
 
