@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import FormContainer from "../../components/FormContainer";
 import { Controller, useForm } from "react-hook-form";
 import LogoLarge from "../../components/LogoLarge";
+import DemoAccounts from "./DemoAccounts";
 
 function Signin() {
   const { signin, isPending } = useSignin();
@@ -22,6 +23,7 @@ function Signin() {
     handleSubmit,
     formState: { errors },
     trigger,
+    setValue,
   } = useForm({
     defaultValues: {
       email: "",
@@ -52,12 +54,19 @@ function Signin() {
     );
   };
 
+  const handleDemoLogin = (email, password) => {
+    setValue("email", email);
+    setValue("password", password);
+  };
+
   return (
     <MainContainer>
       <LogoLarge />
 
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <Heading addClass="text-3xl">Sign in</Heading>
+
+        <DemoAccounts onDemoLogin={handleDemoLogin} />
 
         <Controller
           name="email"
