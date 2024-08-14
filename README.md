@@ -25,10 +25,11 @@
 <!-- Badges -->
 <div align="center">
 
-[![Twitter Follow](https://img.shields.io/twitter/follow/CodePapa360?style=social&logo=x)](https://x.com/CodePapa360)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=social&logo=linkedin)](https://www.linkedin.com/in/CodePapa360)
+[![Twitter Follow](https://img.shields.io/twitter/follow/CodePapa360?style=for-the-badge&logo=x)](https://x.com/CodePapa360)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/CodePapa360)
 
 ![version](https://img.shields.io/github/package-json/v/CodePapa360/Convayto?color=blue)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
 </div>
 
