@@ -1,3 +1,4 @@
+import Copyright from "../../components/Copyright";
 import { useUi } from "../../contexts/UiContext";
 import SearchView from "../userSearch/SearchView";
 import Header from "./Header";
@@ -17,6 +18,8 @@ function DefaultView() {
       <div className="h-full overflow-auto">
         {isSearchViewOpen ? <SearchView /> : <UsersView />}
       </div>
+
+      <Copyright />
     </div>
   );
 }
