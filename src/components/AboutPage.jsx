@@ -91,7 +91,7 @@ const AboutPage = () => {
           </div>
         </section>
 
-        <section className="mt-8 grid grid-cols-1 grid-rows-2 gap-2 sm:grid-cols-2">
+        <section className="mt-8 grid grid-cols-1 grid-rows-2 gap-2 sm:grid-cols-2 sm:grid-rows-1">
           <a
             href="https://github.com/CodePapa360/Convayto"
             className="flex items-center justify-center rounded-lg bg-gray-800 px-6 py-3 text-white hover:bg-gray-700"
@@ -111,6 +111,21 @@ const AboutPage = () => {
             <MdOpenInNew className="ml-2" />
           </a>
         </section>
+
+        <footer className="mt-6 text-center text-sm opacity-70">
+          <p>
+            © Copyright by{" "}
+            <a
+              href="https://www.linkedin.com/in/codepapa360"
+              className="text-blue-500 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Alamin
+            </a>
+            . Use for learning. Don't use to teach or claim as your own.
+          </p>
+        </footer>
       </div>
     </MainContainer>
   );
