@@ -296,17 +296,7 @@ To contribute to Convayto, follow these steps:
 
 ## License
 
-This project is licensed under the Apache License 2.0. See the [LICENSE](./LICENSE.md) file for details.
-
-### Summary of the Apache License 2.0
-
-- **You can** use, modify, and distribute the code, as long as you include the required notices.
-- **You must** include a copy of the license in all copies or substantial portions of the software.
-- **You must** provide a copy of the license and state any changes made when redistributing the code.
-- **You cannot** use the names, trademarks, or other identifiers of the project or its contributors without permission.
-- **No warranty** is provided for the software.
-
-For a full understanding of the terms, please refer to the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+© Copyright by Alamin. This project is licensed under the Apache License 2.0. See the [LICENSE](./LICENSE.md) file for details. Do not claim as your own.
 
 ## Author
 
