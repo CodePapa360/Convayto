@@ -296,7 +296,7 @@ To contribute to Convayto, follow these steps:
 
 ## License
 
-This project is licensed under the Apache License 2.0. See the [LICENSE](./LICENSE) file for details.
+This project is licensed under the Apache License 2.0. See the [LICENSE](./LICENSE.md) file for details.
 
 ### Summary of the Apache License 2.0
 
