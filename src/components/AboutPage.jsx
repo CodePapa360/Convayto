@@ -123,7 +123,7 @@ const AboutPage = () => {
             >
               Alamin
             </a>
-            . Use for learning. Don't use to teach or claim as your own.
+            . Licensed under the Apache License 2.0. Do not claim as your own.
           </p>
         </footer>
       </div>

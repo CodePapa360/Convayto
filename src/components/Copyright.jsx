@@ -1,6 +1,6 @@
 function Copyright() {
   return (
-    <div className=" bg-LightShade/20 p-4 text-xs">
+    <div className="bg-LightShade/20 p-4 text-xs">
       © Copyright by{" "}
       <a
         href="https://www.linkedin.com/in/codepapa360"
@@ -10,8 +10,7 @@ function Copyright() {
       >
         Alamin
       </a>
-      . For learning purposes only. Do not use for teaching or claim as your
-      own.
+      . Licensed under the Apache License 2.0. Do not claim as your own.
     </div>
   );
 }
