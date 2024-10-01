@@ -1,4 +1,5 @@
 import {
+  APP_NAME,
   EMAIL_REGEX,
   MAX_NAME_LENGTH,
   MAX_USERNAME_LENGTH,
@@ -23,6 +24,7 @@ import EmailConfirmation from "../../components/EmailConfirmation";
 import LogoLarge from "../../components/LogoLarge";
 
 function Signup() {
+  document.title = APP_NAME + " - Sign up";
   const { signup, isPending, isSuccess } = useSignup();
   // const isSuccess = true;
   const {

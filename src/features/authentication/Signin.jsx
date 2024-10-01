@@ -12,8 +12,10 @@ import FormContainer from "../../components/FormContainer";
 import { Controller, useForm } from "react-hook-form";
 import LogoLarge from "../../components/LogoLarge";
 import DemoAccounts from "./DemoAccounts";
+import { APP_NAME } from "../../config";
 
 function Signin() {
+  document.title = APP_NAME + " - Sign in";
   const { signin, isPending } = useSignin();
   const navigate = useNavigate();
   const { isAuthenticated } = useUser();

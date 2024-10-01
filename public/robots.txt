@@ -1,8 +1,8 @@
 User-agent: *
 Disallow: /m/
-Disallow: /reset-password/
-Disallow: /new-password/
-Disallow: /account-confirmation/
+Allow: /reset-password/
+Allow: /new-password/
+Allow: /account-confirmation/
 Allow: /
 
 Sitemap: https://convayto.vercel.app/sitemap.xml
